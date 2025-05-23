@@ -1,0 +1,203 @@
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:06:38 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:06:54 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:07:31 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:08:48 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:09:11 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:09:27 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:09:59 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:15:06 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:15:52 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:17:28 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:17:42 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:20:47 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:21:01 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:22:59 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:24:15 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:26:28 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:29:05 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:35:06 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:36:25 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:36:39 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:45:31 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:46:54 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:48:15 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:48:32 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:49:09 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:51:19 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:51:33 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 8 May 2025 03:54:39 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 8 May 2025 03:54:52 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+

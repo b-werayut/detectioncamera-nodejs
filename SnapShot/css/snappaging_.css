@@ -1,0 +1,96 @@
+.page-link{
+  font-size: clamp(10px, 2.5vw, 16px)
+}
+
+#filedate{
+  font-size: clamp(17px, 2.5vw, 20px); 
+}
+
+.img-thumbnail{
+  cursor: pointer;
+}
+
+.imgdisplay li{
+  list-style: none;
+  border-radius: 5px;
+}
+
+.imgnamex li{
+  list-style: none;
+  border-radius: 5px;
+}
+
+.pagination button.active {
+  background-color: rgb(33 37 41)!important;
+  color: white;
+}
+
+.ui-datepicker-trigger{
+  position: absolute;
+  top: 12px;
+  left: 207px;
+}
+
+@media only screen and (max-width: 360px) {
+  .ui-datepicker-trigger {
+    position: absolute;
+    top: 8px;
+    left: 153px;
+  }
+  }
+
+@media only screen and (min-width: 425px) {
+  .ui-datepicker-trigger {
+    position: absolute;
+    top: 9px;
+    left: 194px;
+  }
+  }
+
+@media only screen and (min-width: 768px) {
+  .ui-datepicker-trigger {
+    position: absolute;
+    top: 9px;
+    left: 156px;
+  }
+  }
+
+  .ui-datepicker-trigger {
+    width: 23px;
+}
+
+/* calendar img */
+@media only screen and (max-width: 360px) {
+  .calendarimg {
+    position: absolute;
+    top: 8px;
+    left: 153px;
+  }
+  }
+
+@media only screen and (min-width: 425px) {
+  .calendarimg {
+    position: absolute;
+    top: 9px;
+    left: 194px;
+  }
+  }
+
+@media only screen and (min-width: 768px) {
+  .calendarimg {
+    position: absolute;
+    top: 9px;
+    left: 156px;
+  }
+  }
+
+  .calendarimg {
+    width: 23px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
