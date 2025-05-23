@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model TmstCameraDetectionLogs {
+  id             Int     @id @default(autoincrement())
+  foldername     String?
+  linesendstatus String?
+  picstatus      Int?    @default(0)
+  vdostatus      Int?    @default(0)
+  createdAt      String?
+  updatedAt      String? @default("No Logs Update")
+}
+
+model TmstPowerDetectionLogs {
+  id        Int      @id @default(autoincrement())
+  point     String
+  status    String
+  value     Int
+  timestamp String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TmstLineUserIdCustomer {
+  id         Int      @id @default(autoincrement())
+  userID     String
+  replyToken String
+  quoteToken String
+  timestamp  String
+  createdAt DateTime @default(now())
+}
+
