@@ -65,6 +65,7 @@
         $urlimg = "/SnapShot/snappaging_.php";
         $urlvdo = "/SnapShot/vdopaging_.php";
         $urlstream = "../LiveNotifyVideo/";
+        $getparam = '';
     }
     ?>
     <!-- Responsive navbar-->
@@ -106,7 +107,7 @@
                         <select id="selectdatas" onchange='selectData()' class="form-select" aria-label="Default select example">
                             <option value="0" selected>เลือกข้อมูลวิดีโอ</option>
                             <?php
-                            $subselectfolder = glob("C:/\FTP/*");
+                            $subselectfolder = glob("/eventfolder/*");
                             $subselectfolder = array_map("basename", $subselectfolder);
                             ?>
                             <?php
@@ -119,8 +120,8 @@
                                 $namefdate .= " " . substr($v, 22, 2);
                                 $namefdate .= ":" . substr($v, 24, 2);
                                 $namefdate .= ":" . substr($v, 26, 2);
-                                $namefdate = date_create($namefdate);
-                                $namefdate = date_format($namefdate, "วันที่ d/m/Y เวลา H:i:s น.");
+                                $namefdate = date("วันที่ d/m/Y เวลา H:i:s น.", strtotime($namefdate));
+                                // $namefdate = date_format($namefdate, "วันที่ d/m/Y เวลา H:i:s น.");
                                 $namefdate = "{$namefcam} {$namefdate}";
                             ?>
                                 <option value="<?= $v ?>"><?= $namefdate; ?></option>
@@ -211,7 +212,7 @@
                         return false;
                     }
 
-                    vdo += `<li class="vdobox col-md-3 p-0" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="http://49.0.91.113:20080/ftpapp/${path}/vdo/${item}" type="video/mp4"></video> </li>`;
+                    vdo += `<li class="vdobox col-md-3 p-0" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="/eventfolder/${path}/vdo/${item}" type="video/mp4"></video> </li>`;
                     vdodisplay.append(vdo);
 
                 });
@@ -338,7 +339,7 @@
                                         if (i >= 5) {
                                             return false;
                                         }
-                                        vdox += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="http://49.0.91.113:20080/ftpapp/${selectdatas}/vdo/x/${item}" type="video/mp4"></video> </li>`;
+                                        vdox += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="/eventfolder/${selectdatas}/vdo/x/${item}" type="video/mp4"></video> </li>`;
                                         vdonamex.append(vdox);
                                     })
                                     vdonamex.fadeIn(400)
@@ -455,7 +456,7 @@
                                         if (i >= 5) {
                                             return false;
                                         }
-                                        vdo += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="http://49.0.91.113:20080/ftpapp/<?= $getparam ?>/vdo/x/${item}" type="video/mp4"></video> </li>`;
+                                        vdo += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="/eventfolder/<?= $getparam ?>/vdo/x/${item}" type="video/mp4"></video> </li>`;
                                         vdonamex.append(vdo).fadeIn(500);
                                     })
                                 }
@@ -499,7 +500,7 @@
                         return false;
                     }
                     // console.log(item);
-                    vdo += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="http://49.0.91.113:20080/ftpapp/<?= $getparam ?>/vdo/${item}" type="video/mp4"></video> </li>`;
+                    vdo += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="/eventfolder/<?= $getparam ?>/vdo/${item}" type="video/mp4"></video> </li>`;
                     vdodisplay.append(vdo);
 
                 });

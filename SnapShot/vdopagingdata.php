@@ -10,10 +10,10 @@ if(isset($_GET['param'])){
     $getparamf .= ":".substr($getparam, 26, 2);
     $getparamf = date_create($getparamf);
     $getparamf = date_format($getparamf,"d/m/Y เวลา H:i:s น.");
-    $selectfolderx = "C:\/FTP/{$getparam}/vdo/X/*";
+    $selectfolderx = "../eventfolder/{$getparam}/vdo/X/*";
     $selectpicx = glob($selectfolderx);
     $basenamex = array_map('basename', $selectpicx);
-    $selectfolder = "C:\/FTP/{$getparam}/vdo/*";
+    $selectfolder = "../eventfolder/{$getparam}/vdo/*";
     $selectpic = glob($selectfolder);
     $basename = array_map('basename', $selectpic);
     $datasjson = ["vdoname"=>$basename, "filedate"=>$getparamf, "vdonamex"=>$basenamex];
@@ -30,10 +30,10 @@ if(isset($_GET['selectdatas'])){
     $getparamf .= ":".substr($getselectdatas, 26, 2);
     $getparamf = date_create($getparamf);
     $getparamf = date_format($getparamf,"d/m/Y เวลา H:i:s น.");
-    $selectfolderx = "C:\/FTP/{$getselectdatas}/vdo/X/*";
+    $selectfolderx = "../eventfolder/{$getselectdatas}/vdo/X/*";
     $selectpicx = glob($selectfolderx);
     $basenamex = array_map('basename', $selectpicx);
-    $selectfolder = "C:\/FTP/{$getselectdatas}/vdo/*.{mp4}";
+    $selectfolder = "../eventfolder/{$getselectdatas}/vdo/*.{mp4}";
     $selectpic = glob($selectfolder, \GLOB_BRACE);
     $basename = array_map('basename', $selectpic);
     $datasjson = ["vdonames"=>$basename, "filedates"=>$getparamf, "vdonamexs"=>$basenamex];

@@ -60,9 +60,11 @@
         $urlvdo = "/SnapShot/vdopaging_.php?param={$getparam}";
         $urlstream = "../LiveNotifyVideo/index.php?param={$getparam}";
     } else {
+        $getparam = 0;
         $urlimg = "/SnapShot/snappaging_.php";
         $urlvdo = "/SnapShot/vdopaging_.php";
         $urlstream = "../LiveNotifyVideo/";
+        $getparam = '';
     }
     ?>
     <!-- Responsive navbar-->
@@ -108,14 +110,31 @@
                 </div>
 
                 <div class="col-md-12 d-flex justify-content-between align-items-center py-1">
-                    <div class="col-md-4 d-flex py-1 btn-stream" style="justify-content: flex-start">
+                    <div class="col-md-3 d-flex py-1 btn-stream" style="justify-content: flex-start">
                         <button class="btn btn-md btn-secondary" onclick="location.href='<?= $urlstream ?>'">STREAMING</button>
                     </div>
-                    <div class="col-md-4 d-inline-block selectdiv" style="padding: 0.5rem 0rem;">
-                        <select id="selectdatas" onchange='selectData()' class="form-select" aria-label="Default select example">
-                            <option value="0" selected>เลือกข้อมูลรูปภาพ</option>
+                    <div class="col-md-3 d-inline-block selectcam" style="padding: 0.5rem 0rem; margin-right: 10px;">
+                        <select id="selectcam" onchange='selectCam()' class="form-select" aria-label="Default select example" style="width: 80%; float: right;">
+                            <option value="0" selected>เลือกล้อง</option>
                             <?php
-                            $subselectfolder = glob("C:/\FTP/*");
+                            $subselectfolder = glob("../eventfolder/*");
+                            $subselectfolder = array_map("basename", $subselectfolder);
+                            ?>
+                            <?php
+                            foreach ($subselectfolder as $k => $v) {
+                            ?>
+                                <option value="<?= $v ?>"><?php echo "กล้อง {$v}"; ?></option>
+                            <?php }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-inline-block selectdiv" style="padding: 0.5rem 0rem;">
+                        <select id="selectdatas" onchange='selectData()' class="form-select" aria-label="Default select example">
+                            <option value="0" selected>กรุณาเลือกกล้องก่อน</option>
+                            <?php
+                            $camname = explode("_", $getparam);
+                            $camfm = $camname[0];
+                            $subselectfolder = glob("../eventfolder/{$camfm}/*");
                             $subselectfolder = array_map("basename", $subselectfolder);
                             ?>
                             <?php
@@ -128,16 +147,16 @@
                                 $namefdate .= " " . substr($v, 22, 2);
                                 $namefdate .= ":" . substr($v, 24, 2);
                                 $namefdate .= ":" . substr($v, 26, 2);
-                                $namefdate = date_create($namefdate);
-                                $namefdate = date_format($namefdate, "วันที่ d/m/Y เวลา H:i:s น.");
-                                $namefdate = "{$namefcam} {$namefdate}";
+                                $namefdate = date("วันที่ d/m/Y เวลา H:i:s น.",strtotime($namefdate));
+                                // $namefdate = date_format("วันที่ d/m/Y เวลา H:i:s น.");
+                                $namefdate = "{$namefdate}";
                             ?>
-                                <option value="<?= $v ?>"><?= $namefdate; ?></option>
+                                <option class="selectdataoption" value="<?= $v ?>"><?= $namefdate; ?></option>
                             <?php }
                             ?>
                         </select>
                     </div>
-                    <div class="col-md-4 d-inline-block d-flex py-1 btn-vdo" style="justify-content: flex-end">
+                    <div class="col-md-3 d-inline-block d-flex py-1 btn-vdo" style="justify-content: flex-end">
                         <button class="btn btn-md btn-secondary" onclick="location.href='<?= $urlvdo ?>'">SNAP VDO</button>
                     </div>
                 </div>
@@ -167,9 +186,72 @@
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
+        $('#selectdatas').attr('disabled', 'disabled')
         let futuretime = '<?= $futuretimecf ?>'
         let roundselectData = 0
         let roundcalldata = 0
+
+        function disabledfunct(){
+            const selectcamval = $('#selectcam').val()
+            if(parseInt(selectcamval) === 0){
+                alert(55555)
+            }
+        }
+
+        function selectCam(){
+            const selectcamval = $('#selectcam').val()
+            const selectdatasbtn = $('#selectdatas')
+            const thaiMonths = [
+            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+            ];
+
+            $('.selectdataoption').remove()
+            
+            if(parseInt(selectcamval) === 0){
+                selectdatasbtn.attr('disabled', 'disabled')
+            }else{
+                selectdatasbtn.removeAttr('disabled', 'disabled')
+
+                $.ajax({
+                url: 'snappagingdata.php',
+                data: `selectcamval=${selectcamval}`,
+                method: 'GET',
+                success: (resp) => {
+                    let obj = jQuery.parseJSON(resp)
+                    if (obj.datas == '') {
+                        alert("nodatas")
+                    }
+                    console.log(obj.datas)
+                    $.each(obj.datas, (i, items)=>{
+                        let datasoption = ''
+                        let datas = items
+                        let datassplit = datas.split("_")
+                        let camname = datassplit[0]
+                        let camnamedisplay = `กล้อง ${camname}`
+                        let day = datassplit[1].slice(6)
+                        let month = datassplit[1].slice(4,6)
+                        let monththai = thaiMonths[parseInt(month)-1]
+                        let year = datassplit[1].slice(0,4)
+                        let yearthai = parseInt(year) + 543
+                        let hour = datassplit[2].slice(0,2)
+                        let minute = datassplit[2].slice(2,4)
+                        let sec = datassplit[2].slice(4)
+                        let datetimedisplay = `วันที่ ${day} ${monththai} ${yearthai} เวลา ${hour}:${minute}:${sec}`
+                        datasoption += `<option class="selectdataoption" value="${items}">${datetimedisplay}</option>`
+                        selectdatasbtn.append(datasoption)
+                    })
+                },
+                error: (data)=>{
+                    Swal.fire({
+                        icon: "error",
+                        title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง!",
+                    })
+                    $('#nodatah2').appendTo('#nodata')
+                }
+            })
+            }
+        }
 
         function formatDate(selectdatasdatefm) {
             let ndt = new Date(selectdatasdatefm)
@@ -266,7 +348,7 @@
                                             if (i >= 8) { // show x img
                                                 return false;
                                             }
-                                            imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}')" src="http://49.0.91.113:20080/imgpath/${selectdatasval}/pic/X/${item}" "></li>`;
+                                            imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}')" src="/eventfolder/${selectdatasval}/pic/X/${item}" "></li>`;
                                             imgnamex.append(imgx);
                                         })
                                         imgnamex.fadeIn(400);
@@ -333,7 +415,7 @@
 
             Swal.fire({
             title: "กำลังดึงข้อมูลข้อมูลรูปภาพ!",
-            timer: 10000,
+            timer: 1000,
             didOpen: () => {
                 Swal.showLoading();
                 const timer = Swal.getPopup().querySelector("b");
@@ -369,7 +451,7 @@
                                     if (i >= 8) {
                                         return false
                                     }
-                                    imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx('${item}')" src="http://49.0.91.113:20080/imgpath/${getparams}/pic/X/${item}" "></li>`;
+                                    imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx('${item}')" src="/eventfolder/${getparams}/pic/X/${item}" "></li>`;
                                     imgnamex.append(imgx).fadeIn(500)
                                 })
                                 $('#nodatah2').remove()
@@ -389,7 +471,7 @@
                         })
             
         }
-        calldata();
+        calldata()
 
         function pagingSelectDatas(path, json) {
             const items = json;
@@ -414,7 +496,7 @@
                         return false;
                     }
                     // console.log(item);
-                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg2('${path}', '${item}')" src="http://49.0.91.113:20080/imgpath/${path}/pic/${item}"></li>`;
+                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg2('${path}', '${item}')" src="/eventfolder/${path}/pic/${item}"></li>`;
                     imgdisplay.append(img);
 
                 });
@@ -495,7 +577,7 @@
                         return false;
                     }
                     // console.log(item);
-                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg('${item}')" src="http://49.0.91.113:20080/imgpath/<?= $getparam ?>/pic/${item}"></li>`;
+                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg('${item}')" src="/eventfolder/<?= $getparam ?>/pic/${item}"></li>`;
                     imgdisplay.append(img);
 
                 });
@@ -553,7 +635,7 @@
 
         function showimg2(path, img) {
             Swal.fire({
-                imageUrl: `http://49.0.91.113:20080/imgpath/${path}/pic/${img}`,
+                imageUrl: `/eventfolder/${path}/pic/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
                 width: 650,
@@ -562,7 +644,7 @@
 
         function showimgx2(path, img) {
             Swal.fire({
-                imageUrl: `http://49.0.91.113:20080/imgpath/${path}/pic/X/${img}`,
+                imageUrl: `/eventfolder/${path}/pic/X/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
                 width: 650,
@@ -571,7 +653,7 @@
 
         function showimg(img) {
             Swal.fire({
-                imageUrl: `http://49.0.91.113:20080/imgpath/<?= $getparam ?>/pic/${img}`,
+                imageUrl: `/eventfolder/<?= $getparam ?>/pic/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
                 width: 650,
@@ -580,7 +662,7 @@
 
         function showimgx(img) {
             Swal.fire({
-                imageUrl: `http://49.0.91.113:20080/imgpath/<?= $getparam ?>/pic/X/${img}`,
+                imageUrl: `/eventfolder/<?= $getparam ?>/pic/X/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
                 width: 650,
