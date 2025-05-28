@@ -6,7 +6,6 @@ const { glob } = require('glob');
 const { insertDetectionLineSendLogs, insertFolderNameLogs, insertPicStatusLogs, insertVdoStatusLogs, getUserIDCustomer } = require('./DatabaseManage');
 const axios = require('axios')
 const dayjs = require('dayjs');
-const { pushAndroidNotificationPower } = require('./Firebase-Services');
 require('dayjs/locale/th')
 
 let roundXdirCheck = 0
@@ -129,6 +128,19 @@ const timeInsertDB = () => {
     return FormatDatTime
 }
 
+const createFirstFolder = async (directory, directoryfm) => {
+    const timeinsert = timeInsertDB()
+    if (!existsSync(directory)) {
+        mkdirSync(directory)
+        const insert = await insertFolderNameLogs(directoryfm, timeinsert)
+        console.log('CreateFolder Insert Status In CreateFolderFunct', insert)
+        result = "Create Folder Success"
+    } else {
+        result = "Folder Date is exist"
+    }
+    return directory
+}
+
 const createFolder = async (directory, directoryfm) => {
     const timeinsert = timeInsertDB()
     if (!existsSync(directory)) {
@@ -162,7 +174,6 @@ const sendLineAxios = async (FolderName, directoryfm) => {
     const useridindb = await getUserIDCustomer()
     const title = 'ระบบตรวจสอบผู้บุกรุก'
     const message = `ตรวจพบผู้ต้องสงสัย!\nวัน${date}\n${time} น.`;
-    const sendandroidnotipower = await pushAndroidNotificationPower(title,message);
 
     const headerAuth = {
         headers: {
@@ -551,7 +562,7 @@ const globDirectory = async (FolderName) => {
     const pathNamefmonth = pathName.slice(17, 19)
     const pathNamefday = pathName.slice(19, 21)
     const pathNamefCamname = pathName.slice(0, 12)
-    const DirectoryName = `C:/inetpub/wwwroot/Camera_Raw/${pathNamefCamname}/${pathNamefyear}-${pathNamefmonth}-${pathNamefday}/pic_001/`
+    const DirectoryName = `C:/FTP/Camera_Raw/${pathNamefCamname}/${pathNamefyear}-${pathNamefmonth}-${pathNamefday}/pic_001/`
 
     const globfileindir = await glob(`${DirectoryName}*.jpg`)
 
@@ -822,7 +833,7 @@ const getPastDate = (days) => {
 }
 
 const deleteOldRawDir = async () => {
-    const camrawfolder = 'C:/inetpub/wwwroot/Camera_Raw/CAM202412001'
+    const camrawfolder = 'C:/FTP/Camera_Raw/CAM202412001'
     const delconfraw = await Config()
     const delconf = delconfraw[0].json.deloldrawdirpastday
 
@@ -876,7 +887,7 @@ const deleteOldRawDir = async () => {
 }
 
 const deleteOldDir = async () => {
-    const camrawfolder = 'C:/FTP/'
+    const camrawfolder = 'C:/inetpub/wwwroot/eventfolder/'
     const delconfraw = await Config()
     const delconf = delconfraw[0].json.delolddirpastday
 
@@ -945,15 +956,20 @@ const cronDelDir = async () => {
 exports.manageDirectory = async (req, res) => {
 
     const camnameconf = await Config()
-    const camname = camnameconf[0].json.cameraname
+    // const camname = camnameconf[0].json.cameraname
+    const { camname } = req.params // CAM202412001
+
     const time = newDateTimeinManageDir()
     const Fdate = time.substring(0, 8)
     const Ftime = time.substring(time.length - 6)
-    const directory = `C:/FTP/${camname}_${Fdate}_${Ftime}`
+    const firstdir = `C:/inetpub/wwwroot/eventfolder/${camname}`
+    const directory = `${firstdir}/${camname}_${Fdate}_${Ftime}`
     const directorysplit = directory.split('/')
-    const directoryfm = directorysplit[2]
+    const directoryfm = directorysplit[5]
+
 
     cronDelDir()
+        .then(resp => createFirstFolder(firstdir))
         .then(resp => createFolder(directory, directoryfm))
         .then(resp => sendLineAxios(resp, directoryfm))
         .then(resp => createSubFolderPic(resp))

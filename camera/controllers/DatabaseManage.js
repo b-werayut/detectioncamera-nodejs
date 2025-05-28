@@ -87,7 +87,10 @@ exports.insertVdoStatusLogs = async (foldername, status, timeinsert) => {
 
 exports.insertPowerLogs = async (req, res) => {
     try {
-        const {point, status, val, timestamp} = req.params
+        const point = req.params.point
+        const status = req.params.status
+        const val = req.params.val
+        const timestamp = req.params.timestamp
         const insert = await prisma.tmstPowerDetectionLogs.create({
             data: {
                 point: point,
@@ -166,20 +169,5 @@ exports.getDataFlutter = async (req, res) => {
     } catch (err) {
         console.log(err)
         res.status(500).send("Server Error")
-    }
-}
-
-exports.deleteDataFlutter = async (req, res)=>{
-    try{
-        const { id } = req.params;
-        const deletedata = await prisma.tmstPowerDetectionLogs.delete({
-            where: {
-                id: Number(id)
-            }
-        })
-        console.log(deletedata)
-        res.send(deletedata)
-    }catch(err){
-        console.log(err)
     }
 }
