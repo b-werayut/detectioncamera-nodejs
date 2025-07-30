@@ -51,11 +51,12 @@
     <?php
     if (isset($_GET['param'])) {
         $getparam = $_GET['param'];
-        $urlimg = "http://49.0.91.113:20080/SnapShot/snappaging_.php?param={$getparam}";
-        $urlvdo = "http://49.0.91.113:20080/SnapShot/vdopaging_.php?param={$getparam}";
+        $urlimg = "/SnapShot/snappaging_.php?param={$getparam}";
+        $urlvdo = "/SnapShot/vdopaging_.php?param={$getparam}";
     } else {
-        $urlimg = "http://49.0.91.113:20080/SnapShot/snappaging_.php";
-        $urlvdo = "http://49.0.91.113:20080/SnapShot/vdopaging_.php";
+        $urlimg = "/SnapShot/snappaging_.php";
+        $urlvdo = "/SnapShot/vdopaging_.php";
+        $getparam = '';
     }
     ?>
     <!-- Responsive navbar-->
@@ -66,7 +67,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item bg-dark"><a class="nav-link active" aria-current="page" href="http://49.0.91.113:20080/LiveNotifyVideo/">Streamimg</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link active" aria-current="page" href="/LiveNotifyVideo/">Streamimg</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlimg; ?>">Snapshot</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlvdo; ?>">Snap Videos</a></li>
                 </ul>
@@ -91,18 +92,22 @@
     <section class="p-1 text-center" style="height_: 100vh;">
 
         <div class="container px-lg-5">
-            <div class="p-4 p-lg-5 bg-light streamdiv rounded-3 text-center " style="background-color: #f7f7f7; height: 950px;">
-                <div class="row justify-content-center align-items-center" id="streaming-box">
+            <div class="p-4 p-lg-5 bg-light streamdiv rounded-3 text-center " style="background-color: #f7f7f7; height: 1800px;">
+                <div class="row justify-content-center align-items-center" id="streaming-box" style="    height: 1700px;">
                     <div class="p-0">
-                        <iframe allowfullscreen src="http://49.0.91.113:20080/Vdo1/" class="iframe" scrolling="no" frameborder="0"></iframe>
+                        <iframe allowfullscreen src="http://www.centrecities.com:26080/detectionstreaming/detectionstreamingvdo1/" class="iframe" scrolling="no" frameborder="0"></iframe>
+                    </div>
+
+                    <div class="p-0">
+                        <iframe allowfullscreen src="http://www.centrecities.com:26080/detectionstreaming/detectionstreamingvdo2/" class="iframe" scrolling="no" frameborder="0"></iframe>
                     </div>
 
                     <div class="col-md-12 btn-box pt-3 d-flex align-items-center bottom-bar" style="gap: 1rem;">
                         <div class="col-md-6 d-flex snap-btn" style="justify-content: flex-end; padding: 3px 0;">
-                        <button type="button" <?= $getparam == '' ? "style='display: none;'" : null ?> class="btn btn-lg btn-secondary btn-snap" onclick="location.href='<?= $urlimg; ?>'">SNAP SHOT</button>
+                        <button type="button" <?php if($getparam === ''){echo "style='display: none;'";} ?> class="btn btn-lg btn-secondary btn-snap" onclick="location.href='<?= $urlimg; ?>'">SNAP SHOT</button>
                         </div>
                         <div class="col-md-6 d-flex vdo-btn" style="justify-content: flex-start; padding: 3px 0;">
-                        <button type="button" <?= $getparam == '' ? "style='display: none;'" : null ?> class="btn btn-lg btn-secondary btn-vdo" onclick="location.href='<?= $urlvdo; ?>'">VDO SNAP</button>
+                        <button type="button" <?php if($getparam === ''){echo "style='display: none;'";} ?> class="btn btn-lg btn-secondary btn-vdo" onclick="location.href='<?= $urlvdo; ?>'">VDO SNAP</button>
                         </div>
                     </div>
                 </div>
@@ -113,14 +118,14 @@
     <!-- Footer-->
     <script>
         let roundcheck = 0
-        const getparams = '<?= $getparam ?>'
+        const getparams = '<?= $getparam; ?>'
 
         const Calldata = async () => {
             if(!getparams){
                 console.log('No Params')
                 return false
             }else{
-                const url = `http://49.0.91.113:3000/api/getlogs/${getparams}`
+                const url = `http://85.204.247.82:26300/api/getlogs/${getparams}`
             await fetch(url)
                 .then(resp => {
                     if (!resp.ok) {
@@ -153,7 +158,7 @@
                 console.log('No Params')
                 return false
             }else{
-            const url = `http://localhost:3000/api/getlogs/${getparams}`
+            const url = `http://85.204.247.82:26300/api/getlogs/${getparams}`
             console.log('Round Check =', roundcheck)
             if (roundcheck == 5) {
                 return false
@@ -164,7 +169,7 @@
                 time = time - 10
                 console.log('timer: ', time)
                 if (time == 0) {
-                    fetch(url)
+                    await fetch(url)
                         .then(resp => {
                             if (!resp.ok) {
                                 throw new Error('Network response was not ok')
