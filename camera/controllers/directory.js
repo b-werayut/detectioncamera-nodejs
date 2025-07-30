@@ -562,7 +562,8 @@ const globDirectory = async (FolderName) => {
     const pathNamefmonth = pathName.slice(17, 19)
     const pathNamefday = pathName.slice(19, 21)
     const pathNamefCamname = pathName.slice(0, 12)
-    const DirectoryName = `C:/FTP/Camera_Raw/${pathNamefCamname}/${pathNamefyear}-${pathNamefmonth}-${pathNamefday}/pic_001/`
+    const DirectoryName = `C:/inetpub/wwwroot/Camera_Raw/${pathNamefCamname}/${pathNamefyear}-${pathNamefmonth}-${pathNamefday}/pic_001/`
+    console.log('DirectoryName in Glob Funct', DirectoryName)
 
     const globfileindir = await glob(`${DirectoryName}*.jpg`)
 
@@ -833,7 +834,7 @@ const getPastDate = (days) => {
 }
 
 const deleteOldRawDir = async () => {
-    const camrawfolder = 'C:/FTP/Camera_Raw/CAM202412001'
+    const camrawfolder = `C:/inetpub/wwwroot/Camera_Raw/${camname}`
     const delconfraw = await Config()
     const delconf = delconfraw[0].json.deloldrawdirpastday
 
@@ -940,10 +941,10 @@ const deleteOldDir = async () => {
 const cronDelDir = async () => {
     let msg = 'NodeCron is Running! : Delete file every 00:00 Asia/Bangkok timezone'
     console.log(`NodeCronFunct is Running!`)
-    const task = cron.schedule('0 0 * * *', () => {
+    const task = cron.schedule('0 0 * * *', async () => {
         const time = newDateTimeinCronFunct()
-        deleteOldRawDir()
-        deleteOldDir()
+        await deleteOldRawDir()
+        await deleteOldDir()
         // console.log(`Time now is: ${time}`)
         console.log(`NodeCron is Running! at ${time}`)
     }, {
@@ -969,7 +970,7 @@ exports.manageDirectory = async (req, res) => {
 
 
     cronDelDir()
-        .then(resp => createFirstFolder(firstdir))
+        .then(resp => createFirstFolder(firstdir, directoryfm))
         .then(resp => createFolder(directory, directoryfm))
         .then(resp => sendLineAxios(resp, directoryfm))
         .then(resp => createSubFolderPic(resp))
