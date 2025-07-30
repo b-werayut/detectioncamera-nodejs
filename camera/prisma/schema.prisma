@@ -1,12 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -40,6 +33,18 @@ model TmstLineUserIdCustomer {
   replyToken String
   quoteToken String
   timestamp  String
-  createdAt DateTime @default(now())
+  createdAt  DateTime @default(now())
 }
 
+model electrical_data {
+  id          Int       @id(map: "PK__electric__3213E83F2FC5526B") @default(autoincrement())
+  device_code String?   @db.NVarChar(50)
+  line        String?   @db.NVarChar(10)
+  voltage     Decimal?  @db.Decimal(10, 2)
+  currentel   Decimal?  @db.Decimal(10, 2)
+  powerel     Decimal?  @db.Decimal(10, 2)
+  energy      Decimal?  @db.Decimal(10, 3)
+  frequency   Decimal?  @db.Decimal(5, 2)
+  pf          Decimal?  @db.Decimal(5, 2)
+  created_at  DateTime? @default(now(), map: "DF__electrica__creat__3C34F16F") @db.DateTime
+}
