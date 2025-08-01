@@ -1,203 +1,2800 @@
 Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 11:59:48 
+Ip-address: 49.230.70.227
+Detail: - 
+_______________________________________________
+
+Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:06:38 
+Timestamp: Monday 7 April 2025 12:00:03 
+Ip-address: 49.230.70.227
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 03:22:27 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:24:37 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:25:24 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:25:26 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:25:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:25:57 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:26:38 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:26:38 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:26:39 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:26:39 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:07 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:32 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:46 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:47 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:48 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:57 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:57 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:57 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:27:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:23 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:24 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:29 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:49 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:51 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:52 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:52 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:52 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:52 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:28:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:29:26 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:29:27 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:29:27 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:29:28 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:29:43 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:29:54 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 03:29:56 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 03:30:10 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:30:12 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:30:44 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:32:09 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:32:44 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:32:45 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:32:45 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:32:45 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:33:05 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:33:19 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:33:20 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 03:33:20 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 03:35:06 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 03:35:48 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 03:35:58 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:02:23 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:02:41 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:03:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:10 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:11 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:12 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:12 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:12 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:13 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:13 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:13 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 04:04:38 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 05:18:26 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 05:19:13 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 10:47:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:50:33 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:50:35 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:50:39 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:50:47 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:50:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:51:00 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:51:04 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:51:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:52:35 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:53:13 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:53:15 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:53:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:53:43 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:53:57 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:54:04 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:54:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:54:52 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:54:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:57:53 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:57:56 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:57:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 10:58:02 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 10:58:05 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 11:15:17 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 11:15:24 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 7 April 2025 11:15:27 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 555 
+Timestamp: Monday 7 April 2025 11:15:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 11:15:43 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 7 April 2025 11:15:45 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 02:19:27 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 02:19:37 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 02:56:05 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 02:56:24 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 02:58:24 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 02:58:37 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 02:58:52 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 02:59:06 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 04:11:02 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 04:11:21 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 04:12:12 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 04:12:22 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 08:04:00 
+Ip-address: 182.232.168.19
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 04:26:25 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 05:04:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 05:05:33 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 8 April 2025 05:16:01 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 8 April 2025 05:16:05 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:07:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:07:35 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:09:33 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:10:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:11:02 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:11:39 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:11:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:12:28 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:20:53 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:21:54 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:22:36 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:22:53 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:39:06 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:39:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:42:22 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:43:46 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 04:46:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 04:47:14 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:34:48 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 9 April 2025 05:38:03 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:41:24 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:41:29 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:41:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:41:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:42:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:47:17 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:47:25 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:49:09 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:49:25 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:52:14 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:52:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:53:19 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:54:01 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:54:19 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:56:05 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:56:41 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:56:51 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:58:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:58:27 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:59:10 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 05:59:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:10:33 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:10:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:12:04 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:12:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:15:01 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:15:21 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:15:54 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:17:46 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:18:05 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:18:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:19:11 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:21:18 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:25:23 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 9 April 2025 06:27:26 
 Ip-address: 49.0.91.113
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:06:54 
-Ip-address: 49.0.91.113
+Timestamp: Thursday 10 April 2025 01:15:52 
+Ip-address: 171.5.247.154
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:07:31 
-Ip-address: 49.0.91.113
+Timestamp: Thursday 10 April 2025 01:16:19 
+Ip-address: 171.5.247.154
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 10 April 2025 01:26:57 
+Ip-address: 171.5.247.154
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 10 April 2025 01:28:39 
+Ip-address: 171.5.247.154
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:08:48 
-Ip-address: 49.0.91.113
+Timestamp: Thursday 10 April 2025 10:37:41 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 10 April 2025 10:44:39 
+Ip-address: 182.232.161.42
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:09:11 
-Ip-address: 49.0.91.113
+Timestamp: Thursday 10 April 2025 10:45:03 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 10 April 2025 10:46:02 
+Ip-address: 182.232.161.42
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:09:27 
-Ip-address: 49.0.91.113
+Timestamp: Thursday 10 April 2025 10:54:16 
+Ip-address: 182.232.161.42
 Detail: - 
 _______________________________________________
 
 Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:09:59 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:15:06 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:15:52 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:17:28 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:17:42 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:20:47 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 10 April 2025 02:09:34 
 Ip-address: 49.0.91.113
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:21:01 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:22:59 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:24:15 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:26:28 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:29:05 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:35:06 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:36:25 
+Timestamp: Thursday 10 April 2025 02:11:27 
 Ip-address: 49.0.91.113
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:36:39 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:45:31 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:46:54 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:48:15 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:48:32 
+Timestamp: Thursday 10 April 2025 02:11:53 
 Ip-address: 49.0.91.113
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:49:09 
+Timestamp: Thursday 10 April 2025 02:15:00 
 Ip-address: 49.0.91.113
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:51:19 
-Ip-address: 49.0.91.113
-Detail: - 
-_______________________________________________
-
-Point: 1 
-Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:51:33 
+Timestamp: Thursday 10 April 2025 02:23:11 
 Ip-address: 49.0.91.113
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าขัดข้อง! 
-Timestamp: Thursday 8 May 2025 03:54:39 
+Timestamp: Thursday 10 April 2025 02:24:45 
 Ip-address: 49.0.91.113
 Detail: - 
 _______________________________________________
 
 Point: 1 
 Value: ไฟฟ้าปกติ 
-Timestamp: Thursday 8 May 2025 03:54:52 
+Timestamp: Thursday 10 April 2025 02:25:34 
 Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 10 April 2025 02:31:38 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 10 April 2025 02:32:46 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 10 April 2025 02:32:53 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 10 April 2025 11:45:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 10 April 2025 11:46:07 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 10 April 2025 11:58:09 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:11:23 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:17:04 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:17:29 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:17:39 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:18:15 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:18:35 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:21:27 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:22:34 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:23:27 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:27:07 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:27:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:30:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:31:16 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:32:18 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:33:35 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:34:17 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:34:42 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:34:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:35:19 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:37:43 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:38:20 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:38:22 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:38:32 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:38:57 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:39:09 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:39:52 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:42:46 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:42:51 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:43:14 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:43:15 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:43:16 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:49:12 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:49:23 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:50:03 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:50:42 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:50:46 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:51:28 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:51:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:52:14 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:52:56 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:53:02 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:53:28 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:54:04 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:54:20 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:57:58 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:58:03 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:58:15 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:58:18 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:58:34 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:58:38 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:58:53 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:59:44 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 12:59:48 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:00:50 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:00:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:01:56 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:02:13 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:04:01 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:04:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:05:25 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:05:34 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:06:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:12:56 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:13:14 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:14:29 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:14:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:14:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:15:11 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:15:49 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:16:19 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:16:33 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:17:26 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:17:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:19:59 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:20:07 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:20:09 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:20:21 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:20:29 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:21:18 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:21:51 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:21:53 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:22:14 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 11 April 2025 01:22:24 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:23:07 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:23:12 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:23:16 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:23:20 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:24:27 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:24:29 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:24:35 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:24:37 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:24:53 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:24:56 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:25:35 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:25:43 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:26:23 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:26:26 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:27:15 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:27:38 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:27:55 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:28:00 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:28:28 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:29:03 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:29:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:29:12 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:29:24 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:29:32 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:29:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:32:26 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:33:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:37:21 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:37:38 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:38:09 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:38:42 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:40:26 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 11 April 2025 01:54:47 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 01:55:00 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 11 April 2025 01:55:17 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 02:04:08 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 11 April 2025 02:15:04 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 07:47:19 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 11 April 2025 11:41:09 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 11 April 2025 11:41:19 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 11 April 2025 05:26:08 
+Ip-address: 182.232.161.42
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 12:48:45 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 12:52:30 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 17 April 2025 12:52:40 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 17 April 2025 12:52:43 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 12:52:52 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:01:34 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:02:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:02:45 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:14:31 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:16:05 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:17:29 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:18:11 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:18:37 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:20:08 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:24:34 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:24:57 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:26:01 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:27:28 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:28:21 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:29:45 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:31:00 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 17 April 2025 09:33:11 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 18 April 2025 04:39:47 
+Ip-address: ::1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 21 April 2025 03:38:13 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 21 April 2025 03:38:25 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 21 April 2025 06:13:26 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 21 April 2025 06:36:00 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 22 April 2025 01:58:37 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 22 April 2025 02:08:59 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 22 April 2025 03:07:17 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 22 April 2025 03:17:38 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 22 April 2025 03:17:57 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Wednesday 23 April 2025 06:16:03 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 24 April 2025 09:03:22 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 24 April 2025 09:03:43 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 24 April 2025 11:10:12 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 24 April 2025 03:12:05 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 24 April 2025 11:00:18 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 24 April 2025 11:01:35 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 25 April 2025 01:10:07 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 25 April 2025 02:14:47 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 25 April 2025 02:15:33 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 25 April 2025 02:16:43 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 25 April 2025 05:17:54 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 25 April 2025 05:23:55 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 25 April 2025 09:16:22 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 28 April 2025 09:09:41 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 28 April 2025 10:01:56 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 28 April 2025 05:28:55 
+Ip-address: 49.230.64.172
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 29 April 2025 04:25:45 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 29 April 2025 04:39:24 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 29 April 2025 04:51:55 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 29 April 2025 05:00:21 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 29 April 2025 05:00:56 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 29 April 2025 05:05:12 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 29 April 2025 05:12:59 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Tuesday 29 April 2025 05:18:29 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 29 April 2025 05:24:08 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Tuesday 29 April 2025 10:23:54 
+Ip-address: 171.5.218.70
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 30 April 2025 08:25:35 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 30 April 2025 08:26:11 
+Ip-address: 49.0.91.113
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 2 May 2025 04:00:08 
+Ip-address: 127.0.0.1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 2 May 2025 04:00:21 
+Ip-address: 127.0.0.1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 2 May 2025 04:04:57 
+Ip-address: 10.12.12.1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 2 May 2025 04:06:20 
+Ip-address: 10.12.12.1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 2 May 2025 04:36:56 
+Ip-address: 10.12.12.1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Friday 2 May 2025 09:31:02 
+Ip-address: 10.12.12.1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 5 May 2025 09:47:23 
+Ip-address: 10.12.12.1
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 7 May 2025 09:05:41 
+Ip-address: 10.12.12.1
 Detail: - 
 _______________________________________________
 

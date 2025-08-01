@@ -1,1 +1,1 @@
-# detectioncamera-nodejs
+# detection-camera-system
