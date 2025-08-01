@@ -8,10 +8,9 @@
 $myfile = fopen("C:/inetpub/wwwroot/camera/config.txt", "r") or die("Unable to open file!");
 $myfile = fread($myfile, filesize("C:/inetpub/wwwroot/camera/config.txt"));
 $configs = json_decode($myfile, true);
-// fclose($myfile);
 
-// $serverName = "10.12.12.206";
-$serverName = "85.204.247.82,26433"; // external sql ip
+$serverName = "10.12.12.27";
+// $serverName = "85.204.247.82,26433"; // external sql ip
 $userName ='nwlproduction';
 $userPassword="Nwl!2563789!";
 $dbName = "NWL_Detection";
@@ -239,20 +238,6 @@ if (isset($_GET['point']) && isset($_GET['val'])){
         return $result;
     }
 
-    function pushNotification($point, $val, $dtfm){
-        $url = "http://localhost:3000/api/pushnotification/{$point}/{$val}/{$dtfm}";
-        $opts = array(
-                    'http' =>
-                    array(
-                        'method'  => 'POST',
-                        'header'  => 'Content-Type: application/x-www-form-urlencoded'
-                    )
-        );
-        $context  = stream_context_create($opts);
-        $result = file_get_contents($url, false, $context);
-        return $result;
-    }
-    
     function InsertDB($point, $Getvaldb, $val, $timestamp){
         $datas = [];
         $datas['point'] = $point;
@@ -276,33 +261,29 @@ if (isset($_GET['point']) && isset($_GET['val'])){
         );
         $context  = stream_context_create($opts);
         $result = file_get_contents($url, false, $context);
-        return 1;
+        return $result;
     }
 
     $title = "ระบบเช็คกระแสไฟฟ้า";
     $point = "จุดที่: {$Getpoint}";
     $status = "{$Getval}";
     $msg = "$point\n$status";
-  
+    // echo $msg;
+    // $boardcastMessage = "$title\nจุดที่: {$Getpoint} \nสถานะ: {$Getval}";
     $output = boardCastMessage($title, $point, $status, $configs['lineurlendpointpower'], $configs['tokenpowerdetect'], $configs['urllocation'], $userID);
     echo  $output;
-
+    //Logs Record
     date_default_timezone_set("Asia/Bangkok");
     $t = date("l j F Y h:i:s");
     $ipadd = $_SERVER['REMOTE_ADDR'];
     $txt = "Point: {$Getpoint} \nValue: {$Getval} \nTimestamp: {$t} \nIp-address: {$ipadd}\nDetail: - \n_______________________________________________\n";
     $mylogfile = file_put_contents('logs.txt', $txt . PHP_EOL, FILE_APPEND | LOCK_EX);
-    fclose($mylogfile);
 
+    //Insert DB
     $newdt = new DateTime("now", new DateTimeZone("Asia/Bangkok"));
     $dtfm = $newdt->format('Y-m-d:H:i:s');
     $insertdb = InsertDB($Getpoint, $Getvaldb, $val, $dtfm);
-
-    if($insertdb === 1){
-        $pushnoti = pushNotification('Networklink', $val, $dtfm);
-        echo  $pushnoti;
-    }
-
+    // echo $insertdb;
 } else {
     echo "No Param";
 }

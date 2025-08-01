@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>NetWorklink.Co.Ltd,</</title>
+    <title>NetWorklink.Co.Ltd,</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="stylesheet" href="fonts/font-kanit.css" />
     <link rel="stylesheet" href="css/styles.css" />
@@ -98,11 +98,11 @@
     <?php
     if (isset($_GET['param'])) {
         $getparam = $_GET['param'];
-        $urlimg = "/SnapShot/snappaging_.php?param={$getparam}";
-        $urlvdo = "/SnapShot/vdopaging_.php?param={$getparam}";
+        $urlimg = "../SnapShot/snappaging_.php?param={$getparam}";
+        $urlvdo = "../SnapShot/vdopaging_.php?param={$getparam}";
     } else {
-        $urlimg = "/SnapShot/snappaging_.php";
-        $urlvdo = "/SnapShot/vdopaging_.php";
+        $urlimg = "../SnapShot/snappaging_.php";
+        $urlvdo = "../SnapShot/vdopaging_.php";
         $getparam = '';
     }
     ?>
@@ -159,7 +159,7 @@
         const BASE_URL = 'http://85.204.247.82';
         const PORT = '26300';
         const API_PATH = 'api/getCameraStat';
-        const CAMERA_STATS_API_URL = `${BASE_URL}:${PORT}/${API_PATH}?v=${Date.now()}`;
+        const CAMERA_STATS_API_URL = `${BASE_URL}:${PORT}/${API_PATH}`;
 
     
 
@@ -241,7 +241,7 @@
 
         async function fetchCameraStatusesFromAPI() {
             try {
-                const response = await fetch(CAMERA_STATS_API_URL, {
+                const response = await fetch(`${CAMERA_STATS_API_URL}?v=${Date.now()}`, {
 
                     headers: {
                         
@@ -269,6 +269,7 @@
 
         async function renderCameraDropdown() {
             const dropdown = document.getElementById('cameraDropdown');
+            let i = 1
             dropdown.innerHTML = ''; 
 
             const apiCameraStats = await fetchCameraStatusesFromAPI();
@@ -311,10 +312,11 @@
                         data-stream-url="${FULL_STREAMING_URL}"
                         data-status="${apiStatus}"
                         > <label class="form-check-label camera-label"
-                        for="${htmlId}">${cameraName}</label> <span id="${htmlId}-status"
+                        for="${htmlId}">Camera: ${i}</label> <span id="${htmlId}-status"
                         class="camera-status ${statusClass}"></span> `;
 
                 dropdown.appendChild(cameraItem);
+                i++
             });
 
             const checkboxes = document.querySelectorAll('.form-check-input');
@@ -347,54 +349,31 @@
 
 
         async function updateStreams() {
-            const streamContainer = document.getElementById('streamContainer');
-            streamContainer.innerHTML = ''; 
+            const $streamContainer = $('#streamContainer');
+            $streamContainer.empty();
+
             const selectedCheckboxes = document.querySelectorAll('.form-check-input');
             const selected = Array.from(selectedCheckboxes)
                 .filter(cb => cb.checked)
                 .map(cb => ({
-                    name: cb.nextElementSibling.textContent.trim(), 
+                    name: cb.nextElementSibling.textContent.trim(),
                     streamUrl: cb.dataset.streamUrl,
                     apiStatus: parseInt(cb.dataset.status, 10)
                 }));
 
             if (selected.length === 0) {
-                streamContainer.innerHTML = '<p class="text-center w-100">Please select at least one camera</p>';
+                $streamContainer.html('<p class="text-center w-100">Please select at least one camera</p>');
             } else {
                 for (const stream of selected) {
+                    const cameraStatus = stream.apiStatus;
+                    const overlayStatusClass = cameraStatus === 1 ? 'online' : 'offline';
 
-                    console.log('stream :>> ', stream);
+                    const $videoWrapper = $('<div></div>')
+                        .addClass('video-wrapper position-relative')
+                        .css('flex', '0 0 auto')
+                        .hide();
 
-                    const videoWrapper = document.createElement('div');
-                    videoWrapper.className = 'video-wrapper position-relative';
-                    videoWrapper.style.flex = '0 0 auto';
-
-                    const overlayStatusClass = stream.apiStatus === 1 ? 'online' : 'offline';
-
-                    let contentHtml = ''; 
-                    let streamIssueMessage = ''; 
-
-                    if (stream.apiStatus === 0) {
-
-                        streamIssueMessage = '(Reported offline by API)';
-                        contentHtml = `
-                            <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #333; color: white; text-align: center; padding: 20px; border-radius: 4px;">
-                                <p style="font-size: 1.2em; margin-bottom: 10px;">Camera is not available</p>
-                            </div>`;
-                    } else {
-             
-             
-                            contentHtml = `
-                                <iframe src="${stream.streamUrl}"
-                                        width="100%"
-                                        height="100%"
-                                        frameborder="0"
-                                        allowfullscreen
-                                        sandbox="allow-scripts allow-same-origin"
-                                        style="display: block;"></iframe>`;
-                    }
-
-                    videoWrapper.innerHTML = `
+                    const $overlay = $(`
                         <div style="position: absolute; top: 0; left: 0;
                                     background-color: rgba(0,0,0,0.7); color: white;
                                     padding: 2px 5px; font-size: 12px; z-index: 10;">
@@ -402,11 +381,61 @@
                             <span class="camera-status ${overlayStatusClass}"
                                 style="display: inline-block; margin-left: 5px;"></span>
                         </div>
-                        ${contentHtml}`;
-                    streamContainer.appendChild(videoWrapper);
+                    `);
+
+                    if (cameraStatus === 0) {
+                        const offlineContent = $(`
+                            <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #333; color: white; text-align: center; padding: 20px; border-radius: 4px;">
+                                <p style="font-size: 1.2em; margin-bottom: 10px;">Camera is not available</p>
+                            </div>
+                        `);
+                        $videoWrapper.append($overlay).append(offlineContent);
+                        $streamContainer.append($videoWrapper);
+                        $videoWrapper.fadeIn(800);
+                    } else {
+                        const $iframe = $('<iframe>', {
+                            src: stream.streamUrl,
+                            width: '100%',
+                            height: '100%',
+                            frameborder: '0',
+                            allowfullscreen: true,
+                            sandbox: 'allow-scripts allow-same-origin',
+                            css: {
+                                display: 'block'
+                            }
+                        });
+
+                        let isLoaded = false;
+
+                        const loadTimeout = setTimeout(() => {
+                            if (!isLoaded) {
+                                $iframe.remove();
+
+                                const errorContent = $(`
+                                    <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #333; color: white; text-align: center; padding: 20px; border-radius: 4px;">
+                                        <p style="font-size: 1.2em; margin-bottom: 10px;">Failed to load video (timeout)</p>
+                                    </div>
+                                `);
+                                $videoWrapper.append(errorContent).fadeIn(800);
+                            }
+                        }, 10000);
+
+                        $iframe.on('load', function () {
+                            if (!isLoaded) {
+                                isLoaded = true;
+                                clearTimeout(loadTimeout);
+                                $videoWrapper.fadeIn(800);
+                            }
+                        });
+
+                        $videoWrapper.append($overlay).append($iframe);
+                        $streamContainer.append($videoWrapper);
+                    }
                 }
             }
         }
+
+
             const streamContainer = document.getElementById('streamContainer');
             streamContainer.innerHTML = '';
             const selectedCheckboxes = document.querySelectorAll('.form-check-input');
@@ -421,34 +450,35 @@
                 }));
 
             if (selected.length === 0) {
-                streamContainer.innerHTML = '<p class="text-center w-100">Please select at least one camera</p>';
-            } else {
-                for (const stream of selected) {
-                    const videoWrapper = document.createElement('div');
-                    const cameraStatus = Number(stream.status)
-                    videoWrapper.className = 'video-wrapper position-relative';
-                    videoWrapper.style.flex = '0 0 auto';
+                    $('#streamContainer').html('<p class="text-center w-100">Please select at least one camera</p>');
+                } else {
+                    for (const stream of selected) {
+                        const videoWrapper = document.createElement('div');
+                        const cameraStatus = Number(stream.status);
+                        videoWrapper.className = 'video-wrapper position-relative';
+                        videoWrapper.style.flex = '0 0 auto';
 
-                    const isOnlineForStream = true;
+                        videoWrapper.innerHTML = `
+                            <div style="position: absolute; top: 0; left: 0;
+                                        background-color: rgba(0,0,0,0.7); color: white;
+                                        padding: 2px 5px; font-size: 12px; z-index: 10;">
+                                ${stream.name}
+                                <span class="camera-status ${cameraStatus ? 'online' : 'offline'}"
+                                    style="display: inline-block; margin-left: 5px;"></span>
+                            </div>
+                            <iframe src="${stream.streamUrl}"
+                                    width="100%"
+                                    height="100%"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    sandbox="allow-scripts allow-same-origin"
+                                    style="display: block;"></iframe>`;
 
-                    videoWrapper.innerHTML = `
-                        <div style="position: absolute; top: 0; left: 0;
-                                    background-color: rgba(0,0,0,0.7); color: white;
-                                    padding: 2px 5px; font-size: 12px; z-index: 10;">
-                            ${stream.name}
-                            <span class="camera-status ${cameraStatus ? 'online' : 'offline'}"
-                                style="display: inline-block; margin-left: 5px;"></span>
-                        </div>
-                        <iframe src="${stream.streamUrl}"
-                                width="100%"
-                                height="100%"
-                                frameborder="0"
-                                allowfullscreen
-                                sandbox="allow-scripts allow-same-origin"
-                                style="display: block;"></iframe>`;
-                    streamContainer.appendChild(videoWrapper);
+                        $(videoWrapper).hide();
+                        $('#streamContainer').append(videoWrapper);
+                        $(videoWrapper).fadeIn(800);
+                    }
                 }
-            }
         
         document.addEventListener('DOMContentLoaded', async function () {
             const dropdownButton = document.querySelector('[data-bs-target="#cameraDropdown"]');
@@ -472,11 +502,13 @@
         });
     </script>
 </body>
+<div style="position: fixed; bottom: 0; right: 0; width: 100%">
 <footer class="py-5 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
     </div>
 </footer>
+</div>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/scripts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>

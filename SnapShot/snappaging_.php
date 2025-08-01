@@ -98,24 +98,13 @@
         <div class="container" style="margin-bottom: 120px;">
             <div class="content pt-0 px-lg-5 ">
                 <!-- content -->
-                <div class="col-md-12 d-flex top-bar justify-content-between align-items-center py-1 d-none">
-                    <div class="col-md-4 d-flex py-1" style="justify-content: flex-start">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='<?= $urlstream ?>'">STREAMING</button>
+                <div class="row justify-content-between align-items-center py-1">
+                    <div class="col-md-3 d-flex py-1 btn-stream" style="justify-content: flex-start;">
+                        <button class="btn btn-md btn-secondary" onclick="location.href='../LiveNotifyVideo/'">STREAMING</button>
                     </div>
-                    <div class="col-md-4 d-inline-block" style="padding: 0.5rem 0rem">
-                    </div>
-                    <div class="col-md-4 d-inline-block d-flex py-1" style="justify-content: flex-end">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='<?= $urlvdo ?>'">SNAP VDO</button>
-                    </div>
-                </div>
-
-                <div class="col-md-12 d-flex justify-content-between align-items-center py-1">
-                    <div class="col-md-3 d-flex py-1 btn-stream" style="justify-content: flex-start">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='<?= $urlstream ?>'">STREAMING</button>
-                    </div>
-                    <div class="col-md-3 d-inline-block selectcam" style="padding: 0.5rem 0rem; margin-right: 10px;">
-                        <select id="selectcam" onchange='selectCam()' class="form-select" aria-label="Default select example" style="width: 80%; float: right;">
-                            <option value="0" selected>เลือกล้อง</option>
+                    <div class="col-md-3 selectcam d-flex py-1" style="justify-content: flex-end;">
+                        <select id="selectcam" onchange="selectCam()" class="form-select" aria-label="Default select example">
+                            <option value="0" selected="">เลือกกล้อง</option>
                             <?php
                             $subselectfolder = glob("../eventfolder/*");
                             $subselectfolder = array_map("basename", $subselectfolder);
@@ -128,50 +117,28 @@
                             ?>
                         </select>
                     </div>
-                    <div class="col-md-3 d-inline-block selectdiv" style="padding: 0.5rem 0rem;">
-                        <select id="selectdatas" onchange='selectData()' class="form-select" aria-label="Default select example">
-                            <option value="0" selected>กรุณาเลือกกล้องก่อน</option>
-                            <?php
-                            $camname = explode("_", $getparam);
-                            $camfm = $camname[0];
-                            $subselectfolder = glob("../eventfolder/{$camfm}/*");
-                            $subselectfolder = array_map("basename", $subselectfolder);
-                            ?>
-                            <?php
-                            foreach ($subselectfolder as $k => $v) {
-                                $namefcam = substr($v, 0, 3);
-                                $namefcam .= substr($v, 9, 3);
-                                $namefdate = substr($v, 13, 4);
-                                $namefdate .= "-" . substr($v, 17, 2);
-                                $namefdate .= "-" . substr($v, 19, 2);
-                                $namefdate .= " " . substr($v, 22, 2);
-                                $namefdate .= ":" . substr($v, 24, 2);
-                                $namefdate .= ":" . substr($v, 26, 2);
-                                $namefdate = date("วันที่ d/m/Y เวลา H:i:s น.",strtotime($namefdate));
-                                // $namefdate = date_format("วันที่ d/m/Y เวลา H:i:s น.");
-                                $namefdate = "{$namefdate}";
-                            ?>
-                                <option class="selectdataoption" value="<?= $v ?>"><?= $namefdate; ?></option>
-                            <?php }
-                            ?>
+                    <div class="col-md-4 selectdiv d-flex py-1" style="justify-content: center;">
+                        <select id="selectdatas" onchange="selectData()" class="form-select w-100" aria-label="Default select example" disabled>
+                            <option value="0" selected="">กรุณาเลือกกล้องก่อน</option>
+                            <option class="selectdataoption" value="CAM202412001">วันที่ 01/01/1970 เวลา 00:00:00 น.</option>
                         </select>
                     </div>
-                    <div class="col-md-3 d-inline-block d-flex py-1 btn-vdo" style="justify-content: flex-end">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='<?= $urlvdo ?>'">SNAP VDO</button>
+                    <div class="col-md-2 d-flex py-1 btn-vdo" style="justify-content: flex-end;">
+                        <button class="btn btn-md btn-secondary" onclick="location.href='/SnapShot/vdopaging_.php'">SNAP VDO</button>
                     </div>
                 </div>
                 <hr>
                 <div class="col-md-12 px-5 pt-2 pb-5 rounded-2 justify-between ct" style="background-color: #f7f7f7;">
-                    <div id="snappath" class="date py-2">
-                        <h4 class="head m-0" id="filedate" style="font-family: Kanit;"></h4>
-                    </div>
+                    <div id="snappath" class="date mt-2">
+                        <span id="filedate" class="badge rounded-pill bg-warning px-3 py-2 text-black" style="font-family: 'Kanit', sans-serif; font-size: 14px;">
+                        </span>
                     <hr>
+                    </div>
                     <div class="p-4 content1 ctm" style="background-color: white;">
                         <div class="text-center" id="nodata">
                             <h5 id="nodatah2">อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>
                         </div>
                         <ul class="imgnamex row" id="imgnamex" style="margin: 0; padding:0;"></ul>
-                        <hr id="line">
                         <ul class="imgdisplay row" id="imgdisplay" style="margin: 0; padding:0;"></ul>
                         <div class="pagination py-2 d-flex flex-wrap" id="pagination"></div>
                     </div>
@@ -190,6 +157,8 @@
         let futuretime = '<?= $futuretimecf ?>'
         let roundselectData = 0
         let roundcalldata = 0
+        let snappath = $('#snappath')
+        snappath.hide()
 
         function disabledfunct(){
             const selectcamval = $('#selectcam').val()
@@ -222,7 +191,7 @@
                     if (obj.datas == '') {
                         alert("nodatas")
                     }
-                    console.log(obj.datas)
+                    // console.log(obj.datas)
                     $.each(obj.datas, (i, items)=>{
                         let datasoption = ''
                         let datas = items
@@ -268,17 +237,14 @@
 
         function selectData() {
             let nodata = $('<h5 id="nodatah2" >อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>')
-            if (roundselectData == 3) {
-                Swal.fire({
-                    icon: "error",
-                    title: "โหลดข้อมูลไม่สำเร็จ!",
-                });
-                nodata.appendTo('#nodata')
-                return false
-            }
+            $('#nodatah').remove()
+            $('#nodatah2').remove()
+            
             $('.page-item').remove()
             $('#nodatah2').remove()
             let selectdatasval = $('#selectdatas').val()
+            let camname = selectdatasval.split("_");
+            let camnamef = camname[0];
             let selectdatasdt = selectdatasval.slice(13, 29).replaceAll('_', '') // 20250401090316
             let selectdatasdty = selectdatasdt.slice(0, 4)
             let selectdatasdtmth = selectdatasdt.slice(4, 6)
@@ -331,29 +297,62 @@
                                         }
                                     });
                                 } else {
-                                    let imgpic = obj.imgnames[obj.imgnames.length - 1].slice(4, 18)
-                                    if (parseInt(imgpic) < parseInt(futuretime) && parseInt(imgpic) < parseInt(futuretime - 1) && parseInt(imgpic) < parseInt(futuretime - 2) && parseInt(imgpic) < parseInt(futuretime - 3)) {
+                                    let imgpic = obj.imgnames[obj.imgnames.length - 1]?.slice(4, 18)
+                                    if (parseInt(imgpic) < parseInt(futuretime - 30)) {
                                         roundselectData++
+                                        if (roundselectData == 3) {
+                                            roundselectData = 0
+                                            if(imgpic.length <= 0){
+                                            Swal.fire({
+                                                icon: "error",
+                                                title: "โหลดข้อมูลไม่สำเร็จ!",
+                                            });
+                                            $('.imgdisplay').remove()
+                                            $('.imgnamex').remove()
+                                            nodata.appendTo('#nodata')
+                                            }
+                                            return false
+                                        }
                                         selectData(selectdatasval)
                                     } else {
                                         swal.close()
                                         $('.imgdisplay').fadeIn(200)
                                         let filedate = $('#filedate')
                                         let imgnamex = $('.imgnamex')
+                                        snappath.fadeIn(function (){
                                         filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
-                                        pagingSelectDatas(selectdatasval, obj.imgnames)
+                                        })
+                                        pagingSelectDatas(selectdatasval, obj.imgnames, camnamef)
                                         $.each(obj.imgnamexs, function(i, item) {
                                             let imgx = '';
                                             console.log(item);
                                             if (i >= 8) { // show x img
                                                 return false;
                                             }
-                                            imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}')" src="/eventfolder/${selectdatasval}/pic/X/${item}" "></li>`;
+                                            imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}','${camnamef}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}" "></li>`;
                                             imgnamex.append(imgx);
                                         })
                                         imgnamex.fadeIn(400);
                                         $('#nodatah2').remove();
                                     }
+                                    $('.imgdisplay').fadeIn(200)
+                                        let filedate = $('#filedate')
+                                        let imgnamex = $('.imgnamex')
+                                        snappath.fadeIn(function (){
+                                        filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
+                                        })
+                                        pagingSelectDatas(selectdatasval, obj.imgnames, camnamef)
+                                        $.each(obj.imgnamexs, function(i, item) {
+                                            let imgx = '';
+                                            console.log(item);
+                                            if (i >= 8) { // show x img
+                                                return false;
+                                            }
+                                            imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}" "></li>`;
+                                            imgnamex.append(imgx);
+                                        })
+                                        imgnamex.fadeIn(400);
+                                        $('#nodatah2').remove();
                                 }
                             },
                             error: function(data) {
@@ -444,7 +443,9 @@
                                 nodata.append('#nodata')
                             } else {
                                 swal.close();
-                                filedate.text(`ข้อมูลวันที่: ${obj.filedate}`);
+                                snappath.fadeIn(function (){
+                                        filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
+                                })
                                 paging(obj.imgname)
                                 $.each(obj.imgnamex, function(i, item) {
                                     let imgx = ''
@@ -473,7 +474,7 @@
         }
         calldata()
 
-        function pagingSelectDatas(path, json) {
+        function pagingSelectDatas(path, json, camname) {
             const items = json;
             if (!items) {
                 return false
@@ -496,7 +497,7 @@
                         return false;
                     }
                     // console.log(item);
-                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg2('${path}', '${item}')" src="/eventfolder/${path}/pic/${item}"></li>`;
+                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg2('${path}', '${item}', '${camname}')" src="/eventfolder/${camname}/${path}/pic/${item}"></li>`;
                     imgdisplay.append(img);
 
                 });
@@ -633,18 +634,18 @@
             updatePagination();
         }
 
-        function showimg2(path, img) {
+        function showimg2(path, img, camname) {
             Swal.fire({
-                imageUrl: `/eventfolder/${path}/pic/${img}`,
+                imageUrl: `/eventfolder/${camname}/${path}/pic/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
                 width: 650,
             });
         }
 
-        function showimgx2(path, img) {
+        function showimgx2(path, img, camname) {
             Swal.fire({
-                imageUrl: `/eventfolder/${path}/pic/X/${img}`,
+                imageUrl: `/eventfolder/${camname}/${path}/pic/X/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
                 width: 650,

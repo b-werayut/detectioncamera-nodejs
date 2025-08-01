@@ -19,10 +19,11 @@ if(isset($_GET['param'])){
     $datasjson = ["imgname"=>$basename, "filedate"=>$getparamf, "imgnamex"=>$basenamex];
     echo json_encode($datasjson);
 }
-
  
 if(isset($_GET['selectdatas'])){
     $getselectdatas = $_GET['selectdatas'];
+    $camnameRaw = explode("_", $getselectdatas);
+    $cameraName = $camnameRaw[0];
     $getparamf = substr($getselectdatas, 13, 4);
     $getparamf .= "-".substr($getselectdatas, 17, 2);
     $getparamf .= "-".substr($getselectdatas, 19, 2);
@@ -31,10 +32,10 @@ if(isset($_GET['selectdatas'])){
     $getparamf .= ":".substr($getselectdatas, 26, 2);
     $getparamf = date_create($getparamf);
     $getparamf = date_format($getparamf,"d/m/Y เวลา H:i:s น.");
-    $selectfolderx = "../eventfolder/{$getselectdatas}/pic/X/*.jpg";
+    $selectfolderx = "../eventfolder/{$cameraName}/{$getselectdatas}/pic/X/*.jpg";
     $selectpicx = glob($selectfolderx);
     $basenamex = array_map('basename', $selectpicx);
-    $selectfolder = "../eventfolder/{$getselectdatas}/pic/*.jpg";
+    $selectfolder = "../eventfolder/{$cameraName}/{$getselectdatas}/pic/*.jpg";
     $selectpic = glob($selectfolder);
     $basename = array_map('basename', $selectpic);
     $datasjson = ["imgnames"=>$basename, "filedates"=>$getparamf, "imgnamexs"=>$basenamex];
