@@ -834,106 +834,67 @@ const getPastDate = (days) => {
     return new Date(Date.now() - days * 24 * 60 * 60 * 1000);
 }
 
-const deleteOldRawDir = async () => {
-    try {
-        const camrawcamerafolder = `C:/inetpub/wwwroot/Camera_Raw`;
-        const delconfraw = await Config();
-        const delconf = delconfraw[0].json.deloldrawdirpastday;
+const deleteOldFiles = async (baseDir, days) => {
+    const cutoffTime = getPastDate(days);
+    const folders = await fs.readdir(baseDir);
 
-        const cutoffTime = getPastDate(delconf);
-        const camerafolders = await fs.readdir(camrawcamerafolder);
+    for (const folder of folders) {
+        const folderPath = path.join(baseDir, folder);
 
-        for (const folder of camerafolders) {
-            const camrawfolder = path.join(camrawcamerafolder, folder);
-            const files = await fs.readdir(camrawfolder);
+        const folderStats = await fs.stat(folderPath);
+        if (!folderStats.isDirectory()) continue;
 
-            for (const file of files) {
-                const filePath = path.join(camrawfolder, file);
-                const fileext = path.extname(file);
-                const filebasename = path.basename(file);
+        const files = await fs.readdir(folderPath);
+        for (const file of files) {
+            const filePath = path.join(folderPath, file);
+            const ext = path.extname(file);
+            const base = path.basename(file);
 
-                if (fileext === '.node' || fileext === '.entries' || filebasename === 'DVRWorkDirectory') {
-                    continue;
+            if (ext === '.node' || ext === '.entries' || base === 'DVRWorkDirectory') continue;
+
+            try {
+                const fileStats = await fs.stat(filePath);
+
+                if (fileStats.mtime < cutoffTime) {
+                    await fs.rm(filePath, { recursive: true, force: true });
+                    console.log(`✅ Deleted: ${filePath}`);
                 }
-
-                try {
-                    const stats = await fs.stat(filePath);
-
-                    if (stats.mtime < cutoffTime) {
-                        await fs.rm(filePath, { recursive: true, force: true });
-                        console.log(`Deleted: ${filebasename}`);
-                    }
-
-                } catch (err) {
-                    console.error(`Error getting stats or deleting ${filePath}:`, err);
-                }
+            } catch (err) {
+                console.error(`❌ Error handling file ${filePath}:`, err);
             }
         }
-
-        return delconf;
-    } catch (err) {
-        console.error('Error in deleteOldRawDir:', err);
-    }
-};
-
-const deleteOldDir = async (req, res) => {
-    try {
-        const camrawcamerafolder = 'C:/inetpub/wwwroot/eventfolder';
-        const delconfraw = await Config();
-        const delconf = delconfraw[0].json.delolddirpastday;
-
-        const cutoffTime = getPastDate(delconf);
-        const camerafolders = await fs.readdir(camrawcamerafolder);
-
-        for (const folder of camerafolders) {
-            const camrawfolder = path.join(camrawcamerafolder, folder);
-            const files = await fs.readdir(camrawfolder);
-
-            for (const file of files) {
-                const filePath = path.join(camrawfolder, file);
-                const fileext = path.extname(file);
-                const filebasename = path.basename(file);
-
-                if (fileext === '.node' || fileext === '.entries' || filebasename === 'DVRWorkDirectory') {
-                    continue;
-                }
-
-                try {
-                    const stats = await fs.stat(filePath);
-
-                    if (stats.mtime < cutoffTime) {
-                        await fs.rm(filePath, { recursive: true, force: true });
-                        console.log(`Deleted: ${filebasename}`);
-                    }
-
-                } catch (err) {
-                    console.error(`Error getting stats or deleting ${filePath}:`, err);
-                }
-            }
-        }
-
-        return delconf;
-
-    } catch (err) {
-        console.error('Error in deleteOldDir:', err);
     }
 };
 
 const cronDelDir = async () => {
-    let msg = 'NodeCron is Running! : Delete file every 00:00 Asia/Bangkok timezone'
-    console.log(`NodeCronFunct is Running!`)
+    console.log(`🟢 NodeCronFunct is Running!`);
+
     const task = cron.schedule('0 0 * * *', async () => {
-        const time = newDateTimeinCronFunct()
-        await deleteOldRawDir()
-        await deleteOldDir()
-        // console.log(`Time now is: ${time}`)
-        console.log(`NodeCron is Running! at ${time}`)
+        const time = newDateTimeinCronFunct();
+
+        try {
+            const delconfraw = await Config();
+
+            await deleteOldFiles(
+                'C:/inetpub/wwwroot/Camera_Raw',
+                delconfraw[0].json.deloldrawdirpastday
+            );
+            await deleteOldFiles(
+                'C:/inetpub/wwwroot/eventfolder',
+                delconfraw[0].json.delolddirpastday
+            );
+
+            console.log(`🕒 NodeCron ran successfully at ${time}`);
+        } catch (err) {
+            console.error(`❌ Error during cron job at ${time}:`, err);
+        }
     }, {
         scheduled: true,
-        timezone: "Asia/Bangkok"
-    })
-    return msg
-}
+        timezone: 'Asia/Bangkok',
+    });
+
+    return '✅ NodeCron is set: Delete files every 00:00 Asia/Bangkok timezone';
+};
 
 exports.manageDirectory = async (req, res) => {
 
