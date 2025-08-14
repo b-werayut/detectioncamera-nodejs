@@ -95,7 +95,18 @@
 </style>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <?php
+    if (isset($_GET['param'])) {
+        $getparam = $_GET['param'];
+        $urlimg = "../SnapShot/snappagingm_.php?param={$getparam}";
+        $urlvdo = "../SnapShot/vdopagingm_.php?param={$getparam}";
+    } else {
+        $urlimg = "../SnapShot/snappagingm_.php";
+        $urlvdo = "../SnapShot/vdopagingm_.php";
+        $getparam = '';
+    }
+    ?>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-lg-5">
             <img src="../snapshot/assets/nwl-logo.png" alt="NetWorklink" width="50">
             <span style="letter-spacing: 1px;" class="text-white" href="#!">NetWorklink.Co.Ltd,</span>
@@ -106,8 +117,8 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item bg-dark"><a class="nav-link active" aria-current="page"
                             href="/LiveNotifyVideo/">Streamimg</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="../SnapShot/snappaging_.php">Snapshot</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="../SnapShot/vdopaging_.php">Snap Videos</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlimg; ?>">Snapshot</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlvdo; ?>">Snap Videos</a></li>
                 </ul>
             </div>
         </div>
@@ -143,10 +154,90 @@
     </section>
 
     <script>
+        let roundcheck = 0;
+        const getparams = '<?= $getparam; ?>';
         const BASE_URL = 'http://85.204.247.82';
         const PORT = '26300';
         const API_PATH = 'api/getCameraStat';
         const CAMERA_STATS_API_URL = `${BASE_URL}:${PORT}/${API_PATH}`;
+
+    
+
+        const Calldata = async () => {
+            if (!getparams) {
+                console.log('No Params');
+                return false;
+            } else {
+                const url = `http://85.204.247.82:26300/api/getlogs/${getparams}`;
+                await fetch(url)
+                    .then(resp => {
+                        if (!resp.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return resp.json();
+                    })
+                    .then(resp => {
+                        const picstatus = resp.picstatus;
+                        const vdostatus = resp.vdostatus;
+                        if (picstatus == 1) {
+                            $('.btn-snap').removeClass("btn-secondary").addClass("btn-success");
+                        } else {
+                            FetchDatas();
+                        }
+                        if (vdostatus == 1) {
+                            $('.btn-vdo').removeClass("btn-secondary").addClass("btn-success");
+                        } else {
+                            FetchDatas();
+                        }
+                    });
+            }
+        };
+        Calldata();
+
+        const FetchDatas = async () => {
+            if (!getparams) {
+                console.log('No Params');
+                return false;
+            } else {
+                const url = `http://85.204.247.82:26300/api/getlogs/${getparams}`;
+                console.log('Round Check =', roundcheck);
+                if (roundcheck == 5) {
+                    return false;
+                }
+                let time = 60;
+                console.log('timer: ', time);
+                const setinterval = setInterval(async () => {
+                    time = time - 10;
+                    console.log('timer: ', time);
+                    if (time == 0) {
+                        await fetch(url)
+                            .then(resp => {
+                                if (!resp.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return resp.json();
+                            })
+                            .then(resp => {
+                                const picstatus = resp.picstatus;
+                                const vdostatus = resp.vdostatus;
+                                if (picstatus == 1) {
+                                    clearInterval(setinterval);
+                                    $('.btn-snap').removeClass("btn-secondary").addClass("btn-success");
+                                } else {
+                                    FetchDatas();
+                                }
+                                if (vdostatus == 1) {
+                                    clearInterval(setinterval);
+                                    $('.btn-vdo').removeClass("btn-secondary").addClass("btn-success");
+                                } else {
+                                    FetchDatas();
+                                }
+                            });
+                    }
+                }, 10000);
+                roundcheck++;
+            }
+        };
 
         async function fetchCameraStatusesFromAPI() {
             try {
@@ -343,6 +434,7 @@
                 }
             }
         }
+
 
             const streamContainer = document.getElementById('streamContainer');
             streamContainer.innerHTML = '';
