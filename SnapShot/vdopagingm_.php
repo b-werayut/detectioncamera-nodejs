@@ -71,17 +71,16 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-lg-5">
-            <img src="assets/nwl-logo.png" alt="NetWorklink" width="50">
-            <span style="letter-spacing: 1px;" class="text-white" href="#!">NetWorklink.Co.Ltd,</span>
+            <a class="navbar-brand" href="#!">NetWorklink.Co.Ltd,</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item bg-dark"><a class="nav-link" aria-current="page"
-                            href="../LiveNotifyVideo/">Streamimg</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="/SnapShot/snappaging_.php">Snapshot</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link active" href="/SnapShot/vdopaging_.php">Snap Videos</a></li>
+                            href="<?= $urlstream ?>">Streamimg</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlimg; ?>">Snapshot</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link active" href="<?= $urlvdo; ?>">Snap Videos</a></li>
                 </ul>
             </div>
         </div>
@@ -102,11 +101,11 @@
                 <!-- content -->
                 <div class="row justify-content-between align-items-center py-1">
                     <div class="col-md-3 d-flex py-1 btn-stream" style="justify-content: flex-start;">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='./snappaging_.php'">SNAPSHOT</button>
+                        <button class="btn btn-md btn-secondary" onclick="location.href='../LiveNotifyVideo/'">STREAMING</button>
                     </div>
                     <div class="col-md-3 selectcam d-flex py-1" style="justify-content: flex-end;">
                         <select id="selectcam" onchange="selectCam()" class="form-select" aria-label="Default select example">
-                            <option value="0" selected="">เลือกกล้อง</option>
+                            <option value="0" selected="">เลือกล้อง</option>
                             <?php
                             $subselectfolder = glob("../eventfolder/*");
                             $subselectfolder = array_map("basename", $subselectfolder);
@@ -126,7 +125,7 @@
                         </select>
                     </div>
                     <div class="col-md-2 d-flex py-1 btn-vdo" style="justify-content: flex-end;">
-                        <!-- <button class="btn btn-md btn-secondary" onclick="location.href='/SnapShot/vdopaging_.php'">SNAP VDO</button> -->
+                        <button class="btn btn-md btn-secondary" onclick="location.href='/SnapShot/vdopaging_.php'">SNAP VDO</button>
                     </div>
                 </div>
                 <hr>
@@ -138,7 +137,7 @@
                     </div>
                     <div class="p-4 content1 ctm" style="background-color: white;">
                         <div class="text-center" id="nodata">
-                            <h5 id="nodatah2">กรุณาเลือกข้อมูล</h5>
+                            <h5 id="nodatah2">อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>
                         </div>
                         <ul class="vdonamex row" id="vdonamex" style="margin: 0; padding:0;"></ul>
                         <ul class="vdodisplay row" id="vdodisplay" style="margin: 0; padding:0;"></ul>
@@ -385,7 +384,7 @@
                         let obj = jQuery.parseJSON(resp)
                         let vdonamex = $('.vdonamex')
 
-                        if (obj.vdonames == '') {
+                        if (obj.vdonames == '' && obj.vdonamexs == '') {
                             Swal.fire({
                                 title: "กำลังดึงข้อมูลวิดีโอ!",
                                 timer: 2000,
@@ -433,79 +432,208 @@
             }
         }
 
-        // function paging(json) {
-        //     const items = json;
-        //     const itemsPerPage = 20;
-        //     let currentPage = 1;
+        function calldata() {
+            let nodata = $('<h5 id="nodatah2" >อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง!</h5>')
+            $('#nodatah2').remove()
+            let getparams = '<?= $getparam ?>'
+            if (!getparams || getparams.trim() === '') {
+                Swal.fire({
+                    title: "กำลังดึงข้อมูลวิดีโอ!!",
+                    timer: 3000,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "โหลดข้อมูลไม่สำเร็จ",
+                        });
+                        nodata.appendTo('#nodata');
+                    }
+                });
+                return;
+            } else if (roundcalldata == 3) {
+                Swal.fire({
+                    icon: "error",
+                    title: "โหลดข้อมูลวิดีโอไม่สำเร็จ!!",
+                })
+                nodata.appendTo('#nodata')
+                return false
+            }
 
-        //     function displayItems(page) {
-        //         const startIndex = (page - 1) * itemsPerPage;
-        //         const endIndex = startIndex + itemsPerPage;
-        //         const itemsToDisplay = items.slice(startIndex, endIndex);
+            let getparamsdatasdt = getparams.slice(13, 29).replaceAll('_', '')
+            let getparamsdatasdty = getparamsdatasdt.slice(0, 4)
+            let getparamsdatasdtmth = getparamsdatasdt.slice(4, 6)
+            let getparamsdatasdtd = getparamsdatasdt.slice(6, 8)
+            let getparamsdatasdth = getparamsdatasdt.slice(8, 10)
+            let getparamsdatasdtminute = getparamsdatasdt.slice(10, 12)
+            let getparamsdatasdts = getparamsdatasdt.slice(12, 14)
+            let getparamsdatasdatefm = `${getparamsdatasdty}-${getparamsdatasdtmth}-${getparamsdatasdtd} ${getparamsdatasdth}:${getparamsdatasdtminute}:${getparamsdatasdts}`
+            const beforetime = formatDatebeforetime(getparamsdatasdatefm).slice(-6)
+            const futuretime = formatDatefuturetime(getparamsdatasdatefm).slice(-6)
 
-        //         const itemList = document.getElementById('vdodisplay');
-        //         itemList.innerHTML = "";
-        //         let vdodisplay = $('.vdodisplay');
-        //         itemsToDisplay.map(item => {
-        //             let vdo = '';
-        //             if (item == "X") {
-        //                 return false;
-        //             }
-        //             vdo += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="/eventfolder/<?= $getparam ?>/vdo/${item}" type="video/mp4"></video> </li>`;
-        //             vdodisplay.append(vdo);
+            $.ajax({
+                data: `param=${getparams}`,
+                url: "vdopagingdata.php",
+                type: "GET",
+                success: (resp) => {
+                    let filedate = $('#filedate')
+                    let vdonamex = $('.vdonamex')
+                    let obj = jQuery.parseJSON(resp)
+                    let vdoname = obj.vdoname[0]
 
-        //         });
-        //         vdodisplay.fadeOut(100);
-        //         vdodisplay.fadeIn(400);
-        //     }
+                    if (obj.vdoname == '' && obj.vdonamex == '') {
+                        Swal.fire({
+                            title: "กำลังดึงข้อมูลวิดีโอ!",
+                            timer: 2000,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง",
+                                })
+                                nodata.appendTo('#nodata')
+                                return false
+                            }
+                        })
+                    } else {
+                        const vdonameraw = vdoname.replaceAll('.', '')
+                        const vdonamestart = vdonameraw.replaceAll('-', '').slice(0, 6) //082515
+                        const vdonameend = vdonameraw.replaceAll('-', '').slice(6, 12) //082526
+                        const getparamfm = getparams.replaceAll('_', '').slice(-6) //082722
 
-        //     function displayPagination() {
-        //         const totalPages = Math.ceil(items.length / itemsPerPage);
-        //         const pagination = document.getElementById('pagination');
-        //         pagination.innerHTML = "";
+                        if (parseInt(vdonamestart) < parseInt(beforetime) && parseInt(vdonameend) < parseInt(futuretime)) {
+                            Swal.fire({
+                                title: "กำลังดึงข้อมูลวิดีโอ!",
+                                timer: 10000,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                },
+                            }).then((result) => {
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    roundcalldata++
+                                    calldata(getparams)
+                                }
+                            })
+                        } else {
+                            $('#nodatah2').remove()
+                            Swal.fire({
+                                title: "กำลังดึงข้อมูลวิดีโอ!",
+                                timer: 2000,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                },
+                            }).then((result) => {
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                     snappath.fadeIn(function (){
+                                        filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
+                                    })
+                                    paging(obj.vdoname)
+                                    $.each(obj.vdonamex, function(i, item) {
+                                        let vdo = '';
+                                        if (i >= 5) {
+                                            return false;
+                                        }
+                                        vdo += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="/eventfolder/<?= $getparam ?>/vdo/x/${item}" type="video/mp4"></video> </li>`;
+                                        vdonamex.append(vdo).fadeIn(500);
+                                    })
+                                }
+                            })
 
-        //         const prevPage = document.createElement('div');
-        //         prevPage.classList.add("page-item");
-        //         prevPage.innerHTML = '<a class="page-link" >Previous</a>';
-        //         prevPage.addEventListener('click', function() {
-        //             if (currentPage > 1) {
-        //                 currentPage--;
-        //                 updatePagination();
-        //             }
-        //         });
-        //         pagination.appendChild(prevPage);
 
-        //         for (let i = 1; i <= totalPages; i++) {
-        //             const page = document.createElement('div');
-        //             page.classList.add("page-item");
-        //             page.classList.toggle('active', i === currentPage);
-        //             page.innerHTML = `<a class="page-link" >${i}</a>`;
-        //             page.addEventListener('click', function() {
-        //                 currentPage = i;
-        //                 updatePagination();
-        //             });
-        //             pagination.appendChild(page);
-        //         }
+                        }
+                    }
+                },
+                error: (data) => {
+                    let nodata = $("<h5 id='nodatah2'>อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>")
+                    Swal.fire({
+                        icon: "error",
+                        title: "โหลดข้อมูลวิดีโอไม่สำเร็จ!",
+                    })
+                    nodata.appendTo('#nodata')
+                    return false
+                }
+            })
+        }
+        calldata();
 
-        //         const nextPage = document.createElement('div');
-        //         nextPage.classList.add("page-item");
-        //         nextPage.innerHTML = '<a class="page-link" >Next</a>';
-        //         nextPage.addEventListener('click', function() {
-        //             if (currentPage < totalPages) {
-        //                 currentPage++;
-        //                 updatePagination();
-        //             }
-        //         });
-        //         pagination.appendChild(nextPage);
-        //     }
+        function paging(json) {
+            const items = json;
+            const itemsPerPage = 20;
+            let currentPage = 1;
 
-        //     function updatePagination() {
-        //         displayItems(currentPage);
-        //         displayPagination();
-        //     }
+            function displayItems(page) {
+                const startIndex = (page - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const itemsToDisplay = items.slice(startIndex, endIndex);
 
-        //     updatePagination();
-        // }
+                const itemList = document.getElementById('vdodisplay');
+                itemList.innerHTML = "";
+                let vdodisplay = $('.vdodisplay');
+                itemsToDisplay.map(item => {
+                    let vdo = '';
+                    if (item == "X") {
+                        return false;
+                    }
+                    vdo += `<li class="vdobox col-md-3 p-0 text-center" > <video width="320" height="240" muted controls class="img-thumbnail"><source class="vdobox col-md-3 p-0" src="/eventfolder/<?= $getparam ?>/vdo/${item}" type="video/mp4"></video> </li>`;
+                    vdodisplay.append(vdo);
+
+                });
+                vdodisplay.fadeOut(100);
+                vdodisplay.fadeIn(400);
+            }
+
+            function displayPagination() {
+                const totalPages = Math.ceil(items.length / itemsPerPage);
+                const pagination = document.getElementById('pagination');
+                pagination.innerHTML = "";
+
+                const prevPage = document.createElement('div');
+                prevPage.classList.add("page-item");
+                prevPage.innerHTML = '<a class="page-link" >Previous</a>';
+                prevPage.addEventListener('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        updatePagination();
+                    }
+                });
+                pagination.appendChild(prevPage);
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const page = document.createElement('div');
+                    page.classList.add("page-item");
+                    page.classList.toggle('active', i === currentPage);
+                    page.innerHTML = `<a class="page-link" >${i}</a>`;
+                    page.addEventListener('click', function() {
+                        currentPage = i;
+                        updatePagination();
+                    });
+                    pagination.appendChild(page);
+                }
+
+                const nextPage = document.createElement('div');
+                nextPage.classList.add("page-item");
+                nextPage.innerHTML = '<a class="page-link" >Next</a>';
+                nextPage.addEventListener('click', function() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        updatePagination();
+                    }
+                });
+                pagination.appendChild(nextPage);
+            }
+
+            function updatePagination() {
+                displayItems(currentPage);
+                displayPagination();
+            }
+
+            updatePagination();
+        }
     </script>
 </body>
 

@@ -866,10 +866,11 @@ const deleteOldFiles = async (baseDir, days) => {
     }
 };
 
-const cronDelDir = async () => {
+exports.cronDelDir = async () => {
     console.log(`🟢 NodeCronFunct is Running!`);
 
     const task = cron.schedule('0 0 * * *', async () => {
+    // const task = cron.schedule('*/5 * * * * *', async () => {
         const time = newDateTimeinCronFunct();
 
         try {
@@ -911,8 +912,7 @@ exports.manageDirectory = async (req, res) => {
     const directoryfm = directorysplit[5]
 
 
-    cronDelDir()
-        .then(resp => createFirstFolder(firstdir, directoryfm))
+    createFirstFolder(firstdir, directoryfm)
         .then(resp => createFolder(directory, directoryfm))
         .then(resp => sendLineAxios(resp, directoryfm))
         .then(resp => createSubFolderPic(resp))

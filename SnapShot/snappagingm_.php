@@ -53,6 +53,19 @@
     $cfdatas = json_decode($cfraw, true);
     $futuretimecf = $cfdatas['futuretime'];
     fclose($myfile);
+
+    if (isset($_GET['param'])) {
+        $getparam = $_GET['param'];
+        $urlimg = "/SnapShot/snappaging_.php?param={$getparam}";
+        $urlvdo = "/SnapShot/vdopaging_.php?param={$getparam}";
+        $urlstream = "../LiveNotifyVideo/index.php?param={$getparam}";
+    } else {
+        $getparam = 0;
+        $urlimg = "/SnapShot/snappaging_.php";
+        $urlvdo = "/SnapShot/vdopaging_.php";
+        $urlstream = "../LiveNotifyVideo/";
+        $getparam = '';
+    }
     ?>
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -64,9 +77,9 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item bg-dark"><a class="nav-link" aria-current="page" href="../LiveNotifyVideo/">Streamimg</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link active" href="/SnapShot/snappaging_.php">Snapshot</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="/SnapShot/vdopaging_.php">Snap Videos</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" aria-current="page" href="<?= $urlstream ?>">Streamimg</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link active" href="<?= $urlimg; ?>">Snapshot</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlvdo; ?>">Snap Videos</a></li>
                 </ul>
             </div>
         </div>
@@ -123,7 +136,7 @@
                     </div>
                     <div class="p-4 content1 ctm" style="background-color: white;">
                         <div class="text-center" id="nodata">
-                            <h5 id="nodatah2">กรุณาเลือกข้อมูล</h5>
+                            <h5 id="nodatah2">อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>
                         </div>
                         <ul class="imgnamex row" id="imgnamex" style="margin: 0; padding:0;"></ul>
                         <ul class="imgdisplay row" id="imgdisplay" style="margin: 0; padding:0;"></ul>
@@ -300,7 +313,7 @@
                                             }
                                             return false
                                         }
-                                        //selectData(selectdatasval)
+                                        selectData(selectdatasval)
                                     } else {
                                         swal.close()
                                         $('.imgdisplay').fadeIn(200)
@@ -355,6 +368,111 @@
                 })
             }
         }
+
+        function calldata() {
+            let getparams = '<?= $getparam ?>'
+            let nodata = $('<h5 id="nodatah2" >อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>')
+            $('#nodatah2').remove()
+            
+            if (!getparams) {
+                Swal.fire({
+                    title: "กำลังดึงข้อมูลข้อมูลรูปภาพ!",
+                    timer: 2000,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        const timer = Swal.getPopup().querySelector("b");
+                    },
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "โหลดข้อมูลไม่สำเร็จ!",
+                        })
+                        nodata.appendTo('#nodata')
+                    }
+                })
+                return false
+            } else if (roundcalldata == 3) {
+                // location.reload()
+                Swal.fire({
+                    icon: "error",
+                    title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง",
+                })
+                nodata.appendTo('#nodata')
+                return false
+            }
+            
+            let getparamsdatasdt = getparams.slice(13, 29).replaceAll('_', '')
+            let getparamsdatasdty = getparamsdatasdt.slice(0, 4)
+            let getparamsdatasdtmth = getparamsdatasdt.slice(4, 6)
+            let getparamsdatasdtd = getparamsdatasdt.slice(6, 8)
+            let getparamsdatasdth = getparamsdatasdt.slice(8, 10)
+            let getparamsdatasdtminute = getparamsdatasdt.slice(10, 12)
+            let getparamsdatasdts = getparamsdatasdt.slice(12, 14)
+            let getparamsdatasdatefm = `${getparamsdatasdty}-${getparamsdatasdtmth}-${getparamsdatasdtd} ${getparamsdatasdth}:${getparamsdatasdtminute}:${getparamsdatasdts}`
+            const futuretime = formatDate(getparamsdatasdatefm)
+
+            Swal.fire({
+            title: "กำลังดึงข้อมูลข้อมูลรูปภาพ!",
+            timer: 1000,
+            didOpen: () => {
+                Swal.showLoading();
+                const timer = Swal.getPopup().querySelector("b");
+            },
+            }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                $.ajax({
+                url: 'snappagingdata.php',
+                data: `param=${getparams}`,
+                method: 'GET',
+                success: (resp) => {
+                    let obj = jQuery.parseJSON(resp)
+                    if (obj.imgname == '' && obj.imgnamex == '') {
+                        roundcalldata++
+                        calldata(getparams)
+                    } else {
+                        let imgpic = obj.imgname[obj.imgname.length - 1].slice(4, 18) // 20250424133939 20250424133821
+                        if (parseInt(imgpic) < parseInt(futuretime) && parseInt(imgpic) < parseInt(futuretime - 30)) {
+                            roundcalldata++
+                            calldata(getparams)
+                            return false
+                        } else {
+                            let filedate = $('#filedate')
+                            let imgnamex = $('.imgnamex')
+                            if (obj.imgname == '' && obj.imgnamex == '') {
+                                nodata.append('#nodata')
+                            } else {
+                                swal.close();
+                                snappath.fadeIn(function (){
+                                        filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
+                                })
+                                paging(obj.imgname)
+                                $.each(obj.imgnamex, function(i, item) {
+                                    let imgx = ''
+                                    if (i >= 8) {
+                                        return false
+                                    }
+                                    imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx('${item}')" src="/eventfolder/${getparams}/pic/X/${item}" "></li>`;
+                                    imgnamex.append(imgx).fadeIn(500)
+                                })
+                                $('#nodatah2').remove()
+                            }
+                        }
+                    }
+                },
+                error: function(data) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง!",
+                    })
+                    $('#nodatah2').appendTo('#nodata')
+                }
+            })
+                            }
+                        })
+            
+        }
+        calldata()
 
         function pagingSelectDatas(path, json, camname) {
             const items = json;
@@ -460,7 +578,7 @@
                         return false;
                     }
                     // console.log(item);
-                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg('${item}')" src="/eventfolder/${camname}/${path}/pic/${item}"></li>`;
+                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg('${item}')" src="/eventfolder/<?= $getparam ?>/pic/${item}"></li>`;
                     imgdisplay.append(img);
 
                 });
@@ -534,6 +652,23 @@
             });
         }
 
+        function showimg(img) {
+            Swal.fire({
+                imageUrl: `/eventfolder/<?= $getparam ?>/pic/${img}`,
+                imageWidth: 600,
+                imageHeight: 400,
+                width: 650,
+            });
+        }
+
+        function showimgx(img) {
+            Swal.fire({
+                imageUrl: `/eventfolder/<?= $getparam ?>/pic/X/${img}`,
+                imageWidth: 600,
+                imageHeight: 400,
+                width: 650,
+            });
+        }
     </script>
 </body>
 

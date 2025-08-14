@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>NetWorklink.Co.Ltd,</</title>
+    <title>NetWorklink.Co.Ltd,</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="stylesheet" href="fonts/font-kanit.css" />
     <link rel="stylesheet" href="css/styles.css" />
@@ -25,6 +25,17 @@
         overflow: hidden;
         border: 1px solid #ddd;
         border-radius: 4px;
+        margin: 10px;
+        position: relative;
+        opacity: 0;
+        /* ซ่อนไว้เป็นค่าเริ่มต้น */
+        transition: opacity 0.3s ease-in-out;
+        /* กำหนด transition */
+    }
+
+    .video-wrapper.show {
+        opacity: 1;
+        /* แสดงเมื่อมีคลาส .show */
     }
 
     #cameraDropdown {
@@ -146,22 +157,26 @@
 
             <div id="cameraDropdown" class="collapse dropdown-menu p-3 mx-auto"
                 style="width: 300px; left: 50%; transform: translateX(-50%);">
-                </div>
+            </div>
         </div>
 
-        <div id="streamContainer" class="mt-4 row g-3 container mx-auto overflow-auto" style="max-height: 500px;">
-            </div>
+        <div id="streamContainer" class="mt-4 row g-3 container mx-auto flex justify-content-center"
+            style="max-height: 500px;">
+        </div>
+
     </section>
 
     <script>
         let roundcheck = 0;
+        let currentStatus = {};
+
         const getparams = '<?= $getparam; ?>';
         const BASE_URL = 'http://85.204.247.82';
         const PORT = '26300';
         const API_PATH = 'api/getCameraStat';
         const CAMERA_STATS_API_URL = `${BASE_URL}:${PORT}/${API_PATH}?v=${Date.now()}`;
 
-    
+
 
         const Calldata = async () => {
             if (!getparams) {
@@ -239,47 +254,66 @@
             }
         };
 
+        let toggleState = 0;
+
+
         async function fetchCameraStatusesFromAPI() {
-            try {
-                const response = await fetch(CAMERA_STATS_API_URL, {
+            // try {
+            //     const response = await fetch(CAMERA_STATS_API_URL, {
 
-                    headers: {
-                        
-                        'cache-control': 'no-cache'
+            //         headers: {
+
+            //             'cache-control': 'no-cache'
+            //         }
+
+            //     });
+            //     if (!response.ok) {
+            //         throw new Error(`HTTP error! status: ${response.status}`);
+            //     }
+            //     const data = await response.json();
+
+            //     console.log('API Camera Stats Response:', data);
+            //     if (data.msg === "Success" && Array.isArray(data.cameraStat)) {
+            //         return data.cameraStat;
+            //     } else {
+            //         console.error('API returned an unexpected format or error:', data);
+            //         return [];
+            //     }
+            // } catch (error) {
+            //     console.error('Error fetching camera stats from API:', error);
+            //     return [];
+            // }
+
+            toggleState = toggleState === 0 ? 1 : 0;
+
+            const data = {
+                msg: "Success",
+                cameraStat: [
+                    {
+                        camera: "detectionstreamingvdo1",
+                        tsFileCount: 25,
+                        status: toggleState
+                    },
+                    {
+                        camera: "detectionstreamingvdo2",
+                        tsFileCount: 25,
+                        status: 1
                     }
-                    
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
+                ]
+            };
 
-                console.log('API Camera Stats Response:', data); 
-                if (data.msg === "Success" && Array.isArray(data.cameraStat)) {
-                    return data.cameraStat;
-                } else {
-                    console.error('API returned an unexpected format or error:', data);
-                    return [];
-                }
-            } catch (error) {
-                console.error('Error fetching camera stats from API:', error);
-                return [];
-            }
+            console.log('Mock API Camera Stats Response:', data);
+            return data.cameraStat;
         }
 
         async function renderCameraDropdown() {
             const dropdown = document.getElementById('cameraDropdown');
-            dropdown.innerHTML = ''; 
+            dropdown.innerHTML = '';
 
             const apiCameraStats = await fetchCameraStatusesFromAPI();
 
-            console.log('apiCameraStats (after fetch):>> ', apiCameraStats); 
-
-
-            apiCameraStats.forEach(cameraData => {
-                const cameraName = cameraData.camera; 
-
-                console.log('cameraData :>> ', cameraData);
+            apiCameraStats.forEach((cameraData, index) => {
+                const cameraName = cameraData.camera;
 
                 const apiStatus = parseInt(cameraData.status, 10);
 
@@ -289,12 +323,17 @@
 
                 const FULL_STREAMING_URL = `${STREAMING_BASE_URL}/${cameraName}`
 
+                currentStatus[index] = {
+                    name: cameraName.trim(),
+                    streamUrl: FULL_STREAMING_URL,
+                    apiStatus
+                }
 
-                console.log(`Processing camera: ${cameraName}, Stream URL: ${FULL_STREAMING_URL}`); 
+                console.log(`Pocessing camera: ${cameraName}, Stream URL: ${FULL_STREAMING_URL}`);
 
                 if (!FULL_STREAMING_URL) {
                     console.warn(`No stream URL defined for camera: ${cameraName}. Skipping.`);
-                    return; 
+                    return;
                 }
 
                 const htmlId = `camera-${cameraName.replace(/[^a-zA-Z0-9]/g, '-')}`;
@@ -317,139 +356,190 @@
                 dropdown.appendChild(cameraItem);
             });
 
+
             const checkboxes = document.querySelectorAll('.form-check-input');
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateStreams);
             });
         }
 
+
         async function updateAllCameraStatusesFromAPIAndUI() {
+
             const apiCameraStats = await fetchCameraStatusesFromAPI();
 
-            document.querySelectorAll('.camera-item input[type="checkbox"]').forEach(checkbox => {
-                const cameraName = checkbox.dataset.cameraName; 
-                const statusElement = document.querySelector(`#${checkbox.id}-status`);
+            let hasStatusChanged = false;
 
-                if (cameraName && statusElement) {
 
-                    const cameraInfo = apiCameraStats.find(cam => cam.camera === cameraName);
-                    const apiStatus = cameraInfo ? cameraInfo.status : 0; // ถ้าไม่พบ ถือว่าเป็น offline
+            document.querySelectorAll('.form-check-input').forEach(checkbox => {
 
-                    statusElement.classList.remove('online', 'offline');
-                    if (apiStatus === 1) {
-                        statusElement.classList.add('online');
-                    } else {
-                        statusElement.classList.add('offline');
+                const cameraName = checkbox.dataset.cameraName;
+                const cameraInfo = apiCameraStats.find(cam => cam.camera === cameraName);
+
+                if (cameraInfo) {
+                    const newStatus = parseInt(cameraInfo.status, 10);
+                    const currentStatus = parseInt(checkbox.dataset.status, 10);
+
+                    console.log('newStatus :>> ', newStatus, currentStatus);
+
+                    if (currentStatus !== newStatus) {
+                        hasStatusChanged = true;
+                        checkbox.dataset.status = newStatus;
+                        const statusElement = document.querySelector(`#${checkbox.id}-status`);
+                        if (statusElement) {
+                            statusElement.className = 'camera-status ' + (newStatus === 1 ? 'online' : 'offline');
+                        }
                     }
+                }
+
+            });
+
+        }
+
+        let cameraStates = {};
+
+        async function updateStreams() {
+            const streamContainer = document.getElementById('streamContainer');
+            const allCheckboxes = document.querySelectorAll('.form-check-input');
+            const selectedCheckboxes = Array.from(document.querySelectorAll('.form-check-input:checked'));
+
+
+            const selectedIds = new Set(selectedCheckboxes.map(cb => cb.id));
+
+            if (selectedIds.size === 0) {
+
+                streamContainer.innerHTML = `
+            <div id="no-camera-message" style="padding: 20px; color: #555; font-weight: bold; text-align: center; width: 100%;">
+                Please select at least one camera
+            </div>
+        `;
+
+                cameraStates = {};
+                return;
+            } else {
+                const message = document.getElementById('no-camera-message');
+                if (message) {
+                    message.remove();
+                }
+            }
+
+
+            document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+                const wrapperId = wrapper.id.replace('stream-', '');
+                if (!selectedIds.has(wrapperId)) {
+                    wrapper.remove();
+                    delete cameraStates[wrapperId];
+                }
+            });
+
+
+            selectedCheckboxes.forEach(checkbox => {
+                const stream = {
+                    id: checkbox.id,
+                    name: checkbox.dataset.cameraName,
+                    streamUrl: checkbox.dataset.streamUrl,
+                    status: parseInt(checkbox.dataset.status, 10)
+                };
+
+                let videoWrapper = document.querySelector(`#stream-${stream.id}`);
+                let isNewWrapper = !videoWrapper;
+
+                if (isNewWrapper) {
+                    videoWrapper = createVideoWrapper(stream.id, stream.name);
+                }
+
+
+                if (cameraStates[stream.id] !== stream.status || isNewWrapper) {
+                    cameraStates[stream.id] = stream.status;
+                    updateCameraDisplay(videoWrapper, stream);
                 }
             });
         }
 
+        function createVideoWrapper(id, name) {
+            const wrapper = document.createElement('div');
+            wrapper.id = `stream-${id}`;
+            wrapper.className = 'video-wrapper position-relative';
+            wrapper.style.flex = '0 0 auto';
+            document.getElementById('streamContainer').appendChild(wrapper);
+            return wrapper;
+        }
 
-        async function updateStreams() {
-            const streamContainer = document.getElementById('streamContainer');
-            streamContainer.innerHTML = ''; 
-            const selectedCheckboxes = document.querySelectorAll('.form-check-input');
-            const selected = Array.from(selectedCheckboxes)
-                .filter(cb => cb.checked)
-                .map(cb => ({
-                    name: cb.nextElementSibling.textContent.trim(), 
-                    streamUrl: cb.dataset.streamUrl,
-                    apiStatus: parseInt(cb.dataset.status, 10)
-                }));
+        function updateCameraDisplay(wrapper, camera) {
+            if (camera.status === 0) {
 
-            if (selected.length === 0) {
-                streamContainer.innerHTML = '<p class="text-center w-100">Please select at least one camera</p>';
+                wrapper.innerHTML = `
+            <div style="position: absolute; top: 0; left: 0;
+                                background-color: rgba(0,0,0,0.7); color: white;
+                                padding: 2px 5px; font-size: 12px; z-index: 10;">
+                        ${camera.name}
+                        <span class="camera-status offline"
+                            style="display: inline-block; margin-left: 5px;"></span>
+                    </div>
+                    <div style="width:100%; height:100%; background:#ccc; display:flex; 
+                                justify-content:center; align-items:center; color:#333;">
+                        Camera is not available
+                    </div>`;
+
+                wrapper.classList.add('show');
             } else {
-                for (const stream of selected) {
 
-                    console.log('stream :>> ', stream);
+                wrapper.innerHTML = `
+                    <div style="position: absolute; top: 0; left: 0;
+                    background-color: rgba(0,0,0,0.7); color: white;
+                    padding: 2px 5px; font-size: 12px; z-index: 10;">
+                        ${camera.name}
+                        <span class="camera-status online"
+                            style="display: inline-block; margin-left: 5px;"></span>
+                    </div>
+                    <iframe src="${camera.streamUrl}?t=${Date.now()}"
+                            width="100%"
+                            height="100%"
+                            frameborder="0"
+                            allowfullscreen
+                            sandbox="allow-scripts allow-same-origin"
+                            style="display: block; opacity: 0; transition: opacity 0.5s ease;"
+                            onload="this.style.opacity = 1;"
+                            
+                            ></iframe>`;
 
-                    const videoWrapper = document.createElement('div');
-                    videoWrapper.className = 'video-wrapper position-relative';
-                    videoWrapper.style.flex = '0 0 auto';
 
-                    const overlayStatusClass = stream.apiStatus === 1 ? 'online' : 'offline';
-
-                    let contentHtml = ''; 
-                    let streamIssueMessage = ''; 
-
-                    if (stream.apiStatus === 0) {
-
-                        streamIssueMessage = '(Reported offline by API)';
-                        contentHtml = `
-                            <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #333; color: white; text-align: center; padding: 20px; border-radius: 4px;">
-                                <p style="font-size: 1.2em; margin-bottom: 10px;">Camera is not available</p>
-                            </div>`;
-                    } else {
-             
-             
-                            contentHtml = `
-                                <iframe src="${stream.streamUrl}"
-                                        width="100%"
-                                        height="100%"
-                                        frameborder="0"
-                                        allowfullscreen
-                                        sandbox="allow-scripts allow-same-origin"
-                                        style="display: block;"></iframe>`;
-                    }
-
-                    videoWrapper.innerHTML = `
-                        <div style="position: absolute; top: 0; left: 0;
-                                    background-color: rgba(0,0,0,0.7); color: white;
-                                    padding: 2px 5px; font-size: 12px; z-index: 10;">
-                            ${stream.name}
-                            <span class="camera-status ${overlayStatusClass}"
-                                style="display: inline-block; margin-left: 5px;"></span>
-                        </div>
-                        ${contentHtml}`;
-                    streamContainer.appendChild(videoWrapper);
-                }
+                wrapper.classList.add('show');
             }
         }
-            const streamContainer = document.getElementById('streamContainer');
-            streamContainer.innerHTML = '';
-            const selectedCheckboxes = document.querySelectorAll('.form-check-input');
 
-            console.log('selectedCheckboxes :>> ', selectedCheckboxes);
-            const selected = Array.from(selectedCheckboxes)
-                .filter(item => item.checked)
-                .map(item => ({
-                    name: item.nextElementSibling.textContent.trim(),
-                    streamUrl: item.dataset.streamUrl,
-                    status: item.dataset.status,
-                }));
-
-            if (selected.length === 0) {
-                streamContainer.innerHTML = '<p class="text-center w-100">Please select at least one camera</p>';
-            } else {
-                for (const stream of selected) {
-                    const videoWrapper = document.createElement('div');
-                    const cameraStatus = Number(stream.status)
-                    videoWrapper.className = 'video-wrapper position-relative';
-                    videoWrapper.style.flex = '0 0 auto';
-
-                    const isOnlineForStream = true;
-
-                    videoWrapper.innerHTML = `
-                        <div style="position: absolute; top: 0; left: 0;
-                                    background-color: rgba(0,0,0,0.7); color: white;
-                                    padding: 2px 5px; font-size: 12px; z-index: 10;">
-                            ${stream.name}
-                            <span class="camera-status ${cameraStatus ? 'online' : 'offline'}"
-                                style="display: inline-block; margin-left: 5px;"></span>
-                        </div>
-                        <iframe src="${stream.streamUrl}"
-                                width="100%"
-                                height="100%"
-                                frameborder="0"
-                                allowfullscreen
-                                sandbox="allow-scripts allow-same-origin"
-                                style="display: block;"></iframe>`;
-                    streamContainer.appendChild(videoWrapper);
-                }
-            }
         
+        setInterval(async () => {
+            const apiCameraStats = await fetchCameraStatusesFromAPI();
+            let hasChanged = false;
+
+            document.querySelectorAll('.form-check-input').forEach(checkbox => {
+                const cameraName = checkbox.dataset.cameraName;
+                const cameraInfo = apiCameraStats.find(cam => cam.camera === cameraName);
+
+                if (cameraInfo) {
+                    const newStatus = parseInt(cameraInfo.status, 10);
+                    const currentStatus = parseInt(checkbox.dataset.status, 10);
+
+
+                    if (currentStatus !== newStatus) {
+                        hasChanged = true;
+                        checkbox.dataset.status = newStatus;
+
+                        const statusElement = document.querySelector(`#${checkbox.id}-status`);
+                        if (statusElement) {
+                            statusElement.className = 'camera-status ' + (newStatus === 1 ? 'online' : 'offline');
+                        }
+                    }
+                }
+            });
+
+            if (hasChanged) {
+                await updateStreams();
+            }
+        }, 3000);
+
+
         document.addEventListener('DOMContentLoaded', async function () {
             const dropdownButton = document.querySelector('[data-bs-target="#cameraDropdown"]');
             const dropdownMenu = document.getElementById('cameraDropdown');
@@ -466,13 +556,15 @@
                 }
             });
 
-            await renderCameraDropdown(); 
-            await updateStreams(); 
-            setInterval(updateAllCameraStatusesFromAPIAndUI, 1000); 
+            await renderCameraDropdown();
+            await updateStreams();
+
+
         });
+
     </script>
 </body>
-<footer class="py-5 bg-dark">
+<footer class="py-2 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
     </div>
