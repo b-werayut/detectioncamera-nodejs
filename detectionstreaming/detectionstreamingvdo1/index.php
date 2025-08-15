@@ -31,8 +31,6 @@
         }
     </style>
 </head>
-<body>
-    <html>
     <body>
         <video id="video" muted playsinline controls autoplay ></video>
         <script>
@@ -51,6 +49,5 @@
                 });
             }
         </script>
-    </body>
 </body>
 </html>
