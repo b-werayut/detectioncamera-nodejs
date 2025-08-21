@@ -3008,3 +3008,360 @@ Ip-address: 10.10.10.254
 Detail: - 
 _______________________________________________
 
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 14 August 2025 11:25:43 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 14 August 2025 11:27:00 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 14 August 2025 11:51:44 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Thursday 14 August 2025 11:54:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Thursday 14 August 2025 01:28:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Friday 15 August 2025 09:08:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Saturday 16 August 2025 07:46:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Saturday 16 August 2025 02:15:30 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:06:35 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:06:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 08:12:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:52:44 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 09:34:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 09:35:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 09:36:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 09:36:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 10:18:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 10:19:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 10:25:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 11:38:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 11:38:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 01:07:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 01:07:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 01:08:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 01:08:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 01:09:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 01:09:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 04:33:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 04:40:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 05:17:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 07:22:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 07:23:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 08:00:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 08:02:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:06:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:07:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 08:08:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 08:12:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:12:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 08:13:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:15:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 08:20:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 08:31:30 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 09:02:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 10:43:35 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 10:44:01 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 10:46:35 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 10:59:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าปกติ 
+Timestamp: Monday 18 August 2025 10:59:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Monday 18 August 2025 11:01:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: ไฟฟ้าขัดข้อง! 
+Timestamp: Wednesday 20 August 2025 03:08:41 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+

@@ -258,51 +258,51 @@
 
 
         async function fetchCameraStatusesFromAPI() {
-            // try {
-            //     const response = await fetch(CAMERA_STATS_API_URL, {
+            try {
+                const response = await fetch(CAMERA_STATS_API_URL, {
 
-            //         headers: {
+                    headers: {
 
-            //             'cache-control': 'no-cache'
-            //         }
+                        'cache-control': 'no-cache'
+                    }
 
-            //     });
-            //     if (!response.ok) {
-            //         throw new Error(`HTTP error! status: ${response.status}`);
-            //     }
-            //     const data = await response.json();
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
 
-            //     console.log('API Camera Stats Response:', data);
-            //     if (data.msg === "Success" && Array.isArray(data.cameraStat)) {
-            //         return data.cameraStat;
-            //     } else {
-            //         console.error('API returned an unexpected format or error:', data);
-            //         return [];
-            //     }
-            // } catch (error) {
-            //     console.error('Error fetching camera stats from API:', error);
-            //     return [];
-            // }
+                console.log('API Camera Stats Response:', data);
+                if (data.msg === "Success" && Array.isArray(data.cameraStat)) {
+                    return data.cameraStat;
+                } else {
+                    console.error('API returned an unexpected format or error:', data);
+                    return [];
+                }
+            } catch (error) {
+                console.error('Error fetching camera stats from API:', error);
+                return [];
+            }
 
             toggleState = toggleState === 0 ? 1 : 0;
 
-            const data = {
-                msg: "Success",
-                cameraStat: [
-                    {
-                        camera: "detectionstreamingvdo1",
-                        tsFileCount: 25,
-                        status: toggleState
-                    },
-                    {
-                        camera: "detectionstreamingvdo2",
-                        tsFileCount: 25,
-                        status: 1
-                    }
-                ]
-            };
+            // const data = {
+            //     msg: "Success",
+            //     cameraStat: [
+            //         {
+            //             camera: "detectionstreamingvdo1",
+            //             tsFileCount: 25,
+            //             status: toggleState
+            //         },
+            //         {
+            //             camera: "detectionstreamingvdo2",
+            //             tsFileCount: 25,
+            //             status: 1
+            //         }
+            //     ]
+            // };
 
-            console.log('Mock API Camera Stats Response:', data);
+            // console.log('Mock API Camera Stats Response:', data);
             return data.cameraStat;
         }
 
@@ -339,6 +339,7 @@
                 const htmlId = `camera-${cameraName.replace(/[^a-zA-Z0-9]/g, '-')}`;
                 const statusClass = apiStatus === 1 ? 'online' : 'offline';
 
+                const isChecked = 'checked';
 
                 const cameraItem = document.createElement('div');
                 cameraItem.className = 'camera-item form-check';
@@ -348,10 +349,13 @@
                         id="${htmlId}"
                         data-camera-name="${cameraName}"
                         data-stream-url="${FULL_STREAMING_URL}"
-                        data-status="${apiStatus}"
+                        data-status="${apiStatus}          
+                        "
+                        ${isChecked}
                         > <label class="form-check-label camera-label"
                         for="${htmlId}">${cameraName}</label> <span id="${htmlId}-status"
-                        class="camera-status ${statusClass}"></span> `;
+                        class="camera-status ${statusClass}"></span> 
+                        `;
 
                 dropdown.appendChild(cameraItem);
             });

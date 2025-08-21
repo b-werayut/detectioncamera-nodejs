@@ -155,7 +155,7 @@ const createFolder = async (directory, directoryfm) => {
     return directory
 }
 
-const sendLineAxios = async (FolderName, directoryfm) => {
+const sendLineAxios = async (FolderName, directoryfm, camname) => {
 
     const cf = await Config()
     const urlEndpoint = cf[0].json.lineurlendpointcamera
@@ -174,7 +174,7 @@ const sendLineAxios = async (FolderName, directoryfm) => {
 
     const useridindb = await getUserIDCustomer()
     const title = 'ระบบตรวจสอบผู้บุกรุก'
-    const message = `ตรวจพบผู้ต้องสงสัย!\nวัน${date}\n${time} น.`;
+    const message = `ตรวจพบผู้ต้องสงสัย!\nกล้อง: ${camname}\nวัน${date}\n${time} น.`;
 
     const headerAuth = {
         headers: {
@@ -191,18 +191,18 @@ const sendLineAxios = async (FolderName, directoryfm) => {
                 "altText": "ข้อมูลเพิ่มเติม",
                 "contents": {
                     "type": "bubble",
-                    "styles": {
-                        "header": {
-                            "backgroundColor": "#FFFFFF"
-                        },
-                        "body": {
-                            "backgroundColor": "#FFFFFF"
-                        },
-                        "footer": {
-                            "backgroundColor": "#FFFFFF"
-                        }
-                    },
                     "size": "mega",
+                    // "styles": {
+                    //   "header": {
+                    //     "backgroundColor": "#FFF8F6"
+                    //   },
+                    //   "body": {
+                    //     "backgroundColor": "#FFFFFF"
+                    //   },
+                    //   "footer": {
+                    //     "backgroundColor": "#F5F5F5"
+                    //   }
+                    // },
                     "header": {
                         "type": "box",
                         "layout": "vertical",
@@ -214,9 +214,8 @@ const sendLineAxios = async (FolderName, directoryfm) => {
                                 "contents": [
                                     {
                                         "type": "text",
-                                        "text": "แจ้งเตือน!",
+                                        "text": "แจ้งเตือน",
                                         "size": "xs",
-                                        "color": "#ffffff",
                                         "align": "center",
                                         "gravity": "center"
                                     }
@@ -237,27 +236,28 @@ const sendLineAxios = async (FolderName, directoryfm) => {
                                 "type": "text",
                                 "text": "แจ้งเตือน!",
                                 "size": "xxl",
-                                "scaling": true,
                                 "weight": "bold",
                                 "wrap": true,
-                                "align": "center"
+                                "align": "center",
+                                "color": "#222222"
                             },
                             {
                                 "type": "text",
                                 "text": title,
                                 "size": "lg",
-                                "scaling": true,
                                 "wrap": true,
-                                "align": "center"
+                                "align": "center",
+                                "color": "#333333"
                             },
                             {
-                                "type": "separator"
+                                "type": "separator",
+                                "margin": "md"
                             }
                         ]
                     },
                     "hero": {
                         "type": "image",
-                        "url": "https://www.drrrayong.com/VMS/assets/human-detect.png",
+                        "url": "https://www.centrecities.com/assets/icon/human-detect.png",
                         "size": "full",
                         "aspectRatio": "2:1"
                     },
@@ -268,41 +268,31 @@ const sendLineAxios = async (FolderName, directoryfm) => {
                         "contents": [
                             {
                                 "type": "text",
-                                "text": "สถานที่",
+                                "text": "📍สถานที่",
                                 "size": "lg",
                                 "align": "center",
-                                "scaling": true,
-                                "wrap": true,
-                                "weight": "bold"
+                                "weight": "bold",
+                                "color": "#5D4037"
                             },
                             {
                                 "type": "text",
                                 "text": "หาดแม่รำพึงจุดที่ 1",
                                 "size": "lg",
                                 "align": "center",
-                                "scaling": true,
-                                "wrap": true,
-                                "weight": "bold"
+                                "weight": "bold",
+                                "color": "#1E1E1E"
                             },
                             {
                                 "type": "separator"
                             },
                             {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "spacing": "md",
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": message,
-                                        "size": "lg",
-                                        "align": "center",
-                                        "color": "#EC3D44",
-                                        "scaling": true,
-                                        "wrap": true,
-                                        "weight": "bold"
-                                    }
-                                ]
+                                "type": "text",
+                                "text": message,
+                                "size": "md",
+                                "align": "center",
+                                "color": "#D32F2F",
+                                "wrap": true,
+                                "weight": "bold"
                             },
                             {
                                 "type": "separator"
@@ -312,26 +302,190 @@ const sendLineAxios = async (FolderName, directoryfm) => {
                     "footer": {
                         "type": "box",
                         "layout": "vertical",
+                        "spacing": "md",
                         "contents": [
-                            {
-                                "type": "separator"
-                            },
                             {
                                 "type": "button",
                                 "style": "primary",
-                                "color": "#412500",
+                                "color": "#4CAF50",
                                 "action": {
                                     "type": "uri",
-                                    "label": ">> คลิกเพื่อดูข้อมูลเพิ่มเติม <<",
-                                    "uri": `${cfurldest}?param=${directoryfm}`
-                                }
+                                    "label": "ดูข้อมูลเพิ่มเติม",
+                                    "uri": "http://www.centrecities.com:26080/LiveNotifyVideo/"
+                                },
+                                "height": "sm"
+                            },
+                            {
+                                "type": "text",
+                                "text": `อัปเดตล่าสุด: ${new Date().toLocaleString('th-TH', { hour12: false })}`,
+                                "size": "xs",
+                                "color": "#888888",
+                                "align": "center"
                             }
                         ]
                     }
                 }
             }
         ]
-    }
+    };
+
+    // const datas = {
+    //     "to": useridindb,
+    //     "messages": [
+    //         {
+    //             "type": "flex",
+    //             "altText": "ข้อมูลเพิ่มเติม",
+    //             "contents": {
+    //                 "type": "bubble",
+    //                 "styles": {
+    //                     "header": {
+    //                         "backgroundColor": "#FFFFFF"
+    //                     },
+    //                     "body": {
+    //                         "backgroundColor": "#FFFFFF"
+    //                     },
+    //                     "footer": {
+    //                         "backgroundColor": "#FFFFFF"
+    //                     }
+    //                 },
+    //                 "size": "mega",
+    //                 "header": {
+    //                     "type": "box",
+    //                     "layout": "vertical",
+    //                     "spacing": "sm",
+    //                     "contents": [
+    //                         {
+    //                             "type": "box",
+    //                             "layout": "horizontal",
+    //                             "contents": [
+    //                                 {
+    //                                     "type": "text",
+    //                                     "text": "แจ้งเตือน!",
+    //                                     "size": "xs",
+    //                                     "color": "#ffffff",
+    //                                     "align": "center",
+    //                                     "gravity": "center"
+    //                                 }
+    //                             ],
+    //                             "backgroundColor": "#EC3D44",
+    //                             "paddingAll": "2px",
+    //                             "paddingStart": "4px",
+    //                             "paddingEnd": "4px",
+    //                             "flex": 0,
+    //                             "position": "absolute",
+    //                             "offsetStart": "18px",
+    //                             "offsetTop": "18px",
+    //                             "cornerRadius": "100px",
+    //                             "width": "60px",
+    //                             "height": "25px"
+    //                         },
+    //                         {
+    //                             "type": "text",
+    //                             "text": "แจ้งเตือน!",
+    //                             "size": "xxl",
+    //                             "scaling": true,
+    //                             "weight": "bold",
+    //                             "wrap": true,
+    //                             "align": "center"
+    //                         },
+    //                         {
+    //                             "type": "text",
+    //                             "text": title,
+    //                             "size": "lg",
+    //                             "scaling": true,
+    //                             "wrap": true,
+    //                             "align": "center"
+    //                         },
+    //                         {
+    //                             "type": "separator"
+    //                         }
+    //                     ]
+    //                 },
+    //                 "hero": {
+    //                     "type": "image",
+    //                     "url": "https://www.drrrayong.com/VMS/assets/human-detect.png",
+    //                     "size": "full",
+    //                     "aspectRatio": "2:1"
+    //                 },
+    //                 "body": {
+    //                     "type": "box",
+    //                     "layout": "vertical",
+    //                     "spacing": "md",
+    //                     "contents": [
+    //                         {
+    //                             "type": "text",
+    //                             "text": "สถานที่",
+    //                             "size": "lg",
+    //                             "align": "center",
+    //                             "scaling": true,
+    //                             "wrap": true,
+    //                             "weight": "bold"
+    //                         },
+    //                         {
+    //                             "type": "text",
+    //                             "text": "หาดแม่รำพึงจุดที่ 1",
+    //                             "size": "lg",
+    //                             "align": "center",
+    //                             "scaling": true,
+    //                             "wrap": true,
+    //                             "weight": "bold"
+    //                         },
+    //                         {
+    //                             "type": "separator"
+    //                         },
+    //                         {
+    //                             "type": "box",
+    //                             "layout": "horizontal",
+    //                             "spacing": "md",
+    //                             "contents": [
+    //                                 {
+    //                                     "type": "text",
+    //                                     "text": message,
+    //                                     "size": "lg",
+    //                                     "align": "center",
+    //                                     "color": "#EC3D44",
+    //                                     "scaling": true,
+    //                                     "wrap": true,
+    //                                     "weight": "bold"
+    //                                 }
+    //                             ]
+    //                         },
+    //                         {
+    //                             "type": "separator"
+    //                         }
+    //                     ]
+    //                 },
+    //                 "footer": {
+    //                     "type": "box",
+    //                     "layout": "vertical",
+    //                     "contents": [
+    //                         {
+    //                             "type": "separator"
+    //                         },
+    //                         {
+    //                             "type": "button",
+    //                             "style": "primary",
+    //                             "color": "#412500",
+    //                             "action": {
+    //                                 "type": "uri",
+    //                                 "label": ">> คลิกเพื่อดูข้อมูลเพิ่มเติม <<",
+    //                                 // "uri": `${cfurldest}?param=${directoryfm}`
+    //                                 "uri": `http://www.centrecities.com:26080/LiveNotifyVideo/`
+    //                             }
+    //                         },
+    //                         {
+    //                             "type": "text",
+    //                             "text": "อัปเดตล่าสุด: ".date('d/m/Y H:i'),
+    //                             "size": "xs",
+    //                             "color": "#999999",
+    //                             "align": "center"
+    //                         }
+    //                     ]
+    //                 }
+    //             }
+    //         }
+    //     ]
+    // }
 
     const sendlinemsgapi = await axios.post(urlEndpoint, datas, headerAuth)
         .then(resp => {
@@ -870,7 +1024,7 @@ exports.cronDelDir = async () => {
     console.log(`🟢 NodeCronFunct is Running!`);
 
     const task = cron.schedule('0 0 * * *', async () => {
-    // const task = cron.schedule('*/5 * * * * *', async () => {
+        // const task = cron.schedule('*/5 * * * * *', async () => {
         const time = newDateTimeinCronFunct();
 
         try {
@@ -914,7 +1068,7 @@ exports.manageDirectory = async (req, res) => {
 
     createFirstFolder(firstdir, directoryfm)
         .then(resp => createFolder(directory, directoryfm))
-        .then(resp => sendLineAxios(resp, directoryfm))
+        .then(resp => sendLineAxios(resp, directoryfm, camname))
         .then(resp => createSubFolderPic(resp))
         .then(resp => createSubFolderX(resp))
         .then(resp => createSubFolderVdo(resp))
