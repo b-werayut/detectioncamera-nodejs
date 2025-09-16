@@ -1,11 +1,13 @@
 <?php
 session_start();
-$timeout = 60 * 1;
+$timeout = 60 * 30;
+$logout = true;
 
 $role = $_SESSION['role'] ?? null;
 $auth = $_SESSION['auth'] ?? null;
 
 if (empty($role) && empty($auth) && isset($_GET['auth'])) {
+    $logout = false;
     $_SESSION['auth'] = $_GET['auth'];
 
     header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
@@ -163,7 +165,11 @@ if (empty($role) && empty($auth)) {
                             href="/LiveNotifyVideo/">Streamimg</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlimg; ?>">Snapshot</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlvdo; ?>">Snap Videos</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="../logout.php">Logout</a></li>
+                    <?php
+                    if($logout){
+                    "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
+                    }
+                    ?>
                 </ul>
             </div>
         </div>

@@ -52673,3 +52673,2964 @@ Ip-address: 10.10.10.254
 Detail: - 
 _______________________________________________
 
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:29:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:31:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:32:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:33:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:34:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:35:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:36:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:37:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:39:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:40:14 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:41:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:42:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:43:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:44:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:45:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:47:06 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:48:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:49:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:50:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:51:41 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:52:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:53:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:55:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:56:16 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:57:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:58:33 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 07:59:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:15:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:16:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:18:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:19:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:20:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:21:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:22:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:23:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:24:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:26:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:27:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:28:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:29:33 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:30:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:31:51 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:32:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:34:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:35:17 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:36:26 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:37:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:38:43 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:39:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:41:00 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:42:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:43:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:44:26 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:45:35 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:46:44 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:47:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:49:01 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:50:10 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:51:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:52:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:53:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:54:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:55:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:57:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:58:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 08:59:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:00:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:01:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:02:46 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:03:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:05:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:06:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:07:20 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:08:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:09:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:10:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:11:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:13:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:14:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:15:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:16:30 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:17:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:18:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:19:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:21:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:22:14 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:23:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:24:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:25:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:26:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:28:00 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:29:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:30:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:31:26 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:32:35 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:33:44 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:34:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:36:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:37:10 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:38:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:39:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:40:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:41:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:42:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:44:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:45:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:46:20 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:47:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:48:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:49:46 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:50:55 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:52:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:53:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:54:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:55:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:56:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:57:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 09:58:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:00:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:01:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:02:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:03:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:04:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:05:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:06:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:08:06 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:09:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:10:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:11:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:12:41 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:13:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:14:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:16:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:17:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:18:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:19:33 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:20:41 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:21:50 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:22:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:24:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:25:16 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:26:25 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:27:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:28:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:29:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:31:01 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:32:10 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:33:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:34:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:35:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:36:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:37:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:39:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:40:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:41:20 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:42:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:43:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:44:46 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:45:55 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:47:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:48:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:49:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:50:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:51:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:52:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:53:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:55:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:56:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:57:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:58:30 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 10:59:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:00:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:01:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:03:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:04:14 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:05:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:06:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:07:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:08:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:09:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:11:06 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:12:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:13:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:14:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:15:41 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:16:50 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:17:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:19:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:20:16 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:21:25 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:22:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:23:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:24:51 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:26:00 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:27:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:28:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:29:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:30:35 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:31:44 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:32:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:34:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:35:10 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:36:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:37:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:38:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:39:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:40:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:42:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:43:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:44:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:45:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:46:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:47:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:48:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:50:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:51:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:52:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:53:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:54:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:55:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:56:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:58:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 11:59:14 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:00:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:01:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:02:41 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:03:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:04:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:06:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:07:16 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:08:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:09:33 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:10:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:11:51 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:12:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:14:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:15:17 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:16:26 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:17:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:18:43 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:19:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:21:01 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:22:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:23:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:24:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:25:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:26:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:27:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:29:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:30:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:31:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:32:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:33:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:34:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:35:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:37:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:38:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:39:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:40:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:41:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:42:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:43:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:45:06 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:46:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:47:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:48:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:49:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:50:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:51:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:53:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:54:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:55:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:56:33 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:57:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:58:51 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 12:59:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:01:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:02:17 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:03:25 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:04:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:05:43 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:06:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:08:01 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:09:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:10:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:11:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:12:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:13:44 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:14:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:16:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:17:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:18:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:19:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:20:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:21:46 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:22:55 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:24:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:25:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:26:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:27:30 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:28:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:29:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:30:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:32:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:33:14 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:34:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:35:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:36:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:37:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:38:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:40:06 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:41:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:42:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:43:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:44:41 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:45:50 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:46:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:48:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:49:16 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:50:25 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:51:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:52:43 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:53:52 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:55:00 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:56:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:57:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:58:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 01:59:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:00:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:01:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:03:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:04:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:05:20 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:06:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:07:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:08:46 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:09:55 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:11:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:12:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:13:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:14:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:15:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:16:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:17:56 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:19:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:20:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:21:22 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:22:31 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:23:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:24:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:25:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:27:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:28:14 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:29:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:30:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:31:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:32:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:33:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:35:06 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:36:15 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:37:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:38:33 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:39:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:40:50 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:41:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:43:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:44:16 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:45:25 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:46:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:47:43 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:48:51 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:50:01 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:51:10 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:52:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:53:27 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:54:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:55:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:56:53 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:58:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 02:59:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:00:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:01:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:02:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:03:46 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:04:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:06:03 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:07:12 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:08:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:09:29 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:10:38 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:11:47 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:12:55 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:14:04 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:15:13 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:16:21 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:17:30 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:18:39 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:19:48 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:20:57 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:22:05 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:23:14 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:24:23 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:25:32 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:26:40 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:27:49 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:28:58 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:30:07 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:31:16 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:32:24 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:33:33 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:34:42 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:35:50 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:36:59 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:38:08 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:39:17 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:40:25 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:41:34 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:42:43 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:43:51 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:45:00 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:46:09 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:47:18 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Tuesday 16 September 2025 03:48:26 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+

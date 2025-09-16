@@ -71,7 +71,11 @@ include '../auth/auth_check.php';
                     <li class="nav-item bg-dark"><a class="nav-link" aria-current="page" href="../LiveNotifyVideo/">Streamimg</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link active" href="/SnapShot/snappaging_.php">Snapshot</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="/SnapShot/vdopaging_.php">Snap Videos</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="../logout.php">Logout</a></li>
+                    <?php
+                    if($logout){
+                    "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
