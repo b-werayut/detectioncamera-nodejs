@@ -40,7 +40,7 @@
                   <!-- <img src="./assets/brand/nwl-logo.png" alt=""> -->
                     <h1 class="fw-medium mb-0"
                         style="
-                            font-size: clamp(18px, 2.5vw, 36px);
+                            font-size: clamp(33px, 2.5vw, 36px);
                             letter-spacing: 1px;
                             color: #ffb100;
                         ">
