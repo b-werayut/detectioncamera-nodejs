@@ -1,23 +1,28 @@
 <?php
 session_start();
+include '../auth/auth_check.php';
 
-$role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
-$auth = isset($_SESSION['auth']) ? $_SESSION['auth'] : null;
+$role = $_SESSION['role'] ?? null;
+$auth = $_SESSION['auth'] ?? null;
 
 if (empty($role) && empty($auth) && isset($_GET['auth'])) {
     $_SESSION['auth'] = $_GET['auth'];
+
     header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
     exit();
 }
 
-$role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
-$auth = isset($_SESSION['auth']) ? $_SESSION['auth'] : null;
+if (!isset($_SESSION['login_time'])) {
+        $_SESSION['login_time'] = time();
+}
 
 if (empty($role) && empty($auth)) {
     header("Location: ../login.php");
     exit();
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

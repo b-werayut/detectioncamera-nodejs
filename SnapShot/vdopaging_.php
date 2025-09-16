@@ -1,13 +1,6 @@
 <?php
 session_start();
-
-$role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
-$auth = isset($_SESSION['auth']) ? $_SESSION['auth'] : null;
-
-if (empty($role) && empty($auth)) {
-    header("Location: ../login.php");
-    exit();
-}
+include '../auth/auth_check.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
