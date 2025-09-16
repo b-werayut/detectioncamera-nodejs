@@ -169,7 +169,7 @@ function boardCastMessage($title, $point, $status, $lineApiEndpoint, $lineAccess
                             ],
                             [
                                 'type' => 'text',
-                                'text' => "หาดแม่รำพึงจุดที่ 1",
+                                'text' => "โครงการวิจัยโจรกรรม ปทุมธานี",
                                 "size" => "lg",
                                 "align" => "center",
                                 "scaling" => true,

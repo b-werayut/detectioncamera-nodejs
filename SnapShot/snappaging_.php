@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+$role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
+$auth = isset($_SESSION['auth']) ? $_SESSION['auth'] : null;
+
+if (empty($role) && empty($auth)) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,6 +78,7 @@
                     <li class="nav-item bg-dark"><a class="nav-link" aria-current="page" href="../LiveNotifyVideo/">Streamimg</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link active" href="/SnapShot/snappaging_.php">Snapshot</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="/SnapShot/vdopaging_.php">Snap Videos</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" href="../logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -133,11 +145,11 @@
             </div>
     </section>
     <!-- Footer-->
-    <footer class="py-5 bg-dark footer">
-        <div class="container">
-            <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
-        </div>
-    </footer>
+    <footer class="py-2 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
+    </div>
+</footer>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
         $('#selectdatas').attr('disabled', 'disabled')
@@ -176,7 +188,13 @@
                 success: (resp) => {
                     let obj = jQuery.parseJSON(resp)
                     if (obj.datas == '') {
-                        alert("nodatas")
+                        $('#selectdatas').prop('disabled', true);
+                        Swal.fire({
+                        title: "ไม่มีข้อมูล!",
+                        icon: "warning",
+                        position: "center",
+                        confirmButtonText: "ตกลง",
+                    });
                     }
                     // console.log(obj.datas)
                     $.each(obj.datas, (i, items)=>{

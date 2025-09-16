@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+$role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
+$auth = isset($_SESSION['auth']) ? $_SESSION['auth'] : null;
+
+if (empty($role) && empty($auth) && isset($_GET['auth'])) {
+    $_SESSION['auth'] = $_GET['auth'];
+    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+    exit();
+}
+
+$role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
+$auth = isset($_SESSION['auth']) ? $_SESSION['auth'] : null;
+
+if (empty($role) && empty($auth)) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,6 +131,7 @@
         $getparam = $_GET['param'];
         $urlimg = "/SnapShot/snappaging_.php?param={$getparam}";
         $urlvdo = "/SnapShot/vdopaging_.php?param={$getparam}";
+        echo  $getparam;
     } else {
         $urlimg = "/SnapShot/snappaging_.php";
         $urlvdo = "/SnapShot/vdopaging_.php";
@@ -130,6 +151,7 @@
                             href="/LiveNotifyVideo/">Streamimg</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlimg; ?>">Snapshot</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlvdo; ?>">Snap Videos</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" href="../logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -207,7 +229,7 @@
                     });
             }
         };
-        Calldata();
+        // Calldata();
 
         const FetchDatas = async () => {
             if (!getparams) {
@@ -272,7 +294,7 @@
                 }
                 const data = await response.json();
 
-                console.log('API Camera Stats Response:', data);
+                // console.log('API Camera Stats Response:', data);
                 if (data.msg === "Success" && Array.isArray(data.cameraStat)) {
                     return data.cameraStat;
                 } else {
@@ -329,7 +351,7 @@
                     apiStatus
                 }
 
-                console.log(`Pocessing camera: ${cameraName}, Stream URL: ${FULL_STREAMING_URL}`);
+                // console.log(`Pocessing camera: ${cameraName}, Stream URL: ${FULL_STREAMING_URL}`);
 
                 if (!FULL_STREAMING_URL) {
                     console.warn(`No stream URL defined for camera: ${cameraName}. Skipping.`);
