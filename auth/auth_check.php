@@ -2,6 +2,7 @@
 $timeout = 60 * 30;
 $logout = true;
 
+$user = $_SESSION['username'] ?? null;
 $role = $_SESSION['role'] ?? null;
 $auth = $_SESSION['auth'] ?? null;
 

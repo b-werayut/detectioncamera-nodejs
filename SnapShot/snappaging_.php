@@ -68,12 +68,20 @@ include '../auth/auth_check.php';
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item bg-dark"><a class="nav-link" aria-current="page" href="../LiveNotifyVideo/">Streamimg</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link active" href="/SnapShot/snappaging_.php">Snapshot</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="/SnapShot/vdopaging_.php">Snap Videos</a></li>
                     <?php
-                    if($logout){
-                    "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
+                    if ($user) {
+                        echo "<li class='nav-item bg-dark'><a class='nav-link'>" . $user . "</a></li>";
+                    }
+                    ?>
+                    <li class="nav-item bg-dark"><a class="nav-link" aria-current="page"
+                            href="../LiveNotifyVideo/">Streamimg</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link active"
+                            href="/SnapShot/snappaging_.php">Snapshot</a></li>
+                    <li class="nav-item bg-dark"><a class="nav-link" href="/SnapShot/vdopaging_.php">Snap Videos</a>
+                    </li>
+                    <?php
+                    if (empty($auth)) {
+                        echo "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
                     }
                     ?>
                 </ul>
@@ -96,10 +104,12 @@ include '../auth/auth_check.php';
                 <!-- content -->
                 <div class="row justify-content-between align-items-center py-1">
                     <div class="col-md-3 d-flex py-1 btn-stream" style="justify-content: flex-start;">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='../LiveNotifyVideo/'">STREAMING</button>
+                        <button class="btn btn-md btn-secondary"
+                            onclick="location.href='../LiveNotifyVideo/'">STREAMING</button>
                     </div>
                     <div class="col-md-3 selectcam d-flex py-1" style="justify-content: flex-end;">
-                        <select id="selectcam" onchange="selectCam()" class="form-select" aria-label="Default select example">
+                        <select id="selectcam" onchange="selectCam()" class="form-select"
+                            aria-label="Default select example">
                             <option value="0" selected="">เลือกกล้อง</option>
                             <?php
                             $subselectfolder = glob("../eventfolder/*");
@@ -107,28 +117,32 @@ include '../auth/auth_check.php';
                             ?>
                             <?php
                             foreach ($subselectfolder as $k => $v) {
-                            ?>
+                                ?>
                                 <option value="<?= $v ?>"><?php echo "กล้อง {$v}"; ?></option>
                             <?php }
                             ?>
                         </select>
                     </div>
                     <div class="col-md-4 selectdiv d-flex py-1" style="justify-content: center;">
-                        <select id="selectdatas" onchange="selectData()" class="form-select w-100" aria-label="Default select example" disabled>
+                        <select id="selectdatas" onchange="selectData()" class="form-select w-100"
+                            aria-label="Default select example" disabled>
                             <option value="0" selected="">กรุณาเลือกกล้องก่อน</option>
-                            <option class="selectdataoption" value="CAM202412001">วันที่ 01/01/1970 เวลา 00:00:00 น.</option>
+                            <option class="selectdataoption" value="CAM202412001">วันที่ 01/01/1970 เวลา 00:00:00 น.
+                            </option>
                         </select>
                     </div>
                     <div class="col-md-2 d-flex py-1 btn-vdo" style="justify-content: flex-end;">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='/SnapShot/vdopaging_.php'">SNAP VDO</button>
+                        <button class="btn btn-md btn-secondary" onclick="location.href='/SnapShot/vdopaging_.php'">SNAP
+                            VDO</button>
                     </div>
                 </div>
                 <hr>
                 <div class="col-md-12 px-5 pt-2 pb-5 rounded-2 justify-between ct" style="background-color: #f7f7f7;">
                     <div id="snappath" class="date mt-2">
-                        <span id="filedate" class="badge rounded-pill bg-warning px-3 py-2 text-black" style="font-family: 'Kanit', sans-serif; font-size: 14px;">
+                        <span id="filedate" class="badge rounded-pill bg-warning px-3 py-2 text-black"
+                            style="font-family: 'Kanit', sans-serif; font-size: 14px;">
                         </span>
-                    <hr>
+                        <hr>
                     </div>
                     <div class="p-4 content1 ctm" style="background-color: white;">
                         <div class="text-center" id="nodata">
@@ -143,10 +157,10 @@ include '../auth/auth_check.php';
     </section>
     <!-- Footer-->
     <footer class="py-2 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
-    </div>
-</footer>
+        <div class="container">
+            <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
+        </div>
+    </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
         $('#selectdatas').attr('disabled', 'disabled')
@@ -156,71 +170,71 @@ include '../auth/auth_check.php';
         let snappath = $('#snappath')
         snappath.hide()
 
-        function disabledfunct(){
+        function disabledfunct() {
             const selectcamval = $('#selectcam').val()
-            if(parseInt(selectcamval) === 0){
+            if (parseInt(selectcamval) === 0) {
                 alert(55555)
             }
         }
 
-        function selectCam(){
+        function selectCam() {
             const selectcamval = $('#selectcam').val()
             const selectdatasbtn = $('#selectdatas')
             const thaiMonths = [
-            "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-            "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+                "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+                "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
             ];
 
             $('.selectdataoption').remove()
-            
-            if(parseInt(selectcamval) === 0){
+
+            if (parseInt(selectcamval) === 0) {
                 selectdatasbtn.attr('disabled', 'disabled')
-            }else{
+            } else {
                 selectdatasbtn.removeAttr('disabled', 'disabled')
 
                 $.ajax({
-                url: 'snappagingdata.php',
-                data: `selectcamval=${selectcamval}`,
-                method: 'GET',
-                success: (resp) => {
-                    let obj = jQuery.parseJSON(resp)
-                    if (obj.datas == '') {
-                        $('#selectdatas').prop('disabled', true);
+                    url: 'snappagingdata.php',
+                    data: `selectcamval=${selectcamval}`,
+                    method: 'GET',
+                    success: (resp) => {
+                        let obj = jQuery.parseJSON(resp)
+                        if (obj.datas == '') {
+                            $('#selectdatas').prop('disabled', true);
+                            Swal.fire({
+                                title: "ไม่มีข้อมูล!",
+                                icon: "warning",
+                                position: "center",
+                                confirmButtonText: "ตกลง",
+                            });
+                        }
+                        // console.log(obj.datas)
+                        $.each(obj.datas, (i, items) => {
+                            let datasoption = ''
+                            let datas = items
+                            let datassplit = datas.split("_")
+                            let camname = datassplit[0]
+                            let camnamedisplay = `กล้อง ${camname}`
+                            let day = datassplit[1].slice(6)
+                            let month = datassplit[1].slice(4, 6)
+                            let monththai = thaiMonths[parseInt(month) - 1]
+                            let year = datassplit[1].slice(0, 4)
+                            let yearthai = parseInt(year) + 543
+                            let hour = datassplit[2].slice(0, 2)
+                            let minute = datassplit[2].slice(2, 4)
+                            let sec = datassplit[2].slice(4)
+                            let datetimedisplay = `วันที่ ${day} ${monththai} ${yearthai} เวลา ${hour}:${minute}:${sec}`
+                            datasoption += `<option class="selectdataoption" value="${items}">${datetimedisplay}</option>`
+                            selectdatasbtn.append(datasoption)
+                        })
+                    },
+                    error: (data) => {
                         Swal.fire({
-                        title: "ไม่มีข้อมูล!",
-                        icon: "warning",
-                        position: "center",
-                        confirmButtonText: "ตกลง",
-                    });
+                            icon: "error",
+                            title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง!",
+                        })
+                        $('#nodatah2').appendTo('#nodata')
                     }
-                    // console.log(obj.datas)
-                    $.each(obj.datas, (i, items)=>{
-                        let datasoption = ''
-                        let datas = items
-                        let datassplit = datas.split("_")
-                        let camname = datassplit[0]
-                        let camnamedisplay = `กล้อง ${camname}`
-                        let day = datassplit[1].slice(6)
-                        let month = datassplit[1].slice(4,6)
-                        let monththai = thaiMonths[parseInt(month)-1]
-                        let year = datassplit[1].slice(0,4)
-                        let yearthai = parseInt(year) + 543
-                        let hour = datassplit[2].slice(0,2)
-                        let minute = datassplit[2].slice(2,4)
-                        let sec = datassplit[2].slice(4)
-                        let datetimedisplay = `วันที่ ${day} ${monththai} ${yearthai} เวลา ${hour}:${minute}:${sec}`
-                        datasoption += `<option class="selectdataoption" value="${items}">${datetimedisplay}</option>`
-                        selectdatasbtn.append(datasoption)
-                    })
-                },
-                error: (data)=>{
-                    Swal.fire({
-                        icon: "error",
-                        title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง!",
-                    })
-                    $('#nodatah2').appendTo('#nodata')
-                }
-            })
+                })
             }
         }
 
@@ -241,7 +255,7 @@ include '../auth/auth_check.php';
             let nodata = $('<h5 id="nodatah2" >อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>')
             $('#nodatah').remove()
             $('#nodatah2').remove()
-            
+
             $('.page-item').remove()
             $('#nodatah2').remove()
             let selectdatasval = $('#selectdatas').val()
@@ -304,14 +318,14 @@ include '../auth/auth_check.php';
                                         roundselectData++
                                         if (roundselectData == 3) {
                                             roundselectData = 0
-                                            if(imgpic.length <= 0){
-                                            Swal.fire({
-                                                icon: "error",
-                                                title: "โหลดข้อมูลไม่สำเร็จ!",
-                                            });
-                                            $('.imgdisplay').remove()
-                                            $('.imgnamex').remove()
-                                            nodata.appendTo('#nodata')
+                                            if (imgpic.length <= 0) {
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "โหลดข้อมูลไม่สำเร็จ!",
+                                                });
+                                                $('.imgdisplay').remove()
+                                                $('.imgnamex').remove()
+                                                nodata.appendTo('#nodata')
                                             }
                                             return false
                                         }
@@ -321,11 +335,11 @@ include '../auth/auth_check.php';
                                         $('.imgdisplay').fadeIn(200)
                                         let filedate = $('#filedate')
                                         let imgnamex = $('.imgnamex')
-                                        snappath.fadeIn(function (){
-                                        filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
+                                        snappath.fadeIn(function () {
+                                            filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
                                         })
                                         pagingSelectDatas(selectdatasval, obj.imgnames, camnamef)
-                                        $.each(obj.imgnamexs, function(i, item) {
+                                        $.each(obj.imgnamexs, function (i, item) {
                                             let imgx = '';
                                             console.log(item);
                                             if (i >= 8) { // show x img
@@ -338,26 +352,26 @@ include '../auth/auth_check.php';
                                         $('#nodatah2').remove();
                                     }
                                     $('.imgdisplay').fadeIn(200)
-                                        let filedate = $('#filedate')
-                                        let imgnamex = $('.imgnamex')
-                                        snappath.fadeIn(function (){
+                                    let filedate = $('#filedate')
+                                    let imgnamex = $('.imgnamex')
+                                    snappath.fadeIn(function () {
                                         filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
-                                        })
-                                        pagingSelectDatas(selectdatasval, obj.imgnames, camnamef)
-                                        $.each(obj.imgnamexs, function(i, item) {
-                                            let imgx = '';
-                                            console.log(item);
-                                            if (i >= 8) { // show x img
-                                                return false;
-                                            }
-                                            imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}','${camnamef}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}" "></li>`;
-                                            imgnamex.append(imgx);
-                                        })
-                                        imgnamex.fadeIn(400);
-                                        $('#nodatah2').remove();
+                                    })
+                                    pagingSelectDatas(selectdatasval, obj.imgnames, camnamef)
+                                    $.each(obj.imgnamexs, function (i, item) {
+                                        let imgx = '';
+                                        console.log(item);
+                                        if (i >= 8) { // show x img
+                                            return false;
+                                        }
+                                        imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}','${camnamef}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}" "></li>`;
+                                        imgnamex.append(imgx);
+                                    })
+                                    imgnamex.fadeIn(400);
+                                    $('#nodatah2').remove();
                                 }
                             },
-                            error: function(data) {
+                            error: function (data) {
                                 Swal.fire({
                                     icon: "error",
                                     title: "โหลดข้อมูลไม่สำเร็จ!",
@@ -410,7 +424,7 @@ include '../auth/auth_check.php';
                 const prevPage = document.createElement('div');
                 prevPage.classList.add("page-item");
                 prevPage.innerHTML = '<a class="page-link" >Previous</a>';
-                prevPage.addEventListener('click', function() {
+                prevPage.addEventListener('click', function () {
                     if (currentPage > 1) {
                         currentPage--;
                         updatePagination2();
@@ -423,7 +437,7 @@ include '../auth/auth_check.php';
                     page.classList.add("page-item");
                     page.classList.toggle('active', i === currentPage);
                     page.innerHTML = `<a class="page-link" >${i}</a>`;
-                    page.addEventListener('click', function() {
+                    page.addEventListener('click', function () {
                         currentPage = i;
                         updatePagination2();
                     });
@@ -433,7 +447,7 @@ include '../auth/auth_check.php';
                 const nextPage = document.createElement('div');
                 nextPage.classList.add("page-item");
                 nextPage.innerHTML = '<a class="page-link" >Next</a>';
-                nextPage.addEventListener('click', function() {
+                nextPage.addEventListener('click', function () {
                     if (currentPage < totalPages) {
                         currentPage++;
                         updatePagination2();
@@ -491,7 +505,7 @@ include '../auth/auth_check.php';
                 const prevPage = document.createElement('div');
                 prevPage.classList.add("page-item");
                 prevPage.innerHTML = '<a class="page-link" >Previous</a>';
-                prevPage.addEventListener('click', function() {
+                prevPage.addEventListener('click', function () {
                     if (currentPage > 1) {
                         currentPage--;
                         updatePagination();
@@ -504,7 +518,7 @@ include '../auth/auth_check.php';
                     page.classList.add("page-item");
                     page.classList.toggle('active', i === currentPage);
                     page.innerHTML = `<a class="page-link" >${i}</a>`;
-                    page.addEventListener('click', function() {
+                    page.addEventListener('click', function () {
                         currentPage = i;
                         updatePagination();
                     });
@@ -514,7 +528,7 @@ include '../auth/auth_check.php';
                 const nextPage = document.createElement('div');
                 nextPage.classList.add("page-item");
                 nextPage.innerHTML = '<a class="page-link" >Next</a>';
-                nextPage.addEventListener('click', function() {
+                nextPage.addEventListener('click', function () {
                     if (currentPage < totalPages) {
                         currentPage++;
                         updatePagination();

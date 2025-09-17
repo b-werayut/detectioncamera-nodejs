@@ -1,13 +1,12 @@
 <?php
 session_start();
-$timeout = 60 * 30;
-$logout = true;
+$timeout = 60 * 1;
 
+$user = $_SESSION['username'] ?? null;
 $role = $_SESSION['role'] ?? null;
 $auth = $_SESSION['auth'] ?? null;
 
 if (empty($role) && empty($auth) && isset($_GET['auth'])) {
-    $logout = false;
     $_SESSION['auth'] = $_GET['auth'];
 
     header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
@@ -15,7 +14,7 @@ if (empty($role) && empty($auth) && isset($_GET['auth'])) {
 }
 
 if (!isset($_SESSION['login_time'])) {
-        $_SESSION['login_time'] = time();
+    $_SESSION['login_time'] = time();
 }
 
 if (isset($_SESSION['login_time']) && time() - $_SESSION['login_time'] > $timeout) {
@@ -145,7 +144,7 @@ if (empty($role) && empty($auth)) {
         $getparam = $_GET['param'];
         $urlimg = "/SnapShot/snappaging_.php?param={$getparam}";
         $urlvdo = "/SnapShot/vdopaging_.php?param={$getparam}";
-        echo  $getparam;
+        echo $getparam;
     } else {
         $urlimg = "/SnapShot/snappaging_.php";
         $urlvdo = "/SnapShot/vdopaging_.php";
@@ -161,13 +160,18 @@ if (empty($role) && empty($auth)) {
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <?php
+                    if ($user) {
+                        echo "<li class='nav-item bg-dark'><a class='nav-link'>" . $user . "</a></li>";
+                    }
+                    ?>
                     <li class="nav-item bg-dark"><a class="nav-link active" aria-current="page"
                             href="/LiveNotifyVideo/">Streamimg</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlimg; ?>">Snapshot</a></li>
                     <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlvdo; ?>">Snap Videos</a></li>
                     <?php
-                    if($logout){
-                    "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
+                    if (empty($auth)) {
+                        echo "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
                     }
                     ?>
                 </ul>
@@ -552,7 +556,7 @@ if (empty($role) && empty($auth)) {
             }
         }
 
-        
+
         setInterval(async () => {
             const apiCameraStats = await fetchCameraStatusesFromAPI();
             let hasChanged = false;
