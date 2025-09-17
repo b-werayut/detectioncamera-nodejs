@@ -62242,3 +62242,73 @@ Ip-address: 10.10.10.254
 Detail: - 
 _______________________________________________
 
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:16:19 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:17:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:18:36 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:19:45 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:20:54 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:22:02 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:23:11 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:24:20 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:25:28 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+
+Point: 1 
+Value: 3 
+Timestamp: Wednesday 17 September 2025 03:26:37 
+Ip-address: 10.10.10.254
+Detail: - 
+_______________________________________________
+

@@ -1,5 +1,5 @@
 <?php
-$timeout = 60 * 30;
+$timeout = 60 * 1;
 $logout = true;
 
 $user = $_SESSION['username'] ?? null;
