@@ -1,10 +1,11 @@
 <?php
-$timeout = 60 * 1;
 $logout = true;
 
 $user = $_SESSION['username'] ?? null;
 $role = $_SESSION['role'] ?? null;
 $auth = $_SESSION['auth'] ?? null;
+$login_time = $_SESSION['login_time'] ?? null;
+$timeout = $_SESSION['timeout'] ?? null;
 
 if (empty($role) && empty($auth)) {
     header("Location: ../login.php");

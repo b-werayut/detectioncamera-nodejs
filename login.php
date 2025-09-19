@@ -46,7 +46,7 @@
                 <!-- <div class="col-md-6 col-lg-5 d-none d-md-block index-img">
                 <img src="./assets/img/ip-camera.png" />
               </div> -->
-                <div class="col-md-6 col-lg-12 d-flex">
+                <div class="col-md-12 col-lg-12 d-flex">
                   <div class="d-flex flex-column justify-content-between w-100">
                     <div class="card-body p-4 p-lg-5 text-black">
                       <form style="margin-top: 6rem;">

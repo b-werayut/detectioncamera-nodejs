@@ -1,33 +1,65 @@
 <?php
 session_start();
-$timeout = 60 * 1;
 
 $user = $_SESSION['username'] ?? null;
 $role = $_SESSION['role'] ?? null;
 $auth = $_SESSION['auth'] ?? null;
+$login_time = $_SESSION['login_time'] ?? null;
+$timeout = $_SESSION['timeout'] ?? null;
+
+if (isset($_SESSION['login_time'], $timeout) && is_numeric($timeout) && time() - $_SESSION['login_time'] > $timeout) {
+    expiredTime();
+}
 
 if (empty($role) && empty($auth) && isset($_GET['auth'])) {
+    linePermission();
+}
+
+if (empty($role) && empty($auth)) {
+    loginPermission();
+}
+
+function expiredTime()
+{
+    session_unset();
+    session_destroy();
+
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
+
+    header("Location: ../login.php?expired=1");
+    exit();
+}
+
+function linePermission()
+{
     $_SESSION['auth'] = $_GET['auth'];
+
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
 
     header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
     exit();
 }
 
-if (!isset($_SESSION['login_time'])) {
-    $_SESSION['login_time'] = time();
-}
-
-if (isset($_SESSION['login_time']) && time() - $_SESSION['login_time'] > $timeout) {
+function loginPermission()
+{
     session_unset();
     session_destroy();
-    header("Location: ../login.php?expired=1");
-    exit();
-}
 
-if (empty($role) && empty($auth)) {
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
+
     header("Location: ../login.php");
     exit();
 }
+
 
 ?>
 
@@ -152,6 +184,9 @@ if (empty($role) && empty($auth)) {
     }
     ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="text-white">
+            <div>login_time: <?= $login_time ?></div>
+        </div>
         <div class="container px-lg-5">
             <img src="../snapshot/assets/nwl-logo.png" alt="NetWorklink" width="50">
             <span style="letter-spacing: 1px;" class="text-white" href="#!">NetWorklink.Co.Ltd,</span>
