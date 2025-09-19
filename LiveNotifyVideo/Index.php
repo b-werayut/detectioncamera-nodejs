@@ -16,7 +16,7 @@ if (empty($role) && empty($auth) && isset($_GET['auth'])) {
 }
 
 if (empty($role) && empty($auth)) {
-    loginPermission();
+    checkAuthentication();
 }
 
 function expiredTime()
@@ -46,7 +46,7 @@ function linePermission()
     exit();
 }
 
-function loginPermission()
+function checkAuthentication()
 {
     session_unset();
     session_destroy();
@@ -80,9 +80,9 @@ function loginPermission()
 </head>
 
 <style>
-    #streamContainer {
+    /* #streamContainer {
         gap: 8px;
-    }
+    } */
 
     .video-wrapper {
         width: 390px;
@@ -227,7 +227,7 @@ function loginPermission()
                 </div>
             </div>
     </header>
-    <section class="p-1 text-center" style="height_: 100vh;">
+    <section class="p-1 text-center main-content">
         <div class="container text-center mt-3 position-relative">
             <button class="btn btn-outline-dark mb-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#cameraDropdown" style="min-width: 300px; width: 300px; max-width: 100%;">
@@ -239,8 +239,7 @@ function loginPermission()
             </div>
         </div>
 
-        <div id="streamContainer" class="mt-4 row g-3 container mx-auto flex justify-content-center"
-            style="max-height: 500px;">
+        <div id="streamContainer" class="mt-4 row g-3 flex justify-content-center"></div>
         </div>
 
     </section>

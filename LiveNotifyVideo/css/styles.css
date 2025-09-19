@@ -11582,3 +11582,14 @@ textarea.form-control-lg {
   width: 4rem;
   font-size: 2rem;
 }
+
+.video-wrapper:last-child {
+  margin-bottom: 6rem;
+}
+
+/* 
+@media (max-width: 1024px) {
+  #streamContainer {
+    height: 300vh;
+  }
+} */
