@@ -8,7 +8,7 @@ $login_time = $_SESSION['login_time'] ?? null;
 $timeout = $_SESSION['timeout'] ?? null;
 
 if (empty($role) && empty($auth)) {
-    header("Location: ../login.php");
+    header("Location: ../login.php?unauthorized=1");
     exit();
 }
 

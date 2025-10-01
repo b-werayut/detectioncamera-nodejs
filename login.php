@@ -385,7 +385,7 @@
         type: 'POST',
         data: datastr,
         success: (result) => {
-
+          console.log('result>>', result)
           const baseConfig = {
             position: "center",
             background: '#fefefe',
@@ -450,7 +450,6 @@
               icon: "error",
               title: "รหัสผ่านไม่ถูกต้อง",
               position: "center",
-              background: "#fffbea",
               iconColor: "#f39c12",
               customClass: {
                 title: "swal2-title-custom",
@@ -463,11 +462,29 @@
               confirmButtonText: "ตกลง",
             });
           }
+        }, error: function (error) {
+          Swal.fire({
+            icon: "error",
+            title: "เข้าสู่ระบบไม่สำเร็จ",
+            text: "กรุณาติดต่อผู้ดูแลระบบ",
+            position: "center",
+            iconColor: "#f39c12",
+            customClass: {
+              title: "swal2-title-custom",
+              popup: "swal2-popup-custom",
+              confirmButton: "swal2-confirm-custom"
+            },
+            showClass: {
+              popup: "animate__animated animate__shakeX"
+            },
+            confirmButtonText: "ตกลง",
+          });
+          console.log('login err>>', error)
         }
-      })
-
+      });
     }
   }
+
 
   $("#registerForm").on('submit', function (e) {
     e.preventDefault();
@@ -597,6 +614,24 @@
               confirmButtonText: "ตกลง",
             });
           }
+        }, error: function (error) {
+          Swal.fire({
+            icon: "error",
+            title: "สมัครชื่อผู้ใช้งานไม่สำเร็จ",
+            text: "กรุณาติดต่อผู้ดูแลระบบ",
+            position: "center",
+            iconColor: "#f39c12",
+            customClass: {
+              title: "swal2-title-custom",
+              popup: "swal2-popup-custom",
+              confirmButton: "swal2-confirm-custom"
+            },
+            showClass: {
+              popup: "animate__animated animate__shakeX"
+            },
+            confirmButtonText: "ตกลง",
+          });
+          console.log('register err>>', error);
         }
       })
     }
@@ -685,6 +720,24 @@
                 }
               });
             }
+          }, error: function (error) {
+            Swal.fire({
+              icon: "error",
+              title: "เปลี่ยนรหัสผ่านไม่สำเร็จ",
+              text: "กรุณาติดต่อผู้ดูแลระบบ",
+              position: "center",
+              iconColor: "#f39c12",
+              customClass: {
+                title: "swal2-title-custom",
+                popup: "swal2-popup-custom",
+                confirmButton: "swal2-confirm-custom"
+              },
+              showClass: {
+                popup: "animate__animated animate__shakeX"
+              },
+              confirmButtonText: "ตกลง",
+            });
+            console.log('resetpass err>>', error)
           }
         })
       }
