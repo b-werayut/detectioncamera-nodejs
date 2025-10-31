@@ -1042,7 +1042,7 @@ const picDirCheck = async (
   const checkInterval = 60000; // check every 1 minute
   const maxRound = confvalmilisec / checkInterval;
   const extraRounds = 8; // wait extra rounds if still not enough images
-  const minImages = 30; // จำนวนรูปขั้นต่ำ
+  const minImages = 60; // จำนวนรูปขั้นต่ำ
 
   console.log(
     `🖼️ Starting image detection (supports late files)... Checking every ${
