@@ -944,7 +944,7 @@ const xDirCheck = async (
   const minFiles = 20; // จำนวนไฟล์ขั้นต่ำ
 
   console.log(
-    `🔍 Starting X directory check (supports late files)... Checking every ${checkInterval / 1000}s. Minimum files: ${minFiles}`
+    `🖼️ Starting X images (supports late files)... Checking every ${checkInterval / 1000}s. Minimum files: ${minFiles}`
   );
 
   fs.ensureDirSync(destpath);
@@ -1045,7 +1045,7 @@ const picDirCheck = async (
   const minImages = 60; // จำนวนรูปขั้นต่ำ
 
   console.log(
-    `🖼️ Starting image detection (supports late files)... Checking every ${
+    `🖼️ Starting Pic images (supports late files)... Checking every ${
       checkInterval / 1000
     } seconds. Minimum images: ${minImages}`
   );
