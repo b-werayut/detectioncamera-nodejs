@@ -21,7 +21,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['role'] = $role;
                 $_SESSION['login_time'] = time();
-                $_SESSION['timeout'] = 60 * 1;
+                $_SESSION['timeout'] = 60 * 30;
                 $_SESSION['success'] = "<div>Login Success</div>";
                 echo 1;
                 // if($role === 'ADMIN'){

@@ -69,3 +69,14 @@ model CameraStreams {
   IsActive    Boolean? @default(true, map: "DF__CameraStr__IsAct__4D5F7D71")
   Cameras     Cameras  @relation(fields: [CameraId], references: [CameraId], onDelete: Cascade, onUpdate: NoAction, map: "FK_CameraStreams_Cameras")
 }
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String?  @unique
+  role      String   @default("USER")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime 
+}

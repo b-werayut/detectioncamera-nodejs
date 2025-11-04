@@ -68,7 +68,7 @@ function checkAuthentication()
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>NetWorklink.Co.Ltd,</title>
@@ -80,9 +80,11 @@ function checkAuthentication()
 </head>
 
 <style>
-    /* #streamContainer {
-        gap: 8px;
-    } */
+    html,
+    body {
+        height: 100%;
+        overflow-y: auto;
+    }
 
     .video-wrapper {
         width: 390px;
@@ -183,30 +185,30 @@ function checkAuthentication()
         $getparam = '';
     }
     ?>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg digital-bg">
         <div class="text-white">
-            <div>login_time: <?= $login_time ?></div>
+            <!-- <div>login_time: <?php //$login_time ?></div> -->
         </div>
         <div class="container px-lg-5">
             <img src="../snapshot/assets/nwl-logo.png" alt="NetWorklink" width="50">
             <span style="letter-spacing: 1px;" class="text-white" href="#!">NetWorklink.Co.Ltd,</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <?php
-                    if ($user) {
-                        echo "<li class='nav-item bg-dark'><a class='nav-link'>" . $user . "</a></li>";
-                    }
+                    // if ($user) {
+                    //     echo "<li class='nav-item bg-dark'><a class='nav-link'>" . $user . "</a></li>";
+                    // }
                     ?>
-                    <li class="nav-item bg-dark"><a class="nav-link active" aria-current="page"
+                    <li class="nav-item"><a class="nav-link active text-light" aria-current="page"
                             href="/LiveNotifyVideo/">Streamimg</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlimg; ?>">Snapshot</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="<?= $urlvdo; ?>">Snap Videos</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="<?= $urlimg; ?>">Snapshot</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="<?= $urlvdo; ?>">Snap Videos</a></li>
                     <?php
                     if (empty($auth)) {
-                        echo "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link text-light' href='../logout.php'>Logout</a></li>";
                     }
                     ?>
                 </ul>
@@ -215,7 +217,7 @@ function checkAuthentication()
     </nav>
     <header class="py-2 ">
         <div class="container px-lg-5 ">
-            <div class="p-4 p-lg-5 bg-light rounded-3 text-center bg-dark">
+            <div class="p-4 p-lg-5 rounded-3 text-center digital-style">
                 <div class="">
                     <h1 class="display-5 fw-bold text-white text-uppercase" style="letter-spacing: 10px">Streaming</h1>
                 </div>
@@ -241,6 +243,8 @@ function checkAuthentication()
 
         <div id="streamContainer" class="mt-4 row g-3 flex justify-content-center"></div>
         </div>
+
+        <div style="height: 80px;"></div>
 
     </section>
 
@@ -646,9 +650,11 @@ function checkAuthentication()
 
     </script>
 </body>
-<footer class="py-2 bg-dark">
+<footer class="py-2 digital-bg">
     <div class="container">
-        <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
+        <p class="m-0 text-center text-white" style="letter-spacing: 1px;">
+            Copyright &copy; NetWorklink.Co.Ltd,
+        </p>
     </div>
 </footer>
 <script src="js/bootstrap.bundle.min.js"></script>

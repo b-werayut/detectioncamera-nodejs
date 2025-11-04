@@ -11578,6 +11578,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
 .feature {
   display: inline-flex;
   align-items: center;
@@ -11586,3 +11587,17 @@ textarea.form-control-lg {
   width: 4rem;
   font-size: 2rem;
 }
+
+.digital-style {
+        /* background: linear-gradient(135deg, #0f0f0f, #003300, #00ff41); */
+        background-image: url('../assets/bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #00ff41;
+        text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
+    }
+
+  .digital-bg{
+background: linear-gradient(to bottom, #0f0f0f, #003300);
+  }

@@ -169,7 +169,7 @@ function boardCastMessage($title, $point, $status, $lineApiEndpoint, $lineAccess
                             ],
                             [
                                 'type' => 'text',
-                                'text' => "โครงการวิจัยโจรกรรม ปทุมธานี",
+                                'text' => "โครงการวิจัยนครปฐม กม.61",
                                 "size" => "lg",
                                 "align" => "center",
                                 "scaling" => true,
@@ -230,7 +230,7 @@ function boardCastMessage($title, $point, $status, $lineApiEndpoint, $lineAccess
                                 "action" => [
                                     "type" => "uri",
                                     "label" => ">> คลิกเพื่อดูข้อมูลเพิ่มเติม <<",
-                                    "uri" => $urldest,
+                                    "uri" => "{$urldest}?auth=1",
                                 ],
                                 "height"=> "sm"
                                 ],

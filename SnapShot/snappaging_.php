@@ -59,29 +59,29 @@ include '../auth/auth_check.php';
     fclose($myfile);
     ?>
     <!-- Responsive navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to bottom, #0f0f0f, #003300);">
         <div class="container px-lg-5">
             <img src="assets/nwl-logo.png" alt="NetWorklink" width="50">
             <span style="letter-spacing: 1px;" class="text-white" href="#!">NetWorklink.Co.Ltd,</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <?php
-                    if ($user) {
-                        echo "<li class='nav-item bg-dark'><a class='nav-link'>" . $user . "</a></li>";
-                    }
+                    // if ($user) {
+                    //     echo "<li class='nav-item bg-dark'><a class='nav-link'>" . $user . "</a></li>";
+                    // }
                     ?>
-                    <li class="nav-item bg-dark"><a class="nav-link" aria-current="page"
+                    <li class="nav-item"><a class="nav-link text-light" aria-current="page"
                             href="../LiveNotifyVideo/">Streamimg</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link active"
+                    <li class="nav-item"><a class="nav-link  text-light active"
                             href="/SnapShot/snappaging_.php">Snapshot</a></li>
-                    <li class="nav-item bg-dark"><a class="nav-link" href="/SnapShot/vdopaging_.php">Snap Videos</a>
+                    <li class="nav-item"><a class="nav-link text-light" href="/SnapShot/vdopaging_.php">Snap Videos</a>
                     </li>
                     <?php
                     if (empty($auth)) {
-                        echo "<li class='nav-item bg-dark'><a class='nav-link' href='../logout.php'>Logout</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link  text-light' href='../logout.php'>Logout</a></li>";
                     }
                     ?>
                 </ul>
@@ -91,7 +91,12 @@ include '../auth/auth_check.php';
     <!-- Header-->
     <header class="py-2 ">
         <div class="container px-lg-5 ">
-            <div class="p-4 p-lg-5 bg-light rounded-3 text-center bg-dark">
+            <div class="p-4 p-lg-5 rounded-3 text-center" style="background-image: url('assets/bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #00ff41;
+        text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;">
                 <div class="">
                     <h1 class="display-5 fw-bold text-white text-uppercase" style="letter-spacing: 5px">Snapshot</h1>
                 </div>
@@ -139,8 +144,8 @@ include '../auth/auth_check.php';
                 <hr>
                 <div class="col-md-12 px-5 pt-2 pb-5 rounded-2 justify-between ct" style="background-color: #f7f7f7;">
                     <div id="snappath" class="date mt-2">
-                        <span id="filedate" class="badge rounded-pill bg-warning px-3 py-2 text-black"
-                            style="font-family: 'Kanit', sans-serif; font-size: 14px;">
+                        <span id="filedate" class="rounded-pill bg-warning px-3 py-2 text-light"
+                            style="font-family: 'Kanit', sans-serif; font-size: 14px; background-color: #004a00!important;">
                         </span>
                         <hr>
                     </div>
@@ -156,7 +161,7 @@ include '../auth/auth_check.php';
             </div>
     </section>
     <!-- Footer-->
-    <footer class="py-2 bg-dark">
+    <footer class="py-2 digital-bg">
         <div class="container">
             <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
         </div>

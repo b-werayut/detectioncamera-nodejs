@@ -1,49 +1,40 @@
-// install first :  npm i @ffmpeg-installer/ffmpeg
+const fs = require('fs');
+const path = require('path');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const ffmpeg = require('fluent-ffmpeg');
 ffmpeg.setFfmpegPath(ffmpegPath);
-const path = require("path");
-const { existsSync, mkdirSync } = require("fs");
-const { glob } = require('glob');
-const { insertVdoStatusLogs } = require('./DatabaseManage');
 
-exports.convertToMp4Funct = async (inputFile, outputDir, beforetime, futuretime, directoryfm) => {
-        // console.log('convertToMp4Funct inputfile =', inputFile)
-        const vdofilecv = {fname:[],fcount:[]}
-        const outputDirFormat = `${outputDir}/Vdo/`
-        vdofilecv.fcount.push(
-            inputFile.length
-        )
-        inputFile.map( items => {
-        if (!existsSync(items)) {
-            return reject(new Error("Input file does not exist"));
+exports.convertToMp4Funct = async (inputFile, outputDir) => {
+    const vdofilecv = { fname: [], fcount: [] };
+    const outputDirFormat = path.join(outputDir, 'Vdo');
+
+    if (!fs.existsSync(outputDirFormat)) {
+        fs.mkdirSync(outputDirFormat, { recursive: true });
+    }
+
+    vdofilecv.fcount.push(inputFile.length);
+
+    inputFile.map(item => {
+        if (!fs.existsSync(item)) {
+            throw new Error(`Input file does not exist: ${item}`);
         }
-        vdofilecv.fname.push(
-            items
-        )
-       
-        const outputFileName = path.basename(items, path.extname(items)) + ".mp4";
+        vdofilecv.fname.push(item);
+
+        const outputFileName = path.basename(item, path.extname(item)) + ".mp4";
         const outputFilePath = path.join(outputDirFormat, outputFileName);
 
-         ffmpeg(items)
+        ffmpeg(item)
             .output(outputFilePath)
-            .on("start", (commandLine) => {
-                // console.log("FFmpeg command: " + commandLine);
-            })
-             .on("progress", (progress) => {
-                if(progress == ''){
-                    console.log(`Processing`);
-                }
-            })
-            .on("end", () => {
-                // console.log(`Conversion completed: ${outputFilePath}`);
-            })
-            .on("error", (err) => {
-                console.error("Error: ", err);
+            .on("start", commandLine => console.log("FFmpeg command:", commandLine))
+            .on("progress", progress => console.log("Processing", progress))
+            .on("end", () => console.log(`Conversion completed: ${outputFilePath}`))
+            .on("error", (err, stdout, stderr) => {
+                console.error("FFmpeg error:", err.message);
+                console.error("FFmpeg stdout:", stdout);
+                console.error("FFmpeg stderr:", stderr);
             })
             .run();
-    })
+    });
 
-    return ({vdofilecv: vdofilecv, msg: 'Convert vdo success'})
-}
-
+    return { vdofilecv, msg: 'Convert vdo success' };
+};
