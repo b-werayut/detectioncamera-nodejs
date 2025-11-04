@@ -698,7 +698,11 @@ const globVdoFile = async (
   const videoPattern = path.join(videoDir, "*.dav");
   const checkInterval = 60000; // 1 นาที
   const extraRounds = 8;
+<<<<<<< HEAD
   const minVideos = 1; // จำนวนวิดีโอต่ำสุด
+=======
+  const minVideos = 1; // ปรับตามต้องการ
+>>>>>>> origin/main
 
   console.log("------------------------------");
   console.log("🎥 Scanning for .dav video files...");
@@ -725,7 +729,11 @@ const globVdoFile = async (
       const status = 1;
       const timeinsert = timeInsertDB();
       const updateStatus = await insertVdoStatusLogs(directoryfm, status, timeinsert);
+<<<<<<< HEAD
       console.log("📝 updateVdoStatus In globVdoFile =", updateStatus);
+=======
+      console.log("updateVdoStatus In globVdoFile =", updateStatus);
+>>>>>>> origin/main
     } catch (err) {
       console.error("❌ Error during video conversion:", err);
     }
@@ -763,6 +771,7 @@ const globVdoFile = async (
     await sleep(checkInterval);
   }
 
+<<<<<<< HEAD
   const finalVideos = await getMatchingFiles();
   if (finalVideos.length > 0) {
     console.log(`🎞️ Processing all ${finalVideos.length} available video(s) (less than minimum ${minVideos}).`);
@@ -772,6 +781,10 @@ const globVdoFile = async (
     console.log("🚫 No video files found to process after timeout.");
     return { vdofile: [], folderdest: videoDir };
   }
+=======
+  console.log("⏰ Timeout reached — not enough video files found after all extra rounds.");
+  return { vdofile: [], folderdest: videoDir };
+>>>>>>> origin/main
 };
 
 const Config = async (foldername) => {
@@ -1026,6 +1039,7 @@ const xDirCheck = async (
     await sleep(checkInterval);
   }
 
+<<<<<<< HEAD
   const finalFiles = await getMatchingFiles();
   if (finalFiles.length > 0) {
     console.log(`📸 Copying all ${finalFiles.length} available X images (less than minimum ${minFiles}).`);
@@ -1035,6 +1049,10 @@ const xDirCheck = async (
     console.log("🚫 No X images found to copy after timeout.");
     return false;
   }
+=======
+  console.log("⏰ Timeout reached — not enough X files found after all extra rounds.");
+  return false;
+>>>>>>> origin/main
 };
 
 const picDirCheck = async (
@@ -1055,8 +1073,13 @@ const picDirCheck = async (
   const confvalmilisec = confvalraw * 60000; // total waiting time (ms)
   const checkInterval = 60000; // check every 1 minute
   const maxRound = confvalmilisec / checkInterval;
+<<<<<<< HEAD
   const extraRounds = 10; // wait extra rounds if still not enough images
   const minImages = 30; // จำนวนรูปขั้นต่ำ
+=======
+  const extraRounds = 8; // wait extra rounds if still not enough images
+  const minImages = 60; // จำนวนรูปขั้นต่ำ
+>>>>>>> origin/main
 
   console.log(
     `🖼️ Starting Pic images (supports late files)... Checking every ${
@@ -1138,6 +1161,7 @@ const picDirCheck = async (
     await sleep(checkInterval);
   }
 
+<<<<<<< HEAD
   const finalFiles = await getMatchingFiles();
   if (finalFiles.length > 0) {
     console.log(`📸 Copying all ${finalFiles.length} available images (less than minimum ${minImages}).`);
@@ -1149,6 +1173,11 @@ const picDirCheck = async (
   }
 };
 
+=======
+  console.log("⏰ Timeout reached — not enough images found after all extra rounds.");
+  return false;
+};
+>>>>>>> origin/main
 
 const getCurrentTime = (currenttime) => {
   let Year = String(currenttime.getFullYear());
@@ -1238,7 +1267,11 @@ const deleteOldFiles = async (baseDir, days) => {
 };
 
 exports.cronDelDir = async () => {
+<<<<<<< HEAD
   console.log(`🟢 NodeCron is Running!`);
+=======
+  console.log(`🟢 NodeCronFunct is Running!`);
+>>>>>>> origin/main
 
   const task = cron.schedule(
     "0 0 * * *",
@@ -1339,7 +1372,11 @@ exports.manageDirectory = async (req, res) => {
         directoryfm
       )
     )
+<<<<<<< HEAD
     .then((resp) => res.send(`Detected System is Running!`))
+=======
+    .then((resp) => res.send(`NodeCronFunct is Running!`))
+>>>>>>> origin/main
     .catch((err) => {
       console.log(err), res.status(500).send("Server Error");
     });
