@@ -1,4 +1,4 @@
-camera/firebase/
 camera/firebase/*.json
-camera/firebase/*.json
-nginx-rtmp-win32-dev/*.log"nginx-rtmp-win32-dev/logs/*.log" 
+nginx-rtmp-win32-dev/*.log"nginx-rtmp-win32-dev/logs/*.log"
+node_modules
+generated/prisma/
