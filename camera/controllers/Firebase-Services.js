@@ -30,9 +30,11 @@ exports.pushAndroidNotification = async (title,messageparams)=>{
 exports.pushAndroidNotificationPower = async (req, res)=>{
   try{
 
-    let { point, val, timestamp } = req.params
+    let { point, val } = req.params
 
     val = val == 1 ? "ไฟฟ้าปกติ" : 'ไฟฟ้าขัดข้อง'
+    const datenow = new Date();
+
 
     if (!admin.apps.length) {
       admin.initializeApp({
@@ -43,7 +45,7 @@ exports.pushAndroidNotificationPower = async (req, res)=>{
     const message = {
       notification: {
         title: `${val}`,
-        body: `${timestamp}`,
+        body: `${datenow}`,
       },
       token: 'cgzTkl42Q4STqYyoY0-ocq:APA91bF2bEKP99orjUnvvt9_1jklo2jV8MIxjKB_pwF_-MuYtqP2PU6ACtn2Rgi6WJSmIB9l10kRtBDIX2wTiJcwgo-TRfs29TNTodXplZhyk95SBdJBSkc',
     };

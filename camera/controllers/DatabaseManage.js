@@ -87,16 +87,16 @@ exports.insertVdoStatusLogs = async (foldername, status, timeinsert) => {
 
 exports.insertPowerLogs = async (req, res) => {
     try {
-        const point = req.params.point
-        const status = req.params.status
-        const val = req.params.val
-        const timestamp = req.params.timestamp
-        const insert = await prisma.tmstPowerDetectionLogs.create({
+        const point = req.params?.point
+        const status = req.params?.status
+        const val = req.params?.val
+        const timestamp = req.params?.timestamp
+        const insert = await prisma.PowerLogs.create({
             data: {
-                point: point,
-                status: status,
-                value: Number(val),
-                timestamp: timestamp
+                Point: point,
+                PowerStatus: status,
+                Value: Number(val),
+                Timestamp: timestamp,
             }
         })
         res.send(insert)

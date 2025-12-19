@@ -4,79 +4,139 @@ generator client {
 
 datasource db {
   provider = "sqlserver"
-  url      = env("DATABASE_URL")
-}
-
-model TmstCameraDetectionLogs {
-  id             Int     @id @default(autoincrement())
-  foldername     String?
-  linesendstatus String?
-  picstatus      Int?    @default(0)
-  vdostatus      Int?    @default(0)
-  createdAt      String?
-  updatedAt      String? @default("No Logs Update")
-}
-
-model TmstPowerDetectionLogs {
-  id        Int      @id @default(autoincrement())
-  point     String
-  status    String
-  value     Int
-  timestamp String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model TmstLineUserIdCustomer {
-  id         Int      @id @default(autoincrement())
-  userID     String
-  replyToken String
-  quoteToken String
-  timestamp  String
-  createdAt  DateTime @default(now())
-}
-
-model electrical_data {
-  id          Int       @id(map: "PK__electric__3213E83F2FC5526B") @default(autoincrement())
-  device_code String?   @db.NVarChar(50)
-  line        String?   @db.NVarChar(10)
-  voltage     Decimal?  @db.Decimal(10, 2)
-  currentel   Decimal?  @db.Decimal(10, 2)
-  powerel     Decimal?  @db.Decimal(10, 2)
-  energy      Decimal?  @db.Decimal(10, 3)
-  frequency   Decimal?  @db.Decimal(5, 2)
-  pf          Decimal?  @db.Decimal(5, 2)
-  created_at  DateTime? @default(now(), map: "DF__electrica__creat__3C34F16F") @db.DateTime
-}
-
-model Cameras {
-  CameraId       Int             @id(map: "PK__Cameras__F971E0C853A7FA4B") @default(autoincrement())
-  CameraCode     String          @unique(map: "UQ__Cameras__27375FE60124A330") @db.NVarChar(50)
-  CameraName     String          @db.NVarChar(255)
-  Location       String?         @db.NVarChar(255)
-  Status         String?         @default("Unknown", map: "DF__Cameras__Status__489AC854") @db.NVarChar(50)
-  LastActiveTime DateTime?
-  DateAdded      DateTime?       @default(now(), map: "DF__Cameras__DateAdd__498EEC8D")
-  CameraStreams  CameraStreams[]
-}
-
-model CameraStreams {
-  StreamId    Int      @id(map: "PK__CameraSt__07C87A925C36111C") @default(autoincrement())
-  CameraId    Int
-  StreamType  String   @db.NVarChar(50)
-  StreamURL   String   @unique(map: "UQ__CameraSt__4E2724681264C193") @db.NVarChar(500)
-  Description String?  @db.NVarChar(255)
-  IsActive    Boolean? @default(true, map: "DF__CameraStr__IsAct__4D5F7D71")
-  Cameras     Cameras  @relation(fields: [CameraId], references: [CameraId], onDelete: Cascade, onUpdate: NoAction, map: "FK_CameraStreams_Cameras")
+  url = env("DATABASE_URL")
 }
 
 model Users {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  password  String
-  email     String?  @unique
-  role      String   @default("USER")
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime 
+  UserId           Int       @id @default(autoincrement())
+  Username         String?
+  Firstname        String?
+  Lastname         String?
+  isActive         Boolean   @default(false)
+  Email            String?
+  PhoneNumber      String?
+  LineNotifyActive Boolean   @default(false)
+  CreatedAt        DateTime  @default(now())
+  ModifiedDate     DateTime  @default(now())
+  RoleID           Int
+  ProjectID        Int
+  LineUser         LineUser?
+  Password         Password?
+  Project          Project   @relation(fields: [ProjectID], references: [ProjectID])
+  Role             Role      @relation(fields: [RoleID], references: [RoleID])
+}
+
+model Address {
+  AddressID    Int      @id @default(autoincrement())
+  Address      String?
+  City         String?
+  Postcode     String?
+  CreatedAt    DateTime    @default(now())
+  ModifiedDate DateTime    @default(now())
+  ProvinceId   Int
+  ProjectID    Int
+  CameraID     Int
+  Camera       Camera   @relation(fields: [CameraID], references: [CameraID])
+  Project      Project  @relation(fields: [ProjectID], references: [ProjectID])
+  Province     Province @relation(fields: [ProvinceId], references: [ProvinceId])
+}
+
+model Camera {
+  CameraID     Int         @id @default(autoincrement())
+  CameraName   String      @unique
+  Url          String
+  CameraStatus Int
+  isActive     Boolean     @default(false)
+  CreatedAt    DateTime    @default(now())
+  ModifiedDate DateTime    @default(now())
+  ProjectID    Int
+  Address      Address[]
+}
+
+model DetectObject {
+  DetectID     Int       @id @default(autoincrement())
+  Camera       String?
+  Location     String?
+  FileName     String?
+  Thai_Time    String?
+  UtC_Time     String?
+  CreatedAt    DateTime  @default(now())
+  ModifiedDate DateTime  @default(now())
+}
+
+model EventLogs {
+  EventLogsId  Int      @id @default(autoincrement())
+  CameraEvent  String?
+  LineStatus   Int?
+  SnapStatus   Int?
+  VdoStatus    Int?
+  ObjectName   String?
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+}
+
+model LineToken {
+  LineTokenID  Int        @id @default(autoincrement())
+  Token        String?
+  isActive     Boolean    @default(false)
+  CreatedAt    DateTime    @default(now())
+  ModifiedDate DateTime    @default(now())
+  LineUser     LineUser[]
+}
+
+model LineUser {
+  LineUserId   Int       @id @default(autoincrement())
+  userType     String?
+  CreatedAt    DateTime  @default(now())
+  ModifiedDate DateTime  @default(now())
+  LineTokenID  Int
+  UserId       Int       @unique
+  LineToken    LineToken @relation(fields: [LineTokenID], references: [LineTokenID])
+  Users        Users     @relation(fields: [UserId], references: [UserId])
+}
+
+model Password {
+  PasswordID           Int      @id @default(autoincrement())
+  PasswordHash String
+  CreatedAt    DateTime    @default(now())
+  ModifiedDate DateTime    @default(now())
+  UserId       Int      @unique
+  Users        Users    @relation(fields: [UserId], references: [UserId])
+}
+
+model PowerLogs {
+  PowerLogID   Int      @id @default(autoincrement())
+  Point        String?
+  PowerStatus  String?
+  Value Int?
+  Timestamp    String?
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+}
+
+model Project {
+  ProjectID    Int         @id @default(autoincrement())
+  ProjectName  String?
+  CreatedAt    DateTime    @default(now())
+  ModifiedDate DateTime    @default(now())
+  Address      Address[]
+  Users        Users[]
+}
+
+model Province {
+  ProvinceId   Int       @id @default(autoincrement())
+  ProvinceCode String?
+  NameEn       String?
+  CountryId    Int
+  CreatedAt    DateTime  @default(now())
+  ModifiedDate DateTime  @default(now())
+  Address      Address[]
+}
+
+model Role {
+  RoleID       Int      @id @default(autoincrement())
+  UserRole     Int
+  CreatedAt    DateTime    @default(now())
+  ModifiedDate DateTime    @default(now())
+  Users        Users[]
 }

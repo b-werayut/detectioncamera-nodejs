@@ -10,5 +10,5 @@ if (process.env.NODE_ENV === 'production') {
   }
   prisma = global.prisma
 }
-console.log("Connect prisma")
+// console.log("Connect prisma")
 module.exports = prisma
