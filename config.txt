@@ -1,1 +1,5 @@
-{"tokencameradetect":"FWL29SlqhBjOS2RCtkyiWXBFg9Xc9V2DV0UE/lOSPClGEt/0XlMlzdNr5hhLAJaXyRkhojEMNoxgPJfntRfdCS9FQf2SVBX0XW2dl0C1C+peK05si03q7gId09i+ACNQgbmfq8tiTTm0WhVsY7zJFQdB04t89/1O/w1cDnyilFU=","lineurlendpointpower":"https://api.line.me/v2/bot/message/multicast","urllocation":"http://www.centrecities.com:26080/livenotifyvideo/index.php","beforetime":"2","futuretime":"1","deloldrawdirpastday":"2","delolddirpastday":"7","delaysendlineminute":"30","cameraname":"CAM202412001","tokenpowerdetect":"FWL29SlqhBjOS2RCtkyiWXBFg9Xc9V2DV0UE/lOSPClGEt/0XlMlzdNr5hhLAJaXyRkhojEMNoxgPJfntRfdCS9FQf2SVBX0XW2dl0C1C+peK05si03q7gId09i+ACNQgbmfq8tiTTm0WhVsY7zJFQdB04t89/1O/w1cDnyilFU=","lineurlendpointcamera":"https://api.line.me/v2/bot/message/multicast"}
+{
+  "lineurlendpointpower": "https://api.line.me/v2/bot/message/push",
+  "tokenpowerdetect": "ใส่_LINE_TOKEN_ของคุณที่นี่",
+  "urllocation": "https://www.example.com/check-status"
+}

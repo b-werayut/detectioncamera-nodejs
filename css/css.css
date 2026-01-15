@@ -12,11 +12,8 @@
 
 /* .card-body{background-color: #424242;} */
 
-
-/* From Uiverse.io by Maximinodotpy */
-
 .inputGroup {
-    font-family: 'Segoe UI', sans-serif;
+    /* font-family: 'Segoe UI', sans-serif; */
     margin: 1em 0 1em 0;
     max-width: 100%;
     position: relative;
@@ -325,7 +322,7 @@ table td {
 }
 
 .main-bg {
-    background-image: url('../assets/img/bg.png');
+    background-image: url('../assets/img/bg_.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -340,7 +337,7 @@ table td {
 .login-btn {
     width: 100%;
     letter-spacing: 1px;
-    font-size: 14px;
+    font-size: 16px;
     background: linear-gradient(to bottom, #1A4D2E, #163f27);
     box-shadow: 1px 1px 4px #010a04;
     color: white;

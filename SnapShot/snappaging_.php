@@ -1,400 +1,428 @@
 <?php
-session_start();
-include '../auth/auth_check.php';
-?>
-<!DOCTYPE html>
-<html lang="en">
+// 1. เริ่ม Session เป็นอย่างแรก
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>NetWorklink.Co.Ltd,</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link rel="stylesheet" href="fonts/font-kanit.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/snappaging_.css">
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <link href="css/sweetalert2.min.css" rel="stylesheet">
-    <script src="js/sweetalert2.all.min.js"></script>
-</head>
+// echo $_SESSION['RoleID'];
+// echo $_SESSION['UserRole'];
+$roleId = $_SESSION['RoleID'];
 
-<style>
-    @media only screen and (max-width: 600px) {
-        .top-bar {
-            display: flex !important;
-        }
+// 2. ตั้งค่า Timezone และปิด Error (Production)
+date_default_timezone_set('Asia/Bangkok');
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
 
-        .btn-stream {
-            display: none !important;
-        }
+// 3. เชื่อมต่อฐานข้อมูล
+require_once '../config/db_connection.php';
 
-        .btn-vdo {
-            display: none !important;
-        }
+// --- ส่วนจัดการ Session Timeout (เหมือน index.php) ---
+if (isset($_SESSION['UserId'])) {
+    $timeout_duration = 3600; // 1 ชั่วโมง
 
-        .selectdiv {
-            width: 100% !important;
-        }
-
-        .ct {
-            padding-right: 1rem !important;
-            padding-left: 1rem !important;
-        }
-
-        .ctm {
-            padding: 0.5rem !important;
+    if (isset($_SESSION['LAST_ACTIVITY'])) {
+        if ((time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+            session_unset();
+            session_destroy();
+            header("Location: ../login.php?timeout=1");
+            exit();
         }
     }
-</style>
+    $_SESSION['LAST_ACTIVITY'] = time();
+}
+
+// --- ตัวแปร User และ Auth (ปรับให้ตรง DB) ---
+$user = $_SESSION['Username'] ?? null;        // [Username]
+$roleId = $_SESSION['RoleID'] ?? 0;           // [RoleID]
+$userProjectId = $_SESSION['ProjectID'] ?? 0; // [ProjectID]
+$auth = $_SESSION['auth'] ?? null;
+$userRole = $_SESSION['UserRole'];
+
+// ตั้งค่า Link Streaming
+if (isset($auth)) {
+    $urlstream = '../livenotifyvideo/index.php?auth=' . $auth;
+} else {
+    $urlstream = '../livenotifyvideo/index.php';
+}
+
+// --- Check Authentication ---
+if (empty($user) && empty($auth)) {
+    header("Location: ../login.php");
+    exit();
+}
+
+// --- ส่วนดึงข้อมูล Projects และ Cameras ---
+$projects = [];
+$cameras = [];
+$projectDisabled = "disabled";
+$selectedProjectID = 0;
+
+try {
+    if ($roleId == 1) { // SuperAdmin เห็นทุกโครงการ
+        $sqlProj = "SELECT DISTINCT p.ProjectID, p.ProjectName 
+                    FROM Project p 
+                    INNER JOIN Camera c ON p.ProjectID = c.ProjectID 
+                    WHERE c.isActive = 1 
+                    ORDER BY p.ProjectName ASC";
+
+        $stmtProj = $conn->prepare($sqlProj);
+        $stmtProj->execute();
+        $projects = $stmtProj->fetchAll(PDO::FETCH_ASSOC);
+        $projectDisabled = "";
+
+        if (isset($_GET['projectid']) && !empty($_GET['projectid'])) {
+            $selectedProjectID = $_GET['projectid'];
+        } elseif (count($projects) > 0) {
+            $selectedProjectID = $projects[0]['ProjectID'];
+        }
+
+    } else { // Admin/Viewer เห็นเฉพาะของตัวเอง
+        $sqlProj = "SELECT ProjectID, ProjectName FROM Project WHERE ProjectID = ?";
+        $stmtProj = $conn->prepare($sqlProj);
+        $stmtProj->execute([$userProjectId]);
+        $projects = $stmtProj->fetchAll(PDO::FETCH_ASSOC);
+
+        $projectDisabled = "disabled";
+        $selectedProjectID = $userProjectId;
+    }
+
+    if (!empty($selectedProjectID)) {
+        $sqlCam = "SELECT CameraName FROM Camera WHERE isActive = 1 AND ProjectID = ? ORDER BY CameraName ASC";
+        $stmtCam = $conn->prepare($sqlCam);
+        $stmtCam->execute([$selectedProjectID]);
+        $cameras = $stmtCam->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+} catch (Exception $e) {
+    error_log("DB Error: " . $e->getMessage());
+}
+?>
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ภาพนิ่ง - NetWorklink Co.Ltd.</title>
+    <meta name="description" content="ระบบดูภาพนิ่งจากกล้องตรวจจับ NetWorklink">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="fonts/font-kanit.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="./css/snappaging.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
 
 <body>
     <?php
-    $myfile = fopen("C:\inetpub\wwwroot\camera\config.txt", "r") or die("Unable to open file!");
-    $cfraw = fgets($myfile);
-    $cfdatas = json_decode($cfraw, true);
-    $futuretimecf = $cfdatas['futuretime'];
-    fclose($myfile);
+    $futuretimecf = 0;
+    $configPath = "C:\\inetpub\\wwwroot\\camera\\config.txt";
+    if (!file_exists($configPath)) {
+        $configPath = "config.txt";
+    }
+
+    if (file_exists($configPath)) {
+        $myfile = fopen($configPath, "r");
+        if ($myfile) {
+            $cfraw = fgets($myfile);
+            $cfdatas = json_decode($cfraw, true);
+            $futuretimecf = $cfdatas['futuretime'] ?? 0;
+            fclose($myfile);
+        }
+    }
+
+    // กำหนดหน้าปัจจุบันสำหรับ Navbar Active State
+    $currentPage = 'snapshot';
     ?>
-    <!-- Responsive navbar-->
-    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to bottom, #0f0f0f, #003300);">
-        <div class="container px-lg-5">
-            <img src="assets/nwl-logo.png" alt="NetWorklink" width="50">
-            <span style="letter-spacing: 1px;" class="text-white" href="#!">NetWorklink.Co.Ltd,</span>
-            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <?php
-                    // if ($user) {
-                    //     echo "<li class='nav-item bg-dark'><a class='nav-link'>" . $user . "</a></li>";
-                    // }
-                    ?>
-                    <li class="nav-item"><a class="nav-link text-light" aria-current="page"
-                            href="../LiveNotifyVideo/">Streamimg</a></li>
-                    <li class="nav-item"><a class="nav-link  text-light active"
-                            href="/SnapShot/snappaging_.php">Snapshot</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="/SnapShot/vdopaging_.php">Snap Videos</a>
-                    </li>
-                    <?php
-                    if (empty($auth)) {
-                        echo "<li class='nav-item'><a class='nav-link  text-light' href='../logout.php'>Logout</a></li>";
-                    }
-                    ?>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- Header-->
-    <header class="py-2 ">
-        <div class="container px-lg-5 ">
-            <div class="p-4 p-lg-5 rounded-3 text-center" style="background-image: url('assets/bg.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        color: #00ff41;
-        text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;">
-                <div class="">
-                    <h1 class="display-5 fw-bold text-white text-uppercase" style="letter-spacing: 5px">Snapshot</h1>
-                </div>
-            </div>
-    </header>
-    <!-- Page Content-->
-    <section class="p-1 mb-4">
-        <div class="container" style="margin-bottom: 120px;">
-            <div class="content pt-0 px-lg-5 ">
-                <!-- content -->
-                <div class="row justify-content-between align-items-center py-1">
-                    <div class="col-md-3 d-flex py-1 btn-stream" style="justify-content: flex-start;">
-                        <button class="btn btn-md btn-secondary"
-                            onclick="location.href='../LiveNotifyVideo/'">STREAMING</button>
-                    </div>
-                    <div class="col-md-3 selectcam d-flex py-1" style="justify-content: flex-end;">
-                        <select id="selectcam" onchange="selectCam()" class="form-select"
-                            aria-label="Default select example">
-                            <option value="0" selected="">เลือกกล้อง</option>
-                            <?php
-                            $subselectfolder = glob("../eventfolder/*");
-                            $subselectfolder = array_map("basename", $subselectfolder);
-                            ?>
-                            <?php
-                            foreach ($subselectfolder as $k => $v) {
-                                ?>
-                                <option value="<?= $v ?>"><?php echo "กล้อง {$v}"; ?></option>
-                            <?php }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="col-md-4 selectdiv d-flex py-1" style="justify-content: center;">
-                        <select id="selectdatas" onchange="selectData()" class="form-select w-100"
-                            aria-label="Default select example" disabled>
-                            <option value="0" selected="">กรุณาเลือกกล้องก่อน</option>
-                            <option class="selectdataoption" value="CAM202412001">วันที่ 01/01/1970 เวลา 00:00:00 น.
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 d-flex py-1 btn-vdo" style="justify-content: flex-end;">
-                        <button class="btn btn-md btn-secondary" onclick="location.href='/SnapShot/vdopaging_.php'">SNAP
-                            VDO</button>
-                    </div>
-                </div>
-                <hr>
-                <div class="col-md-12 px-5 pt-2 pb-5 rounded-2 justify-between ct" style="background-color: #f7f7f7;">
-                    <div id="snappath" class="date mt-2">
-                        <span id="filedate" class="rounded-pill bg-warning px-3 py-2 text-light"
-                            style="font-family: 'Kanit', sans-serif; font-size: 14px; background-color: #004a00!important;">
-                        </span>
-                        <hr>
-                    </div>
-                    <div class="p-4 content1 ctm" style="background-color: white;">
-                        <div class="text-center" id="nodata">
-                            <h5 id="nodatah2">กรุณาเลือกข้อมูล</h5>
-                        </div>
-                        <ul class="imgnamex row" id="imgnamex" style="margin: 0; padding:0;"></ul>
-                        <ul class="imgdisplay row" id="imgdisplay" style="margin: 0; padding:0;"></ul>
-                        <div class="pagination py-2 d-flex flex-wrap" id="pagination"></div>
-                    </div>
-                </div>
-            </div>
-    </section>
-    <!-- Footer-->
-    <footer class="py-2 digital-bg">
+
+    <?php include_once '../components/navbar.php'; ?>
+    <!-- Page Header -->
+    <header class="page-header">
         <div class="container">
-            <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
+            <h1><i class="fas fa-camera me-3"></i>ภาพนิ่ง</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="p-1">
+        <div class="container px-lg-5">
+
+            <!-- Selector Section -->
+            <div class="selector-section">
+                <div class="row g-3 align-items-end">
+
+                    <!-- Project Selector -->
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-building me-1"></i> โครงการ
+                        </label>
+                        <select id="selectproject" class="form-select" onchange="changeProject()" <?php echo $projectDisabled ?>>
+                            <?php
+                            $projectList = [];
+
+                            if ($roleId == 1) {
+                                $sql = "SELECT ProjectID, ProjectName FROM [NWL_Detected].[dbo].[Project]";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $projectList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            } else {
+                                $projectList = $projects ?? [];
+                            }
+
+                            if (!empty($projectList)) {
+                                foreach ($projectList as $project) {
+                                    $projectID = (int) $project['ProjectID'];
+                                    $projectName = htmlspecialchars($project['ProjectName'], ENT_QUOTES, 'UTF-8');
+                                    $selected = ($projectID == $selectedProjectID) ? 'selected' : '';
+
+                                    echo "<option value=\"{$projectID}\" {$selected}>{$projectName}</option>";
+                                }
+                            } else {
+                                echo "<option value=\"\" selected>ไม่พบโครงการ</option>";
+                            }
+
+                            ?>
+                        </select>
+                    </div>
+
+                    <!-- Camera Selector -->
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-video me-1"></i> กล้อง
+                        </label>
+                        <select id="selectcam" onchange="selectCam()" class="form-select">
+                            <option value="0" selected>เลือกกล้อง</option>
+                            <?php
+                            if (!empty($cameras)) {
+                                foreach ($cameras as $cam) {
+                                    $camName = htmlspecialchars($cam['CameraName']);
+                                    echo '<option value="' . $camName . '">กล้อง ' . $camName . '</option>';
+                                }
+                            } else {
+                                echo '<option value="" disabled>ไม่มีกล้องในโครงการนี้</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <!-- Data Selector -->
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-calendar-alt me-1"></i> ข้อมูล
+                        </label>
+                        <select id="selectdatas" onchange="selectData()" class="form-select" disabled>
+                            <option value="0" selected>กรุณาเลือกกล้องก่อน</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="content-section">
+                <div id="snappath" class="mb-3" style="display: none;">
+                    <span id="filedate" class="date-badge">
+                        <i class="fas fa-calendar"></i>
+                        <span></span>
+                    </span>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="image-container">
+                    <div class="no-data-message" id="nodata">
+                        <i class="fas fa-images"></i>
+                        <h5 id="nodatah2">กรุณาเลือกข้อมูล</h5>
+                    </div>
+                    <ul class="imgnamex row" id="imgnamex" style="margin: 0; padding: 0;"></ul>
+                    <ul class="imgdisplay row" id="imgdisplay" style="margin: 0; padding: 0;"></ul>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="text-center">
+                Copyright &copy;
+                <?= date('Y'); ?> NetWorklink Co.Ltd. - All Rights Reserved
+            </p>
         </div>
     </footer>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script>
-        $('#selectdatas').attr('disabled', 'disabled')
-        let futuretime = '<?= $futuretimecf ?>'
-        let roundselectData = 0
-        let roundcalldata = 0
-        let snappath = $('#snappath')
-        snappath.hide()
 
-        function disabledfunct() {
-            const selectcamval = $('#selectcam').val()
-            if (parseInt(selectcamval) === 0) {
-                alert(55555)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $('#selectdatas').attr('disabled', 'disabled');
+        let futuretime = '<?= $futuretimecf ?>';
+        let snappath = $('#snappath');
+        snappath.hide();
+
+        function changeProject() {
+            const projectId = document.getElementById('selectproject').value;
+            if (projectId) {
+                window.location.search = '?projectid=' + projectId;
             }
         }
 
         function selectCam() {
-            const selectcamval = $('#selectcam').val()
-            const selectdatasbtn = $('#selectdatas')
+            const selectcamval = $('#selectcam').val();
+            const selectdatasbtn = $('#selectdatas');
             const thaiMonths = [
                 "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
                 "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
             ];
 
-            $('.selectdataoption').remove()
+            $('.selectdataoption').remove();
 
-            if (parseInt(selectcamval) === 0) {
-                selectdatasbtn.attr('disabled', 'disabled')
+            if (selectcamval == "0" || selectcamval == "") {
+                selectdatasbtn.attr('disabled', 'disabled');
             } else {
-                selectdatasbtn.removeAttr('disabled', 'disabled')
+                selectdatasbtn.removeAttr('disabled');
 
                 $.ajax({
-                    url: 'snappagingdata.php',
+                    url: '/SnapShot/snappagingdata.php',
                     data: `selectcamval=${selectcamval}`,
                     method: 'GET',
                     success: (resp) => {
-                        let obj = jQuery.parseJSON(resp)
-                        if (obj.datas == '') {
-                            $('#selectdatas').prop('disabled', true);
-                            Swal.fire({
-                                title: "ไม่มีข้อมูล!",
-                                icon: "warning",
-                                position: "center",
-                                confirmButtonText: "ตกลง",
+                        try {
+                            let obj = jQuery.parseJSON(resp);
+                            if (obj.datas == '') {
+                                $('#selectdatas').prop('disabled', true);
+                                Swal.fire({
+                                    title: "ไม่มีข้อมูล!",
+                                    icon: "warning",
+                                    confirmButtonText: "ตกลง",
+                                    confirmButtonColor: '#0d4d3d'
+                                });
+                            }
+
+                            $.each(obj.datas, (i, items) => {
+                                let datas = items;
+                                let datassplit = datas.split("_");
+                                if (datassplit.length >= 3) {
+                                    let day = datassplit[1].slice(6);
+                                    let month = datassplit[1].slice(4, 6);
+                                    let monththai = thaiMonths[parseInt(month) - 1];
+                                    let year = datassplit[1].slice(0, 4);
+                                    let yearthai = parseInt(year) + 543;
+                                    let hour = datassplit[2].slice(0, 2);
+                                    let minute = datassplit[2].slice(2, 4);
+                                    let sec = datassplit[2].slice(4);
+                                    let datetimedisplay = `วันที่ ${day} ${monththai} ${yearthai} เวลา ${hour}:${minute}:${sec}`;
+
+                                    selectdatasbtn.append(`<option class="selectdataoption" value="${items}">${datetimedisplay}</option>`);
+                                }
                             });
+                        } catch (e) {
+                            console.error("JSON Error:", e);
                         }
-                        // console.log(obj.datas)
-                        $.each(obj.datas, (i, items) => {
-                            let datasoption = ''
-                            let datas = items
-                            let datassplit = datas.split("_")
-                            let camname = datassplit[0]
-                            let camnamedisplay = `กล้อง ${camname}`
-                            let day = datassplit[1].slice(6)
-                            let month = datassplit[1].slice(4, 6)
-                            let monththai = thaiMonths[parseInt(month) - 1]
-                            let year = datassplit[1].slice(0, 4)
-                            let yearthai = parseInt(year) + 543
-                            let hour = datassplit[2].slice(0, 2)
-                            let minute = datassplit[2].slice(2, 4)
-                            let sec = datassplit[2].slice(4)
-                            let datetimedisplay = `วันที่ ${day} ${monththai} ${yearthai} เวลา ${hour}:${minute}:${sec}`
-                            datasoption += `<option class="selectdataoption" value="${items}">${datetimedisplay}</option>`
-                            selectdatasbtn.append(datasoption)
-                        })
                     },
                     error: (data) => {
                         Swal.fire({
                             icon: "error",
-                            title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง!",
-                        })
-                        $('#nodatah2').appendTo('#nodata')
+                            title: "เกิดข้อผิดพลาดในการเชื่อมต่อ",
+                            confirmButtonColor: '#0d4d3d'
+                        });
                     }
-                })
+                });
             }
         }
 
         function formatDate(selectdatasdatefm) {
-            let ndt = new Date(selectdatasdatefm)
-            let year = String(ndt.getFullYear()).padStart(2, '0')
-            let month = String(ndt.getMonth() + 1).padStart(2, '0')
-            let day = String(ndt.getDate()).padStart(2, '0')
-            let hours = String(ndt.getHours()).padStart(2, '0')
-            ndt.setMinutes(ndt.getMinutes() + parseInt(futuretime)); // Set time
-            let minutes = String(ndt.getMinutes()).padStart(2, '0')
-            let sec = String(ndt.getSeconds()).padStart(2, '0')
-            let datefm = `${year}${month}${day}${hours}${minutes}${sec}` //20250401090316 + 2 minute
-            return datefm
+            let ndt = new Date(selectdatasdatefm);
+            let year = String(ndt.getFullYear()).padStart(2, '0');
+            let month = String(ndt.getMonth() + 1).padStart(2, '0');
+            let day = String(ndt.getDate()).padStart(2, '0');
+            let hours = String(ndt.getHours()).padStart(2, '0');
+            ndt.setMinutes(ndt.getMinutes() + parseInt(futuretime));
+            let minutes = String(ndt.getMinutes()).padStart(2, '0');
+            let sec = String(ndt.getSeconds()).padStart(2, '0');
+            return `${year}${month}${day}${hours}${minutes}${sec}`;
         }
 
         function selectData() {
-            let nodata = $('<h5 id="nodatah2" >อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>')
-            $('#nodatah').remove()
-            $('#nodatah2').remove()
+            let nodataHtml = '<h5 id="nodatah2">อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>';
 
-            $('.page-item').remove()
-            $('#nodatah2').remove()
-            let selectdatasval = $('#selectdatas').val()
+            $('#nodatah, #nodatah2, .page-item').remove();
+
+            let selectdatasval = $('#selectdatas').val();
+            if (!selectdatasval || selectdatasval === "0") return;
+
             let camname = selectdatasval.split("_");
             let camnamef = camname[0];
-            let selectdatasdt = selectdatasval.slice(13, 29).replaceAll('_', '') // 20250401090316
-            let selectdatasdty = selectdatasdt.slice(0, 4)
-            let selectdatasdtmth = selectdatasdt.slice(4, 6)
-            let selectdatasdtd = selectdatasdt.slice(6, 8)
-            let selectdatasdth = selectdatasdt.slice(8, 10)
-            let selectdatasdtminute = selectdatasdt.slice(10, 12)
-            let selectdatasdts = selectdatasdt.slice(12, 14)
-            let selectdatasdatefm = `${selectdatasdty}-${selectdatasdtmth}-${selectdatasdtd} ${selectdatasdth}:${selectdatasdtminute}:${selectdatasdts}`
 
-            const futuretime = formatDate(selectdatasdatefm)
+            let selectdatasdt = selectdatasval.slice(13, 29).replaceAll('_', '');
+            let selectdatasdatefm = `${selectdatasdt.slice(0, 4)}-${selectdatasdt.slice(4, 6)}-${selectdatasdt.slice(6, 8)} ${selectdatasdt.slice(8, 10)}:${selectdatasdt.slice(10, 12)}:${selectdatasdt.slice(12, 14)}`;
+            const futuretimeCalc = formatDate(selectdatasdatefm);
 
-            $('.imgbox').fadeOut(100);
-            $('.imgdisplay').fadeOut(100);
-            $('.imgnamex').fadeOut(100);
+            $('.imgbox, .imgdisplay, .imgnamex').fadeOut(100);
+
             if (selectdatasval == 0) {
                 Swal.fire({
                     icon: "error",
                     title: "กรุณาเลือกข้อมูล!",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                });
+                    confirmButtonColor: '#0d4d3d'
+                }).then((result) => { if (result.isConfirmed) location.reload(); });
             } else {
                 Swal.fire({
-                    title: "กำลังดึงข้อมูลข้อมูลรูปภาพ!",
+                    title: "กำลังดึงข้อมูล...",
                     timer: 2000,
-                    didOpen: () => {
-                        Swal.showLoading();
-                        const timer = Swal.getPopup().querySelector("b");
-                    },
+                    didOpen: () => { Swal.showLoading(); },
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {
                         $.ajax({
-                            url: 'snappagingdata.php',
+                            url: '/SnapShot/snappagingdata.php',
                             data: `selectdatas=${selectdatasval}`,
                             method: 'GET',
                             success: (resp) => {
-                                let obj = jQuery.parseJSON(resp)
+                                let obj = jQuery.parseJSON(resp);
                                 if (obj.imgnames == '' && obj.imgnamexs == '') {
-                                    $('.page-item').remove()
+                                    $('.page-item').remove();
                                     Swal.fire({
                                         icon: "error",
-                                        title: "อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง",
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            // location.reload()
-                                            nodata.appendTo('#nodata')
-                                            return false
-                                        }
+                                        title: "ไม่พบรูปภาพ",
+                                        confirmButtonColor: '#0d4d3d'
                                     });
                                 } else {
-                                    let imgpic = obj.imgnames[obj.imgnames.length - 1]?.slice(4, 18)
-                                    if (parseInt(imgpic) < parseInt(futuretime - 30)) {
-                                        roundselectData++
-                                        if (roundselectData == 3) {
-                                            roundselectData = 0
-                                            if (imgpic.length <= 0) {
-                                                Swal.fire({
-                                                    icon: "error",
-                                                    title: "โหลดข้อมูลไม่สำเร็จ!",
-                                                });
-                                                $('.imgdisplay').remove()
-                                                $('.imgnamex').remove()
-                                                nodata.appendTo('#nodata')
-                                            }
-                                            return false
-                                        }
-                                        //selectData(selectdatasval)
-                                    } else {
-                                        swal.close()
-                                        $('.imgdisplay').fadeIn(200)
-                                        let filedate = $('#filedate')
-                                        let imgnamex = $('.imgnamex')
-                                        snappath.fadeIn(function () {
-                                            filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
-                                        })
-                                        pagingSelectDatas(selectdatasval, obj.imgnames, camnamef)
-                                        $.each(obj.imgnamexs, function (i, item) {
-                                            let imgx = '';
-                                            console.log(item);
-                                            if (i >= 8) { // show x img
-                                                return false;
-                                            }
-                                            imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}','${camnamef}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}" "></li>`;
-                                            imgnamex.append(imgx);
-                                        })
-                                        imgnamex.fadeIn(400);
-                                        $('#nodatah2').remove();
-                                    }
-                                    $('.imgdisplay').fadeIn(200)
-                                    let filedate = $('#filedate')
-                                    let imgnamex = $('.imgnamex')
-                                    snappath.fadeIn(function () {
-                                        filedate.text(`ข้อมูลวันที่: ${obj.filedates}`)
-                                    })
-                                    pagingSelectDatas(selectdatasval, obj.imgnames, camnamef)
+                                    $('.imgdisplay').fadeIn(200);
+                                    $('#filedate').html(`<i class="fas fa-calendar me-2"></i>ข้อมูลวันที่: ${obj.filedates}`);
+                                    snappath.fadeIn();
+
+                                    pagingSelectDatas(selectdatasval, obj.imgnames, camnamef);
+
+                                    let imgnamex = $('.imgnamex');
                                     $.each(obj.imgnamexs, function (i, item) {
-                                        let imgx = '';
-                                        console.log(item);
-                                        if (i >= 8) { // show x img
-                                            return false;
-                                        }
-                                        imgx += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}','${camnamef}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}" "></li>`;
-                                        imgnamex.append(imgx);
-                                    })
+                                        if (i >= 8) return false;
+                                        imgnamex.append(`<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}','${camnamef}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}"></li>`);
+                                    });
                                     imgnamex.fadeIn(400);
                                     $('#nodatah2').remove();
                                 }
                             },
-                            error: function (data) {
+                            error: function () {
                                 Swal.fire({
                                     icon: "error",
                                     title: "โหลดข้อมูลไม่สำเร็จ!",
+                                    confirmButtonColor: '#0d4d3d'
                                 });
-                                nodata.appendTo('#nodata')
-                                return false
                             }
-                        })
+                        });
                     }
-                })
+                });
             }
         }
 
+        // Pagination Logic
         function pagingSelectDatas(path, json, camname) {
             const items = json;
-            if (!items) {
-                return false
-            }
+            if (!items) return false;
 
             const itemsPerPage = 12;
             let currentPage = 1;
@@ -407,18 +435,12 @@ include '../auth/auth_check.php';
                 const itemList = document.getElementById('imgdisplay');
                 itemList.innerHTML = "";
                 let imgdisplay = $('.imgdisplay');
-                itemsToDisplay.map(item => {
-                    let img = ''
-                    if (item == "X") {
-                        return false;
-                    }
-                    // console.log(item);
-                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg2('${path}', '${item}', '${camname}')" src="/eventfolder/${camname}/${path}/pic/${item}"></li>`;
-                    imgdisplay.append(img);
 
+                itemsToDisplay.map(item => {
+                    if (item == "X") return false;
+                    imgdisplay.append(`<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg2('${path}', '${item}', '${camname}')" src="/eventfolder/${camname}/${path}/pic/${item}"></li>`);
                 });
-                imgdisplay.fadeOut(100);
-                imgdisplay.fadeIn(400);
+                imgdisplay.hide().fadeIn(400);
             }
 
             function displayPagination2() {
@@ -426,42 +448,30 @@ include '../auth/auth_check.php';
                 const pagination = document.getElementById('pagination');
                 pagination.innerHTML = "";
 
-                const prevPage = document.createElement('div');
-                prevPage.classList.add("page-item");
-                prevPage.innerHTML = '<a class="page-link" >Previous</a>';
-                prevPage.addEventListener('click', function () {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        updatePagination2();
-                    }
-                });
-                pagination.appendChild(prevPage);
+                if (totalPages > 1) {
+                    // Previous Button
+                    const prevPage = document.createElement('div');
+                    prevPage.className = "page-item";
+                    prevPage.innerHTML = '<a class="page-link"><i class="fas fa-chevron-left"></i></a>';
+                    prevPage.onclick = function () { if (currentPage > 1) { currentPage--; updatePagination2(); } };
+                    pagination.appendChild(prevPage);
 
-                for (let i = 1; i <= totalPages; i++) {
-                    const page = document.createElement('div');
-                    page.classList.add("page-item");
-                    page.classList.toggle('active', i === currentPage);
-                    page.innerHTML = `<a class="page-link" >${i}</a>`;
-                    page.addEventListener('click', function () {
-                        currentPage = i;
-                        updatePagination2();
-                    });
-                    pagination.appendChild(page);
-                }
-
-                const nextPage = document.createElement('div');
-                nextPage.classList.add("page-item");
-                nextPage.innerHTML = '<a class="page-link" >Next</a>';
-                nextPage.addEventListener('click', function () {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        updatePagination2();
+                    // Page Numbers
+                    for (let i = 1; i <= totalPages; i++) {
+                        const page = document.createElement('div');
+                        page.className = "page-item" + (i === currentPage ? " active" : "");
+                        page.innerHTML = `<a class="page-link">${i}</a>`;
+                        page.onclick = function () { currentPage = i; updatePagination2(); };
+                        pagination.appendChild(page);
                     }
-                });
-                if (totalPages > 0) {
+
+                    // Next Button
+                    const nextPage = document.createElement('div');
+                    nextPage.className = "page-item";
+                    nextPage.innerHTML = '<a class="page-link"><i class="fas fa-chevron-right"></i></a>';
+                    nextPage.onclick = function () { if (currentPage < totalPages) { currentPage++; updatePagination2(); } };
                     pagination.appendChild(nextPage);
                 }
-
             }
 
             function updatePagination2() {
@@ -472,90 +482,19 @@ include '../auth/auth_check.php';
             updatePagination2();
         }
 
-        function paging(json) {
-            const items = json;
-            if (!items) {
-                return false
-            }
-            const itemsPerPage = 12;
-            let currentPage = 1;
-
-            function displayItems(page) {
-                const startIndex = (page - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
-                const itemsToDisplay = items.slice(startIndex, endIndex);
-
-                const itemList = document.getElementById('imgdisplay');
-                itemList.innerHTML = "";
-                let imgdisplay = $('.imgdisplay');
-                itemsToDisplay.map(item => {
-                    let img = '';
-                    if (item == "X") {
-                        return false;
-                    }
-                    // console.log(item);
-                    img += `<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimg('${item}')" src="/eventfolder/${camname}/${path}/pic/${item}"></li>`;
-                    imgdisplay.append(img);
-
-                });
-                imgdisplay.fadeOut(100);
-                imgdisplay.fadeIn(400);
-            }
-
-            function displayPagination() {
-                const totalPages = Math.ceil(items.length / itemsPerPage);
-                const pagination = document.getElementById('pagination');
-                pagination.innerHTML = "";
-
-                const prevPage = document.createElement('div');
-                prevPage.classList.add("page-item");
-                prevPage.innerHTML = '<a class="page-link" >Previous</a>';
-                prevPage.addEventListener('click', function () {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        updatePagination();
-                    }
-                });
-                pagination.appendChild(prevPage);
-
-                for (let i = 1; i <= totalPages; i++) {
-                    const page = document.createElement('div');
-                    page.classList.add("page-item");
-                    page.classList.toggle('active', i === currentPage);
-                    page.innerHTML = `<a class="page-link" >${i}</a>`;
-                    page.addEventListener('click', function () {
-                        currentPage = i;
-                        updatePagination();
-                    });
-                    pagination.appendChild(page);
-                }
-
-                const nextPage = document.createElement('div');
-                nextPage.classList.add("page-item");
-                nextPage.innerHTML = '<a class="page-link" >Next</a>';
-                nextPage.addEventListener('click', function () {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        updatePagination();
-                    }
-                });
-                pagination.appendChild(nextPage);
-            }
-
-            function updatePagination() {
-                displayItems(currentPage);
-                displayPagination();
-            }
-
-            updatePagination();
-        }
-
+        // SweetAlert Image Preview
         function showimg2(path, img, camname) {
             Swal.fire({
                 imageUrl: `/eventfolder/${camname}/${path}/pic/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
-                width: 650,
+                width: 700,
+                showCloseButton: true,
+                showConfirmButton: false,
+                background: '#fff',
+                customClass: {
+                    popup: 'rounded-4'
+                }
             });
         }
 
@@ -564,10 +503,15 @@ include '../auth/auth_check.php';
                 imageUrl: `/eventfolder/${camname}/${path}/pic/X/${img}`,
                 imageWidth: 600,
                 imageHeight: 400,
-                width: 650,
+                width: 700,
+                showCloseButton: true,
+                showConfirmButton: false,
+                background: '#fff',
+                customClass: {
+                    popup: 'rounded-4'
+                }
             });
         }
-
     </script>
 </body>
 

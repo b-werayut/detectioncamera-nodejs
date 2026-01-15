@@ -5,6 +5,7 @@ const {
   getUserIDCustomer,
   getUserIDCustomerexternal,
   getDataFlutter,
+  testPort,
 } = require("../controllers/DatabaseManage");
 const { delayEventFunct } = require("../Middleware/DelaySendLineFunct");
 const { registerHandler } = require("../controllers/Register");
@@ -19,6 +20,7 @@ const {
   pushAndroidNotificationPower,
 } = require("../controllers/Firebase-Services");
 const { insertObjectLogs } = require("../controllers/ObjectDetect");
+const { liffRegister } = require("../controllers/Liff-Register");
 const router = express.Router();
 
 router.get("/getuserid/", getUserIDCustomerexternal);
@@ -35,6 +37,7 @@ router.post("/detect-object", insertObjectLogs);
 router.post("/powerlogs/:point/:status/:val/:timestamp/", insertPowerLogs);
 router.post("/register", registerHandler);
 router.post("/login", loginHandler);
+router.post("/liff/register", liffRegister);
 
 //Api Mobile platform
 router.post("/pushnotification/:point/:val/", pushAndroidNotificationPower);

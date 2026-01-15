@@ -1,0 +1,220 @@
+:root {
+    --sidebar-bg: linear-gradient(to top, #128f26 34%, #24bb31 85%);
+    --sidebar-active: #128f26;
+    --card-teal: linear-gradient(to right, #128f26 34%, #24bb31 85%);
+    --card-teal2: linear-gradient(to right, #128f26 34%, #24bb31 85%);
+    --bg-light: #f3fcf8;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+.sidebar-logo {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.nav-link {
+    color: #fff;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.nav-link:hover {
+    color: #fff;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.nav-link.active {
+    background-color: var(--sidebar-active);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.user-profile {
+    margin-top: auto;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 30px;
+    width: calc(100% - 250px);
+    transition: all 0.3s;
+}
+
+/* Cards */
+.stat-card {
+    background: var(--card-teal);
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 166, 147, 0.2);
+}
+
+.stat-card-2 {
+    background: var(--card-teal2);
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 166, 147, 0.2);
+}
+
+.icon-circle {
+    background: rgba(255,255,255,0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Table */
+.table-card {
+    background: white;
+    border-radius: 15px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table thead th {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    color: #033624;
+    padding: 15px;
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    color: #000;
+}
+
+/* Buttons */
+.btn-action-edit {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-action-edit:hover {
+    background-color: #198754;
+    color: #ffffff;          
+    border-color: #198754; 
+    box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3); /* เพิ่มเงาเล็กน้อย */
+}
+
+.btn-action-delete {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+}
+
+.bg-green, .btn-green {
+    background-color: #128f26 !important;
+}
+
+.btn-action-delete.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    width: 35px; height: 35px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.btn-action-delete.btn-danger:hover {
+    background-color: #bb2d3b;
+    box-shadow: 0 2px 5px rgba(220, 53, 69, 0.3);
+}
+
+.btn-action-edit {
+    background-color: #f0f0f0;
+    border: none;
+    width: 35px; height: 35px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    color: #333;
+}
+
+.btn-action-edit:hover {
+    background-color: #e2e2e2;
+    color: #000;
+}
+
+/* --- Pagination Active Green --- */
+.page-link.active-green {
+    background-color: #198754 !important;
+    color: white !important;
+}
+
+.custom-switch {
+    width: 3em !important;
+    height: 1.5em !important;
+    cursor: pointer;
+}
+
+.custom-switch:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.border-bottom-light {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .sidebar { margin-left: -250px; }
+    .sidebar.active { margin-left: 0; }
+    .main-content { margin-left: 0; width: 100%; }
+    .mobile-toggle { display: block !important; }
+}

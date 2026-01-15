@@ -20,9 +20,6 @@
 </head>
 
 <body>
-
-  <!-- <section class="vh-100" style="background-color: #9A616D;"> --> <!-- bg pink -->
-  <!-- <section class="vh-100" style="background-color: #FAEDCE;"> -->
   <section class="vh-100 main-bg">
     <div class="blur-content h-100">
       <div class="container h-100">
