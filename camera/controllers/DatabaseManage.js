@@ -19,73 +19,105 @@ exports.insertDetectionLineSendLogs = async (
   foldername,
   statuscode,
   statustext = "",
-  timeinsert
+  timeinsert = new Date()
 ) => {
   try {
-    const status = `${statuscode}:${statustext}`;
-    console.log("Status SendLine :", status);
+    console.log("Status SendLine :", statuscode, statustext);
 
     const find = await prisma.EventLogs.findFirst({
-      where: { CameraEvent: foldername },
+      where: {
+        CameraEvent: foldername,
+      },
     });
+
+    if (!find) {
+      console.warn("ไม่พบ EventLogs สำหรับ CameraEvent:", foldername);
+      return null;
+    }
 
     const updatelinesendstatus = await prisma.EventLogs.update({
       where: {
-        id: find.id,
+        EventLogsId: find.EventLogsId,
       },
       data: {
-        LineStatus: String(status),
-        updatedAt: timeinsert,
+        LineStatus: statuscode,
+        LineMessage: statustext,
+        ModifiedDate: new Date(),
       },
     });
 
     return updatelinesendstatus;
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw err;
   }
 };
 
-exports.insertPicStatusLogs = async (foldername, status, timeinsert) => {
+exports.insertPicStatusLogs = async (
+  foldername,
+  status,
+  timeinsert = new Date()
+) => {
   try {
-    const find = await prisma.tmstCameraDetectionLogs.findFirst({
-      where: { foldername: foldername },
+    const find = await prisma.EventLogs.findFirst({
+      where: {
+        CameraEvent: foldername,
+      },
     });
 
-    const updatepicstatus = await prisma.tmstCameraDetectionLogs.update({
+    if (!find) {
+      console.warn("ไม่พบ EventLogs สำหรับ CameraEvent:", foldername);
+      return null;
+    }
+
+    const updatePicStatus = await prisma.eventLogs.update({
       where: {
-        id: find.id,
+        EventLogsId: find.EventLogsId,
       },
       data: {
-        picstatus: Number(status),
-        updatedAt: timeinsert,
+        SnapStatus: Number(status),
+        ModifiedDate: timeinsert,
       },
     });
 
-    return updatepicstatus;
+    return updatePicStatus;
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw err;
   }
 };
 
-exports.insertVdoStatusLogs = async (foldername, status, timeinsert) => {
+exports.insertVdoStatusLogs = async (
+  foldername,
+  status,
+  timeinsert = new Date()
+) => {
   try {
-    const find = await prisma.tmstCameraDetectionLogs.findFirst({
-      where: { foldername: foldername },
+    const find = await prisma.eventLogs.findFirst({
+      where: {
+        CameraEvent: foldername,
+      },
     });
 
-    const updatevdostatus = await prisma.tmstCameraDetectionLogs.update({
+    if (!find) {
+      console.warn("ไม่พบ EventLogs สำหรับ CameraEvent:", foldername);
+      return null;
+    }
+
+    const updateVdoStatus = await prisma.eventLogs.update({
       where: {
-        id: find.id,
+        EventLogsId: find.EventLogsId,
       },
       data: {
-        vdostatus: Number(status),
-        updatedAt: timeinsert,
+        VdoStatus: Number(status),
+        ModifiedDate: timeinsert,
       },
     });
 
-    return updatevdostatus;
+    return updateVdoStatus;
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    throw err;
   }
 };
 
@@ -112,16 +144,25 @@ exports.insertPowerLogs = async (req, res) => {
 
 exports.getUserIDCustomer = async (req, res) => {
   try {
-    const useriddb = await prisma.tmstLineUserIdCustomer.findMany({
+    const result = await prisma.lineUser.findMany({
+      where: {
+        Users: {
+          LineNotifyActive: true,
+        },
+      },
       select: {
-        userID: true,
+        UserIdLine: true,
       },
     });
-    const userid = useriddb.map((user) => user.userID);
-    // console.log('userid In getUserIDCustomer :', userid)
-    return userid;
+
+    const userIdLineList = result
+      .map((u) => u.UserIdLine)
+      .filter((id) => id !== null); // กันค่า null
+
+    console.log("userIdLineList:", userIdLineList);
+    return userIdLineList;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).send("Server Error");
   }
 };

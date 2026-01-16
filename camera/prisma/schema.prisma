@@ -49,6 +49,7 @@ model EventLogs {
   EventLogsId  Int      @id @default(autoincrement())
   CameraEvent  String?
   LineStatus   Int?
+  LineMessage String?
   SnapStatus   Int?
   VdoStatus    Int?
   ObjectName   String?

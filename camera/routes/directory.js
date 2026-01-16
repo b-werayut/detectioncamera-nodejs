@@ -23,7 +23,7 @@ const { insertObjectLogs } = require("../controllers/ObjectDetect");
 const { liffRegister } = require("../controllers/Liff-Register");
 const router = express.Router();
 
-router.get("/getuserid/", getUserIDCustomerexternal);
+router.get("/getuseridex/", getUserIDCustomerexternal);
 router.get("/getDataFlutter/", getDataFlutter);
 router.get("/directory/:camname", delayEventFunct, manageDirectory);
 router.get("/directory2/:camname", manageDirectory);
@@ -31,6 +31,7 @@ router.get("/directory2/:camname", manageDirectory);
 router.get("/getlogs/:params", GetLogsData);
 router.get("/getcamerastat", getCameraStat);
 router.get("/deldir", delDir);
+router.get("/getuserid", getUserIDCustomer);
 // router.delete('/testdelfolder', deleteOldDir)
 
 router.post("/detect-object", insertObjectLogs);

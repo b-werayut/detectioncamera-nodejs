@@ -350,7 +350,8 @@ try {
         function selectData() {
             let nodataHtml = '<h5 id="nodatah2">อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>';
 
-            $('#nodatah, #nodatah2, .page-item').remove();
+            $('.page-item, #snappath').hide();
+            $('#nodatah2, #nodata').show();
 
             let selectdatasval = $('#selectdatas').val();
             if (!selectdatasval || selectdatasval === "0") return;
@@ -384,7 +385,8 @@ try {
                             success: (resp) => {
                                 let obj = jQuery.parseJSON(resp);
                                 if (obj.imgnames == '' && obj.imgnamexs == '') {
-                                    $('.page-item').remove();
+                                    $('#nodatah2, #nodata').show();
+                                    $('.page-item, #snappath').hide();
                                     Swal.fire({
                                         icon: "error",
                                         title: "ไม่พบรูปภาพ",
@@ -403,7 +405,9 @@ try {
                                         imgnamex.append(`<li class="imgbox col-md-3 p-0"><img class="img-thumbnail" onclick="showimgx2('${selectdatasval}','${item}','${camnamef}')" src="/eventfolder/${camnamef}/${selectdatasval}/pic/X/${item}"></li>`);
                                     });
                                     imgnamex.fadeIn(400);
-                                    $('#nodatah2').remove();
+                                    $('#nodata, #nodatah2').hide();
+                                    $('.page-item').show();
+
                                 }
                             },
                             error: function () {
