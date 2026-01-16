@@ -347,8 +347,10 @@ try {
         }
 
         function selectData() {
-            $('#nodatah, #nodatah2, .page-item').remove();
             let nodata = $("<h5 id='nodatah2'>อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>");
+
+            $('.page-item, #snappath').hide();
+            $('#nodatah2, #nodata').show();
 
             let selectdatasval = $('#selectdatas').val();
             if (!selectdatasval || selectdatasval === "0") return;
@@ -368,7 +370,7 @@ try {
                     icon: "error",
                     title: "กรุณาเลือกข้อมูล!",
                     confirmButtonColor: '#0d4d3d'
-                }).then((result) => { if (result.isConfirmed) { nodata.appendTo('#nodata'); } });
+                })
             } else {
                 Swal.fire({
                     title: "กำลังดึงข้อมูลวิดีโอ!",
@@ -383,12 +385,13 @@ try {
                             success: (resp) => {
                                 let obj = jQuery.parseJSON(resp);
                                 if (obj.vdonames == '') {
+                                    $('#nodata').show();
+                                    $('.page-item, #snappath').hide();
                                     Swal.fire({
                                         icon: "error",
                                         title: "ไม่พบไฟล์วิดีโอ",
                                         confirmButtonColor: '#0d4d3d'
                                     });
-                                    nodata.appendTo('#nodata');
                                 } else {
                                     $('#nodatah2').remove();
                                     snappath.fadeIn(function () {
@@ -404,6 +407,8 @@ try {
                                         vdonamex.append(`<li class="vdobox col-md-3 p-2 text-center"><video width="100%" muted controls class="img-thumbnail"><source src="/eventfolder/${camnamef}/${selectdatasval}/vdo/x/${item}" type="video/mp4"></video></li>`);
                                     });
                                     vdonamex.fadeIn(400);
+                                    $('#nodata, #nodatah2').hide();
+                                    $('.page-item').show();
                                 }
                             },
                             error: (data) => {
