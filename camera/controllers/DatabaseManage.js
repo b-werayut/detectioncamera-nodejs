@@ -19,7 +19,7 @@ exports.insertDetectionLineSendLogs = async (
   foldername,
   statuscode,
   statustext = "",
-  timeinsert = new Date()
+  timeinsert = new Date(),
 ) => {
   try {
     console.log("Status SendLine :", statuscode, statustext);
@@ -53,16 +53,10 @@ exports.insertDetectionLineSendLogs = async (
   }
 };
 
-exports.insertPicStatusLogs = async (
-  foldername,
-  status,
-  timeinsert = new Date()
-) => {
+exports.insertPicStatusLogs = async (foldername, status, timeinsert) => {
   try {
     const find = await prisma.EventLogs.findFirst({
-      where: {
-        CameraEvent: foldername,
-      },
+      where: { CameraEvent: foldername },
     });
 
     if (!find) {
@@ -70,13 +64,18 @@ exports.insertPicStatusLogs = async (
       return null;
     }
 
+    const modifiedDate =
+      timeinsert && !isNaN(new Date(timeinsert))
+        ? new Date(timeinsert)
+        : new Date();
+
     const updatePicStatus = await prisma.eventLogs.update({
       where: {
         EventLogsId: find.EventLogsId,
       },
       data: {
         SnapStatus: Number(status),
-        ModifiedDate: timeinsert,
+        ModifiedDate: modifiedDate,
       },
     });
 
@@ -87,11 +86,7 @@ exports.insertPicStatusLogs = async (
   }
 };
 
-exports.insertVdoStatusLogs = async (
-  foldername,
-  status,
-  timeinsert = new Date()
-) => {
+exports.insertVdoStatusLogs = async (foldername, status, timeinsert) => {
   try {
     const find = await prisma.eventLogs.findFirst({
       where: {
@@ -104,13 +99,18 @@ exports.insertVdoStatusLogs = async (
       return null;
     }
 
+    const modifiedDate =
+      timeinsert && !isNaN(new Date(timeinsert))
+        ? new Date(timeinsert)
+        : new Date();
+
     const updateVdoStatus = await prisma.eventLogs.update({
       where: {
         EventLogsId: find.EventLogsId,
       },
       data: {
         VdoStatus: Number(status),
-        ModifiedDate: timeinsert,
+        ModifiedDate: modifiedDate,
       },
     });
 
@@ -182,7 +182,7 @@ exports.getUserIDCustomerexternal = async (req, res) => {
     const obj = { userid: [], replytoken: [] };
     const userid = useriddb.map((user) => obj.userid.push(user.userID));
     const users = useriddb.map((items) =>
-      obj.replytoken.push(items.replyToken)
+      obj.replytoken.push(items.replyToken),
     );
     res.send(obj);
   } catch (err) {

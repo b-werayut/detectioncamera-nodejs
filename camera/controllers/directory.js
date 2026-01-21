@@ -194,7 +194,7 @@ const copyFileWithRetry = (
   sourceFile,
   destFile,
   maxRetries = 5,
-  delay = 500
+  delay = 500,
 ) => {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -205,21 +205,21 @@ const copyFileWithRetry = (
       if (err.code === "EBUSY") {
         console.log(
           `⚠️ File busy: ${path.basename(
-            sourceFile
-          )}. Retry ${attempt}/${maxRetries}`
+            sourceFile,
+          )}. Retry ${attempt}/${maxRetries}`,
         );
         Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, delay);
       } else {
         console.error(
           `❌ Error copying ${path.basename(sourceFile)}:`,
-          err.message
+          err.message,
         );
         return false;
       }
     }
   }
   console.error(
-    `❌ Failed to copy ${path.basename(sourceFile)} after ${maxRetries} retries`
+    `❌ Failed to copy ${path.basename(sourceFile)} after ${maxRetries} retries`,
   );
   return false;
 };
@@ -238,7 +238,7 @@ const getMatchingFiles = async (
   extension,
   beforeTime,
   futureTime,
-  timeExtractor
+  timeExtractor,
 ) => {
   // Use forward slashes for glob pattern (glob requires forward slashes even on Windows)
   const normalizedPath = sourcePath.replace(/\\/g, "/");
@@ -264,14 +264,14 @@ const getMatchingFiles = async (
 
     if (files.length <= 5) {
       console.log(
-        `  📄 ${filename}: ts=${timestamp} bt=${beforeTime} ft=${futureTime} match=${match}`
+        `  📄 ${filename}: ts=${timestamp} bt=${beforeTime} ft=${futureTime} match=${match}`,
       );
     }
     return match;
   });
 
   console.log(
-    `✅ Matched ${matchedFiles.length} files within time window [${beforeTime} - ${futureTime}]`
+    `✅ Matched ${matchedFiles.length} files within time window [${beforeTime} - ${futureTime}]`,
   );
   return matchedFiles;
 };
@@ -357,7 +357,7 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
       directoryfm,
       resp.status,
       resp.statusText,
-      timeinsert
+      timeinsert,
     );
     writeFileSync("delaylogs.txt", JSON.stringify(logsdata));
     console.log(`✅ LINE notification sent: ${resp.statusText}`);
@@ -368,7 +368,7 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
       directoryfm,
       status,
       statusText,
-      timeinsert
+      timeinsert,
     );
     writeFileSync("delaylogs.txt", JSON.stringify(logsdata));
     console.error(`❌ LINE notification failed: ${statusText}`);
@@ -562,14 +562,14 @@ const fileDirCheck = async (options) => {
       const fileName = path.basename(file);
       copyFileWithRetry(
         path.join(sourcePath, fileName),
-        path.join(destPath, fileName)
+        path.join(destPath, fileName),
       );
     }
     const status = 1;
     await insertPicStatusLogs(
       directoryfm,
       status,
-      formatDateTime(DateFormat.DATABASE)
+      formatDateTime(DateFormat.DATABASE),
     );
     console.log(`${logPrefix} Processed ${files.length} files`);
   };
@@ -583,7 +583,7 @@ const fileDirCheck = async (options) => {
       return true;
     }
     console.log(
-      `⏳ Round ${round}: ${files.length}/${minFiles} files. Waiting...`
+      `⏳ Round ${round}: ${files.length}/${minFiles} files. Waiting...`,
     );
     await sleep(CHECK_INTERVAL_MS);
   }
@@ -598,7 +598,7 @@ const fileDirCheck = async (options) => {
       return true;
     }
     console.log(
-      `🔁 Extra ${extra}: ${files.length}/${minFiles} files. Waiting...`
+      `🔁 Extra ${extra}: ${files.length}/${minFiles} files. Waiting...`,
     );
     await sleep(CHECK_INTERVAL_MS);
   }
@@ -685,7 +685,7 @@ const copyFileinDir = async (
   beforetime,
   futuretime,
   currenttime,
-  directoryfm
+  directoryfm,
 ) => {
   const destPathX = `${foldername}/Pic/x/`;
   const destPathPic = `${foldername}/Pic/`;
@@ -771,7 +771,7 @@ const globVdoFile = async (
   beforetime,
   futuretime,
   currenttime,
-  directoryfm
+  directoryfm,
 ) => {
   const videoDir = dir.replace("pic_001", "video_001");
   fs.ensureDirSync(videoDir);
@@ -804,7 +804,7 @@ const globVdoFile = async (
       await insertVdoStatusLogs(
         directoryfm,
         1,
-        formatDateTime(DateFormat.DATABASE)
+        formatDateTime(DateFormat.DATABASE),
       );
       console.log(`✅ Converted ${videoFiles.length} video(s)`);
     } catch (err) {
@@ -821,7 +821,7 @@ const globVdoFile = async (
       return { vdofile: videos, folderdest: videoDir };
     }
     console.log(
-      `⏳ Round ${round}: ${videos.length}/${minVideos} videos. Waiting...`
+      `⏳ Round ${round}: ${videos.length}/${minVideos} videos. Waiting...`,
     );
     await sleep(CHECK_INTERVAL_MS);
   }
@@ -922,7 +922,7 @@ exports.cronDelDir = async () => {
         console.error(`❌ Cron error at ${time}:`, err.message);
       }
     },
-    { scheduled: true, timezone: "Asia/Bangkok" }
+    { scheduled: true, timezone: "Asia/Bangkok" },
   );
 
   return "✅ NodeCron scheduled: Delete files daily at 00:00 Asia/Bangkok";
@@ -956,7 +956,7 @@ exports.delDir = async (req, res) => {
  * @param {Object} res - Express response object
  */
 exports.manageDirectory = async (req, res) => {
-  const { camname } = req.params;
+  const { projectcode, camname } = req.params;
   const time = formatDateTime(DateFormat.COMPACT);
   const fDate = time.substring(0, 8);
   const fTime = time.substring(8);
@@ -988,7 +988,7 @@ exports.manageDirectory = async (req, res) => {
       globResult.beforetime,
       globResult.futuretime,
       globResult.currenttime,
-      directoryfm
+      directoryfm,
     );
 
     // Process videos
@@ -998,7 +998,7 @@ exports.manageDirectory = async (req, res) => {
       copyResult.beforeTime,
       copyResult.futuretime,
       copyResult.currenttime,
-      directoryfm
+      directoryfm,
     );
 
     res.send("Detected System is Running!");

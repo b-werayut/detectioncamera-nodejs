@@ -98,6 +98,7 @@ model PowerLogs {
 
 model Project {
   ProjectID    Int       @id @default(autoincrement())
+ ProjectCode  String @db.VarChar(10) @unique
   ProjectName  String?
   CreatedAt    DateTime  @default(now())
   ModifiedDate DateTime  @default(now())
@@ -116,8 +117,8 @@ model Province {
 }
 
 model Role {
-  RoleID       Int      @id @default(autoincrement())
-  UserRole     String   @db.VarChar(50)
+  RoleID   Int    @id @default(autoincrement())
+  UserRole String @unique @db.VarChar(50)
   CreatedAt    DateTime @default(now())
   ModifiedDate DateTime @default(now())
   Users        Users[]
@@ -132,6 +133,7 @@ model Users {
   Email            String?
   PhoneNumber      String?
   LineNotifyActive Boolean   @default(false)
+  last_login_at DateTime  @default(now())
   CreatedAt        DateTime  @default(now())
   ModifiedDate     DateTime  @default(now())
   RoleID           Int

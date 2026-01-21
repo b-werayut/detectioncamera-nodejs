@@ -11,11 +11,13 @@ exports.registerHandler = async (req, res) => {
       Firstname,
       Lastname,
       Email,
+      ProjectCode,
       PhoneNumber,
       Role,
       ProjectName,
     } = req.body;
 
+    // console.log("req.body :>", req.body);
     // Validate input
     if (
       !Username ||
@@ -23,6 +25,7 @@ exports.registerHandler = async (req, res) => {
       !Firstname ||
       !Lastname ||
       !Email ||
+      !ProjectCode ||
       !PhoneNumber ||
       !ProjectName
     ) {
@@ -76,18 +79,22 @@ exports.registerHandler = async (req, res) => {
           },
         },
 
+        // ❗ แนะนำ: connect role แทน create (กัน role ซ้ำ)
         Role: {
-          create: {
-            UserRole: Role,
+          connectOrCreate: {
+            where: { UserRole: Role },
+            create: { UserRole: Role },
           },
         },
 
         Project: {
           create: {
             ProjectName,
+            ProjectCode,
           },
         },
       },
+
       select: {
         UserId: true,
         Username: true,

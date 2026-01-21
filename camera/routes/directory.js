@@ -9,6 +9,7 @@ const {
 } = require("../controllers/DatabaseManage");
 const { delayEventFunct } = require("../Middleware/DelaySendLineFunct");
 const { registerHandler } = require("../controllers/Register");
+const { streamCheck } = require("../controllers/monitor");
 const { loginHandler } = require("../controllers/Login");
 const {
   manageDirectory,
@@ -25,13 +26,18 @@ const router = express.Router();
 
 router.get("/getuseridex/", getUserIDCustomerexternal);
 router.get("/getDataFlutter/", getDataFlutter);
-router.get("/directory/:camname", delayEventFunct, manageDirectory);
+router.get(
+  "/directory/:projectcode/:camname",
+  delayEventFunct,
+  manageDirectory,
+);
 router.get("/directory2/:camname", manageDirectory);
 // router.get('/directory/', manageDirectory)
 router.get("/getlogs/:params", GetLogsData);
 router.get("/getcamerastat", getCameraStat);
 router.get("/deldir", delDir);
 router.get("/getuserid", getUserIDCustomer);
+router.get("/streamcheck", streamCheck);
 // router.delete('/testdelfolder', deleteOldDir)
 
 router.post("/detect-object", insertObjectLogs);
