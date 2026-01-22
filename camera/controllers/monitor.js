@@ -1,5 +1,4 @@
 const http = require("http");
-const { exec } = require("child_process");
 
 const API_HOST = "127.0.0.1";
 const API_PORT = 9997;
@@ -41,7 +40,7 @@ async function monitor() {
   console.log("=== MediaMTX RTMP PUSH MONITOR ===");
   console.log(new Date().toLocaleString());
 
-  const results = []; // ✅ เก็บผลลัพธ์
+  const results = [];
 
   try {
     const result = await fetchPaths();
@@ -72,6 +71,8 @@ async function monitor() {
 
       // ===== FROZEN CHECK =====
       const currentBytes = pathInfo.bytesReceived || 0;
+
+      console.log("cam.lastBytes", cam.lastBytes);
 
       if (cam.lastBytes === 0) {
         cam.lastBytes = currentBytes;
@@ -136,16 +137,11 @@ function alertIfChanged(cam, newStatus) {
   if (cam.status === newStatus) return;
 
   cam.status = newStatus;
-  process.stdout.write("\x07"); // beep
-
-  // popup (เปิดถ้าต้องการ)
-  // exec(
-  //   `powershell -command "Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('${cam.name} ${newStatus}','MediaMTX ALERT')"`
-  // );
+  process.stdout.write("\x07");
 }
 
 // ===== START =====
-setInterval(monitor, CHECK_INTERVAL);
+// setInterval(monitor, CHECK_INTERVAL);
 exports.streamCheck = async (req, res) => {
   const result = await monitor();
   console.log("result", result);

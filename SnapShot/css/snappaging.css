@@ -324,7 +324,7 @@
             margin-left: 0.25rem;
         }
 
-        .user-dropdown:hover .dropdown-arrow {
+        .user-dropdown.is-open .dropdown-arrow {
             transform: rotate(180deg);
         }
 
@@ -345,7 +345,7 @@
             overflow: hidden;
         }
 
-        .user-dropdown:hover .user-dropdown-menu {
+        .user-dropdown.is-open .user-dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);

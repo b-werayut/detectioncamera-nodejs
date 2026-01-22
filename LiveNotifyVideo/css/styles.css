@@ -135,7 +135,7 @@
             margin-left: 0.25rem;
         }
 
-        .user-dropdown:hover .dropdown-arrow {
+        .user-dropdown.is-open .dropdown-arrow {
             transform: rotate(180deg);
         }
 
@@ -156,7 +156,7 @@
             overflow: hidden;
         }
 
-        .user-dropdown:hover .user-dropdown-menu {
+        .user-dropdown.is-open .user-dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
@@ -493,9 +493,12 @@
             justify-content: center;
         }
 
-        .btn-camera-selector:hover {
+        .btn.btn-camera-selector:hover {
+            color: white;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            border-color: transparent;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(13, 77, 61, 0.4);
+            box-shadow: 0 8px 20px rgba(77, 255, 210, 0.4);
         }
 
         #cameraDropdown {

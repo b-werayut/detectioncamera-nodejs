@@ -287,13 +287,20 @@ const getMatchingFiles = async (
  * @param {boolean} [skipLog=false] - Skip database logging if true
  * @returns {Promise<string>} Created directory path
  */
-const createFolder = async (directory, directoryfm, skipLog = false) => {
+const createFolder = async (
+  directory,
+  directoryfm,
+  skipLog = false,
+  camname,
+) => {
   if (!existsSync(directory)) {
     mkdirSync(directory, { recursive: true });
-    if (!skipLog) {
+
+    if (!skipLog && camname) {
       const timeinsert = formatDateTime(DateFormat.DATABASE);
-      await insertFolderNameLogs(directoryfm, timeinsert);
+      await insertFolderNameLogs(camname, directoryfm, timeinsert);
     }
+
     console.log(`📁 Created folder: ${directory}`);
   }
   return directory;
@@ -325,6 +332,7 @@ const createSubFolder = async (folderName, subFolder) => {
  * @param {string} camname - Camera name identifier
  * @returns {Promise<string>} Folder name
  */
+
 const sendLineAxios = async (FolderName, directoryfm, camname) => {
   const cf = await Config();
   const urlEndpoint = cf[0].json.lineurlendpointcamera;
@@ -353,23 +361,29 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
 
   try {
     const resp = await axios.post(urlEndpoint, flexMessage, headerAuth);
+
     await insertDetectionLineSendLogs(
+      camname,
       directoryfm,
       resp.status,
       resp.statusText,
       timeinsert,
     );
+
     writeFileSync("delaylogs.txt", JSON.stringify(logsdata));
     console.log(`✅ LINE notification sent: ${resp.statusText}`);
   } catch (err) {
     const status = err.response?.status || 500;
     const statusText = err.response?.statusText || "Error";
+
     await insertDetectionLineSendLogs(
+      camname,
       directoryfm,
       status,
       statusText,
       timeinsert,
     );
+
     writeFileSync("delaylogs.txt", JSON.stringify(logsdata));
     console.error(`❌ LINE notification failed: ${statusText}`);
   }
@@ -552,6 +566,9 @@ const fileDirCheck = async (options) => {
   const maxRound = totalWaitMs / CHECK_INTERVAL_MS;
 
   console.log(`${logPrefix} Starting file check... Min files: ${minFiles}`);
+  console.log(
+    `${logPrefix} Fixed time window: [${beforeTime} - ${futureTime}]`,
+  );
   fs.ensureDirSync(destPath);
 
   const getFiles = () =>
@@ -620,26 +637,87 @@ const fileDirCheck = async (options) => {
 // ============================================================================
 
 /**
+ * Calculate time window from event time.
+ * @param {Date} eventDate - The event date/time
+ * @param {Object} config - Configuration with beforetime and futuretime
+ * @returns {{ currentTime: string, beforeTime: string, futureTime: string }}
+ */
+const getTimeWindowFromEvent = (eventDate, config) => {
+  const { beforetime, futuretime } = config;
+
+  const formatTime = (date) => {
+    return [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0"),
+      String(date.getHours()).padStart(2, "0"),
+      String(date.getMinutes()).padStart(2, "0"),
+      String(date.getSeconds()).padStart(2, "0"),
+    ].join("");
+  };
+
+  // Current time = event time
+  const currentTime = formatTime(eventDate);
+
+  // Before time = event time - beforetime minutes
+  const beforeDate = new Date(eventDate);
+  beforeDate.setMinutes(beforeDate.getMinutes() - parseInt(beforetime));
+  const beforeTimeStr = formatTime(beforeDate);
+
+  // Future time = event time + futuretime minutes
+  const futureDate = new Date(eventDate);
+  futureDate.setMinutes(futureDate.getMinutes() + parseInt(futuretime));
+  const futureTimeStr = formatTime(futureDate);
+
+  return { currentTime, beforeTime: beforeTimeStr, futureTime: futureTimeStr };
+};
+
+/**
  * Scan directory for files matching time criteria.
  * @param {string} FolderName - Target folder name
  * @returns {Promise<Object>} Object containing file lists and metadata
  */
 const globDirectory = async (FolderName) => {
   const conf = await Config();
-  const { currentTime, beforeTime, futureTime } = getTimeWindow(conf[0].json);
-
-  console.log(`⏰ Time window: ${beforeTime} - ${currentTime} - ${futureTime}`);
 
   // FolderName format: CAM202412001_20260116_162002
   // Index:             0-11          13-20     22-27
   const pathName = path.basename(FolderName);
   const camName = pathName.split("_")[0]; // CAM202412001
   const dateStr = pathName.split("_")[1]; // 20260116
+  const timeStr = pathName.split("_")[2]; // 162002
 
   // Parse date: YYYYMMDD -> YYYY-MM-DD
   const year = dateStr.slice(0, 4); // 2026
   const month = dateStr.slice(4, 6); // 01
   const day = dateStr.slice(6, 8); // 16
+
+  // Parse time: HHMMSS
+  const hours = timeStr.slice(0, 2); // 16
+  const minutes = timeStr.slice(2, 4); // 20
+  const seconds = timeStr.slice(4, 6); // 02
+
+  // Create event date from folder name
+  const eventDate = new Date(
+    parseInt(year),
+    parseInt(month) - 1, // Month is 0-indexed
+    parseInt(day),
+    parseInt(hours),
+    parseInt(minutes),
+    parseInt(seconds),
+  );
+
+  console.log(`🕐 Event time from folder: ${eventDate.toISOString()}`);
+
+  // Calculate time window from EVENT time, not current time
+  const { currentTime, beforeTime, futureTime } = getTimeWindowFromEvent(
+    eventDate,
+    conf[0].json,
+  );
+
+  console.log(
+    `⏰ Time window (from event): ${beforeTime} - ${currentTime} - ${futureTime}`,
+  );
 
   const DirectoryName = `${CAMERA_RAW_DIR}/${camName}/${year}-${month}-${day}/pic_001/`;
   console.log(`📂 Scanning: ${DirectoryName}`);
@@ -662,6 +740,9 @@ const globDirectory = async (FolderName) => {
       filesPic.push(file);
     }
   });
+
+  console.log(`📊 Files X (before event): ${filesX.length}`);
+  console.log(`📊 Files Pic (after event): ${filesPic.length}`);
 
   return {
     filex: { fileX: filesX },
@@ -729,7 +810,7 @@ const copyFileinDir = async (
     futureTime: futuretime,
     directoryfm,
     minFiles: 20,
-    extraRounds: 8,
+    extraRounds: 3,
     logPrefix: "🖼️ X",
   });
 
@@ -741,7 +822,7 @@ const copyFileinDir = async (
     futureTime: futuretime,
     directoryfm,
     minFiles: 30,
-    extraRounds: 10,
+    extraRounds: 5,
     logPrefix: "📸 Pic",
   });
 
@@ -957,18 +1038,29 @@ exports.delDir = async (req, res) => {
  */
 exports.manageDirectory = async (req, res) => {
   const { projectcode, camname } = req.params;
-  const time = formatDateTime(DateFormat.COMPACT);
-  const fDate = time.substring(0, 8);
-  const fTime = time.substring(8);
-
-  const firstDir = `${EVENT_FOLDER_DIR}/${camname}`;
-  const directory = `${firstDir}/${camname}_${fDate}_${fTime}`;
-  const directoryfm = path.basename(directory);
 
   try {
+    const camera = await prisma.Camera.findUnique({
+      where: { CameraName: camname },
+      select: { CameraID: true },
+    });
+
+    if (!camera) {
+      console.log("❌ Camera not found :", camname);
+      return res.status(200).send("Camera not found");
+    }
+
+    const time = formatDateTime(DateFormat.COMPACT);
+    const fDate = time.substring(0, 8);
+    const fTime = time.substring(8);
+
+    const firstDir = `${EVENT_FOLDER_DIR}/${camname}`;
+    const directory = `${firstDir}/${camname}_${fDate}_${fTime}`;
+    const directoryfm = path.basename(directory);
+
     // Create folder structure
-    await createFolder(firstDir, directoryfm, true);
-    await createFolder(directory, directoryfm);
+    await createFolder(firstDir, directoryfm, true, camname);
+    await createFolder(directory, directoryfm, false, camname);
 
     // Send LINE notification
     await sendLineAxios(directory, directoryfm, camname);
@@ -977,6 +1069,8 @@ exports.manageDirectory = async (req, res) => {
     await createSubFolder(directory, "Pic");
     await createSubFolder(directory, "Pic/x");
     await createSubFolder(directory, "Vdo");
+
+    res.send("Detected System is Running!");
 
     // Process files
     const globResult = await globDirectory(directory);
@@ -1000,8 +1094,6 @@ exports.manageDirectory = async (req, res) => {
       copyResult.currenttime,
       directoryfm,
     );
-
-    res.send("Detected System is Running!");
   } catch (err) {
     console.error("❌ manageDirectory error:", err);
     res.status(500).send("Server Error");

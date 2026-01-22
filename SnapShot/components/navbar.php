@@ -1,4 +1,16 @@
 <?php
+/**
+ * Navbar Component - NetWorklink Co.Ltd.
+ * ไฟล์ Component สำหรับ Navigation Bar ที่ใช้ได้ทุกหน้า
+ * 
+ * ต้องมี Variables เหล่านี้ก่อน include:
+ * - $urlstream (string) : URL สำหรับหน้า Streaming
+ * - $roleId (int) : Role ID ของ User (1 = SuperAdmin, 2 = Admin)
+ * - $user (string) : Username ที่ Login
+ * - $role (string|null) : ชื่อ Role ของ User (optional)
+ * - $login_time (int|null) : Timestamp เวลา Login (optional)
+ * - $currentPage (string) : ชื่อหน้าปัจจุบัน สำหรับ Active State ('streaming', 'snapshot', 'video', 'manage')
+ */
 
 // ตั้งค่า default ให้กับตัวแปรที่อาจไม่มี
 $urlstream = $urlstream ?? '';
@@ -42,7 +54,7 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
 
                 <!-- ภาพนิ่ง -->
                 <li class="nav-item">
-                    <a class="nav-link <?= $activeSnapshot; ?>" href="/SnapShot/snappaging_.php">
+                    <a class="nav-link <?= $activeSnapshot; ?>" href="snappaging_.php">
                         <i class="fas fa-camera me-1"></i>
                         <span class="nav-text">ภาพนิ่ง</span>
                     </a>
@@ -50,7 +62,7 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
 
                 <!-- วิดีโอ -->
                 <li class="nav-item">
-                    <a class="nav-link <?= $activeVideo; ?>" href="/SnapShot/vdopaging_.php">
+                    <a class="nav-link <?= $activeVideo; ?>" href="vdopaging_.php">
                         <i class="fas fa-film me-1"></i>
                         <span class="nav-text">วิดีโอ</span>
                     </a>
@@ -105,14 +117,6 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
                                         <i class="fas fa-clock"></i>
                                         <span>เข้าสู่ระบบ:
                                             <?= date('H:i น.', $login_time); ?>
-                                        </span>
-                                    </div>
-                                <?php endif; ?>
-                                <?php if (!empty($userRole)): ?>
-                                    <div class="user-dropdown-item">
-                                        <i class="fas fa-user-shield"></i>
-                                        <span>
-                                            <?= $userRole; ?>
                                         </span>
                                     </div>
                                 <?php endif; ?>
@@ -233,6 +237,60 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
         transform: rotate(180deg);
     }
 
+    .user-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .user-badge:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+        color: #10b981;
+        font-weight: 700;
+        border-radius: 50%;
+        font-size: 0.9rem;
+    }
+
+    .user-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #fff;
+    }
+
+    .user-role {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .dropdown-arrow {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.75rem;
+        transition: transform 0.3s ease;
+    }
+
+    /* User Dropdown Menu */
     .user-dropdown-menu {
         display: none;
         position: static;
@@ -385,6 +443,18 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
             position: relative;
         }
 
+        .user-badge {
+            width: auto;
+            padding: 0.5rem 1rem;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            font-size: 0.85rem;
+        }
+
         .user-dropdown-menu {
             position: absolute;
             top: 100%;
@@ -392,6 +462,10 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
             min-width: 260px;
             margin-top: 0.5rem;
             z-index: 1050;
+        }
+
+        .user-dropdown.is-open .dropdown-arrow {
+            transform: rotate(180deg);
         }
     }
 

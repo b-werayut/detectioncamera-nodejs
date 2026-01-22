@@ -23,26 +23,17 @@ model Address {
 }
 
 model Camera {
-  CameraID     Int       @id @default(autoincrement())
-  CameraName   String    @unique
+  CameraID     Int         @id @default(autoincrement())
+  CameraName   String      @unique
   Url          String
   CameraStatus Int
-  isActive     Boolean   @default(false)
-  CreatedAt    DateTime  @default(now())
-  ModifiedDate DateTime  @default(now())
+  isActive     Boolean     @default(false)
+  CreatedAt    DateTime    @default(now())
+  ModifiedDate DateTime    @default(now())
   ProjectID    Int
-  Address      Address[]
-}
 
-model DetectObject {
-  DetectID     Int      @id @default(autoincrement())
-  Camera       String?
-  Location     String?
-  FileName     String?
-  Thai_Time    String?
-  UtC_Time     String?
-  CreatedAt    DateTime @default(now())
-  ModifiedDate DateTime @default(now())
+  Address      Address[]
+  EventLogs    EventLogs[]
 }
 
 model EventLogs {
@@ -53,6 +44,22 @@ model EventLogs {
   SnapStatus   Int?
   VdoStatus    Int?
   ObjectName   String?
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+
+  CameraID     Int
+  Camera       Camera   @relation(fields: [CameraID], references: [CameraID])
+
+  @@unique([CameraID, CameraEvent])
+}
+
+model DetectObject {
+  DetectID     Int      @id @default(autoincrement())
+  Camera       String?
+  Location     String?
+  FileName     String?
+  Thai_Time    String?
+  UtC_Time     String?
   CreatedAt    DateTime @default(now())
   ModifiedDate DateTime @default(now())
 }

@@ -1,21 +1,36 @@
 const { STRING } = require("txt-file-to-json/src/constants");
 const prisma = require("../Config/prisma");
 
-exports.insertFolderNameLogs = async (foldername, FormatDatTime) => {
+exports.insertFolderNameLogs = async (
+  camname,
+  foldername,
+  timeinsert = new Date(),
+) => {
   try {
-    const insertfoldername = await prisma.EventLogs.create({
+    const camera = await prisma.Camera.findUnique({
+      where: { CameraName: camname },
+      select: { CameraID: true },
+    });
+
+    if (!camera) {
+      console.warn("ไม่พบ Camera:", camname);
+      return null;
+    }
+
+    return await prisma.EventLogs.create({
       data: {
+        CameraID: camera.CameraID,
         CameraEvent: foldername,
-        // CreatedAt: FormatDatTime,
       },
     });
-    return insertfoldername;
   } catch (err) {
-    console.log(err);
+    console.error("insertFolderNameLogs error:", err);
+    throw err;
   }
 };
 
 exports.insertDetectionLineSendLogs = async (
+  camname,
   foldername,
   statuscode,
   statustext = "",
@@ -24,31 +39,36 @@ exports.insertDetectionLineSendLogs = async (
   try {
     console.log("Status SendLine :", statuscode, statustext);
 
-    const find = await prisma.EventLogs.findFirst({
-      where: {
-        CameraEvent: foldername,
-      },
+    const camera = await prisma.Camera.findUnique({
+      where: { CameraName: camname },
+      select: { CameraID: true },
     });
 
-    if (!find) {
-      console.warn("ไม่พบ EventLogs สำหรับ CameraEvent:", foldername);
+    if (!camera) {
+      console.warn("ไม่พบ Camera:", camname);
       return null;
     }
 
-    const updatelinesendstatus = await prisma.EventLogs.update({
+    return await prisma.EventLogs.upsert({
       where: {
-        EventLogsId: find.EventLogsId,
+        CameraID_CameraEvent: {
+          CameraID: camera.CameraID,
+          CameraEvent: foldername,
+        },
       },
-      data: {
+      update: {
         LineStatus: statuscode,
         LineMessage: statustext,
-        ModifiedDate: new Date(),
+      },
+      create: {
+        CameraID: camera.CameraID,
+        CameraEvent: foldername,
+        LineStatus: statuscode,
+        LineMessage: statustext,
       },
     });
-
-    return updatelinesendstatus;
   } catch (err) {
-    console.error(err);
+    console.error("insertDetectionLineSendLogs error:", err);
     throw err;
   }
 };

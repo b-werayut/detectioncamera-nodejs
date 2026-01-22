@@ -223,6 +223,23 @@ $currentPage = 'streaming';
                 <div class="stat-card">
                     <div class="stat-card-header">
                         <div>
+                            <div class="stat-value" id="frozenCameras">0</div>
+                            <div class="stat-label">กล้องภาพค้าง</div>
+                        </div>
+                        <div class="stat-icon frozen"
+                            style="background: linear-gradient(135deg, #f59e0b15 0%, #f59e0b25 100%); color: #f59e0b;">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                    </div>
+                    <div class="stat-trend frozen" style="color: #f59e0b;">
+                        <i class="fas fa-pause-circle"></i>
+                        <span>ไม่มีข้อมูลใหม่</span>
+                    </div>
+                </div>
+
+                <div class="stat-card d-none">
+                    <div class="stat-card-header">
+                        <div>
                             <div class="stat-value" id="selectedCameras">0</div>
                             <div class="stat-label">กล้องที่เลือก</div>
                         </div>
@@ -295,24 +312,41 @@ $currentPage = 'streaming';
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <script>
-        let roundcheck = 0;
-        let currentStatus = {};
-
+        // ===== MediaMTX Camera Monitor Configuration =====
         const getparams = '<?php echo $getparam ?? ''; ?>';
-        const BASE_URL = 'http://85.204.247.82';
-        const PORT = '26300';
-        const API_PATH = 'api/getCameraStat';
-        const CAMERA_STATS_API_URL = `${BASE_URL}:${PORT}/${API_PATH}?v=${Date.now()}`;
 
-        let toggleState = 0;
+        // MediaMTX API Configuration
+        const MEDIAMTX_HOST = '127.0.0.1';
+        const MEDIAMTX_API_PORT = 9997;
+        const MEDIAMTX_API_URL = `http://${MEDIAMTX_HOST}:${MEDIAMTX_API_PORT}/v3/paths/list`;
+
+        // Streaming Configuration
+        const STREAMING_HOST = '0.0.0.0';
+        const STREAMING_PORT = 8889; // WebRTC port
+
+        // Monitor Intervals
+        const CHECK_INTERVAL = 10000; // 10 seconds
+        const FREEZE_TIMEOUT = 15000; // 15 seconds (no bytes change = frozen)
+
+        // Camera tracking state
         let cameraStates = {};
+        let cameraByteHistory = {}; // Track bytesReceived for freeze detection
 
-        async function fetchCameraStatusesFromAPI() {
+        // Status constants
+        const STATUS = {
+            ONLINE: 'ONLINE',
+            OFFLINE: 'OFFLINE',
+            FROZEN: 'FROZEN',
+            UNKNOWN: 'UNKNOWN'
+        };
+
+        /**
+         * Fetch paths list from MediaMTX API
+         */
+        async function fetchMediaMTXPaths() {
             try {
-                const response = await fetch(CAMERA_STATS_API_URL, {
-                    headers: {
-                        'cache-control': 'no-cache'
-                    }
+                const response = await fetch(`${MEDIAMTX_API_URL}?_=${Date.now()}`, {
+                    headers: { 'cache-control': 'no-cache' }
                 });
 
                 if (!response.ok) {
@@ -320,31 +354,139 @@ $currentPage = 'streaming';
                 }
 
                 const data = await response.json();
-
-                if (data.msg === "Success" && Array.isArray(data.cameraStat)) {
-                    return data.cameraStat;
-                } else {
-                    console.error('API returned an unexpected format or error:', data);
-                    return [];
-                }
+                return data.items || [];
             } catch (error) {
-                console.error('Error fetching camera stats from API:', error);
-                return [];
+                console.error('❌ Cannot connect to MediaMTX API:', error);
+                return null; // Return null to indicate API error
             }
         }
 
+        /**
+         * Determine camera status based on MediaMTX path info
+         */
+        function determineCameraStatus(pathInfo, cameraName) {
+            const now = Date.now();
+
+            // Initialize byte history if not exists
+            if (!cameraByteHistory[cameraName]) {
+                cameraByteHistory[cameraName] = {
+                    lastBytes: 0,
+                    lastBytesTime: now,
+                    status: STATUS.UNKNOWN
+                };
+            }
+
+            const history = cameraByteHistory[cameraName];
+
+            // ===== OFFLINE CHECK =====
+            if (!pathInfo ||
+                pathInfo.ready !== true ||
+                !pathInfo.source ||
+                pathInfo.source.type !== 'rtmpConn') {
+                history.status = STATUS.OFFLINE;
+                history.lastBytes = 0;
+                history.lastBytesTime = now;
+                return STATUS.OFFLINE;
+            }
+
+            // ===== FROZEN CHECK =====
+            const currentBytes = pathInfo.bytesReceived || 0;
+
+            // First time seeing this camera online
+            if (history.lastBytes === 0) {
+                history.lastBytes = currentBytes;
+                history.lastBytesTime = now;
+                history.status = STATUS.ONLINE;
+                return STATUS.ONLINE;
+            }
+
+            // Bytes increased = camera is streaming data
+            if (currentBytes > history.lastBytes) {
+                history.lastBytes = currentBytes;
+                history.lastBytesTime = now;
+                history.status = STATUS.ONLINE;
+                return STATUS.ONLINE;
+            }
+
+            // Bytes haven't changed for too long = FROZEN
+            if (now - history.lastBytesTime > FREEZE_TIMEOUT) {
+                history.status = STATUS.FROZEN;
+                return STATUS.FROZEN;
+            }
+
+            // Still considered online (within freeze timeout window)
+            return history.status === STATUS.FROZEN ? STATUS.FROZEN : STATUS.ONLINE;
+        }
+
+        /**
+         * Process MediaMTX paths and return camera status array
+         */
+        async function fetchCameraStatusesFromAPI() {
+            const items = await fetchMediaMTXPaths();
+
+            // API connection error
+            if (items === null) {
+                return [];
+            }
+
+            const cameraStats = [];
+
+            items.forEach(pathInfo => {
+                const cameraName = pathInfo.name;
+                const status = determineCameraStatus(pathInfo, cameraName);
+
+                cameraStats.push({
+                    camera: cameraName,
+                    path: pathInfo.name,
+                    status: status,
+                    bytesReceived: pathInfo.bytesReceived || 0,
+                    bytesSent: pathInfo.bytesSent || 0,
+                    readyTime: pathInfo.readyTime || null,
+                    tracks: pathInfo.tracks || [],
+                    readers: pathInfo.readers?.length || 0,
+                    sourceType: pathInfo.source?.type || 'unknown'
+                });
+            });
+
+            return cameraStats;
+        }
+
+        /**
+         * Update dashboard statistics
+         */
         function updateDashboardStats(cameraData) {
             const total = cameraData.length;
-            const online = cameraData.filter(cam => parseInt(cam.status, 10) === 1).length;
-            const offline = total - online;
+            const online = cameraData.filter(cam => cam.status === STATUS.ONLINE).length;
+            const offline = cameraData.filter(cam => cam.status === STATUS.OFFLINE).length;
+            const frozen = cameraData.filter(cam => cam.status === STATUS.FROZEN).length;
             const selected = document.querySelectorAll('.form-check-input:checked').length;
 
             document.getElementById('totalCameras').textContent = total;
             document.getElementById('onlineCameras').textContent = online;
             document.getElementById('offlineCameras').textContent = offline;
+            document.getElementById('frozenCameras').textContent = frozen;
             document.getElementById('selectedCameras').textContent = selected;
         }
 
+        /**
+         * Get status display properties
+         */
+        function getStatusDisplay(status) {
+            switch (status) {
+                case STATUS.ONLINE:
+                    return { class: 'online', text: 'ออนไลน์', icon: '🟢', color: '#10b981' };
+                case STATUS.OFFLINE:
+                    return { class: 'offline', text: 'ออฟไลน์', icon: '🔴', color: '#ef4444' };
+                case STATUS.FROZEN:
+                    return { class: 'frozen', text: 'ภาพค้าง', icon: '🟡', color: '#f59e0b' };
+                default:
+                    return { class: 'unknown', text: 'ไม่ทราบ', icon: '⚪', color: '#6b7280' };
+            }
+        }
+
+        /**
+         * Update camera status table
+         */
         function updateCameraTable(cameraData) {
             const tbody = document.getElementById('cameraTableBody');
 
@@ -352,7 +494,9 @@ $currentPage = 'streaming';
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="4" style="text-align: center; padding: 2rem; color: #6b7280;">
-                            ไม่มีข้อมูลกล้อง
+                            <i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
+                            ไม่พบกล้องจาก MediaMTX API<br>
+                            <small>กรุณาตรวจสอบการเชื่อมต่อ</small>
                         </td>
                     </tr>
                 `;
@@ -360,32 +504,51 @@ $currentPage = 'streaming';
             }
 
             tbody.innerHTML = cameraData.map(cam => {
-                const status = parseInt(cam.status, 10);
-                const statusClass = status === 1 ? 'online' : 'offline';
-                const statusText = status === 1 ? 'ออนไลน์' : 'ออฟไลน์';
-                const STREAMING_PORT = 26080;
-                const streamUrl = `${BASE_URL}:${STREAMING_PORT}/detectionstreaming/${cam.camera}`;
+                const statusDisplay = getStatusDisplay(cam.status);
+                const streamUrl = `http://${STREAMING_HOST}:${STREAMING_PORT}/${cam.path}`;
                 const currentTime = new Date().toLocaleTimeString('th-TH');
+                const bytesFormatted = formatBytes(cam.bytesReceived);
 
                 return `
                     <tr>
-                        <td><strong>${cam.camera}</strong></td>
                         <td>
-                            <span class="table-status-badge ${statusClass}">
-                                <span class="table-status-dot ${statusClass}"></span>
-                                ${statusText}
+                            <strong>${cam.camera}</strong>
+                            <br><small style="color: #6b7280; font-size: 0.75rem;">
+                                ${cam.tracks.join(', ')} • ${cam.readers} viewers
+                            </small>
+                        </td>
+                        <td>
+                            <span class="table-status-badge ${statusDisplay.class}" style="background-color: ${statusDisplay.color}15; color: ${statusDisplay.color}; border: 1px solid ${statusDisplay.color}30;">
+                                <span class="table-status-dot" style="background-color: ${statusDisplay.color};"></span>
+                                ${statusDisplay.text}
                             </span>
                         </td>
-                        <td style="font-size: 0.8rem; color: #6b7280; word-break: break-all;">${streamUrl}</td>
+                        <td style="font-size: 0.8rem; color: #6b7280;">
+                            ${bytesFormatted} received
+                        </td>
                         <td>${currentTime}</td>
                     </tr>
                 `;
             }).join('');
         }
 
+        /**
+         * Format bytes to human readable string
+         */
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        /**
+         * Render camera selection dropdown
+         */
         async function renderCameraDropdown() {
             const dropdown = document.getElementById('cameraDropdown');
-            dropdown.innerHTML = '';
+            dropdown.innerHTML = '<div style="text-align: center; padding: 1rem;"><div class="loading-spinner"></div></div>';
 
             const apiCameraStats = await fetchCameraStatusesFromAPI();
 
@@ -393,28 +556,27 @@ $currentPage = 'streaming';
             updateDashboardStats(apiCameraStats);
             updateCameraTable(apiCameraStats);
 
+            dropdown.innerHTML = '';
+
+            if (apiCameraStats.length === 0) {
+                dropdown.innerHTML = `
+                    <div style="text-align: center; padding: 1rem; color: #6b7280;">
+                        <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
+                        ไม่พบกล้องจาก MediaMTX
+                    </div>
+                `;
+                return;
+            }
+
             apiCameraStats.forEach((cameraData, index) => {
                 const cameraName = cameraData.camera;
-                const apiStatus = parseInt(cameraData.status, 10);
+                const statusDisplay = getStatusDisplay(cameraData.status);
 
-                const STREAMING_PORT = 26080;
-                const STREAMING_BASE_URL = `${BASE_URL}:${STREAMING_PORT}/detectionstreaming`;
-                const FULL_STREAMING_URL = `${STREAMING_BASE_URL}/${cameraName}`;
-
-                currentStatus[index] = {
-                    name: cameraName.trim(),
-                    streamUrl: FULL_STREAMING_URL,
-                    apiStatus
-                };
-
-                if (!FULL_STREAMING_URL) {
-                    console.warn(`No stream URL defined for camera: ${cameraName}. Skipping.`);
-                    return;
-                }
+                // Generate WebRTC streaming URL
+                const FULL_STREAMING_URL = `http://${STREAMING_HOST}:${STREAMING_PORT}/${cameraData.path}`;
 
                 const htmlId = `camera-${cameraName.replace(/[^a-zA-Z0-9]/g, '-')}`;
-                const statusClass = apiStatus === 1 ? 'online' : 'offline';
-                const isChecked = 'checked';
+                const isChecked = cameraData.status !== STATUS.OFFLINE ? 'checked' : '';
 
                 const cameraItem = document.createElement('div');
                 cameraItem.className = 'camera-item';
@@ -423,13 +585,16 @@ $currentPage = 'streaming';
                         type="checkbox"
                         id="${htmlId}"
                         data-camera-name="${cameraName}"
+                        data-camera-path="${cameraData.path}"
                         data-stream-url="${FULL_STREAMING_URL}"
-                        data-status="${apiStatus}"
+                        data-status="${cameraData.status}"
                         ${isChecked}>
                     <label class="camera-label" for="${htmlId}">
                         <i class="fas fa-video me-2"></i>${cameraName}
                     </label>
-                    <span id="${htmlId}-status" class="camera-status ${statusClass}"></span>
+                    <span id="${htmlId}-status" class="camera-status ${statusDisplay.class}" 
+                          style="background-color: ${statusDisplay.color};" 
+                          title="${statusDisplay.text}"></span>
                 `;
 
                 dropdown.appendChild(cameraItem);
@@ -441,6 +606,9 @@ $currentPage = 'streaming';
             });
         }
 
+        /**
+         * Update video streams based on selection
+         */
         async function updateStreams() {
             const streamContainer = document.getElementById('streamContainer');
             const selectedCheckboxes = Array.from(document.querySelectorAll('.form-check-input:checked'));
@@ -464,6 +632,7 @@ $currentPage = 'streaming';
                 if (message) message.remove();
             }
 
+            // Remove unselected cameras
             document.querySelectorAll('.video-wrapper').forEach(wrapper => {
                 const wrapperId = wrapper.id.replace('stream-', '');
                 if (!selectedIds.has(wrapperId)) {
@@ -472,15 +641,17 @@ $currentPage = 'streaming';
                 }
             });
 
+            // Add/update selected cameras
             selectedCheckboxes.forEach(checkbox => {
                 const stream = {
                     id: checkbox.id,
                     name: checkbox.dataset.cameraName,
+                    path: checkbox.dataset.cameraPath,
                     streamUrl: checkbox.dataset.streamUrl,
-                    status: parseInt(checkbox.dataset.status, 10)
+                    status: checkbox.dataset.status
                 };
 
-                let videoWrapper = document.querySelector(`#stream-${stream.id}`);
+                let videoWrapper = document.querySelector(`#stream-${CSS.escape(stream.id)}`);
                 let isNewWrapper = !videoWrapper;
 
                 if (isNewWrapper) {
@@ -494,6 +665,9 @@ $currentPage = 'streaming';
             });
         }
 
+        /**
+         * Create video wrapper element
+         */
         function createVideoWrapper(id, name) {
             const wrapper = document.createElement('div');
             wrapper.id = `stream-${id}`;
@@ -507,41 +681,64 @@ $currentPage = 'streaming';
             return wrapper;
         }
 
+        /**
+         * Update camera display based on status
+         */
         function updateCameraDisplay(wrapper, camera) {
-            const statusClass = camera.status === 1 ? 'status-badge-online' : 'status-badge-offline';
-            const statusText = camera.status === 1 ? 'ออนไลน์' : 'ออฟไลน์';
-            const statusIcon = camera.status === 1 ? 'fa-circle' : 'fa-circle';
+            const statusDisplay = getStatusDisplay(camera.status);
+            const statusClass = `status-badge-${statusDisplay.class}`;
 
-            if (camera.status === 0) {
+            if (camera.status === STATUS.OFFLINE) {
                 wrapper.innerHTML = `
                     <div class="video-header">
                         <div class="video-name">
                             <i class="fas fa-video"></i>
                             ${camera.name}
                         </div>
-                        <div class="video-status-badge ${statusClass}">
-                            <i class="fas ${statusIcon}"></i>
-                            ${statusText}
+                        <div class="video-status-badge ${statusClass}" style="background-color: ${statusDisplay.color}20; color: ${statusDisplay.color};">
+                            <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                            ${statusDisplay.text}
                         </div>
                     </div>
                     <div class="video-content">
                         <div class="video-placeholder">
-                            <i class="fas fa-video-slash"></i>
+                            <i class="fas fa-video-slash" style="color: ${statusDisplay.color};"></i>
                             <p>กล้องไม่พร้อมใช้งาน</p>
-                            <small>Camera is not available</small>
+                            <small>Camera is offline - No RTMP connection</small>
                         </div>
                     </div>
                 `;
-            } else {
+            } else if (camera.status === STATUS.FROZEN) {
                 wrapper.innerHTML = `
                     <div class="video-header">
                         <div class="video-name">
                             <i class="fas fa-video"></i>
                             ${camera.name}
                         </div>
-                        <div class="video-status-badge ${statusClass}">
-                            <i class="fas ${statusIcon}"></i>
-                            ${statusText}
+                        <div class="video-status-badge ${statusClass}" style="background-color: ${statusDisplay.color}20; color: ${statusDisplay.color};">
+                            <i class="fas fa-snowflake" style="font-size: 0.6rem;"></i>
+                            ${statusDisplay.text}
+                        </div>
+                    </div>
+                    <div class="video-content">
+                        <div class="video-placeholder" style="background: linear-gradient(135deg, #fef3c720 0%, #fbbf2420 100%);">
+                            <i class="fas fa-snowflake" style="color: ${statusDisplay.color}; animation: spin 3s linear infinite;"></i>
+                            <p style="color: ${statusDisplay.color};">ภาพค้าง - ไม่มีข้อมูลใหม่</p>
+                            <small>Stream frozen - No new data received</small>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // ONLINE - Show iframe
+                wrapper.innerHTML = `
+                    <div class="video-header">
+                        <div class="video-name">
+                            <i class="fas fa-video"></i>
+                            ${camera.name}
+                        </div>
+                        <div class="video-status-badge ${statusClass}" style="background-color: ${statusDisplay.color}20; color: ${statusDisplay.color};">
+                            <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                            ${statusDisplay.text}
                         </div>
                     </div>
                     <div class="video-content">
@@ -558,8 +755,12 @@ $currentPage = 'streaming';
             }
         }
 
-        // Update camera status every 3 seconds
+        // ===== PERIODIC STATUS CHECK =====
         setInterval(async () => {
+            console.log('================================');
+            console.log('=== MediaMTX RTMP PUSH MONITOR ===');
+            console.log(new Date().toLocaleString('th-TH'));
+
             const apiCameraStats = await fetchCameraStatusesFromAPI();
             let hasChanged = false;
 
@@ -567,22 +768,35 @@ $currentPage = 'streaming';
             updateDashboardStats(apiCameraStats);
             updateCameraTable(apiCameraStats);
 
+            // Log status for each camera
+            apiCameraStats.forEach(cam => {
+                const statusDisplay = getStatusDisplay(cam.status);
+                console.log(`${statusDisplay.icon} ${cam.camera} (${cam.path}) ${cam.status}`);
+            });
+
+            // Check for status changes in checkboxes
             document.querySelectorAll('.form-check-input').forEach(checkbox => {
                 const cameraName = checkbox.dataset.cameraName;
                 const cameraInfo = apiCameraStats.find(cam => cam.camera === cameraName);
 
                 if (cameraInfo) {
-                    const newStatus = parseInt(cameraInfo.status, 10);
-                    const currentStatus = parseInt(checkbox.dataset.status, 10);
+                    const newStatus = cameraInfo.status;
+                    const currentStatus = checkbox.dataset.status;
 
                     if (currentStatus !== newStatus) {
                         hasChanged = true;
                         checkbox.dataset.status = newStatus;
 
-                        const statusElement = document.querySelector(`#${checkbox.id}-status`);
+                        const statusDisplay = getStatusDisplay(newStatus);
+                        const statusElement = document.querySelector(`#${CSS.escape(checkbox.id)}-status`);
                         if (statusElement) {
-                            statusElement.className = 'camera-status ' + (newStatus === 1 ? 'online' : 'offline');
+                            statusElement.className = `camera-status ${statusDisplay.class}`;
+                            statusElement.style.backgroundColor = statusDisplay.color;
+                            statusElement.title = statusDisplay.text;
                         }
+
+                        // Alert on status change
+                        console.log(`⚡ Status changed: ${cameraName} ${currentStatus} → ${newStatus}`);
                     }
                 }
             });
@@ -590,7 +804,7 @@ $currentPage = 'streaming';
             if (hasChanged) {
                 await updateStreams();
             }
-        }, 3000);
+        }, CHECK_INTERVAL);
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', async function () {
