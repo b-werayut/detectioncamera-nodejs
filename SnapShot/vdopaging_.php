@@ -290,7 +290,7 @@ try {
 
                 activeCams.forEach(cam => {
                     selectcam.append(
-                        `<option value="${cam.CameraID}">${cam.CameraName}</option>`
+                        `<option value="${cam.CameraName}">${cam.CameraName}</option>`
                     );
                 });
 
@@ -310,8 +310,239 @@ try {
             }
         }
 
+        async function selectCam() {
+            const selectcamval = $('#selectcam').val();
+            const selectdatasbtn = $('#selectdatas');
+            const thaiMonths = [
+                "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+                "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+            ];
+
+            $('.selectdataoption').remove();
+
+
+            selectdatasbtn.removeAttr('disabled');
+
+            $.ajax({
+                url: '/SnapShot/vdopagingdata.php',
+                data: `selectcamval=${selectcamval}`,
+                method: 'GET',
+                success: (resp) => {
+                    try {
+                        let obj = jQuery.parseJSON(resp);
+                        if (obj.datas == '') {
+                            $('#selectdatas').prop('disabled', true);
+                            Swal.fire({
+                                title: "ไม่มีข้อมูล!",
+                                icon: "warning",
+                                confirmButtonText: "ตกลง",
+                                confirmButtonColor: '#0d4d3d'
+                            });
+                        }
+
+                        $.each(obj.datas, (i, items) => {
+                            let datas = items;
+                            let datassplit = datas.split("_");
+                            if (datassplit.length >= 3) {
+                                let day = datassplit[1].slice(6);
+                                let month = datassplit[1].slice(4, 6);
+                                let monththai = thaiMonths[parseInt(month) - 1];
+                                let year = datassplit[1].slice(0, 4);
+                                let yearthai = parseInt(year) + 543;
+                                let hour = datassplit[2].slice(0, 2);
+                                let minute = datassplit[2].slice(2, 4);
+                                let sec = datassplit[2].slice(4);
+                                let datetimedisplay = `วันที่ ${day} ${monththai} ${yearthai} เวลา ${hour}:${minute}:${sec}`;
+
+                                selectdatasbtn.append(`<option class="selectdataoption" value="${items}">${datetimedisplay}</option>`);
+                            }
+                        });
+                    } catch (e) {
+                        console.error("JSON Error:", e);
+                    }
+                },
+                error: (data) => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "เกิดข้อผิดพลาดในการเชื่อมต่อ",
+                        confirmButtonColor: '#0d4d3d'
+                    });
+                }
+            });
+        }
+
+
+        async function selectData() {
+            let nodata = $("<h5 id='nodatah2'>อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>");
+
+            $('.page-item, #snappath').hide();
+            $('#nodatah2, #nodata').show();
+
+            let selectdatasval = $('#selectdatas').val();
+            if (!selectdatasval || selectdatasval === "0") return;
+
+            let camname = selectdatasval.split("_");
+            let camnamef = camname[0];
+
+            let selectdatasdt = selectdatasval.slice(13, 29).replaceAll('_', '');
+            let selectdatasdatefm = `${selectdatasdt.slice(0, 4)}-${selectdatasdt.slice(4, 6)}-${selectdatasdt.slice(6, 8)} ${selectdatasdt.slice(8, 10)}:${selectdatasdt.slice(10, 12)}:${selectdatasdt.slice(12, 14)}`;
+
+            const futuretimeCalc = formatDatefuturetime(selectdatasdatefm);
+
+            $('.vdobox, .vdodisplay, .vdonamex').fadeOut(100);
+
+            if (selectdatasval == 0) {
+                Swal.fire({
+                    icon: "error",
+                    title: "กรุณาเลือกข้อมูล!",
+                    confirmButtonColor: '#0d4d3d'
+                })
+            } else {
+                Swal.fire({
+                    title: "กำลังดึงข้อมูลวิดีโอ!",
+                    timer: 2000,
+                    didOpen: () => { Swal.showLoading(); },
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        $.ajax({
+                            url: '/SnapShot/vdopagingdata.php',
+                            data: `selectdatas=${selectdatasval}`,
+                            method: 'GET',
+                            success: (resp) => {
+                                let obj = jQuery.parseJSON(resp);
+                                if (obj.vdonames == '') {
+                                    $('#nodata').show();
+                                    $('.page-item, #snappath').hide();
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "ไม่พบไฟล์วิดีโอ",
+                                        confirmButtonColor: '#0d4d3d'
+                                    });
+                                } else {
+                                    $('#nodatah2').remove();
+                                    snappath.fadeIn(function () {
+                                        $('#filedate').html(`<i class="fas fa-calendar me-2"></i>ข้อมูลวันที่: ${obj.filedates}`);
+                                    });
+                                    $('.vdodisplay').fadeIn(200);
+
+                                    pagingSelectDatas(selectdatasval, obj.vdonames, camnamef);
+
+                                    let vdonamex = $('.vdonamex');
+                                    $.each(obj.vdonamexs, function (i, item) {
+                                        if (i >= 5) return false;
+                                        vdonamex.append(`<li class="vdobox col-md-3 p-2 text-center"><video width="100%" muted controls class="img-thumbnail"><source src="/eventfolder/${camnamef}/${selectdatasval}/vdo/x/${item}" type="video/mp4"></video></li>`);
+                                    });
+                                    vdonamex.fadeIn(400);
+                                    $('#nodata, #nodatah2').hide();
+                                    $('.page-item').show();
+                                }
+                            },
+                            error: (data) => {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "โหลดข้อมูลไม่สำเร็จ!",
+                                    confirmButtonColor: '#0d4d3d'
+                                });
+                                nodata.appendTo('#nodata');
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+        $('#selectdatas').attr('disabled', 'disabled');
+        let futuretime = '<?= $futuretimecf ?>';
+        let beforetimeraw = '<?= $beforetime ?>';
+        let beforetime = parseInt(beforetimeraw) + 1;
+        let snappath = $('#snappath');
+        snappath.hide();
+
+        function formatDatefuturetime(selectdatasdatefm) {
+            let ndt = new Date(selectdatasdatefm);
+            let year = String(ndt.getFullYear()).padStart(2, '0');
+            let month = String(ndt.getMonth() + 1).padStart(2, '0');
+            let day = String(ndt.getDate()).padStart(2, '0');
+            let hours = String(ndt.getHours()).padStart(2, '0');
+            ndt.setMinutes(ndt.getMinutes() + parseInt(futuretime));
+            ndt.setSeconds(ndt.getSeconds() + 40);
+            let minutes = String(ndt.getMinutes()).padStart(2, '0');
+            let sec = String(ndt.getSeconds()).padStart(2, '0');
+            return `${year}${month}${day}${hours}${minutes}${sec}`;
+        }
+
+        function formatDatebeforetime(selectdatasdatefm) {
+            let ndt = new Date(selectdatasdatefm);
+            let year = String(ndt.getFullYear()).padStart(2, '0');
+            let month = String(ndt.getMonth() + 1).padStart(2, '0');
+            let day = String(ndt.getDate()).padStart(2, '0');
+            let hours = String(ndt.getHours()).padStart(2, '0');
+            ndt.setMinutes(ndt.getMinutes() - parseInt(beforetime));
+            ndt.setSeconds(ndt.getSeconds() - 40);
+            let minutes = String(ndt.getMinutes()).padStart(2, '0');
+            let sec = String(ndt.getSeconds()).padStart(2, '0');
+            return `${year}${month}${day}${hours}${minutes}${sec}`;
+        }
+
+        function pagingSelectDatas(path, json, camnamef) {
+            const items = json;
+            const itemsPerPage = 20;
+            let currentPage = 1;
+
+            function displayItems2(page) {
+                const startIndex = (page - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const itemsToDisplay = items.slice(startIndex, endIndex);
+
+                const itemList = document.getElementById('vdodisplay');
+                itemList.innerHTML = "";
+                let vdodisplay = $('.vdodisplay');
+
+                itemsToDisplay.map(item => {
+                    if (item == "X") return false;
+                    vdodisplay.append(`<li class="vdobox col-md-3 p-2 text-center"><video width="100%" muted controls class="img-thumbnail"><source src="/eventfolder/${camnamef}/${path}/vdo/${item}" type="video/mp4"></video></li>`);
+                });
+                vdodisplay.hide().fadeIn(400);
+            }
+
+            function displayPagination2() {
+                const totalPages = Math.ceil(items.length / itemsPerPage);
+                const pagination = document.getElementById('pagination');
+                pagination.innerHTML = "";
+
+                if (totalPages > 1) {
+                    const prevPage = document.createElement('div');
+                    prevPage.className = "page-item";
+                    prevPage.innerHTML = '<a class="page-link"><i class="fas fa-chevron-left"></i></a>';
+                    prevPage.onclick = function () { if (currentPage > 1) { currentPage--; updatePagination2(); } };
+                    pagination.appendChild(prevPage);
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        const page = document.createElement('div');
+                        page.className = "page-item" + (i === currentPage ? " active" : "");
+                        page.innerHTML = `<a class="page-link">${i}</a>`;
+                        page.onclick = function () { currentPage = i; updatePagination2(); };
+                        pagination.appendChild(page);
+                    }
+
+                    const nextPage = document.createElement('div');
+                    nextPage.className = "page-item";
+                    nextPage.innerHTML = '<a class="page-link"><i class="fas fa-chevron-right"></i></a>';
+                    nextPage.onclick = function () { if (currentPage < totalPages) { currentPage++; updatePagination2(); } };
+                    pagination.appendChild(nextPage);
+                }
+            }
+
+            function updatePagination2() {
+                displayItems2(currentPage);
+                displayPagination2();
+            }
+
+            updatePagination2();
+        }
+
         $(document).ready(function () {
-            toggleControls(); // ตอนโหลดหน้า
+            toggleControls();
 
             $('#selectproject').on('change', function () {
                 toggleControls();
@@ -346,243 +577,6 @@ try {
                 }
             }
 
-            $('#selectdatas').attr('disabled', 'disabled');
-            let futuretime = '<?= $futuretimecf ?>';
-            let beforetimeraw = '<?= $beforetime ?>';
-            let beforetime = parseInt(beforetimeraw) + 1;
-            let snappath = $('#snappath');
-            snappath.hide();
-
-            function changeProject() {
-                const projectId = document.getElementById('selectproject').value;
-                window.location.href = "?projectId=" + projectId;
-            }
-
-            function selectCam() {
-                const selectcamval = $('#selectcam').val();
-                const selectdatasbtn = $('#selectdatas');
-                const thaiMonths = [
-                    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-                    "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-                ];
-
-                $('.selectdataoption').remove();
-
-                if (selectcamval == "0" || selectcamval == "") {
-                    selectdatasbtn.attr('disabled', 'disabled');
-                } else {
-                    selectdatasbtn.removeAttr('disabled');
-
-                    $.ajax({
-                        url: '/SnapShot/vdopagingdata.php',
-                        data: `selectcamval=${selectcamval}`,
-                        method: 'GET',
-                        success: (resp) => {
-                            try {
-                                let obj = jQuery.parseJSON(resp);
-                                if (obj.datas == '') {
-                                    $('#selectdatas').prop('disabled', true);
-                                    Swal.fire({
-                                        title: "ไม่มีข้อมูล!",
-                                        icon: "warning",
-                                        confirmButtonText: "ตกลง",
-                                        confirmButtonColor: '#0d4d3d'
-                                    });
-                                }
-
-                                $.each(obj.datas, (i, items) => {
-                                    let datas = items;
-                                    let datassplit = datas.split("_");
-                                    if (datassplit.length >= 3) {
-                                        let day = datassplit[1].slice(6);
-                                        let month = datassplit[1].slice(4, 6);
-                                        let monththai = thaiMonths[parseInt(month) - 1];
-                                        let year = datassplit[1].slice(0, 4);
-                                        let yearthai = parseInt(year) + 543;
-                                        let hour = datassplit[2].slice(0, 2);
-                                        let minute = datassplit[2].slice(2, 4);
-                                        let sec = datassplit[2].slice(4);
-                                        let datetimedisplay = `วันที่ ${day} ${monththai} ${yearthai} เวลา ${hour}:${minute}:${sec}`;
-
-                                        selectdatasbtn.append(`<option class="selectdataoption" value="${items}">${datetimedisplay}</option>`);
-                                    }
-                                });
-                            } catch (e) {
-                                console.error("JSON Error:", e);
-                            }
-                        },
-                        error: (data) => {
-                            Swal.fire({
-                                icon: "error",
-                                title: "เกิดข้อผิดพลาดในการเชื่อมต่อ",
-                                confirmButtonColor: '#0d4d3d'
-                            });
-                        }
-                    });
-                }
-            }
-
-            function formatDatefuturetime(selectdatasdatefm) {
-                let ndt = new Date(selectdatasdatefm);
-                let year = String(ndt.getFullYear()).padStart(2, '0');
-                let month = String(ndt.getMonth() + 1).padStart(2, '0');
-                let day = String(ndt.getDate()).padStart(2, '0');
-                let hours = String(ndt.getHours()).padStart(2, '0');
-                ndt.setMinutes(ndt.getMinutes() + parseInt(futuretime));
-                ndt.setSeconds(ndt.getSeconds() + 40);
-                let minutes = String(ndt.getMinutes()).padStart(2, '0');
-                let sec = String(ndt.getSeconds()).padStart(2, '0');
-                return `${year}${month}${day}${hours}${minutes}${sec}`;
-            }
-
-            function formatDatebeforetime(selectdatasdatefm) {
-                let ndt = new Date(selectdatasdatefm);
-                let year = String(ndt.getFullYear()).padStart(2, '0');
-                let month = String(ndt.getMonth() + 1).padStart(2, '0');
-                let day = String(ndt.getDate()).padStart(2, '0');
-                let hours = String(ndt.getHours()).padStart(2, '0');
-                ndt.setMinutes(ndt.getMinutes() - parseInt(beforetime));
-                ndt.setSeconds(ndt.getSeconds() - 40);
-                let minutes = String(ndt.getMinutes()).padStart(2, '0');
-                let sec = String(ndt.getSeconds()).padStart(2, '0');
-                return `${year}${month}${day}${hours}${minutes}${sec}`;
-            }
-
-            function selectData() {
-                let nodata = $("<h5 id='nodatah2'>อาจเกิดจากระบบยังดึงข้อมูลมาไม่ทัน ให้ลองใหม่ภายหลัง</h5>");
-
-                $('.page-item, #snappath').hide();
-                $('#nodatah2, #nodata').show();
-
-                let selectdatasval = $('#selectdatas').val();
-                if (!selectdatasval || selectdatasval === "0") return;
-
-                let camname = selectdatasval.split("_");
-                let camnamef = camname[0];
-
-                let selectdatasdt = selectdatasval.slice(13, 29).replaceAll('_', '');
-                let selectdatasdatefm = `${selectdatasdt.slice(0, 4)}-${selectdatasdt.slice(4, 6)}-${selectdatasdt.slice(6, 8)} ${selectdatasdt.slice(8, 10)}:${selectdatasdt.slice(10, 12)}:${selectdatasdt.slice(12, 14)}`;
-
-                const futuretimeCalc = formatDatefuturetime(selectdatasdatefm);
-
-                $('.vdobox, .vdodisplay, .vdonamex').fadeOut(100);
-
-                if (selectdatasval == 0) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "กรุณาเลือกข้อมูล!",
-                        confirmButtonColor: '#0d4d3d'
-                    })
-                } else {
-                    Swal.fire({
-                        title: "กำลังดึงข้อมูลวิดีโอ!",
-                        timer: 2000,
-                        didOpen: () => { Swal.showLoading(); },
-                    }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            $.ajax({
-                                url: '/SnapShot/vdopagingdata.php',
-                                data: `selectdatas=${selectdatasval}`,
-                                method: 'GET',
-                                success: (resp) => {
-                                    let obj = jQuery.parseJSON(resp);
-                                    if (obj.vdonames == '') {
-                                        $('#nodata').show();
-                                        $('.page-item, #snappath').hide();
-                                        Swal.fire({
-                                            icon: "error",
-                                            title: "ไม่พบไฟล์วิดีโอ",
-                                            confirmButtonColor: '#0d4d3d'
-                                        });
-                                    } else {
-                                        $('#nodatah2').remove();
-                                        snappath.fadeIn(function () {
-                                            $('#filedate').html(`<i class="fas fa-calendar me-2"></i>ข้อมูลวันที่: ${obj.filedates}`);
-                                        });
-                                        $('.vdodisplay').fadeIn(200);
-
-                                        pagingSelectDatas(selectdatasval, obj.vdonames, camnamef);
-
-                                        let vdonamex = $('.vdonamex');
-                                        $.each(obj.vdonamexs, function (i, item) {
-                                            if (i >= 5) return false;
-                                            vdonamex.append(`<li class="vdobox col-md-3 p-2 text-center"><video width="100%" muted controls class="img-thumbnail"><source src="/eventfolder/${camnamef}/${selectdatasval}/vdo/x/${item}" type="video/mp4"></video></li>`);
-                                        });
-                                        vdonamex.fadeIn(400);
-                                        $('#nodata, #nodatah2').hide();
-                                        $('.page-item').show();
-                                    }
-                                },
-                                error: (data) => {
-                                    Swal.fire({
-                                        icon: "error",
-                                        title: "โหลดข้อมูลไม่สำเร็จ!",
-                                        confirmButtonColor: '#0d4d3d'
-                                    });
-                                    nodata.appendTo('#nodata');
-                                }
-                            });
-                        }
-                    });
-                }
-            }
-
-            function pagingSelectDatas(path, json, camnamef) {
-                const items = json;
-                const itemsPerPage = 20;
-                let currentPage = 1;
-
-                function displayItems2(page) {
-                    const startIndex = (page - 1) * itemsPerPage;
-                    const endIndex = startIndex + itemsPerPage;
-                    const itemsToDisplay = items.slice(startIndex, endIndex);
-
-                    const itemList = document.getElementById('vdodisplay');
-                    itemList.innerHTML = "";
-                    let vdodisplay = $('.vdodisplay');
-
-                    itemsToDisplay.map(item => {
-                        if (item == "X") return false;
-                        vdodisplay.append(`<li class="vdobox col-md-3 p-2 text-center"><video width="100%" muted controls class="img-thumbnail"><source src="/eventfolder/${camnamef}/${path}/vdo/${item}" type="video/mp4"></video></li>`);
-                    });
-                    vdodisplay.hide().fadeIn(400);
-                }
-
-                function displayPagination2() {
-                    const totalPages = Math.ceil(items.length / itemsPerPage);
-                    const pagination = document.getElementById('pagination');
-                    pagination.innerHTML = "";
-
-                    if (totalPages > 1) {
-                        const prevPage = document.createElement('div');
-                        prevPage.className = "page-item";
-                        prevPage.innerHTML = '<a class="page-link"><i class="fas fa-chevron-left"></i></a>';
-                        prevPage.onclick = function () { if (currentPage > 1) { currentPage--; updatePagination2(); } };
-                        pagination.appendChild(prevPage);
-
-                        for (let i = 1; i <= totalPages; i++) {
-                            const page = document.createElement('div');
-                            page.className = "page-item" + (i === currentPage ? " active" : "");
-                            page.innerHTML = `<a class="page-link">${i}</a>`;
-                            page.onclick = function () { currentPage = i; updatePagination2(); };
-                            pagination.appendChild(page);
-                        }
-
-                        const nextPage = document.createElement('div');
-                        nextPage.className = "page-item";
-                        nextPage.innerHTML = '<a class="page-link"><i class="fas fa-chevron-right"></i></a>';
-                        nextPage.onclick = function () { if (currentPage < totalPages) { currentPage++; updatePagination2(); } };
-                        pagination.appendChild(nextPage);
-                    }
-                }
-
-                function updatePagination2() {
-                    displayItems2(currentPage);
-                    displayPagination2();
-                }
-
-                updatePagination2();
-            }
         })
     </script>
 </body>

@@ -400,13 +400,29 @@ body {
 
 .professional-table thead th {
     padding: 1rem;
-    text-align: left;
+    text-align: center;
     font-weight: 600;
     color: white;
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+}
+
+.professional-table tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.professional-table tbody tr:hover {
+    background: var(--light-green);
+}
+
+.professional-table tbody td {
+    padding: 1rem;
+    color: #374151;
+    font-size: 0.9rem;
+    vertical-align: middle;
 }
 
 .professional-table thead th:first-child {
@@ -467,8 +483,49 @@ body {
     animation: pulse-green 2s infinite;
 }
 
-.table-status-dot.offline {
-    background: #ef4444;
+/* DataTables Customization */
+.dataTables_wrapper .dataTables_filter input {
+    border-radius: 8px;
+    padding: 0.4rem 1rem;
+    border: 1px solid #e5e7eb;
+    margin-left: 0.5rem;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(13, 77, 61, 0.1);
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border-radius: 8px;
+    padding: 0.4rem 2rem 0.4rem 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.page-link {
+    color: var(--primary-green);
+    border-radius: 6px;
+    margin: 0 2px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+.page-link:hover {
+    color: var(--secondary-green);
+    background-color: var(--light-green);
+}
+
+.dataTables_info {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
 }
 
 /* Camera Selector - Banking Style */
@@ -631,7 +688,7 @@ body {
 }
 
 .project-selector-wrapper .form-select {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--primary-green);
     border-color: #e5e7eb;
 }
@@ -645,7 +702,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid var(--light-green);
 }
@@ -891,9 +948,9 @@ footer p {
         font-size: 0.95rem;
     }
 
-    .data-table-section {
+    /* .data-table-section {
         padding: 1rem;
-    }
+    } */
 
     .section-title {
         font-size: 1.1rem;

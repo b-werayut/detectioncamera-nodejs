@@ -78,12 +78,12 @@ try {
 
         $projectOptions = '<option value="" '
             . (empty($selectedProjectID) ? 'selected' : '')
-            . ' disabled hidden>เลือกโครงการ</option>';
+            . ' disabled hidden>-- กรุณาเลือกโครงการ --</option>';
 
         while ($row = $stmtProj->fetch(PDO::FETCH_ASSOC)) {
             $selected = ($row['ProjectID'] == $selectedProjectID) ? 'selected' : '';
             $projectOptions .= '<option value="' . $row['ProjectID'] . '" ' . $selected . '>'
-                . $row['ProjectName']
+                . "โครงการ: " . $row['ProjectName']
                 . '</option>';
         }
 
@@ -170,6 +170,7 @@ $currentPage = 'streaming';
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="stylesheet" href="fonts/font-kanit.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="./css/styles.css" rel="stylesheet">
@@ -274,22 +275,30 @@ $currentPage = 'streaming';
                         <i class="fas fa-table"></i>
                         ภาพรวมสถานะกล้อง
                     </h2>
-
-                    <?php if ($roleId == 1): ?>
+                    <?php if ($roleId == 1) { ?>
                         <div class="project-selector-wrapper">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text bg-white border-end-0">
+                            <div class="input-group input-group-lg shadow-sm rounded" style="
+    border: 1px solid green;">
+                                <span class=" input-group-text bg-white border-0">
                                     <i class="fas fa-building text-success"></i>
                                 </span>
-                                <select id="selectproject" class="form-select border-start-0" onchange="changeProject()"
-                                    style="min-width: 200px; font-weight: 600;">
+                                <select id="selectproject" class="form-select border-0 fw-semibold"
+                                    onchange="changeProject()">
                                     <?php echo $projectOptions; ?>
                                 </select>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php } else {
+                        $projectName = $row['ProjectName'];
+                        ?>
+                        <h2 class="section-title">
+                            <i class="fas fa-building me-1"></i>
+                            <?= "โครงการ: " . htmlspecialchars($projectName); ?>
+                        </h2>
+                    <?php }
+                    ; ?>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive table-striped table-hover table-bordered">
                     <table class="professional-table" id="cameraStatusTable">
                         <thead>
                             <tr>
@@ -300,12 +309,7 @@ $currentPage = 'streaming';
                             </tr>
                         </thead>
                         <tbody id="cameraTableBody">
-                            <tr>
-                                <td colspan="4" style="text-align: center; padding: 2rem;">
-                                    <div class="loading-spinner"></div>
-                                    <p style="margin-top: 1rem; color: #6b7280;">กำลังโหลดข้อมูลกล้อง...</p>
-                                </td>
-                            </tr>
+                            <!-- Data will be loaded via DataTables -->
                         </tbody>
                     </table>
                 </div>
@@ -336,6 +340,8 @@ $currentPage = 'streaming';
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <script>
@@ -343,12 +349,12 @@ $currentPage = 'streaming';
          * PHP to JavaScript Variable Injection
          * These variables are required by js/streaming-dashboard.js
          */
-        const currentUserId = '<?php echo $userId ?? ""; ?>';
-        const currentUserRole = '<?php echo $userRole ?? ""; ?>';
-        const selectedProjectID = '<?php echo $selectedProjectID ?? 0; ?>';
-        const getparams = '<?php echo $getparam ?? ''; ?>';
+        var currentUserId = '<?php echo $userId ?? ""; ?>';
+        var currentUserRole = '<?php echo $userRole ?? ""; ?>';
+        var selectedProjectID = '<?php echo $selectedProjectID ?? 0; ?>';
+        var getparams = '<?php echo $getparam ?? ''; ?>';
     </script>
-    
+
     <script src="js/streaming-dashboard.js"></script>
 </body>
 
