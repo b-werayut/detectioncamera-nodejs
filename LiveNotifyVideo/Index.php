@@ -386,9 +386,13 @@ $currentPage = 'streaming';
             try {
                 console.log('📷 Fetching user cameras from getCameraByUser API...');
 
-                const response = await fetchWithTimeout(
-                    `${USER_CAMERA_API_URL}?userId=${encodeURIComponent(currentUserId)}&_=${Date.now()}`
-                );
+                const response = await fetchWithTimeout(USER_CAMERA_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ userID: currentUserId })
+                });
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
