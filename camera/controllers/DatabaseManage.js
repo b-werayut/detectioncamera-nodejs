@@ -211,6 +211,55 @@ exports.getUserIDCustomerexternal = async (req, res) => {
   }
 };
 
+exports.getCameraByUser = async (req, res) => {
+  const { userID } = req.body;
+
+  try {
+    const result = await prisma.Camera.findMany({
+      where: {
+        Project: {
+          Users: {
+            some: {
+              UserId: Number(userID),
+            },
+          },
+        },
+      },
+      select: {
+        CameraID: true,
+        CameraName: true,
+        isActive: true,
+      },
+    });
+    res.send(result);
+  } catch (err) {
+    console.error("Server Error", err);
+    res.status(500).send(err);
+  }
+};
+
+exports.getAllCamera = async (req, res) => {
+  const { projectID } = req.body;
+
+  try {
+    const result = await prisma.Camera.findMany({
+      where: {
+        ProjectID: Number(projectID), // 👈 ตรงตัว
+      },
+      select: {
+        CameraID: true,
+        CameraName: true,
+        isActive: true,
+      },
+    });
+
+    res.send(result);
+  } catch (err) {
+    console.error("getAllCamera error:", err);
+    res.status(500).send({ message: "Server Error" });
+  }
+};
+
 exports.getDataFlutter = async (req, res) => {
   try {
     const useriddb = await prisma.tmstPowerDetectionLogs.findMany({

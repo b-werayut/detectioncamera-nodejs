@@ -5,7 +5,8 @@ const {
   getUserIDCustomer,
   getUserIDCustomerexternal,
   getDataFlutter,
-  testPort,
+  getCameraByUser,
+  getAllCamera,
 } = require("../controllers/DatabaseManage");
 const { delayEventFunct } = require("../Middleware/DelaySendLineFunct");
 const { registerHandler } = require("../controllers/Register");
@@ -38,6 +39,8 @@ router.get("/getcamerastat", getCameraStat);
 router.get("/deldir", delDir);
 router.get("/getuserid", getUserIDCustomer);
 router.get("/streamcheck", streamCheck);
+router.post("/getcamerabyuser", getCameraByUser);
+router.post("/getallcamera", getAllCamera);
 // router.delete('/testdelfolder', deleteOldDir)
 
 router.post("/detect-object", insertObjectLogs);

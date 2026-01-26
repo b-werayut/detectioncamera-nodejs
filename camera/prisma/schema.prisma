@@ -17,23 +17,26 @@ model Address {
   ProvinceId   Int
   ProjectID    Int
   CameraID     Int?
-  Camera       Camera?  @relation(fields: [CameraID], references: [CameraID], onDelete: NoAction)
-  Project      Project  @relation(fields: [ProjectID], references: [ProjectID])
-  Province     Province @relation(fields: [ProvinceId], references: [ProvinceId])
+
+  Camera   Camera? @relation(fields: [CameraID],references: [CameraID],onDelete: NoAction,onUpdate: NoAction)
+  Project  Project @relation(fields: [ProjectID],references: [ProjectID],onDelete: Cascade,onUpdate: NoAction)
+  Province Province @relation(fields: [ProvinceId], references: [ProvinceId])
 }
 
 model Camera {
-  CameraID     Int         @id @default(autoincrement())
-  CameraName   String      @unique
+  CameraID     Int      @id @default(autoincrement())
+  CameraName   String   @unique
   Url          String
   CameraStatus Int
-  isActive     Boolean     @default(false)
-  CreatedAt    DateTime    @default(now())
-  ModifiedDate DateTime    @default(now())
+  isActive     Boolean  @default(false)
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
   ProjectID    Int
 
-  Address      Address[]
-  EventLogs    EventLogs[]
+  Project Project @relation(fields: [ProjectID],references: [ProjectID],onDelete: Cascade,onUpdate: NoAction)
+
+  Address   Address[]
+  EventLogs EventLogs[]
 }
 
 model EventLogs {
@@ -48,7 +51,7 @@ model EventLogs {
   ModifiedDate DateTime @default(now())
 
   CameraID     Int
-  Camera       Camera   @relation(fields: [CameraID], references: [CameraID])
+  Camera       Camera   @relation(fields: [CameraID],references: [CameraID],onDelete: Cascade)
 
   @@unique([CameraID, CameraEvent])
 }
@@ -105,13 +108,16 @@ model PowerLogs {
 
 model Project {
   ProjectID    Int       @id @default(autoincrement())
- ProjectCode  String @db.VarChar(10) @unique
+  ProjectCode  String    @db.VarChar(10) @unique
   ProjectName  String?
   CreatedAt    DateTime  @default(now())
   ModifiedDate DateTime  @default(now())
+
   Address      Address[]
   Users        Users[]
+  Camera       Camera[]
 }
+
 
 model Province {
   ProvinceId   Int       @id @default(autoincrement())
