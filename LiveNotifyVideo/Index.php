@@ -362,11 +362,19 @@ $currentPage = 'streaming';
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), timeout);
 
+            // Create explicit config to avoid browser-level fetch method/body conflicts
+            const config = {
+                ...options,
+                signal: controller.signal
+            };
+
+            // Ensure method is explicitly set for requests with body
+            if (config.body && !config.method) {
+                config.method = 'POST';
+            }
+
             try {
-                const response = await fetch(url, {
-                    ...options,
-                    signal: controller.signal
-                });
+                const response = await fetch(url, config);
                 clearTimeout(timeoutId);
                 return response;
             } catch (error) {
@@ -421,8 +429,8 @@ $currentPage = 'streaming';
 
                 // Retry logic
                 if (retryCount < MAX_RETRIES) {
-                    console.log(`🔄 Retrying... (${retryCount + 1}/${MAX_RETRIES})`); await new
-                        Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+                    console.log(`🔄 Retrying... (${retryCount + 1}/${MAX_RETRIES})`);
+                    await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
                     return fetchUserCameras(retryCount + 1);
                 }
 
