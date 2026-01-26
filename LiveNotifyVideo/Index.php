@@ -269,7 +269,7 @@ $currentPage = 'streaming';
                             <tr>
                                 <th>ชื่อกล้อง</th>
                                 <th>สถานะ</th>
-                                <th>Bytes Received</th>
+                                <th>ปริมาณข้อมูลสตรีม (Bytes)</th>
                                 <th>อัพเดทล่าสุด</th>
                             </tr>
                         </thead>
