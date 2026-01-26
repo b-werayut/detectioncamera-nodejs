@@ -77,19 +77,22 @@ async function fetchWithTimeout(url, options = {}, timeout = API_TIMEOUT) {
  */
 async function fetchUserCameras(retryCount = 0) {
   try {
-    const isSuperAdmin =
-      currentUserRole && currentUserRole.toLowerCase() === "superadmin";
+    const isSuperAdmin = currentUserRole && currentUserRole.toString().trim().toLowerCase() === "superadmin";
+    const projId = selectedProjectID ? selectedProjectID.toString().trim() : "0";
 
     // If SuperAdmin and no project selected, do not load anything from API
-    if (isSuperAdmin && (!selectedProjectID || selectedProjectID === "0")) {
+    if (isSuperAdmin && (!projId || projId === "0" || projId === "")) {
       console.log("🛡️ SuperAdmin: No project selected. Skipping camera fetch.");
+      updateDashboardVisibility(false);
       return new Map();
     }
+
+    updateDashboardVisibility(true);
 
     // Determine target API and Payload
     const API_URL = isSuperAdmin ? ALL_CAMERA_API_URL : USER_CAMERA_API_URL;
     const payload = isSuperAdmin
-      ? { projectID: selectedProjectID }
+      ? { projectID: projId }
       : { userID: currentUserId };
 
     console.log(`📷 Fetching cameras from ${API_URL.split("/").pop()}...`);
@@ -350,6 +353,22 @@ function updateDashboardStats(cameraData) {
   document.getElementById("offlineCameras").textContent = offline;
   document.getElementById("frozenCameras").textContent = frozen;
   document.getElementById("selectedCameras").textContent = selected;
+}
+
+/**
+ * Handle visibility of dashboard sections for SuperAdmin blank state
+ */
+function updateDashboardVisibility(isVisible) {
+  const isSuperAdmin = currentUserRole && currentUserRole.toString().trim().toLowerCase() === "superadmin";
+  if (!isSuperAdmin) return; // Only applies to SuperAdmin
+
+  const feedsSection = document.querySelector(".feeds-section");
+
+  if (isVisible) {
+    if (feedsSection) feedsSection.style.display = "block";
+  } else {
+    if (feedsSection) feedsSection.style.display = "none";
+  }
 }
 
 /**
@@ -814,7 +833,7 @@ setInterval(async () => {
 async function changeProject() {
   const projectId = $("#selectproject").val();
 
-  if (projectId === undefined) return;
+  if (projectId === undefined || projectId === null) return;
 
   console.log(`🚀 Project changed to: ${projectId}`);
 
@@ -851,8 +870,69 @@ async function changeProject() {
   await updateStreams();
 }
 
+/**
+ * Filter projects in the Project Hub grid based on search input
+ */
+function filterProjectHub() {
+  const input = document.getElementById('projectSearch');
+  if (!input) return;
+
+  const filter = input.value.toLowerCase();
+  const items = document.querySelectorAll('.project-hub-item');
+
+  items.forEach(item => {
+    const name = item.dataset.name || "";
+    if (name.includes(filter)) {
+      item.style.display = "flex";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+
+/**
+ * Handle project selection from the Hub UI
+ */
+async function confirmProjectSwitch(id, name) {
+  // 1. Update the UI Label immediately for responsiveness
+  const label = document.querySelector('.active-project-label');
+  if (label) label.textContent = name;
+
+  // 2. Sync the hidden select value
+  const hiddenSelect = document.getElementById('selectproject');
+  if (hiddenSelect) hiddenSelect.value = id;
+
+  // 3. Mark active state in the grid
+  document.querySelectorAll('.project-hub-item').forEach(item => {
+    item.classList.remove('active');
+    const checkIcon = item.querySelector('.fa-check-circle');
+    if (checkIcon) checkIcon.remove();
+  });
+
+  const activeItem = document.querySelector(`.project-hub-item[onclick*="'${id}'"]`);
+  if (activeItem) {
+    activeItem.classList.add('active');
+    activeItem.insertAdjacentHTML('beforeend', '<i class="fas fa-check-circle ms-auto text-success"></i>');
+  }
+
+  // 4. Close the dropdown menu
+  const dropdown = document.getElementById('projectDropdownContainer');
+  if (dropdown) {
+    const bsCollapse = bootstrap.Collapse.getInstance(dropdown);
+    if (bsCollapse) bsCollapse.hide();
+    else $(dropdown).collapse('hide');
+  }
+
+  // 5. Trigger the main data refresh logic
+  await changeProject();
+}
+
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", async function () {
+  // Initialize clock (Start immediately)
+  updateLiveTime();
+  setInterval(updateLiveTime, 1000);
+
   const dropdownButton = document.querySelector(
     '[data-bs-target="#cameraDropdown"]',
   );
@@ -877,6 +957,23 @@ document.addEventListener("DOMContentLoaded", async function () {
   await renderCameraDropdown(true); // Initial load
   await updateStreams();
 });
+
+/**
+ * Update the live time display in the dashboard header
+ */
+function updateLiveTime() {
+  const timeElement = document.getElementById("liveTime");
+  if (!timeElement) return;
+
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const timeString = `${hours}:${minutes}`;
+
+  if (timeElement.textContent !== timeString) {
+    timeElement.textContent = timeString;
+  }
+}
 
 // Auth check
 function getCookie(name) {

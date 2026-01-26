@@ -67,8 +67,8 @@ if (!empty($roleId)) {
     }
 }
 
-$projectOptions = "";
-$isProjectDisabled = "";
+$projects = [];
+$currentProjectTitle = "-- กรุณาเลือกโครงการ --";
 
 try {
     if ($roleId == 1) { // SuperAdmin
@@ -76,37 +76,24 @@ try {
         $stmtProj = $conn->prepare($sqlProj);
         $stmtProj->execute();
 
-        $projectOptions = '<option value="" '
-            . (empty($selectedProjectID) ? 'selected' : '')
-            . ' disabled hidden>-- กรุณาเลือกโครงการ --</option>';
-
         while ($row = $stmtProj->fetch(PDO::FETCH_ASSOC)) {
-            $selected = ($row['ProjectID'] == $selectedProjectID) ? 'selected' : '';
-            $projectOptions .= '<option value="' . $row['ProjectID'] . '" ' . $selected . '>'
-                . "โครงการ: " . $row['ProjectName']
-                . '</option>';
+            $projects[] = $row;
+            if ($row['ProjectID'] == $selectedProjectID) {
+                $currentProjectTitle = $row['ProjectName'];
+            }
         }
-
-        $isProjectDisabled = "";
-
     } else { // Admin / Viewer
         $sqlProj = "SELECT ProjectID, ProjectName FROM Project WHERE ProjectID = ?";
         $stmtProj = $conn->prepare($sqlProj);
         $stmtProj->execute([$userProjectID]);
 
         if ($row = $stmtProj->fetch(PDO::FETCH_ASSOC)) {
-            $projectOptions = '<option value="' . $row['ProjectID'] . '" selected>'
-                . $row['ProjectName']
-                . '</option>';
-        } else {
-            $projectOptions = '<option value="" selected disabled>ไม่พบข้อมูลโครงการ</option>';
+            $projects[] = $row;
+            $currentProjectTitle = $row['ProjectName'];
         }
-
-        $isProjectDisabled = "disabled";
     }
-
 } catch (Exception $e) {
-    $projectOptions = '<option value="">Error Loading Projects</option>';
+    // Error handling
 }
 
 $getparam = $_GET['auth'] ?? '';
@@ -181,8 +168,27 @@ $currentPage = 'streaming';
     <?php include_once '../components/navbar.php'; ?>
 
     <!-- Main Content -->
-    <section class="p-1">
+    <section class="py-4 py-lg-5">
         <div class="container px-lg-5">
+
+            <!-- Page Header -->
+            <div class="page-context-header mb-4 mb-lg-5">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="context-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h1 class="page-title mb-1">Streaming Control Center</h1>
+                        <p class="page-subtitle text-muted mb-0">ระบบติดตามและบริหารจัดการกล้องแบบเรียลไทม์</p>
+                    </div>
+                </div>
+                <div class="d-none d-md-block text-end">
+                    <div class="current-time-badge shadow-sm">
+                        <i class="far fa-clock me-2 text-success"></i>
+                        <span id="liveTime"><?= date('H:i'); ?></span> น.
+                    </div>
+                </div>
+            </div>
 
             <!-- Dashboard Stats -->
             <div class="dashboard-stats">
@@ -268,38 +274,69 @@ $currentPage = 'streaming';
                 </div>
             </div>
 
-            <!-- Camera Status Table -->
+            <!-- Camera Monitoring Overview -->
             <div class="data-table-section">
                 <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-table"></i>
-                        ภาพรวมสถานะกล้อง
-                    </h2>
+                    <div>
+                        <div class="section-badge" style='font-size: 1rem;'><i class="fas fa-table"></i> OVERVIEW</div>
+                        <h2 class="section-title d-none">
+                            <i class="fas fa-table"></i>
+                            ภาพรวมสถานะกล้อง
+                        </h2>
+                    </div>
                     <?php if ($roleId == 1) { ?>
-                        <div class="project-selector-wrapper">
-                            <div class="input-group input-group-lg shadow-sm rounded" style="
-    border: 1px solid green;">
-                                <span class=" input-group-text bg-white border-0">
-                                    <i class="fas fa-building text-success"></i>
+                        <div class="project-switcher-container">
+                            <button class="btn btn-project-switcher shadow-sm" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#projectDropdownContainer">
+                                <i class="fas fa-building me-2"></i>
+                                <span class="active-project-label">
+                                    <?= htmlspecialchars($currentProjectTitle); ?>
                                 </span>
-                                <select id="selectproject" class="form-select border-0 fw-semibold"
-                                    onchange="changeProject()">
-                                    <?php echo $projectOptions; ?>
-                                </select>
+                                <i class="fas fa-chevron-down ms-3 dropdown-arrow"></i>
+                            </button>
+
+                            <!-- Hidden Select for JS Compatibility -->
+                            <select id="selectproject" class="d-none">
+                                <?php foreach ($projects as $proj): ?>
+                                    <option value="<?= $proj['ProjectID'] ?>" <?= ($proj['ProjectID'] == $selectedProjectID) ? 'selected' : '' ?>>
+                                        <?= $proj['ProjectName'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div id="projectDropdownContainer" class="collapse project-hub-dropdown shadow-lg mt-3">
+                                <div class="project-search-wrapper">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="projectSearch" placeholder="ค้นหาโครงการ..."
+                                        onkeyup="filterProjectHub()">
+                                </div>
+                                <div class="project-hub-grid" id="projectHubGrid">
+                                    <?php foreach ($projects as $proj): ?>
+                                        <div class="project-hub-item <?= ($proj['ProjectID'] == $selectedProjectID) ? 'active' : '' ?>"
+                                            onclick="confirmProjectSwitch('<?= $proj['ProjectID'] ?>', '<?= htmlspecialchars($proj['ProjectName']) ?>')"
+                                            data-name="
+                                <?= strtolower($proj['ProjectName']) ?>">
+                                            <div class="hub-icon">
+                                                <i class="fas fa-city"></i>
+                                            </div>
+                                            <span class="hub-name"><?= htmlspecialchars($proj['ProjectName']); ?></span>
+                                            <?php if ($proj['ProjectID'] == $selectedProjectID): ?>
+                                                <i class="fas fa-check-circle ms-auto text-success"></i>
+                                            <?php endif; ?>
+                                        </div> <?php endforeach; ?>
+                                </div>
                             </div>
                         </div>
                     <?php } else {
                         $projectName = $row['ProjectName'];
                         ?>
-                        <h2 class="section-title">
-                            <i class="fas fa-building me-1"></i>
-                            <?= "โครงการ: " . htmlspecialchars($projectName); ?>
-                        </h2>
+                        <?= "<div class='section-badge' style='font-size: 1rem;'>
+        <i class='fas fa-building me-1'></i> โครงการ: " . htmlspecialchars($projectName) . "
+    </div>" ?>
                     <?php }
                     ; ?>
                 </div>
                 <div class="table-responsive table-striped table-hover table-bordered">
-                    <table class="professional-table" id="cameraStatusTable">
+                    <table class="professional-table table-hover" id="cameraStatusTable">
                         <thead>
                             <tr>
                                 <th>ชื่อกล้อง</th>
@@ -315,18 +352,26 @@ $currentPage = 'streaming';
                 </div>
             </div>
 
-            <!-- Camera Selector -->
-            <div class="camera-selector-wrapper text-center">
+            <!-- Global Stream Controls -->
+            <div class="stream-controls-section shadow-sm text-center">
+                <div class="section-badge mx-auto mb-3">SELECT CAMERA</div>
+                <h3 class="mb-4 fw-bold d-none">เลือกกล้อง</h3>
+
                 <button class="btn btn-camera-selector" type="button" data-bs-toggle="collapse"
                     data-bs-target="#cameraDropdown">
-                    <i class="fas fa-list"></i> เลือกกล้องที่ต้องการแสดงผล
+                    <i class="fas fa-th-list"></i> เลือกกล้องที่ต้องการแสดงผล
                 </button>
-
                 <div id="cameraDropdown" class="collapse"></div>
             </div>
 
-            <!-- Stream Container -->
-            <div id="streamContainer"></div>
+            <!-- Live Stream Feeds -->
+            <div class="feeds-section">
+                <div class="d-flex align-items-center gap-2 mb-4">
+                    <div style="width: 4px; height: 24px; background: var(--accent-green); border-radius: 2px;"></div>
+                    <h2 class="section-title mb-0" style="font-size: 1.5rem;">Live Streams</h2>
+                </div>
+                <div id="streamContainer"></div>
+            </div>
         </div>
     </section>
 

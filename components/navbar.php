@@ -34,7 +34,8 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <!-- สตรีมมิ่ง -->
                 <li class="nav-item">
-                    <a class="nav-link <?= $activeStreaming; ?>" aria-current="page" href="<?= $urlstream; ?>">
+                    <a class="nav-link <?= $activeStreaming; ?>" aria-current="page"
+                        href="../livenotifyvideo/index.php">
                         <i class="fas fa-video me-1"></i>
                         <span class="nav-text">สตรีมมิ่ง</span>
                     </a>
