@@ -114,6 +114,9 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
                                         <span>
                                             <?= $userRole; ?>
                                         </span>
+                                        <!-- <span>
+                                           <?php //$userId; ?>
+                                        </span> -->
                                     </div>
                                 <?php endif; ?>
                                 <div class="user-dropdown-item">
