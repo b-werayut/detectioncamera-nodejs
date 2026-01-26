@@ -530,32 +530,76 @@ $currentPage = 'streaming';
             // Step 2: Fetch all MediaMTX paths
             const allPaths = await fetchMediaMTXPaths();
 
-            // Handle MediaMTX API error
+            // Handle MediaMTX API error - still need authorized list to show something
             if (allPaths === null) {
                 console.error('❌ MediaMTX API unavailable');
+                // If we have authorized names, we can at least show them as offline
+                if (authorizedCameraNames) {
+                    const fallbackCameras = Array.from(authorizedCameraNames.keys())
+                        .filter(name => authorizedCameraNames.get(name) === true)
+                        .map(name => ({
+                            camera: name,
+                            path: name,
+                            status: STATUS.OFFLINE,
+                            bytesReceived: 0,
+                            bytesSent: 0
+                        }));
+                    return { cameras: fallbackCameras, error: 'mediamtx_unavailable' };
+                }
                 return { cameras: [], error: 'mediamtx_unavailable' };
             }
 
             // If user camera API fails, fallback based on role
             if (authorizedCameraNames === null) {
                 console.warn('⚠️ User camera API unavailable');
-                // SuperAdmin sees all cameras as fallback
                 if (currentUserRole === 'SuperAdmin') {
                     return { cameras: processMediaMTXPaths(allPaths), error: null };
                 }
                 return { cameras: [], error: 'user_api_unavailable' };
             }
 
-            // Step 3: Filter paths that match authorized cameras AND are active
-            const filteredPaths = allPaths.filter(pathInfo => {
-                const cameraName = pathInfo.name;
-                return authorizedCameraNames.has(cameraName) && authorizedCameraNames.get(cameraName) === true;
+            // Step 3: BASE the list on Authorized Cameras that are ACTIVE
+            // This ensures we show a box for every camera the user *should* see
+            const activeAuthorizedNames = Array.from(authorizedCameraNames.keys())
+                .filter(name => authorizedCameraNames.get(name) === true);
+
+            const comprehensiveCameras = activeAuthorizedNames.map(cameraName => {
+                // Try to find matching path in MediaMTX
+                const pathInfo = allPaths.find(p => p.name === cameraName);
+
+                if (pathInfo) {
+                    // Camera is connected to MediaMTX, process normally
+                    const status = determineCameraStatus(pathInfo, cameraName);
+                    return {
+                        camera: cameraName,
+                        path: pathInfo.name,
+                        status: status,
+                        bytesReceived: pathInfo.bytesReceived || 0,
+                        bytesSent: pathInfo.bytesSent || 0,
+                        readyTime: pathInfo.readyTime || null,
+                        tracks: pathInfo.tracks || [],
+                        readers: pathInfo.readers?.length || 0,
+                        sourceType: pathInfo.source?.type || 'unknown'
+                    };
+                } else {
+                    // Camera exists in Backend but NOT in MediaMTX stream list
+                    return {
+                        camera: cameraName,
+                        path: cameraName, // Fallback path
+                        status: STATUS.OFFLINE,
+                        bytesReceived: 0,
+                        bytesSent: 0,
+                        readyTime: null,
+                        tracks: [],
+                        readers: 0,
+                        sourceType: 'not_found'
+                    };
+                }
             });
 
-            console.log(`📹 Filtered: ${filteredPaths.length}/${allPaths.length} cameras match user permissions`);
+            console.log(`📹 Mapping: Showing ${comprehensiveCameras.length} authorized boxes (${allPaths.length} paths in MediaMTX)`);
 
-            // Step 4: Process filtered paths
-            return { cameras: processMediaMTXPaths(filteredPaths), error: null };
+            return { cameras: comprehensiveCameras, error: null };
         }
 
         /**
@@ -749,9 +793,9 @@ $currentPage = 'streaming';
                 let isChecked = false;
 
                 if (isInitialLoad) {
-                    // 1. On First Load: Default to online cameras
-                    isChecked = cameraData.status !== STATUS.OFFLINE;
-                    if (isChecked) sessionCheckedCameras.add(cameraName);
+                    // 1. On First Load: Default to ALL authorized cameras (show all boxes by default)
+                    isChecked = true;
+                    sessionCheckedCameras.add(cameraName);
                 } else {
                     // 2. Refresh: Use session persistence
                     if (sessionCheckedCameras.has(cameraName)) {
@@ -906,11 +950,11 @@ $currentPage = 'streaming';
                     ${statusDisplay.text}
                 </div>
             </div>
-            <div class="video-content">
+            <div class="video-content" style="background-color: #000;">
                 <div class="video-placeholder">
-                    <i class="fas fa-video-slash" style="color: ${statusDisplay.color};"></i>
-                    <p>กล้องไม่พร้อมใช้งาน</p>
-                    <small>Camera is offline - No RTMP connection</small>
+                    <i class="fas fa-video-slash" style="color: #4b5563; font-size: 3.5rem; margin-bottom: 1.5rem;"></i>
+                    <p style="color: #f3f4f6; font-size: 1.1rem; margin-bottom: 0.5rem;">ไมีมีสัญญาณวีดีโอ</p>
+                    <small style="color: #6b7280;">Camera is offline - Sources not connected</small>
                 </div>
             </div>
             `;
@@ -927,13 +971,12 @@ $currentPage = 'streaming';
                     ${statusDisplay.text}
                 </div>
             </div>
-            <div class="video-content">
-                <div class="video-placeholder"
-                    style="background: linear-gradient(135deg, #fef3c720 0%, #fbbf2420 100%);">
+            <div class="video-content" style="background-color: #000;">
+                <div class="video-placeholder">
                     <i class="fas fa-snowflake"
-                        style="color: ${statusDisplay.color}; animation: spin 3s linear infinite;"></i>
-                    <p style="color: ${statusDisplay.color};">ภาพค้าง - ไม่มีข้อมูลใหม่</p>
-                    <small>Stream frozen - No new data received</small>
+                        style="color: #f59e0b; font-size: 3.5rem; margin-bottom: 1.5rem; animation: spin-slow 8s linear infinite;"></i>
+                    <p style="color: #f3f4f6; font-size: 1.1rem; margin-bottom: 0.5rem;">การเชื่อมต่อขัดข้อง - ภาพค้าง</p>
+                    <small style="color: #6b7280;">Stream frozen - Data transmission interrupted</small>
                 </div>
             </div>
             `;
