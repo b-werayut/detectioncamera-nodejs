@@ -697,6 +697,16 @@ body {
     background-color: #ef4444;
 }
 
+#cameraStatusTable.dataTable {
+    border-collapse: collapse;
+}
+
+#cameraStatusTable.dataTable tbody td {
+    border-top: none !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+
 @keyframes pulse-green {
 
     0%,
