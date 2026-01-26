@@ -612,6 +612,44 @@ body {
     }
 }
 
+/* Integrated Project Selector in Section Header */
+.project-selector-wrapper {
+    max-width: 400px;
+}
+
+.project-selector-wrapper .input-group {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.project-selector-wrapper .input-group:focus-within {
+    box-shadow: 0 10px 15px -3px rgba(13, 77, 61, 0.1);
+    transform: translateY(-1px);
+}
+
+.project-selector-wrapper .form-select {
+    font-size: 0.9rem;
+    color: var(--primary-green);
+    border-color: #e5e7eb;
+}
+
+.project-selector-wrapper .input-group-text {
+    border-color: #e5e7eb;
+    padding-left: 1rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-green);
+}
+
 /* Stream Container */
 #streamContainer {
     display: grid;
