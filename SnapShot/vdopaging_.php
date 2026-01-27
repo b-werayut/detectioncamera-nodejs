@@ -243,71 +243,91 @@ try {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        const API_URL = 'http://www.centrecities.com:26300/api/getallcamera';
+
+        init();
+
+        function init() {
+            const projectId = $('#selectproject').val();
+            if (projectId && projectId !== '0') {
+                changeProject();
+            }
+        }
+
         async function changeProject() {
             const projectId = $('#selectproject').val();
-            const selectcam = $('#selectcam');
-            const selectdatasbtn = $('#selectdatas');
+            const $selectCam = $('#selectcam');
+            const $selectDatasBtn = $('#selectdatas');
 
-            selectcam
-                .empty()
-                .append('<option value="0" selected>-- กรุณาเลือกกล้อง --</option>')
-                .prop('disabled', true);
+            resetCameraSelect();
 
-            selectdatasbtn.prop('disabled', true);
-
-            if (projectId == "0" || projectId == "") return;
+            if (!projectId || projectId === '0') return;
 
             try {
-                const response = await fetch('http://www.centrecities.com:26300/api/getallcamera', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        projectID: projectId
-                    })
-                });
+                const cameras = await fetchCameras(projectId);
+                const activeCams = cameras.filter(cam => cam.isActive);
 
-                if (!response.ok) {
-                    throw new Error('HTTP ' + response.status);
-                }
-
-                const cameras = await response.json();
-
-                const activeCams = cameras.filter(cam => cam.isActive === true);
-
-                if (activeCams.length === 0) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'ไม่พบข้อมูลกล้อง',
-                        text: 'โครงการนี้ยังไม่มีการตั้งค่ากล้อง',
-                        confirmButtonText: 'ตกลง'
-                    });
-
-                    selectcam.prop('disabled', true);
+                if (!activeCams.length) {
+                    showAlert(
+                        'warning',
+                        'ไม่พบข้อมูลกล้อง',
+                        'โครงการนี้ยังไม่มีการตั้งค่ากล้อง'
+                    );
                     return;
                 }
 
-                activeCams.forEach(cam => {
-                    selectcam.append(
-                        `<option value="${cam.CameraName}">${cam.CameraName}</option>`
+                populateCameraSelect(activeCams);
+                $selectCam.prop('disabled', false);
+
+            } catch (error) {
+                console.error('โหลดกล้องไม่สำเร็จ:', error);
+
+                showAlert(
+                    'error',
+                    'เกิดข้อผิดพลาด',
+                    'ไม่สามารถโหลดข้อมูลกล้องได้'
+                );
+            }
+
+            function resetCameraSelect() {
+                $selectCam
+                    .empty()
+                    .append('<option value="0" selected>-- กรุณาเลือกกล้อง --</option>')
+                    .prop('disabled', true);
+
+                $selectDatasBtn.prop('disabled', true);
+            }
+
+            function populateCameraSelect(cameras) {
+                cameras.forEach(({ CameraName }) => {
+                    $selectCam.append(
+                        `<option value="${CameraName}">${CameraName}</option>`
                     );
                 });
-
-                selectcam.prop('disabled', false);
-
-            } catch (err) {
-                console.error('โหลดกล้องไม่สำเร็จ:', err);
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'เกิดข้อผิดพลาด',
-                    text: 'ไม่สามารถโหลดข้อมูลกล้องได้',
-                    confirmButtonText: 'ตกลง'
-                });
-
-                selectcam.prop('disabled', true);
             }
+        }
+
+        async function fetchCameras(projectId) {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ projectID: projectId })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            return response.json();
+        }
+
+        function showAlert(icon, title, text) {
+            Swal.fire({
+                icon,
+                title,
+                text,
+                confirmButtonText: 'ตกลง'
+            });
         }
 
         async function selectCam() {
