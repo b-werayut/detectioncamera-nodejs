@@ -357,7 +357,33 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
     },
   };
 
-  const flexMessage = createFlexMessage(useridindb, title, message);
+  // Ensure userIds is a valid array of strings
+  const validUserIds = Array.isArray(useridindb)
+    ? useridindb.filter(id => id && typeof id === 'string' && id.trim() !== '')
+    : [];
+
+  if (validUserIds.length === 0) {
+    console.warn("⚠️ No valid LINE User IDs found. Skipping notification.");
+    return FolderName;
+  }
+
+  // Clean up time string for display (remove "เวลา: " prefix)
+  const cleanTime = time.replace("เวลา: ", "");
+
+  const flexMessage = createFlexMessage(validUserIds, {
+    title: title,
+    alertTitle: "ตรวจพบผู้ต้องสงสัย!",
+    camName: camname,
+    date: date,
+    time: cleanTime,
+    location: "โครงการวิจัยนครปฐม กม.61",
+    imageUrl: "https://www.centrecities.com/assets/icon/human-detect.png",
+    link: "http://www.centrecities.com:26080/LiveNotifyVideo/index.php?auth=1",
+    altText: "🚨 ตรวจพบผู้บุกรุก! กรุณาตรวจสอบทันที"
+  });
+
+  // Debug Payload
+  // console.log("Payload:", JSON.stringify(flexMessage, null, 2));
 
   try {
     const resp = await axios.post(urlEndpoint, flexMessage, headerAuth);
@@ -375,6 +401,7 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
   } catch (err) {
     const status = err.response?.status || 500;
     const statusText = err.response?.statusText || "Error";
+    const errorDetails = err.response?.data ? JSON.stringify(err.response.data) : err.message;
 
     await insertDetectionLineSendLogs(
       camname,
@@ -386,147 +413,442 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
 
     writeFileSync("delaylogs.txt", JSON.stringify(logsdata));
     console.error(`❌ LINE notification failed: ${statusText}`);
+    console.error(`🔍 Error Details: ${errorDetails}`);
   }
 
   return FolderName;
 };
 
 /**
- * Create LINE Flex Message structure.
- * @param {Array} userIds - Array of user IDs to send to
- * @param {string} title - Alert title
- * @param {string} message - Alert message body
+ * Create LINE Flex Message structure with modern premium design.
+ * @param {Array|string} userIds - User IDs to send to
+ * @param {Object} data - Message data object
+ * @param {string} data.title - Main system title
+ * @param {string} data.alertTitle - Alert headline
+ * @param {string} data.camName - Camera name
+ * @param {string} data.date - Date string
+ * @param {string} data.time - Time string
+ * @param {string} data.location - Location string
+ * @param {string} data.imageUrl - Hero image URL
+ * @param {string} data.link - Action link
+ * @param {string} data.altText - Notification preview text
  * @returns {Object} LINE message payload
  */
-const createFlexMessage = (userIds, title, message) => ({
-  to: userIds,
-  messages: [
-    {
-      type: "flex",
-      altText: "ข้อมูลเพิ่มเติม",
-      contents: {
-        type: "bubble",
-        size: "mega",
-        header: {
-          type: "box",
-          layout: "vertical",
-          spacing: "sm",
-          contents: [
-            {
-              type: "box",
-              layout: "horizontal",
-              contents: [
-                {
-                  type: "text",
-                  text: "แจ้งเตือน",
-                  size: "xs",
-                  align: "center",
-                  gravity: "center",
-                },
-              ],
-              backgroundColor: "#EC3D44",
-              paddingAll: "2px",
-              paddingStart: "4px",
-              paddingEnd: "4px",
-              flex: 0,
-              position: "absolute",
-              offsetStart: "18px",
-              offsetTop: "18px",
-              cornerRadius: "100px",
-              width: "60px",
-              height: "25px",
-            },
-            {
-              type: "text",
-              text: "แจ้งเตือน!",
-              size: "xxl",
-              weight: "bold",
-              wrap: true,
-              align: "center",
-              color: "#222222",
-            },
-            {
-              type: "text",
-              text: title,
-              size: "lg",
-              wrap: true,
-              align: "center",
-              color: "#333333",
-            },
-            { type: "separator", margin: "md" },
-          ],
-        },
-        hero: {
-          type: "image",
-          url: "https://www.centrecities.com/assets/icon/human-detect.png",
-          size: "full",
-          aspectRatio: "2:1",
-        },
-        body: {
-          type: "box",
-          layout: "vertical",
-          spacing: "md",
-          contents: [
-            {
-              type: "text",
-              text: "📍สถานที่",
-              size: "lg",
-              align: "center",
-              weight: "bold",
-              color: "#5D4037",
-            },
-            {
-              type: "text",
-              text: "โครงการวิจัยนครปฐม กม.61",
-              size: "lg",
-              align: "center",
-              weight: "bold",
-              color: "#1E1E1E",
-            },
-            { type: "separator" },
-            {
-              type: "text",
-              text: message,
-              size: "md",
-              align: "center",
-              color: "#D32F2F",
-              wrap: true,
-              weight: "bold",
-            },
-            { type: "separator" },
-          ],
-        },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          spacing: "md",
-          contents: [
-            {
-              type: "button",
-              style: "primary",
-              color: "#4CAF50",
-              action: {
-                type: "uri",
-                label: "ดูข้อมูลเพิ่มเติม",
-                uri: "http://www.centrecities.com:26080/LiveNotifyVideo/index.php?auth=1",
+const createFlexMessage = (userIds, data) => {
+  // Premium Color Palette
+  const COLORS = {
+    headerBg: "#1A237E",      // Deep Indigo
+    accent: "#FF5252",         // Coral Red
+    accentLight: "#FFCDD2",    // Light Coral
+    textPrimary: "#212121",
+    textSecondary: "#616161",
+    textMuted: "#9E9E9E",
+    white: "#FFFFFF",
+    cardBg: "#FAFAFA",
+    success: "#43A047",
+    divider: "#E0E0E0",
+  };
+
+  const eventId = Date.now().toString().slice(-8);
+
+  return {
+    to: userIds,
+    messages: [
+      {
+        type: "flex",
+        altText: data.altText || "🚨 แจ้งเตือนระบบรักษาความปลอดภัย",
+        contents: {
+          type: "bubble",
+          size: "giga",
+          header: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              // Top Bar with Logo and Badge
+              {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  // Shield Icon
+                  {
+                    type: "box",
+                    layout: "vertical",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "🛡️",
+                        size: "xxl",
+                        align: "center",
+                      },
+                    ],
+                    width: "50px",
+                    height: "50px",
+                    backgroundColor: "#FFFFFF20",
+                    cornerRadius: "25px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  },
+                  // Title Section
+                  {
+                    type: "box",
+                    layout: "vertical",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "SECURITY SYSTEM",
+                        color: "#FFFFFF99",
+                        size: "xxs",
+                        weight: "bold",
+                      },
+                      {
+                        type: "text",
+                        text: "แจ้งเตือนฉุกเฉิน",
+                        color: COLORS.white,
+                        size: "xl",
+                        weight: "bold",
+                      },
+                    ],
+                    paddingStart: "lg",
+                    justifyContent: "center",
+                  },
+                  // Urgent Badge
+                  {
+                    type: "box",
+                    layout: "vertical",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "URGENT",
+                        color: COLORS.white,
+                        size: "xxs",
+                        weight: "bold",
+                        align: "center",
+                      },
+                    ],
+                    backgroundColor: COLORS.accent,
+                    cornerRadius: "md",
+                    paddingAll: "sm",
+                    paddingStart: "md",
+                    paddingEnd: "md",
+                    position: "absolute",
+                    offsetEnd: "lg",
+                    offsetTop: "lg",
+                  },
+                ],
+                paddingAll: "lg",
+                paddingTop: "xl",
+                paddingBottom: "xl",
               },
-              height: "sm",
+            ],
+            backgroundColor: COLORS.headerBg,
+            paddingAll: "none",
+          },
+          hero: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "image",
+                url: data.imageUrl,
+                size: "full",
+                aspectRatio: "16:9",
+                aspectMode: "cover",
+              },
+              // Overlay Gradient
+              {
+                type: "box",
+                layout: "vertical",
+                contents: [
+                  {
+                    type: "text",
+                    text: data.alertTitle,
+                    color: COLORS.white,
+                    size: "lg",
+                    weight: "bold",
+                    align: "center",
+                  },
+                ],
+                position: "absolute",
+                offsetBottom: "0px",
+                offsetStart: "0px",
+                offsetEnd: "0px",
+                paddingAll: "lg",
+                background: {
+                  type: "linearGradient",
+                  angle: "0deg",
+                  startColor: "#00000099",
+                  endColor: "#00000000",
+                },
+              },
+            ],
+            paddingAll: "none",
+            action: {
+              type: "uri",
+              uri: data.link,
             },
-            {
-              type: "text",
-              text: `อัปเดตล่าสุด: ${new Date().toLocaleString("th-TH", {
-                hour12: false,
-              })}`,
-              size: "xs",
-              color: "#888888",
-              align: "center",
+          },
+          body: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              // System Title
+              {
+                type: "text",
+                text: data.title,
+                color: COLORS.textSecondary,
+                size: "xs",
+                margin: "none",
+              },
+              // Divider
+              {
+                type: "separator",
+                margin: "lg",
+                color: COLORS.divider,
+              },
+              // Info Cards Container
+              {
+                type: "box",
+                layout: "vertical",
+                contents: [
+                  // Camera Info Card
+                  {
+                    type: "box",
+                    layout: "horizontal",
+                    contents: [
+                      {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "📹",
+                            size: "lg",
+                            align: "center",
+                          },
+                        ],
+                        width: "40px",
+                        height: "40px",
+                        backgroundColor: "#E3F2FD",
+                        cornerRadius: "md",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      },
+                      {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "กล้องที่ตรวจพบ",
+                            color: COLORS.textMuted,
+                            size: "xs",
+                          },
+                          {
+                            type: "text",
+                            text: data.camName,
+                            color: COLORS.textPrimary,
+                            size: "md",
+                            weight: "bold",
+                          },
+                        ],
+                        paddingStart: "md",
+                        justifyContent: "center",
+                      },
+                    ],
+                    paddingAll: "md",
+                    backgroundColor: COLORS.cardBg,
+                    cornerRadius: "md",
+                  },
+                  // Time Info Card
+                  {
+                    type: "box",
+                    layout: "horizontal",
+                    contents: [
+                      {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "🕐",
+                            size: "lg",
+                            align: "center",
+                          },
+                        ],
+                        width: "40px",
+                        height: "40px",
+                        backgroundColor: "#FFF3E0",
+                        cornerRadius: "md",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      },
+                      {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "วันและเวลา",
+                            color: COLORS.textMuted,
+                            size: "xs",
+                          },
+                          {
+                            type: "text",
+                            text: `${data.date}`,
+                            color: COLORS.textPrimary,
+                            size: "sm",
+                            weight: "bold",
+                          },
+                          {
+                            type: "text",
+                            text: `${data.time} น.`,
+                            color: COLORS.textSecondary,
+                            size: "sm",
+                          },
+                        ],
+                        paddingStart: "md",
+                        justifyContent: "center",
+                      },
+                    ],
+                    paddingAll: "md",
+                    backgroundColor: COLORS.cardBg,
+                    cornerRadius: "md",
+                    margin: "sm",
+                  },
+                  // Location Info Card
+                  {
+                    type: "box",
+                    layout: "horizontal",
+                    contents: [
+                      {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "📍",
+                            size: "lg",
+                            align: "center",
+                          },
+                        ],
+                        width: "40px",
+                        height: "40px",
+                        backgroundColor: "#E8F5E9",
+                        cornerRadius: "md",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      },
+                      {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "สถานที่",
+                            color: COLORS.textMuted,
+                            size: "xs",
+                          },
+                          {
+                            type: "text",
+                            text: data.location,
+                            color: COLORS.textPrimary,
+                            size: "sm",
+                            weight: "bold",
+                            wrap: true,
+                          },
+                        ],
+                        paddingStart: "md",
+                        justifyContent: "center",
+                        flex: 1,
+                      },
+                    ],
+                    paddingAll: "md",
+                    backgroundColor: COLORS.cardBg,
+                    cornerRadius: "md",
+                    margin: "sm",
+                  },
+                ],
+                margin: "lg",
+                spacing: "none",
+              },
+            ],
+            paddingAll: "xl",
+            backgroundColor: COLORS.white,
+          },
+          footer: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              // Primary Action Button
+              {
+                type: "button",
+                style: "primary",
+                height: "md",
+                action: {
+                  type: "uri",
+                  label: "🔍 ตรวจสอบเหตุการณ์",
+                  uri: data.link,
+                },
+                color: COLORS.accent,
+              },
+              // Secondary Action Button
+              {
+                type: "button",
+                style: "secondary",
+                height: "md",
+                action: {
+                  type: "uri",
+                  label: "📞 ติดต่อเจ้าหน้าที่",
+                  uri: "tel:020000000",
+                },
+                margin: "sm",
+              },
+              // Event ID Footer
+              {
+                type: "box",
+                layout: "horizontal",
+                contents: [
+                  {
+                    type: "text",
+                    text: `Event ID: #${eventId}`,
+                    color: COLORS.textMuted,
+                    size: "xxs",
+                    flex: 1,
+                  },
+                  {
+                    type: "text",
+                    text: "Powered by Networklink",
+                    color: COLORS.textMuted,
+                    size: "xxs",
+                    align: "end",
+                    flex: 1,
+                  },
+                ],
+                margin: "lg",
+              },
+            ],
+            paddingAll: "xl",
+            backgroundColor: COLORS.white,
+          },
+          styles: {
+            header: {
+              separator: false,
             },
-          ],
+            hero: {
+              separator: false,
+            },
+            body: {
+              separator: false,
+            },
+            footer: {
+              separator: true,
+            },
+          },
         },
       },
-    },
-  ],
-});
+    ],
+  };
+};
 
 // ============================================================================
 // FILE DIRECTORY CHECK (GENERIC)

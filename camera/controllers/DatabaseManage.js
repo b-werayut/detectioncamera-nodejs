@@ -162,11 +162,27 @@ exports.insertPowerLogs = async (req, res) => {
   }
 };
 
-exports.getUserIDCustomer = async (req, res) => {
+exports.getUserIDCustomer = async (camname) => {
   try {
-    const result = await prisma.lineUser.findMany({
+    // const camname = "nptcam01";
+    const camera = await prisma.Camera.findFirst({
+      where: {
+        CameraName: camname,
+      },
+      select: {
+        ProjectID: true,
+      },
+    });
+
+    if (!camera) {
+      console.log("ไม่พบ Camera:", camname);
+      return [];
+    }
+
+    const users = await prisma.LineUser.findMany({
       where: {
         Users: {
+          ProjectID: camera.ProjectID,
           LineNotifyActive: true,
         },
       },
@@ -175,15 +191,15 @@ exports.getUserIDCustomer = async (req, res) => {
       },
     });
 
-    const userIdLineList = result
+    const userIdLineList = users
       .map((u) => u.UserIdLine)
-      .filter((id) => id !== null); // กันค่า null
+      .filter((id) => id !== null);
 
     console.log("userIdLineList:", userIdLineList);
     return userIdLineList;
   } catch (err) {
     console.error(err);
-    res.status(500).send("Server Error");
+    return [];
   }
 };
 
