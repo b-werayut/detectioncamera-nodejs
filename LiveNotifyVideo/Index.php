@@ -335,7 +335,7 @@ $currentPage = 'streaming';
                     <?php }
                     ; ?>
                 </div>
-                <div class="table-responsive table-striped table-hover table-bordered">
+                <div class="table-responsive">
                     <table class="professional-table table-hover" id="cameraStatusTable">
                         <thead>
                             <tr>
