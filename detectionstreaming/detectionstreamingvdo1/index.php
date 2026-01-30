@@ -80,7 +80,7 @@
             font-size: 18px;
             cursor: pointer;
             position: absolute;
-            bottom: -57px;
+            bottom: 0px;
             right: 0px;
         }
 

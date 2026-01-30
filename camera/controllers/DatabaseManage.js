@@ -166,7 +166,9 @@ exports.insertPowerLogs = async (req, res) => {
 
 exports.getUserIDCustomer = async (camname) => {
   try {
+    // const camname = "hls2/st";
     // const camname = "nptcam01";
+    // const camname = "bkkcam01";
 
     if (!camname) {
       console.log("ไม่มี Camname");
@@ -208,8 +210,9 @@ exports.getUserIDCustomer = async (camname) => {
       .map((u) => u.UserIdLine)
       .filter((id) => id !== null);
 
-    // console.log("Proj Name", camera.Project.ProjectName);
-    // console.log("userIdLineList", userIdLineList);
+    console.log("Proj ID", camera.ProjectID);
+    console.log("Proj Name", camera.Project.ProjectName);
+    console.log("userIdLineList", userIdLineList);
 
     return {
       projectName: camera.Project.ProjectName,
