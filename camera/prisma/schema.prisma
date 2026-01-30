@@ -40,7 +40,8 @@ model Camera {
 }
 
 model EventLogs {
-  EventLogsId  Int      @id @default(autoincrement())
+  EventLogsID  Int      @id @default(autoincrement())
+  EventID String?
   CameraEvent  String?
   LineStatus   Int?
   LineMessage String?
