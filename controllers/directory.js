@@ -287,18 +287,20 @@ const getMatchingFiles = async (
  * @param {boolean} [skipLog=false] - Skip database logging if true
  * @returns {Promise<string>} Created directory path
  */
+
 const createFolder = async (
   directory,
   directoryfm,
   skipLog = false,
   camname,
+  eventId,
 ) => {
   if (!existsSync(directory)) {
     mkdirSync(directory, { recursive: true });
 
     if (!skipLog && camname) {
       const timeinsert = formatDateTime(DateFormat.DATABASE);
-      await insertFolderNameLogs(camname, directoryfm, timeinsert);
+      await insertFolderNameLogs(camname, directoryfm, timeinsert, eventId);
     }
 
     console.log(`📁 Created folder: ${directory}`);
@@ -333,7 +335,7 @@ const createSubFolder = async (folderName, subFolder) => {
  * @returns {Promise<string>} Folder name
  */
 
-const sendLineAxios = async (FolderName, directoryfm, camname) => {
+const sendLineAxios = async (FolderName, directoryfm, camname, eventId) => {
   const cf = await Config();
   const urlEndpoint = cf[0].json.lineurlendpointcamera;
   const cftoken = cf[0].json.tokencameradetect;
@@ -346,7 +348,9 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
     datetimelogs: formatDateTime(DateFormat.LOGS),
   };
 
-  const useridindb = await getUserIDCustomer();
+  const useridindb = await getUserIDCustomer(camname);
+  const lineUserID = useridindb.userIdLineList;
+  const projectname = useridindb.projectName;
   const title = "ระบบตรวจสอบผู้บุกรุก";
   const message = `ตรวจพบผู้ต้องสงสัย!\nกล้อง: ${camname}\nวัน${date}\n${time} น.`;
 
@@ -358,8 +362,9 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
   };
 
   // Ensure userIds is a valid array of strings
-  const validUserIds = Array.isArray(useridindb)
-    ? useridindb.filter(
+
+  const validUserIds = Array.isArray(lineUserID)
+    ? lineUserID.filter(
         (id) => id && typeof id === "string" && id.trim() !== "",
       )
     : [];
@@ -378,10 +383,11 @@ const sendLineAxios = async (FolderName, directoryfm, camname) => {
     camName: camname,
     date: date,
     time: cleanTime,
-    location: "โครงการวิจัยนครปฐม กม.61",
+    location: projectname,
     imageUrl: "https://www.centrecities.com/assets/icon/human-detect.png",
     link: "http://www.centrecities.com:26080/LiveNotifyVideo/index.php?auth=1",
     altText: "🚨 ตรวจพบผู้บุกรุก! กรุณาตรวจสอบทันที",
+    eventId: eventId,
   });
 
   // Debug Payload
@@ -452,8 +458,6 @@ const createFlexMessage = (userIds, data) => {
     success: "#43A047",
     divider: "#E0E0E0",
   };
-
-  const eventId = Date.now().toString().slice(-8);
 
   return {
     to: userIds,
@@ -814,7 +818,7 @@ const createFlexMessage = (userIds, data) => {
                 contents: [
                   {
                     type: "text",
-                    text: `Event ID: #${eventId}`,
+                    text: `Event ID: #${data.eventId}`,
                     color: COLORS.textMuted,
                     size: "xxs",
                     flex: 1,
@@ -1364,6 +1368,7 @@ exports.delDir = async (req, res) => {
  */
 exports.manageDirectory = async (req, res) => {
   const { projectcode, camname } = req.params;
+  const eventId = Date.now().toString().slice(-8);
 
   try {
     const camera = await prisma.Camera.findUnique({
@@ -1385,11 +1390,11 @@ exports.manageDirectory = async (req, res) => {
     const directoryfm = path.basename(directory);
 
     // Create folder structure
-    await createFolder(firstDir, directoryfm, true, camname);
-    await createFolder(directory, directoryfm, false, camname);
+    await createFolder(firstDir, directoryfm, true, camname, eventId);
+    await createFolder(directory, directoryfm, false, camname, eventId);
 
     // Send LINE notification
-    await sendLineAxios(directory, directoryfm, camname);
+    await sendLineAxios(directory, directoryfm, camname, eventId);
 
     // Create subfolders
     await createSubFolder(directory, "Pic");

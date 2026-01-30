@@ -18,9 +18,9 @@ function generateToken(user) {
 
 exports.loginHandler = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { Username, password } = req.body;
 
-    if (!username || !password) {
+    if (!Username || !password) {
       return res.status(400).json({
         success: false,
         message: "กรุณากรอก Username และ Password",
@@ -29,7 +29,7 @@ exports.loginHandler = async (req, res) => {
     }
 
     const user = await prisma.users.findFirst({
-      where: { username: username },
+      where: { Username: Username },
     });
 
     if (!user) {
@@ -40,7 +40,15 @@ exports.loginHandler = async (req, res) => {
       });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const passwordData = await prisma.Password.findFirst({
+      where: { UserId: user.UserId },
+    });
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      passwordData.PasswordHash
+    );
+
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
@@ -51,10 +59,10 @@ exports.loginHandler = async (req, res) => {
 
     const token = generateToken(user);
 
-    await prisma.users.update({
-      where: { id: user.id },
-      data: { lastLogin: new Date() },
-    });
+    // await prisma.users.update({
+    //   where: { id: user.id },
+    //   data: { lastLogin: new Date() },
+    // });
 
     // เซ็ต cookie token
     res.cookie("token", token, {
@@ -70,7 +78,7 @@ exports.loginHandler = async (req, res) => {
       message: "เข้าสู่ระบบสำเร็จ",
       user: {
         id: user.id,
-        username: user.username,
+        Username: user.Username,
         email: user.email,
       },
       val: 3,

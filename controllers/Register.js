@@ -1,74 +1,117 @@
 const jwt = require("jsonwebtoken");
-const prisma = require("../Config/Prisma");
+const prisma = require("../Config/prisma");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 exports.registerHandler = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-    const updatedAt = new Date();
+    const {
+      Username,
+      Password,
+      Firstname,
+      Lastname,
+      Email,
+      ProjectCode,
+      PhoneNumber,
+      Role,
+      ProjectName,
+    } = req.body;
 
+    // console.log("req.body :>", req.body);
     // Validate input
-    if (!username || !email || !password) {
-      return res.json({
-        success: false,
+    if (
+      !Username ||
+      !Password ||
+      !Firstname ||
+      !Lastname ||
+      !Email ||
+      !ProjectCode ||
+      !PhoneNumber ||
+      !ProjectName
+    ) {
+      return res.status(400).json({
+        status: false,
         message: "Please provide all required fields",
+        val: 0,
       });
     }
 
-    // Check if user already exists
     const existingUsername = await prisma.users.findFirst({
-      where: { username: username },
+      where: { Username },
     });
 
     if (existingUsername) {
       return res.json({
-        success: false,
+        status: false,
         message: "Username already exists",
         val: 1,
       });
     }
 
-    // Check if email already exists
     const existingEmail = await prisma.users.findFirst({
-      where: { email: email },
+      where: { Email },
     });
 
     if (existingEmail) {
       return res.json({
-        success: false,
+        status: false,
         message: "Email already exists",
         val: 2,
       });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash password
+    const hashedPassword = await bcrypt.hash(Password, 10);
 
-    // Save user to database if JWT generation succeeded
     const newUser = await prisma.users.create({
       data: {
-        username,
-        email,
-        password: hashedPassword,
-        updatedAt,
+        Username,
+        Firstname,
+        Lastname,
+        Email,
+        PhoneNumber,
+        isActive: false,
+        LineNotifyActive: false,
+
+        Password: {
+          create: {
+            PasswordHash: hashedPassword,
+          },
+        },
+
+        // ❗ แนะนำ: connect role แทน create (กัน role ซ้ำ)
+        Role: {
+          connectOrCreate: {
+            where: { UserRole: Role },
+            create: { UserRole: Role },
+          },
+        },
+
+        Project: {
+          create: {
+            ProjectName,
+            ProjectCode,
+          },
+        },
+      },
+
+      select: {
+        UserId: true,
+        Username: true,
+        Email: true,
       },
     });
 
-    res.status(201).json({
-      success: true,
-      message: "Account created successfully",
-      user: {
-        id: newUser.id,
-        username: newUser.username,
-        email: newUser.email,
-      },
+    return res.status(201).json({
+      status: true,
+      message: "Account created Successfully",
+      user: newUser,
       val: 3,
     });
   } catch (error) {
     console.error("Register Error:", error);
-    res.status(500).json({
-      success: false,
+    return res.status(500).json({
+      status: false,
       message: "Error creating account",
       error: error.message,
       val: 0,

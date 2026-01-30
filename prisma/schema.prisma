@@ -4,7 +4,138 @@ generator client {
 
 datasource db {
   provider = "sqlserver"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
+}
+
+model Address {
+  AddressID    Int      @id @default(autoincrement())
+  Address      String?
+  City         String?
+  Postcode     String?
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+  ProvinceId   Int
+  ProjectID    Int
+  CameraID     Int?
+
+  Camera   Camera? @relation(fields: [CameraID],references: [CameraID],onDelete: NoAction,onUpdate: NoAction)
+  Project  Project @relation(fields: [ProjectID],references: [ProjectID],onDelete: Cascade,onUpdate: NoAction)
+  Province Province @relation(fields: [ProvinceId], references: [ProvinceId])
+}
+
+model Camera {
+  CameraID     Int      @id @default(autoincrement())
+  CameraName   String   @unique
+  Url          String
+  CameraStatus Int
+  isActive     Boolean  @default(false)
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+  ProjectID    Int
+
+  Project Project @relation(fields: [ProjectID],references: [ProjectID],onDelete: Cascade,onUpdate: NoAction)
+
+  Address   Address[]
+  EventLogs EventLogs[]
+}
+
+model EventLogs {
+  EventLogsID  Int      @id @default(autoincrement())
+  EventID String?
+  CameraEvent  String?
+  LineStatus   Int?
+  LineMessage String?
+  SnapStatus   Int?
+  VdoStatus    Int?
+  ObjectName   String?
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+
+  CameraID     Int
+  Camera       Camera   @relation(fields: [CameraID],references: [CameraID],onDelete: Cascade)
+
+  @@unique([CameraID, CameraEvent])
+}
+
+model DetectObject {
+  DetectID     Int      @id @default(autoincrement())
+  Camera       String?
+  Location     String?
+  FileName     String?
+  Thai_Time    String?
+  UtC_Time     String?
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+}
+
+model LineToken {
+  LineTokenID  Int        @id @default(autoincrement())
+  Token        String?
+  isActive     Boolean    @default(false)
+  CreatedAt    DateTime   @default(now())
+  ModifiedDate DateTime   @default(now())
+  LineUser     LineUser[]
+}
+
+model LineUser {
+  LineUserId   Int       @id @default(autoincrement())
+  UserIdLine   String?
+  CreatedAt    DateTime  @default(now())
+  ModifiedDate DateTime  @default(now())
+  LineTokenID  Int
+  UserId       Int       @unique
+  LineToken    LineToken @relation(fields: [LineTokenID], references: [LineTokenID])
+  Users        Users     @relation(fields: [UserId], references: [UserId])
+}
+
+model Password {
+  PasswordID   Int      @id @default(autoincrement())
+  PasswordHash String
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+  UserId       Int      @unique
+  Users        Users    @relation(fields: [UserId], references: [UserId])
+}
+
+model PowerLogs {
+  PowerLogID   Int      @id @default(autoincrement())
+  Point        String?
+  PowerStatus  String?
+  Value        Int?
+  Timestamp    String?
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+}
+
+model Project {
+  ProjectID    Int       @id @default(autoincrement())
+  ProjectCode  String    @db.VarChar(10) @unique
+  ProjectName  String?
+  CreatedAt    DateTime  @default(now())
+  ModifiedDate DateTime  @default(now())
+
+  Address      Address[]
+  Users        Users[]
+  Camera       Camera[]
+}
+
+
+model Province {
+  ProvinceId   Int       @id @default(autoincrement())
+  ProvinceCode String?
+  Name         String?
+  CountryId    Int
+  CreatedAt    DateTime  @default(now())
+  ModifiedDate DateTime  @default(now())
+  Address      Address[]
+}
+
+model Role {
+  RoleID   Int    @id @default(autoincrement())
+  UserRole String @unique @db.VarChar(50)
+  CreatedAt    DateTime @default(now())
+  ModifiedDate DateTime @default(now())
+  Users        Users[]
 }
 
 model Users {
@@ -16,6 +147,7 @@ model Users {
   Email            String?
   PhoneNumber      String?
   LineNotifyActive Boolean   @default(false)
+  last_login_at DateTime  @default(now())
   CreatedAt        DateTime  @default(now())
   ModifiedDate     DateTime  @default(now())
   RoleID           Int
@@ -24,119 +156,4 @@ model Users {
   Password         Password?
   Project          Project   @relation(fields: [ProjectID], references: [ProjectID])
   Role             Role      @relation(fields: [RoleID], references: [RoleID])
-}
-
-model Address {
-  AddressID    Int      @id @default(autoincrement())
-  Address      String?
-  City         String?
-  Postcode     String?
-  CreatedAt    DateTime
-  ModifiedDate DateTime
-  ProvinceId   Int
-  ProjectID    Int
-  CameraID     Int
-  Camera       Camera   @relation(fields: [CameraID], references: [CameraID])
-  Project      Project  @relation(fields: [ProjectID], references: [ProjectID])
-  Province     Province @relation(fields: [ProvinceId], references: [ProvinceId])
-}
-
-model Camera {
-  CameraID     Int         @id @default(autoincrement())
-  CameraName   String      @unique
-  Url          String
-  CameraStatus Int
-  isActive     Boolean     @default(false)
-  CreatedAt    DateTime    @default(now())
-  ModifiedDate DateTime    @default(now())
-  ProjectID    Int
-  Address      Address[]
-}
-
-model DetectObject {
-  DetectID     Int       @id @default(autoincrement())
-  Camera       String?
-  Location     String?
-  FileName     String?
-  Thai_Time    String?
-  UtC_Time     String?
-  CreatedAt    DateTime  @default(now())
-  ModifiedDate DateTime  @default(now())
-}
-
-model EventLogs {
-  EventLogsId  Int      @id @default(autoincrement())
-  CameraEvent  String?
-  LineStatus   Int?
-  SnapStatus   Int?
-  VdoStatus    Int?
-  ObjectName   String?
-  CreatedAt    DateTime @default(now())
-  ModifiedDate DateTime @default(now())
-}
-
-model LineToken {
-  LineTokenID  Int        @id @default(autoincrement())
-  Token        String?
-  isActive     Boolean    @default(false)
-  CreatedAt    DateTime
-  ModifiedDate DateTime
-  LineUser     LineUser[]
-}
-
-model LineUser {
-  LineUserId   Int       @id @default(autoincrement())
-  userType     String?
-  CreatedAt    DateTime  @default(now())
-  ModifiedDate DateTime  @default(now())
-  LineTokenID  Int
-  UserId       Int       @unique
-  LineToken    LineToken @relation(fields: [LineTokenID], references: [LineTokenID])
-  Users        Users     @relation(fields: [UserId], references: [UserId])
-}
-
-model Password {
-  id           Int      @id @default(autoincrement())
-  PasswordHash String
-  CreatedAt    DateTime
-  ModifiedDate DateTime
-  UserId       Int      @unique
-  Users        Users    @relation(fields: [UserId], references: [UserId])
-}
-
-model PowerLogs {
-  PowerLogID   Int      @id @default(autoincrement())
-  Point        String?
-  PowerStatus  String?
-  Value Int?
-  Timestamp    String?
-  CreatedAt    DateTime @default(now())
-  ModifiedDate DateTime @default(now())
-}
-
-model Project {
-  ProjectID    Int         @id @default(autoincrement())
-  ProjectName  String?
-  CreatedAt    DateTime    @default(now())
-  ModifiedDate DateTime    @default(now())
-  Address      Address[]
-  Users        Users[]
-}
-
-model Province {
-  ProvinceId   Int       @id @default(autoincrement())
-  ProvinceCode String?
-  NameEn       String?
-  CountryId    Int
-  CreatedAt    DateTime  @default(now())
-  ModifiedDate DateTime  @default(now())
-  Address      Address[]
-}
-
-model Role {
-  RoleID       Int      @id @default(autoincrement())
-  UserRole     String
-  CreatedAt    DateTime
-  ModifiedDate DateTime
-  Users        Users[]
 }
