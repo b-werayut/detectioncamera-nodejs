@@ -91,9 +91,9 @@ exports.insertPicStatusLogs = async (foldername, status, timeinsert) => {
         ? new Date(timeinsert)
         : new Date();
 
-    const updatePicStatus = await prisma.eventLogs.update({
+    const updatePicStatus = await prisma.EventLogs.update({
       where: {
-        EventLogsId: find.EventLogsId,
+        EventLogsID: find.EventLogsID,
       },
       data: {
         SnapStatus: Number(status),
@@ -128,7 +128,7 @@ exports.insertVdoStatusLogs = async (foldername, status, timeinsert) => {
 
     const updateVdoStatus = await prisma.eventLogs.update({
       where: {
-        EventLogsId: find.EventLogsId,
+        EventLogsID: find.EventLogsID,
       },
       data: {
         VdoStatus: Number(status),

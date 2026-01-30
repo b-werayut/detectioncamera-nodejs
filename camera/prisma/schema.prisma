@@ -109,7 +109,6 @@ model PowerLogs {
 
 model Project {
   ProjectID    Int       @id @default(autoincrement())
-  ProjectCode  String    @db.VarChar(10) @unique
   ProjectName  String?
   CreatedAt    DateTime  @default(now())
   ModifiedDate DateTime  @default(now())

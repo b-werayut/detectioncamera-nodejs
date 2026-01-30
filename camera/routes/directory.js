@@ -27,11 +27,7 @@ const router = express.Router();
 
 router.get("/getuseridex/", getUserIDCustomerexternal);
 router.get("/getDataFlutter/", getDataFlutter);
-router.get(
-  "/directory/:projectcode/:camname",
-  delayEventFunct,
-  manageDirectory,
-);
+router.get("/directory/:camname", delayEventFunct, manageDirectory);
 router.get("/directory2/:camname", manageDirectory);
 // router.get('/directory/', manageDirectory)
 router.get("/getlogs/:params", GetLogsData);

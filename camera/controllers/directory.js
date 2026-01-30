@@ -384,7 +384,7 @@ const sendLineAxios = async (FolderName, directoryfm, camname, eventId) => {
     date: date,
     time: cleanTime,
     location: projectname,
-    imageUrl: "https://www.centrecities.com/assets/icon/human-detect.png",
+    imageUrl: "https://www.centrecities.com/assets/icon/human-detected_.png",
     link: "http://www.centrecities.com:26080/LiveNotifyVideo/index.php?auth=1",
     altText: "🚨 ตรวจพบผู้บุกรุก! กรุณาตรวจสอบทันที",
     eventId: eventId,
@@ -1367,7 +1367,7 @@ exports.delDir = async (req, res) => {
  * @param {Object} res - Express response object
  */
 exports.manageDirectory = async (req, res) => {
-  const { projectcode, camname } = req.params;
+  const { camname } = req.params;
   const eventId = Date.now().toString().slice(-8);
 
   try {

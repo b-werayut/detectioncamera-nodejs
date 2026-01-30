@@ -11,7 +11,6 @@ exports.registerHandler = async (req, res) => {
       Firstname,
       Lastname,
       Email,
-      ProjectCode,
       PhoneNumber,
       Role,
       ProjectName,
@@ -25,7 +24,6 @@ exports.registerHandler = async (req, res) => {
       !Firstname ||
       !Lastname ||
       !Email ||
-      !ProjectCode ||
       !PhoneNumber ||
       !ProjectName
     ) {
@@ -90,7 +88,6 @@ exports.registerHandler = async (req, res) => {
         Project: {
           create: {
             ProjectName,
-            ProjectCode,
           },
         },
       },
