@@ -4,7 +4,8 @@ const prisma = require("../Config/prisma");
 exports.insertFolderNameLogs = async (
   camname,
   foldername,
-  timeinsert = new Date(),
+  timeinsert,
+  eventId,
 ) => {
   try {
     const camera = await prisma.Camera.findUnique({
@@ -20,6 +21,7 @@ exports.insertFolderNameLogs = async (
     return await prisma.EventLogs.create({
       data: {
         CameraID: camera.CameraID,
+        EventID: eventId,
         CameraEvent: foldername,
       },
     });
@@ -165,18 +167,29 @@ exports.insertPowerLogs = async (req, res) => {
 exports.getUserIDCustomer = async (camname) => {
   try {
     // const camname = "nptcam01";
+
+    if (!camname) {
+      console.log("ไม่มี Camname");
+      return { projectName: null, userIdLineList: [] };
+    }
+
     const camera = await prisma.Camera.findFirst({
       where: {
         CameraName: camname,
       },
       select: {
         ProjectID: true,
+        Project: {
+          select: {
+            ProjectName: true,
+          },
+        },
       },
     });
 
     if (!camera) {
       console.log("ไม่พบ Camera:", camname);
-      return [];
+      return { projectName: null, userIdLineList: [] };
     }
 
     const users = await prisma.LineUser.findMany({
@@ -195,11 +208,16 @@ exports.getUserIDCustomer = async (camname) => {
       .map((u) => u.UserIdLine)
       .filter((id) => id !== null);
 
-    console.log("userIdLineList:", userIdLineList);
-    return userIdLineList;
+    // console.log("Proj Name", camera.Project.ProjectName);
+    // console.log("userIdLineList", userIdLineList);
+
+    return {
+      projectName: camera.Project.ProjectName,
+      userIdLineList,
+    };
   } catch (err) {
     console.error(err);
-    return [];
+    return { projectName: null, userIdLineList: [] };
   }
 };
 
