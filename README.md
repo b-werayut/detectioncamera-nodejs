@@ -1,1 +1,0 @@
-# detection-camera-system

@@ -26,8 +26,8 @@ $roleId = $_SESSION['RoleID'] ?? 0;           // [RoleID]
 $userProjectID = $_SESSION['ProjectID'] ?? 0; // [ProjectID]
 $auth = $_SESSION['auth'] ?? null;
 $urlstream = '';
-$userRole = $_SESSION['UserRole'];
-$userId = $_SESSION['UserId'];
+$userRole = $_SESSION['UserRole'] ?? null;
+$userId = $_SESSION['UserId'] ?? null;
 $selectedProjectID = $_GET['projectid'] ?? 0;
 
 // echo $_SESSION['RoleID'];
@@ -327,7 +327,7 @@ $currentPage = 'streaming';
                             </div>
                         </div>
                     <?php } else {
-                        $projectName = $row['ProjectName'];
+                        $projectName = $row['ProjectName'] ?? null;
                         ?>
                         <?= "<div class='section-badge' style='font-size: 1rem;'>
         <i class='fas fa-building me-1'></i> โครงการ: " . htmlspecialchars($projectName) . "
