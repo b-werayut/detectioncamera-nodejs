@@ -22,13 +22,16 @@ if (isset($_SESSION['UserId'])) {
 }
 
 $user = $_SESSION['Username'] ?? null;        // [Username]
+$firstname = $_SESSION['Firstname'] ?? null;        // [Firstname]
+$lastname = $_SESSION['Lastname'] ?? null;        // [Lastname]
 $roleId = $_SESSION['RoleID'] ?? 0;           // [RoleID]
 $userProjectID = $_SESSION['ProjectID'] ?? 0; // [ProjectID]
 $auth = $_SESSION['auth'] ?? null;
 $urlstream = '';
-$userRole = $_SESSION['UserRole'] ?? null;
+$role = $_SESSION['UserRole'] ?? null;
 $userId = $_SESSION['UserId'] ?? null;
 $selectedProjectID = $_GET['projectid'] ?? 0;
+$login_time = $_SESSION['LAST_ACTIVITY'] ?? '';
 
 // echo $_SESSION['RoleID'];
 // echo $_SESSION['UserRole'];
@@ -162,36 +165,64 @@ $currentPage = 'streaming';
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="./css/styles.css" rel="stylesheet">
     <script src="js/jquery-3.7.1.min.js"></script>
+    <style>
+        /* Critical inline CSS — prevent white flash on navigation */
+        body {
+            background: #f8fafb;
+            background-image:
+                radial-gradient(ellipse at 0% 0%, rgba(38, 208, 124, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 100% 0%, rgba(13, 77, 61, 0.03) 0%, transparent 60%);
+            margin: 0;
+            opacity: 0;
+            animation: pageEntrance 0.4s ease-out 0.05s forwards;
+        }
+
+        @keyframes pageEntrance {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <?php include_once '../components/navbar.php'; ?>
 
-    <!-- Main Content -->
-    <section class="py-4 py-lg-5">
-        <div class="container px-lg-5">
-
-            <!-- Page Header -->
-            <div class="page-context-header mb-4 mb-lg-5">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="context-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
+    <!-- Page Hero -->
+    <div class="scc-page-hero">
+        <div class="container px-lg-5 py-2">
+            <div class="scc-hero-content">
+                <div class="scc-hero-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="d-flex justify-content-center">
                     <div>
-                        <h1 class="page-title mb-1">Streaming Control Center</h1>
-                        <p class="page-subtitle text-muted mb-0">ระบบติดตามและบริหารจัดการกล้องแบบเรียลไทม์</p>
+                        <h1 class="scc-hero-title m-0 text-uppercase" style="letter-spacing: 1.5px;">Streaming Control
+                            Center</h1>
+                        <p class="scc-hero-subtitle m-0" style="letter-spacing: 1px;">
+                            ระบบติดตามและบริหารจัดการกล้องแบบเรียลไทม์</p>
                     </div>
                 </div>
-                <div class="d-none d-md-block text-end">
+                <div class="scc-hero-meta">
                     <div class="current-time-badge shadow-sm">
                         <i class="far fa-clock me-2 text-success"></i>
                         <span id="liveTime"><?= date('H:i'); ?></span> น.
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="py-4 py-lg-2">
+        <div class="container px-lg-5">
 
             <!-- Dashboard Stats -->
-            <div class="dashboard-stats">
+            <div class="dashboard-stats scc-animate">
                 <div class="stat-card">
                     <div class="stat-card-header">
                         <div>
@@ -204,7 +235,7 @@ $currentPage = 'streaming';
                     </div>
                     <div class="stat-trend up">
                         <i class="fas fa-arrow-up"></i>
-                        <span>ระบบพร้อมใช้งาน</span>
+                        <span>กล้องพร้อมใช้งาน</span>
                     </div>
                 </div>
 
@@ -275,7 +306,7 @@ $currentPage = 'streaming';
             </div>
 
             <!-- Camera Monitoring Overview -->
-            <div class="data-table-section">
+            <div class="data-table-section scc-animate scc-animate-d1">
                 <div class="section-header">
                     <div>
                         <div class="section-badge" style='font-size: 1rem;'><i class="fas fa-table"></i> OVERVIEW</div>
@@ -353,7 +384,7 @@ $currentPage = 'streaming';
             </div>
 
             <!-- Global Stream Controls -->
-            <div class="stream-controls-section shadow-sm text-center">
+            <div class="stream-controls-section shadow-sm text-center scc-animate scc-animate-d2">
                 <div class="section-badge mx-auto mb-3">SELECT CAMERA</div>
                 <h3 class="mb-4 fw-bold d-none">เลือกกล้อง</h3>
 
@@ -365,8 +396,8 @@ $currentPage = 'streaming';
             </div>
 
             <!-- Live Stream Feeds -->
-            <div class="feeds-section">
-                <div class="d-flex align-items-center gap-2 mb-4">
+            <div class="feeds-section scc-animate scc-animate-d3">
+                <div class="d-flex align-items-center gap-2 mb-4 pt-3">
                     <div style="width: 4px; height: 24px; background: var(--accent-green); border-radius: 2px;"></div>
                     <h2 class="section-title mb-0" style="font-size: 1.5rem;">Live Streams</h2>
                 </div>
@@ -375,12 +406,11 @@ $currentPage = 'streaming';
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p class="text-center">
-                Copyright &copy; <?= date('Y'); ?> NetWorklink Co.Ltd. - All Rights Reserved
-            </p>
+    <!-- Professional Footer -->
+    <footer style="position: sticky; bottom:0; width: 100%; z-index: 9999;">
+        <div class="container text-center">
+            <p>&copy; <?= date('Y'); ?> NetWorklink Co.Ltd. &mdash; Professional Real-time Streaming Solutions</p>
+            <div class="scc-footer-version">All Rights Reserved | Intelligent Camera Management System</div>
         </div>
     </footer>
 
@@ -395,7 +425,7 @@ $currentPage = 'streaming';
          * These variables are required by js/streaming-dashboard.js
          */
         var currentUserId = '<?php echo $userId ?? ""; ?>';
-        var currentUserRole = '<?php echo $userRole ?? ""; ?>';
+        var currentUserRole = '<?php echo $role ?? ""; ?>';
         var selectedProjectID = '<?php echo $selectedProjectID ?? 0; ?>';
         var getparams = '<?php echo $getparam ?? ''; ?>';
     </script>

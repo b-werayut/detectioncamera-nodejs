@@ -24,10 +24,12 @@ if (isset($_SESSION['UserId'])) {
 }
 
 $user = $_SESSION['Username'] ?? null;
+$firstname = $_SESSION['Firstname'] ?? null;        // [Firstname]
+$lastname = $_SESSION['Lastname'] ?? null;        // [Lastname]
 $roleId = $_SESSION['RoleID'] ?? 0;
 $userProjectId = $_SESSION['ProjectID'] ?? 0;
 $auth = $_SESSION['auth'] ?? null;
-$userRole = $_SESSION['UserRole'];
+$role = $_SESSION['UserRole'];
 
 if (isset($auth)) {
     $urlstream = '../livenotifyvideo/index.php?auth=' . $auth;
@@ -47,11 +49,7 @@ $selectedProjectID = 0;
 
 try {
     if ($roleId == 1) {
-        $sqlProj = "SELECT DISTINCT p.ProjectID, p.ProjectName 
-                    FROM Project p 
-                    INNER JOIN Camera c ON p.ProjectID = c.ProjectID 
-                    WHERE c.isActive = 1 
-                    ORDER BY p.ProjectName ASC";
+        $sqlProj = "SELECT ProjectID, ProjectName FROM Project ORDER BY ProjectName ASC";
 
         $stmtProj = $conn->prepare($sqlProj);
         $stmtProj->execute();
@@ -74,13 +72,6 @@ try {
         $selectedProjectID = $userProjectId;
     }
 
-    if (!empty($selectedProjectID)) {
-        $sqlCam = "SELECT CameraName FROM Camera WHERE isActive = 1 AND ProjectID = ? ORDER BY CameraName ASC";
-        $stmtCam = $conn->prepare($sqlCam);
-        $stmtCam->execute([$selectedProjectID]);
-        $cameras = $stmtCam->fetchAll(PDO::FETCH_ASSOC);
-    }
-
 } catch (Exception $e) {
     error_log("DB Error: " . $e->getMessage());
 }
@@ -98,11 +89,31 @@ try {
     <link rel="stylesheet" href="fonts/font-kanit.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="./css/vdopaging.css" rel="stylesheet">
+    <link href="./css/snappaging.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="js/jquery-3.7.1.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Critical inline CSS — prevent white flash on navigation */
+        body {
+            background: #f8fafb;
+            background-image:
+                radial-gradient(ellipse at 0% 0%, rgba(38, 208, 124, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 100% 0%, rgba(13, 77, 61, 0.03) 0%, transparent 60%);
+            margin: 0;
+            opacity: 0;
+            animation: pageEntrance 0.4s ease-out 0.05s forwards;
+        }
+
+        @keyframes pageEntrance {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -125,27 +136,50 @@ try {
         }
     }
 
-    // กำหนดหน้าปัจจุบันสำหรับ Navbar Active State
     $currentPage = 'video';
+    $role = $_SESSION['UserRole'] ?? '';
+    $login_time = $_SESSION['LAST_ACTIVITY'] ?? '';
     ?>
 
     <?php include_once '../components/navbar.php'; ?>
 
-    <header class="page-header">
-        <div class="container">
-            <h1><i class="fas fa-film me-3"></i>วิดีโอ</h1>
+    <!-- Page Hero -->
+    <div class="scc-page-hero">
+        <div class="container px-lg-5">
+            <div class="scc-hero-content">
+                <div class="scc-hero-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <h1 class="scc-hero-title m-0 text-uppercase" style="letter-spacing: 1.5px;">Video Viewer</h1>
+                        <p class="scc-hero-subtitle m-0" style="letter-spacing: 1px;">
+                            ระบบดูวิดีโอจากกล้องตรวจจับ</p>
+                    </div>
+                </div>
+                <div class="scc-hero-meta">
+                    <div class="current-time-badge shadow-sm">
+                        <i class="far fa-clock me-2 text-success"></i>
+                        <span id="liveTime">
+                            <?= date('H:i'); ?>
+                        </span> น.
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <section class="p-1">
+    <!-- Main Content -->
+    <section class="py-4">
         <div class="container px-lg-5">
 
-            <div class="selector-section">
+            <!-- Selector Section -->
+            <div class="scc-selector-section scc-animate">
                 <div class="row g-3 align-items-end">
 
                     <div class="col-md-4">
-                        <label class="form-label">
-                            <i class="fas fa-building me-1"></i> โครงการ
+                        <label class="scc-selector-label">
+                            <i class="fas fa-building"></i> โครงการ
                         </label>
                         <?php
                         $selectedProjectID = isset($_GET['projectId']) ? (int) $_GET['projectId'] : 0;
@@ -178,8 +212,8 @@ try {
                     </div>
 
                     <div class="col-md-4">
-                        <label class="form-label">
-                            <i class="fas fa-video me-1"></i> กล้อง
+                        <label class="scc-selector-label">
+                            <i class="fas fa-video"></i> กล้อง
                         </label>
                         <select id="selectcam" onchange="selectCam()" class="form-select">
                             <option value="0" selected>-- กรุณาเลือกกล้อง --</option>
@@ -197,8 +231,8 @@ try {
                     </div>
 
                     <div class="col-md-4">
-                        <label class="form-label">
-                            <i class="fas fa-calendar-alt me-1"></i> ข้อมูล
+                        <label class="scc-selector-label">
+                            <i class="fas fa-calendar-alt"></i> ข้อมูล
                         </label>
                         <select id="selectdatas" onchange="selectData()" class="form-select" disabled>
                             <option value="0" selected>กรุณาเลือกกล้องก่อน</option>
@@ -208,17 +242,18 @@ try {
                 </div>
             </div>
 
-            <div class="content-section">
+            <!-- Content Section -->
+            <div class="scc-content-section scc-animate scc-animate-d1">
                 <div id="snappath" class="mb-3" style="display: none;">
-                    <span id="filedate" class="date-badge">
-                        <i class="fas fa-calendar"></i>
+                    <span id="filedate" class="scc-date-badge">
+                        <i class="fas fa-calendar-alt"></i>
                         <span></span>
                     </span>
-                    <div class="divider"></div>
+                    <div class="scc-divider"></div>
                 </div>
 
-                <div class="video-container">
-                    <div class="no-data-message" id="nodata">
+                <div class="scc-media-container">
+                    <div class="scc-no-data" id="nodata">
                         <i class="fas fa-film"></i>
                         <h5 id="nodatah2">กรุณาเลือกข้อมูล</h5>
                     </div>
@@ -231,16 +266,17 @@ try {
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p class="text-center">
-                Copyright &copy;
-                <?= date('Y'); ?> NetWorklink Co.Ltd. - All Rights Reserved
-            </p>
+    <!-- Professional Footer -->
+    <footer style="position: absolute; bottom:0; width: 100%;">
+        <div class="container text-center">
+            <p>&copy; <?= date('Y'); ?> NetWorklink Co.Ltd. &mdash; Professional Real-time Streaming Solutions</p>
+            <div class="scc-footer-version">All Rights Reserved | Intelligent Camera Management System</div>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         const API_URL = 'http://www.centrecities.com:26300/api/getallcamera';
@@ -598,6 +634,26 @@ try {
             }
 
         })
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            // Initialize clock (Start immediately)
+            updateLiveTime();
+            setInterval(updateLiveTime, 1000);
+        })
+
+        function updateLiveTime() {
+            const timeElement = document.getElementById("liveTime");
+            if (!timeElement) return;
+
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, "0");
+            const minutes = String(now.getMinutes()).padStart(2, "0");
+            const timeString = `${hours}:${minutes}`;
+
+            if (timeElement.textContent !== timeString) {
+                timeElement.textContent = timeString;
+            }
+        }
     </script>
 </body>
 

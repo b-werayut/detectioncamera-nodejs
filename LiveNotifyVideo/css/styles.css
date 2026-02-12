@@ -29,6 +29,146 @@ body {
     color: #1f2937;
 }
 
+.scc-footer-version {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 0.3rem;
+}
+
+/* ================================================================
+   PAGE HERO — Compact Professional Header (matches SnapShot pages)
+   ================================================================ */
+.scc-page-hero {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 60%, #1e8065 100%);
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.scc-page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(38, 208, 124, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.scc-page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(38, 208, 124, 0.3), transparent);
+}
+
+.scc-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.scc-hero-icon {
+    width: 52px;
+    height: 52px;
+    background: radial-gradient(circle at 30% 30%, rgba(38, 208, 124, 0.2), rgba(255, 255, 255, 0.06));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #26d07c;
+    flex-shrink: 0;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    box-shadow:
+        0 0 20px rgba(38, 208, 124, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: heroIconBreath 4s ease-in-out infinite;
+}
+
+.scc-hero-icon::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 17px;
+    padding: 1px;
+    background: linear-gradient(145deg, rgba(38, 208, 124, 0.35), transparent 50%, rgba(38, 208, 124, 0.12));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.scc-hero-icon::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 20px;
+    background: radial-gradient(circle, rgba(38, 208, 124, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    animation: heroIconGlow 4s ease-in-out infinite;
+}
+
+.scc-hero-icon i {
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 6px rgba(38, 208, 124, 0.4));
+}
+
+@keyframes heroIconBreath {
+    0%, 100% { box-shadow: 0 0 20px rgba(38, 208, 124, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 28px rgba(38, 208, 124, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12); }
+}
+
+@keyframes heroIconGlow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+}
+
+.scc-hero-title {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.scc-hero-subtitle {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin-top: 0.2rem;
+}
+
+.scc-hero-meta {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .scc-page-hero { padding: 1.25rem 0; }
+    .scc-hero-title { font-size: 1.15rem; }
+    .scc-hero-icon { width: 42px; height: 42px; font-size: 1.05rem; border-radius: 12px; }
+    .scc-hero-meta { display: none; }
+    .scc-hero-content { gap: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+    .scc-hero-title { font-size: 1rem; }
+    .scc-hero-subtitle { font-size: 0.78rem; }
+    .scc-hero-icon { width: 38px; height: 38px; font-size: 0.95rem; border-radius: 11px; }
+}
+
 /* Header Navbar */
 .navbar {
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-green) 100%);
@@ -315,7 +455,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 
 .stat-card {
@@ -409,7 +549,7 @@ body {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 24px;
     padding: 2rem;
-    margin: 2.5rem 0;
+    margin: 1rem 0;
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(13, 77, 61, 0.05);
     transition: box-shadow 0.3s ease;
@@ -572,9 +712,9 @@ body {
 .page-link {
     color: var(--primary-green);
     border-radius: 6px;
-    margin: 0 2px;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.85rem;
+    margin: 0 1px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.78rem;
 }
 
 .page-link:hover {
@@ -583,7 +723,7 @@ body {
 }
 
 .dataTables_info {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     color: #6b7280;
     font-weight: 500;
 }
@@ -900,8 +1040,8 @@ body {
     background: white;
     background-image: linear-gradient(135deg, #ffffff 0%, #fcfdfd 100%);
     border-radius: 24px;
-    padding: 3rem 2rem;
-    margin: 3rem 0;
+    padding: 1.5rem 2rem;
+    margin: 1rem 0;
     box-shadow: var(--card-shadow);
     border: 1px solid rgba(13, 77, 61, 0.05);
 }
@@ -919,26 +1059,58 @@ body {
     border-bottom: 1px solid rgba(13, 77, 61, 0.08);
 }
 
-/* Stream Container */
+/* ================================================================
+   STREAM CONTAINER — Command Center Grid
+   ================================================================ */
 #streamContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem 0;
+    gap: 1.75rem;
+    /* padding: 2rem 0; */
     min-height: 200px;
 }
 
+/* ================================================================
+   VIDEO WRAPPER — Premium Dark Monitor Panel
+   ================================================================ */
 .video-wrapper {
-    background: white;
-    border-radius: 16px;
+    background: #0a0f0d;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        0 20px 48px -12px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     opacity: 0;
-    transform: translateY(10px) scale(0.98);
-    border: 1px solid rgba(13, 77, 61, 0.08);
+    transform: translateY(16px) scale(0.97);
+    border: 1px solid rgba(38, 208, 124, 0.08);
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+.video-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 1px;
+    background: linear-gradient(
+        160deg,
+        rgba(38, 208, 124, 0.15) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(38, 208, 124, 0.08) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 .video-wrapper.show {
@@ -946,58 +1118,125 @@ body {
     transform: translateY(0) scale(1);
 }
 
+/* Staggered entrance animation */
+.video-wrapper:nth-child(1) { transition-delay: 0s; }
+.video-wrapper:nth-child(2) { transition-delay: 0.06s; }
+.video-wrapper:nth-child(3) { transition-delay: 0.12s; }
+.video-wrapper:nth-child(4) { transition-delay: 0.18s; }
+.video-wrapper:nth-child(5) { transition-delay: 0.24s; }
+.video-wrapper:nth-child(6) { transition-delay: 0.30s; }
+
 .video-wrapper:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 25px -5px rgba(13, 77, 61, 0.15), 0 10px 10px -5px rgba(13, 77, 61, 0.1);
-    border-color: rgba(38, 208, 124, 0.3);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.12),
+        0 16px 40px rgba(0, 0, 0, 0.25),
+        0 0 60px -10px rgba(38, 208, 124, 0.15);
+    border-color: rgba(38, 208, 124, 0.2);
 }
 
+.video-wrapper:hover::before {
+    opacity: 1;
+}
+
+/* ================================================================
+   VIDEO HEADER — Dark Refined Bar with Accent Edge
+   ================================================================ */
 .video-header {
-    background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
-    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+    padding: 0.8rem 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
+    position: relative;
+    border-bottom: 1px solid rgba(38, 208, 124, 0.1);
+}
+
+.video-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1.25rem;
+    right: 1.25rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(38, 208, 124, 0.25), transparent);
 }
 
 .video-name {
-    color: white;
+    color: rgba(255, 255, 255, 0.92);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     word-break: break-word;
+    letter-spacing: 0.2px;
 }
 
+.video-name i {
+    color: var(--accent-green);
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* ================================================================
+   STATUS BADGES — Glassmorphism Indicators
+   ================================================================ */
 .video-status-badge {
-    padding: 0.375rem 0.875rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
     white-space: nowrap;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
 }
 
 .status-badge-online {
-    background: var(--accent-green);
-    color: white;
+    background: rgba(38, 208, 124, 0.15);
+    color: #26d07c;
+    border: 1px solid rgba(38, 208, 124, 0.25);
+    box-shadow: 0 0 12px rgba(38, 208, 124, 0.1);
+}
+
+.status-badge-online .fa-circle {
+    animation: statusPulseGreen 2s ease-in-out infinite;
 }
 
 .status-badge-offline {
-    background: #ef4444;
-    color: white;
+    background: rgba(239, 68, 68, 0.12);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
+.status-badge-frozen {
+    background: rgba(245, 158, 11, 0.12);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+@keyframes statusPulseGreen {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(38, 208, 124, 0.4); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(38, 208, 124, 0); }
+}
+
+/* ================================================================
+   VIDEO CONTENT — Cinematic Display Area
+   ================================================================ */
 .video-content {
     width: 100%;
     aspect-ratio: 11/9;
-    background: #000;
-    /* Match video pillarboxes for seamless balance */
+    background: #050a08;
+    background-image:
+        radial-gradient(ellipse at 50% 50%, rgba(38, 208, 124, 0.02) 0%, transparent 70%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1005,83 +1244,124 @@ body {
     overflow: hidden;
 }
 
+/* Subtle scan-line texture overlay */
+.video-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.5;
+}
+
+/* ================================================================
+   VIDEO PLACEHOLDER — Atmospheric Empty State
+   ================================================================ */
 .video-placeholder {
     text-align: center;
-    color: #9ca3af;
-    padding: 2rem;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .video-placeholder i {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    opacity: 0.8;
+    font-size: 2.8rem;
+    margin-bottom: 1.25rem;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 20px currentColor);
 }
 
 .video-placeholder p {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0.5rem 0;
-    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0.4rem 0;
+    letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .video-placeholder small {
-    opacity: 0.6;
-    font-size: 0.75rem;
+    opacity: 0.35;
+    font-size: 0.72rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
+/* ================================================================
+   VIDEO IFRAME — Smooth Load Transition
+   ================================================================ */
 .video-content iframe {
     width: 100%;
     height: 100%;
     border: none;
     display: block;
-    /* Force iframe content to scale better if possible */
     object-fit: contain;
+    position: relative;
+    z-index: 1;
 }
 
-/* Responsive adjustments for the grid */
+/* ================================================================
+   RESPONSIVE — Stream Grid
+   ================================================================ */
 @media (min-width: 1400px) {
     #streamContainer {
         grid-template-columns: repeat(2, 1fr);
-        /* 2 columns for large desktop */
     }
 }
 
+/* ================================================================
+   NO CAMERA MESSAGE — Refined Empty State
+   ================================================================ */
 #no-camera-message {
     grid-column: 1 / -1;
-    padding: 3rem;
+    padding: 3.5rem 2rem;
     text-align: center;
-    color: var(--primary-green);
-    font-weight: 600;
-    font-size: 1.1rem;
-    background: white;
-    border-radius: 16px;
-    box-shadow: var(--card-shadow);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    font-size: 1rem;
+    background: #0a0f0d;
+    border-radius: 14px;
+    border: 1px solid rgba(38, 208, 124, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    letter-spacing: 0.2px;
 }
 
 #no-camera-message i {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--accent-green);
     display: block;
     margin-bottom: 1rem;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 16px rgba(38, 208, 124, 0.3));
 }
 
 /* Footer */
 footer {
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-green) 100%);
-    padding: 1.5rem 0;
+    /* padding: 1.5rem 0; */
+    padding: 15px;
     margin-top: 4rem;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
 }
 
 footer p {
-    color: white;
+    color: rgba(255,255,255,0.7);
     margin: 0;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    font-size: 0.82rem;
 }
 
 /* Loading Animation */
@@ -1104,6 +1384,23 @@ footer p {
         transform: rotate(360deg);
     }
 }
+
+/* ================================================================
+   ANIMATIONS — Page Load Entrance
+   ================================================================ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.scc-animate {
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+.scc-animate-d1 { animation-delay: 0.05s; }
+.scc-animate-d2 { animation-delay: 0.1s; }
+.scc-animate-d3 { animation-delay: 0.15s; }
+.scc-animate-d4 { animation-delay: 0.2s; }
 
 /* Responsive Design */
 @media (max-width: 1200px) {

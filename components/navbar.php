@@ -5,6 +5,8 @@ $urlstream = $urlstream ?? '';
 $roleId = $roleId ?? 0;
 $user = $user ?? '';
 $role = $role ?? '';
+$firstname = $firstname ?? '';
+$lastname = $lastname ?? '';
 $login_time = $login_time ?? '';
 $currentPage = $currentPage ?? '';
 
@@ -15,490 +17,672 @@ $activeVideo = ($currentPage === 'video') ? 'active' : '';
 $activeManage = ($currentPage === 'manage') ? 'active' : '';
 ?>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container px-lg-5">
-        <a class="navbar-brand" href="#!">
-            <img src="../snapshot/assets/nwl-logo.png" alt="NetWorklink" width="50">
-            <span class="d-none d-sm-inline">NetWorklink Co.Ltd.</span>
-            <span class="d-inline d-sm-none">NWL</span>
-        </a>
+<!-- Professional Navbar -->
+<nav class="scc-navbar" id="sccNavbar">
+    <div class="container px-lg-5 py-2">
+        <div class="scc-navbar-inner">
+            <!-- Brand -->
+            <a class="scc-brand" href="#!">
+                <div class="scc-brand-logo">
+                    <img src="../snapshot/assets/nwl-logo.png" alt="NetWorklink" width="42">
+                </div>
+                <div class="scc-brand-text">
+                    <span class="scc-brand-name d-none d-sm-block" style="letter-spacing: 1.5px;">NETWORK LINK
+                        CO.,LTD.</span>
+                    <span class="scc-brand-name d-block d-sm-none">NWL</span>
+                    <span class="scc-brand-tagline d-none d-md-block">Streaming Control Center</span>
+                </div>
+            </a>
 
-        <!-- Mobile Toggle Button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <!-- Mobile Toggle -->
+            <button class="scc-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sccNavCollapse"
+                aria-controls="sccNavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="scc-toggle-bar"></span>
+                <span class="scc-toggle-bar"></span>
+                <span class="scc-toggle-bar"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <!-- สตรีมมิ่ง -->
-                <li class="nav-item">
-                    <a class="nav-link <?= $activeStreaming; ?>" aria-current="page"
-                        href="../livenotifyvideo/index.php">
-                        <i class="fas fa-video me-1"></i>
-                        <span class="nav-text">สตรีมมิ่ง</span>
-                    </a>
-                </li>
-
-                <!-- ภาพนิ่ง -->
-                <li class="nav-item">
-                    <a class="nav-link <?= $activeSnapshot; ?>" href="/SnapShot/snappaging_.php">
-                        <i class="fas fa-camera me-1"></i>
-                        <span class="nav-text">ภาพนิ่ง</span>
-                    </a>
-                </li>
-
-                <!-- วิดีโอ -->
-                <li class="nav-item">
-                    <a class="nav-link <?= $activeVideo; ?>" href="/SnapShot/vdopaging_.php">
-                        <i class="fas fa-film me-1"></i>
-                        <span class="nav-text">วิดีโอ</span>
-                    </a>
-                </li>
-
-                <!-- จัดการระบบ - SuperAdmin/Admin Only -->
-                <?php if ($roleId == 1 || $roleId == 2): ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $activeManage; ?>" href="../Management/index.php">
-                            <i class="fas fa-cog me-1"></i>
-                            <span class="nav-text">จัดการระบบ</span>
+            <!-- Navigation -->
+            <div class="collapse navbar-collapse" id="sccNavCollapse">
+                <ul class="scc-nav ms-auto">
+                    <li class="scc-nav-item">
+                        <a class="scc-nav-link <?= $activeStreaming; ?>" href="<?= $urlstream; ?>">
+                            <i class="fas fa-satellite-dish"></i>
+                            <span>สตรีมมิ่ง</span>
                         </a>
                     </li>
-                <?php endif; ?>
+                    <li class="scc-nav-item">
+                        <a class="scc-nav-link <?= $activeSnapshot; ?>" href="/SnapShot/snappaging_.php">
+                            <i class="fas fa-camera"></i>
+                            <span>ภาพนิ่ง</span>
+                        </a>
+                    </li>
+                    <li class="scc-nav-item">
+                        <a class="scc-nav-link <?= $activeVideo; ?>" href="/SnapShot/vdopaging_.php">
+                            <i class="fas fa-film"></i>
+                            <span>วิดีโอ</span>
+                        </a>
+                    </li>
+                    <?php if ($roleId == 1 || $roleId == 2): ?>
+                        <li class="scc-nav-item">
+                            <a class="scc-nav-link <?= $activeManage; ?>" href="../Management/index.php">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>จัดการระบบ</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
 
-                <!-- User Dropdown -->
-                <li class="nav-item d-flex align-items-center">
-                    <div class="user-dropdown">
-                        <span class="user-badge" role="button" tabindex="0" aria-expanded="false">
-                            <span class="user-avatar">
-                                <?= strtoupper(substr($user, 0, 1)); ?>
-                            </span>
-                            <span class="user-info d-none d-md-inline">
-                                <span class="user-name">
-                                    <?= htmlspecialchars($user); ?>
+                    <!-- Divider -->
+                    <li class="scc-nav-divider"></li>
+
+                    <!-- User Menu -->
+                    <li class="scc-nav-item scc-nav-user">
+                        <div class="scc-user-dropdown" id="sccUserDropdown">
+                            <button class="scc-user-trigger" type="button" aria-expanded="false">
+                                <span class="scc-user-avatar">
+                                    <?= strtoupper(substr($firstname, 0, 1)); ?>
                                 </span>
-                                <?php if (!empty($role)): ?>
-                                    <span class="user-role">
-                                        <?= htmlspecialchars($role); ?>
-                                    </span>
-                                <?php endif; ?>
-                            </span>
-                            <i class="fas fa-chevron-down dropdown-arrow d-none d-md-inline"></i>
-                        </span>
-                        <div class="user-dropdown-menu">
-                            <div class="user-dropdown-header">
-                                <div class="avatar-large">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="name">
-                                    <?= htmlspecialchars($user); ?>
-                                </div>
-                                <?php if (!empty($role)): ?>
-                                    <div class="role-badge">
-                                        <?= htmlspecialchars($role); ?>
+                                <span class="scc-user-meta d-none d-md-flex">
+                                    <span class="scc-user-name"
+                                        style="letter-spacing: 1px;"><?= htmlspecialchars($firstname) . " " . htmlspecialchars($lastname); ?></span>
+                                </span>
+                                <i class="fas fa-chevron-down scc-user-arrow d-none d-md-inline"></i>
+                            </button>
+                            <div class="scc-user-panel">
+                                <div class="scc-user-panel-header">
+                                    <div class="scc-user-panel-avatar">
+                                        <i class="fas fa-user-circle"></i>
                                     </div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="user-dropdown-body">
-                                <?php if (!empty($login_time)): ?>
-                                    <div class="user-dropdown-item">
-                                        <i class="fas fa-clock"></i>
-                                        <span>เข้าสู่ระบบ:
-                                            <?= date('H:i น.', $login_time); ?>
-                                        </span>
+                                    <div class="scc-user-panel-name" style="letter-spacing: 1px;">
+                                        <?= htmlspecialchars($firstname) . " " . htmlspecialchars($lastname); ?>
                                     </div>
-                                <?php endif; ?>
-                                <?php if (!empty($userRole)): ?>
-                                    <div class="user-dropdown-item">
-                                        <i class="fas fa-user-shield"></i>
-                                        <span>
-                                            <?= $userRole; ?>
-                                        </span>
-                                        <!-- <span>
-                                           <?php //$userId; ?>
-                                        </span> -->
-                                    </div>
-                                <?php endif; ?>
-                                <div class="user-dropdown-item">
-                                    <i class="fas fa-calendar-day"></i>
-                                    <span>
-                                        <?= date('d/m/Y'); ?>
-                                    </span>
+                                    <?php if (!empty($role)): ?>
+                                        <div class="scc-user-panel-role"><?= htmlspecialchars($role); ?></div>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="user-dropdown-divider"></div>
-                                <a href="../logout.php" class="user-dropdown-item logout"
-                                    style="text-decoration: none;">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                    <span>ออกจากระบบ</span>
-                                </a>
+                                <div class="scc-user-panel-body">
+                                    <?php if (!empty($role)): ?>
+                                        <div class="scc-user-panel-item">
+                                            <i class="fas fa-shield-alt"></i>
+                                            <span><?= $role; ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if (!empty($login_time)): ?>
+                                        <div class="scc-user-panel-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>เข้าสู่ระบบ: <?= date('H:i น.', $login_time); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="scc-user-panel-item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span><?= date('d/m/Y'); ?></span>
+                                    </div>
+                                    <div class="scc-user-panel-divider"></div>
+                                    <a href="../logout.php" class="scc-user-panel-item scc-logout">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>ออกจากระบบ</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
 
 <style>
-    /* ===============================================
-   Responsive Navbar Styles
-   =============================================== */
-
-    /* Mobile First - Base Styles */
-    .navbar {
-        padding: 0.5rem 0;
+    /* ================================================================
+   SCC NAVBAR — Streaming Control Center Professional Navigation
+   ================================================================ */
+    .scc-navbar {
+        background: linear-gradient(135deg, #061a14 0%, #0a3d2e 50%, #0d4d3d 100%);
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 1100;
+        box-shadow: 0 2px 24px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+        border-bottom: 1px solid rgba(38, 208, 124, 0.1);
     }
 
-    .navbar-brand img {
-        width: 40px;
-        height: auto;
+    .scc-navbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 64px;
     }
 
-    .navbar-brand span {
+    /* --- Brand --- */
+    .scc-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+
+    .scc-brand-logo {
+        position: relative;
+    }
+
+    .scc-brand-logo img {
+        filter: drop-shadow(0 2px 8px rgba(38, 208, 124, 0.2));
+        transition: transform 0.3s ease;
+    }
+
+    .scc-brand:hover .scc-brand-logo img {
+        transform: scale(1.06);
+    }
+
+    .scc-brand-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+    }
+
+    .scc-brand-name {
+        color: #fff;
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+
+    .scc-brand-tagline {
+        color: rgba(38, 208, 124, 0.7);
+        font-size: 0.65rem;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-top: 1px;
+    }
+
+    /* --- Mobile Toggle --- */
+    .scc-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .scc-toggle:hover,
+    .scc-toggle:focus {
+        background: rgba(38, 208, 124, 0.15);
+        border-color: rgba(38, 208, 124, 0.3);
+        outline: none;
+    }
+
+    .scc-toggle-bar {
+        width: 22px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    /* --- Mobile Collapse --- */
+    .scc-navbar .navbar-collapse {
+        background: linear-gradient(180deg, rgba(10, 61, 46, 0.98) 0%, rgba(6, 26, 20, 0.98) 100%);
+        border-radius: 0 0 20px 20px;
+        margin: 0 -12px;
+        padding: 1rem 1.25rem 1.25rem;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(38, 208, 124, 0.1);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    /* --- Nav Items --- */
+    .scc-nav {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .scc-nav-item {
+        width: 100%;
+    }
+
+    .scc-nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.75rem 1rem;
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        border-radius: 12px;
         font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .scc-nav-link i {
+        width: 20px;
+        text-align: center;
+        font-size: 0.88rem;
+        transition: transform 0.25s ease;
+    }
+
+    .scc-nav-link:hover {
+        color: #fff;
+        background: rgba(38, 208, 124, 0.1);
+        transform: translateX(4px);
+    }
+
+    .scc-nav-link:hover i {
+        transform: scale(1.15);
+        color: #26d07c;
+    }
+
+    .scc-nav-link.active {
+        color: #fff;
+        background: linear-gradient(135deg, rgba(38, 208, 124, 0.2) 0%, rgba(38, 208, 124, 0.08) 100%);
+        border: 1px solid rgba(38, 208, 124, 0.2);
         font-weight: 600;
     }
 
-    /* Navbar Toggler Styling */
-    .navbar-toggler {
-        border: none;
-        padding: 0.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        transition: all 0.3s ease;
+    .scc-nav-link.active i {
+        color: #26d07c;
     }
 
-    .navbar-toggler:focus {
-        box-shadow: none;
-        outline: none;
-        background: rgba(255, 255, 255, 0.2);
+    .scc-nav-link.active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60%;
+        background: #26d07c;
+        border-radius: 0 4px 4px 0;
+        box-shadow: 0 0 8px rgba(38, 208, 124, 0.5);
     }
 
-    .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        width: 24px;
-        height: 24px;
+    /* --- Nav Divider --- */
+    .scc-nav-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 0.5rem 0;
+        list-style: none;
     }
 
-    /* Mobile Menu Collapse */
-    .navbar-collapse {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.95) 100%);
-        border-radius: 0 0 16px 16px;
-        margin: 0.5rem -1rem -0.5rem;
-        padding: 1rem;
-        backdrop-filter: blur(10px);
-    }
-
-    /* Nav Items */
-    .navbar-nav {
-        gap: 0.25rem;
-    }
-
-    .nav-item {
+    /* --- User Dropdown --- */
+    .scc-user-dropdown {
         width: 100%;
+        position: relative;
     }
 
-    .nav-link {
+    .scc-user-trigger {
         display: flex;
         align-items: center;
-        padding: 0.75rem 1rem !important;
-        border-radius: 10px;
+        gap: 0.65rem;
+        padding: 0.6rem 0.9rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        cursor: pointer;
         transition: all 0.3s ease;
-        color: rgba(255, 255, 255, 0.9) !important;
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-        background: rgba(255, 255, 255, 0.15);
-        color: #fff !important;
-        transform: translateX(5px);
-    }
-
-    .nav-link i {
-        width: 20px;
-        text-align: center;
-    }
-
-    /* User Dropdown Mobile */
-    .user-dropdown {
         width: 100%;
-        margin-top: 0.5rem;
-        padding-top: 0.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-family: inherit;
+        font-size: inherit;
     }
 
-    .user-dropdown.is-open .user-badge {
-        background: rgba(255, 255, 255, 0.2);
+    .scc-user-trigger:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(38, 208, 124, 0.2);
     }
 
-    .user-dropdown.is-open .dropdown-arrow {
+    .scc-user-dropdown.is-open .scc-user-trigger {
+        background: rgba(38, 208, 124, 0.12);
+        border-color: rgba(38, 208, 124, 0.25);
+    }
+
+    .scc-user-avatar {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #26d07c, #0d8f5f);
+        border-radius: 10px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        box-shadow: 0 2px 8px rgba(38, 208, 124, 0.3);
+    }
+
+    .scc-user-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.2;
+        flex: 1;
+    }
+
+    .scc-user-name {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .scc-user-role {
+        font-size: 0.68rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 400;
+    }
+
+    .scc-user-arrow {
+        font-size: 0.6rem;
+        color: rgba(255, 255, 255, 0.4);
+        transition: transform 0.3s ease;
+    }
+
+    .scc-user-dropdown.is-open .scc-user-arrow {
         transform: rotate(180deg);
     }
 
-    .user-dropdown-menu {
+    /* --- User Panel (Dropdown Menu) --- */
+    .scc-user-panel {
         display: none;
         position: static;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 12px;
+        background: #fff;
+        border-radius: 14px;
         margin-top: 0.5rem;
         overflow: hidden;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        animation: fadeInUp 0.3s ease;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+        animation: sccPanelIn 0.25s ease;
     }
 
-    .user-dropdown.is-open .user-dropdown-menu {
+    .scc-user-dropdown.is-open .scc-user-panel {
         display: block;
     }
 
-    @keyframes fadeInUp {
+    @keyframes sccPanelIn {
         from {
             opacity: 0;
-            transform: translateY(-10px);
+            transform: translateY(-8px) scale(0.97);
         }
 
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
     }
 
-    .user-dropdown-header {
-        padding: 1.25rem;
-        text-align: center;
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    .scc-user-panel-header {
+        padding: 1.25rem 1rem;
+        background: linear-gradient(135deg, #0d4d3d 0%, #1a6b54 100%);
         color: #fff;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
     }
 
-    .user-dropdown-header .avatar-large {
-        width: 50px;
-        height: 50px;
-        margin: 0 auto 0.75rem;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
+    .scc-user-panel-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -30%;
+        width: 100%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(38, 208, 124, 0.12) 0%, transparent 60%);
+        pointer-events: none;
+    }
+
+    .scc-user-panel-avatar {
+        width: 52px;
+        height: 52px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.25rem;
+        font-size: 1.4rem;
+        margin: 0 auto 0.6rem;
+        position: relative;
     }
 
-    .user-dropdown-header .name {
-        font-weight: 600;
+    .scc-user-panel-name {
+        font-weight: 700;
         font-size: 1rem;
-        margin-bottom: 0.25rem;
+        letter-spacing: 0.2px;
+        position: relative;
     }
 
-    .user-dropdown-header .role-badge {
-        font-size: 0.75rem;
-        background: rgba(255, 255, 255, 0.2);
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
+    .scc-user-panel-role {
         display: inline-block;
+        padding: 0.2rem 0.75rem;
+        background: rgba(38, 208, 124, 0.2);
+        border: 1px solid rgba(38, 208, 124, 0.2);
+        border-radius: 20px;
+        font-size: 0.7rem;
+        margin-top: 0.4rem;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+        position: relative;
     }
 
-    .user-dropdown-body {
-        padding: 0.75rem;
+    .scc-user-panel-body {
+        padding: 0.5rem;
     }
 
-    .user-dropdown-item {
+    .scc-user-panel-item {
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        color: #374151;
-        border-radius: 8px;
+        padding: 0.7rem 1rem;
+        color: #4b5563;
+        font-size: 0.85rem;
+        border-radius: 10px;
         transition: all 0.2s ease;
+        cursor: default;
+        text-decoration: none;
     }
 
-    .user-dropdown-item:hover {
-        background: #f3f4f6;
+    .scc-user-panel-item:hover {
+        background: #f0faf6;
     }
 
-    .user-dropdown-item i {
+    .scc-user-panel-item i {
         width: 18px;
         text-align: center;
-        color: #6b7280;
+        color: #0d4d3d;
+        font-size: 0.85rem;
     }
 
-    .user-dropdown-item.logout {
-        color: #ef4444;
-    }
-
-    .user-dropdown-item.logout i {
-        color: #ef4444;
-    }
-
-    .user-dropdown-item.logout:hover {
-        background: #fef2f2;
-    }
-
-    .user-dropdown-divider {
+    .scc-user-panel-divider {
         height: 1px;
-        background: #e5e7eb;
-        margin: 0.5rem 0;
+        background: #f0f0f0;
+        margin: 0.35rem 0.5rem;
     }
 
-    /* ===============================================
-   Tablet & Desktop Styles (min-width: 992px)
-   =============================================== */
+    .scc-logout {
+        color: #ef4444 !important;
+        cursor: pointer;
+    }
+
+    .scc-logout i {
+        color: #ef4444 !important;
+    }
+
+    .scc-logout:hover {
+        background: #fef2f2 !important;
+    }
+
+    /* ================================================================
+   DESKTOP (min-width: 992px)
+   ================================================================ */
     @media (min-width: 992px) {
-        .navbar {
-            padding: 0.75rem 0;
+        .scc-navbar {
+            padding: 0;
         }
 
-        .navbar-brand img {
-            width: 50px;
+        .scc-navbar-inner {
+            min-height: 68px;
         }
 
-        .navbar-brand span {
-            font-size: 1rem;
+        .scc-toggle {
+            display: none;
         }
 
-        .navbar-collapse {
+        .scc-navbar .navbar-collapse {
+            display: flex !important;
             background: transparent;
             margin: 0;
             padding: 0;
             border-radius: 0;
+            border-top: none;
+            box-shadow: none;
+            backdrop-filter: none;
         }
 
-        .navbar-nav {
+        .scc-nav {
             flex-direction: row;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .scc-nav-item {
+            width: auto;
+        }
+
+        .scc-nav-link {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
             gap: 0.5rem;
         }
 
-        .nav-item {
-            width: auto;
-        }
-
-        .nav-link {
-            padding: 0.5rem 1rem !important;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
+        .scc-nav-link:hover {
             transform: translateY(-2px);
         }
 
-        /* User Dropdown Desktop */
-        .user-dropdown {
-            width: auto;
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
-            position: relative;
+        .scc-nav-link.active {
+            background: linear-gradient(135deg, rgba(38, 208, 124, 0.18) 0%, rgba(38, 208, 124, 0.06) 100%);
+            box-shadow: 0 0 12px rgba(38, 208, 124, 0.15);
         }
 
-        .user-dropdown-menu {
+        .scc-nav-link.active::before {
+            left: 50%;
+            top: auto;
+            bottom: -2px;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .scc-nav-divider {
+            width: 1px;
+            height: 28px;
+            margin: 0 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* User Dropdown Desktop */
+        .scc-user-dropdown {
+            width: auto;
+        }
+
+        .scc-user-trigger {
+            width: auto;
+            padding: 0.45rem 0.85rem;
+            border-radius: 50px;
+        }
+
+        .scc-user-avatar {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            font-size: 0.78rem;
+            border-radius: 8px;
+        }
+
+        .scc-user-panel {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 8px);
             right: 0;
             min-width: 260px;
-            margin-top: 0.5rem;
-            z-index: 1050;
+            z-index: 1100;
         }
     }
 
-    /* ===============================================
-   Large Desktop Styles (min-width: 1200px)
-   =============================================== */
+    /* ================================================================
+   LARGE DESKTOP (min-width: 1200px)
+   ================================================================ */
     @media (min-width: 1200px) {
-        .navbar-brand span {
+        .scc-brand-name {
             font-size: 1.1rem;
         }
 
-        .nav-link {
-            padding: 0.5rem 1.25rem !important;
+        .scc-nav-link {
+            padding: 0.5rem 1.15rem;
         }
     }
 
-    /* ===============================================
-   Small Mobile Styles (max-width: 576px)
-   =============================================== */
+    /* ================================================================
+   SMALL MOBILE (max-width: 576px)
+   ================================================================ */
     @media (max-width: 576px) {
-        .navbar-brand img {
-            width: 35px;
+        .scc-brand-logo img {
+            width: 36px;
         }
 
-        .navbar-brand span {
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-
-        .nav-link {
-            padding: 0.65rem 0.75rem !important;
+        .scc-brand-name {
             font-size: 0.9rem;
         }
 
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
-            font-size: 0.8rem;
+        .scc-nav-link {
+            padding: 0.65rem 0.85rem;
+            font-size: 0.88rem;
         }
 
-        .user-dropdown-header {
-            padding: 1rem;
-        }
-
-        .user-dropdown-header .avatar-large {
-            width: 45px;
-            height: 45px;
-            font-size: 1rem;
+        .scc-user-avatar {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
         }
     }
 </style>
 
 <script>
     (function () {
-        function setOpen(dropdown, open) {
-            if (!dropdown) return;
+        var dropdown = document.getElementById('sccUserDropdown');
+        if (!dropdown) return;
+        var trigger = dropdown.querySelector('.scc-user-trigger');
+
+        function toggle(open) {
             dropdown.classList.toggle('is-open', open);
-            const badge = dropdown.querySelector('.user-badge');
-            if (badge) badge.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (trigger) trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
 
-        function closeAll(except) {
-            document.querySelectorAll('.user-dropdown.is-open').forEach(function (dd) {
-                if (except && dd === except) return;
-                setOpen(dd, false);
+        if (trigger) {
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggle(!dropdown.classList.contains('is-open'));
             });
         }
 
-        document.addEventListener('click', function (event) {
-            const dropdown = event.target.closest('.user-dropdown');
-            if (!dropdown) {
-                closeAll();
-                return;
-            }
-
-            const badge = event.target.closest('.user-badge');
-            if (badge && dropdown.contains(badge)) {
-                event.preventDefault();
-                const willOpen = !dropdown.classList.contains('is-open');
-                closeAll(dropdown);
-                setOpen(dropdown, willOpen);
-                return;
-            }
+        document.addEventListener('click', function (e) {
+            if (!dropdown.contains(e.target)) toggle(false);
         });
 
-        document.addEventListener('keydown', function (event) {
-            const badge = event.target.closest && event.target.closest('.user-badge');
-            if (!badge) return;
-            const dropdown = badge.closest('.user-dropdown');
-            if (!dropdown) return;
-
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                const willOpen = !dropdown.classList.contains('is-open');
-                closeAll(dropdown);
-                setOpen(dropdown, willOpen);
-            }
-
-            if (event.key === 'Escape') {
-                setOpen(dropdown, false);
-                badge.blur();
-            }
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') toggle(false);
         });
     })();
 </script>

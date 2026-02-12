@@ -91,38 +91,30 @@ try {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>NetWorklink.Co.Ltd,</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิดีโอ - NetWorklink Co.Ltd.</title>
+    <meta name="description" content="ระบบดูวิดีโอจากกล้องตรวจจับ NetWorklink">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="stylesheet" href="fonts/font-kanit.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/vdopaging_.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="./css/snappaging.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="js/jquery-3.7.1.min.js"></script>
-    <link href="css/sweetalert2.min.css" rel="stylesheet">
-    <script src="js/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
-<style>
-    @media only screen and (max-width: 600px) {
-        .top-bar { flex-direction: column; }
-        .d-flex { display: inline-block !important; }
-        .selectdiv { width: 100%; }
-        .btn-hide { display: none !important; }
-        .ct { padding-right: 1rem !important; padding-left: 1rem !important; }
-        .ctm { padding: 0.5rem !important; }
-    }
-</style>
 
 <body>
     <?php
     $futuretimecf = 0;
     $beforetime = 0;
     // ตรวจสอบ Config
-    $configPath = "C:\inetpub\wwwroot\camera\config.txt"; 
+    $configPath = "C:\\inetpub\\wwwroot\\camera\\config.txt"; 
     if (!file_exists($configPath)) {
         $configPath = "config.txt"; 
     }
@@ -137,56 +129,47 @@ try {
             fclose($myfile);
         }
     }
+
+    $currentPage = 'video';
+    $role = $_SESSION['UserRole'] ?? '';
+    $login_time = $_SESSION['LAST_ACTIVITY'] ?? '';
     ?>
 
-    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to bottom, #0f0f0f, #003300);">
-        <div class="container px-lg-5">
-            <img src="assets/nwl-logo.png" alt="NetWorklink" width="50">
-            <span style="letter-spacing: 1px;" class="text-white" href="#!">NetWorklink.Co.Ltd,</span>
-            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <?php if ($user) { echo "<li class='nav-item bg-dark d-none'><a class='nav-link'>" . htmlspecialchars($user) . "</a></li>"; } ?>
-                    
-                    <li class="nav-item"><a class="nav-link text-light" href="<?= $urlstream ?>">Streaming</a></li>
-                    <li class="nav-item"><a class="nav-link text-light" href="/SnapShot/snappaging_.php">Snapshot</a></li>
-                    <li class="nav-item"><a class="nav-link text-light active" href="/SnapShot/vdopaging_.php">Snap Videos</a></li>
-                    
-                    <?php if ($roleId == 1 || $roleId == 2): ?>
-                        <li class="nav-item"><a class="nav-link text-light" href="../Management/index.php">Management</a></li>
-                    <?php endif; ?>
+    <?php include_once '../components/navbar.php'; ?>
 
-                    <?php 
-                    if (!empty($user)) { 
-                        echo "<li class='nav-item'><a class='nav-link text-light' href='../logout.php'>Logout</a></li>"; 
-                    } 
-                    ?>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <header class="py-2">
+    <!-- Page Hero -->
+    <div class="scc-page-hero">
         <div class="container px-lg-5">
-            <div class="p-4 p-lg-5 rounded-3 text-center" style="background-image: url('assets/bg.png'); background-size: cover; background-position: center; color: #00ff41; text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;">
+            <div class="scc-hero-content">
+                <div class="scc-hero-icon">
+                    <i class="fas fa-film"></i>
+                </div>
                 <div>
-                    <h1 class="display-5 fw-bold text-white text-uppercase" style="letter-spacing: 5px">Snap Videos</h1>
+                    <h1 class="scc-hero-title">Snap Videos</h1>
+                    <p class="scc-hero-subtitle">ระบบดูวิดีโอจากกล้องตรวจจับแบบเรียลไทม์</p>
+                </div>
+                <div class="scc-hero-meta">
+                    <span class="scc-hero-badge">
+                        <i class="fas fa-circle"></i> VIDEO SYSTEM
+                    </span>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
-    <section class="p-1 mb-4">
-        <div class="container" style="margin-bottom: 120px;">
-            <div class="content pt-0 px-lg-5">
-                
-                <div class="row g-3 align-items-end py-2">
-                    
+    <!-- Main Content -->
+    <section class="py-4">
+        <div class="container px-lg-5">
+
+            <!-- Selector Section -->
+            <div class="scc-selector-section scc-animate">
+                <div class="row g-3 align-items-end">
+
                     <div class="col-md-4">
-                        <label class="form-label fw-bold mb-1" style="font-size: 0.9rem;">โครงการ</label>
-                        <select id="selectproject" class="form-select shadow-sm" style="border-radius: 10px;" 
+                        <label class="scc-selector-label">
+                            <i class="fas fa-building"></i> โครงการ
+                        </label>
+                        <select id="selectproject" class="form-select" 
                                 onchange="changeProject()" <?= $projectDisabled ?>>
                             <?php
                             if (count($projects) > 0) {
@@ -204,10 +187,11 @@ try {
                     </div>
 
                     <div class="col-md-4">
-                        <label class="form-label fw-bold mb-1" style="font-size: 0.9rem;">กล้อง</label>
-                        <select id="selectcam" onchange="selectCam()" class="form-select shadow-sm" 
-                            style="border-radius: 10px;" aria-label="Select Camera">
-                            <option value="0" selected="">เลือกกล้อง</option>
+                        <label class="scc-selector-label">
+                            <i class="fas fa-video"></i> กล้อง
+                        </label>
+                        <select id="selectcam" onchange="selectCam()" class="form-select" aria-label="Select Camera">
+                            <option value="0" selected="">-- กรุณาเลือกกล้อง --</option>
                             <?php
                             if (!empty($cameras)) {
                                 foreach ($cameras as $cam) {
@@ -222,44 +206,51 @@ try {
                     </div>
 
                     <div class="col-md-4">
-                        <label class="form-label mb-1 d-block">&nbsp;</label> 
-                        <select id="selectdatas" onchange="selectData()" class="form-select shadow-sm w-100" 
-                            style="border-radius: 10px;" aria-label="Select Data" disabled>
-                            <option value="0" selected="">กรุณาเลือกกล้องก่อน</option>
+                        <label class="scc-selector-label">
+                            <i class="fas fa-calendar-alt"></i> ข้อมูล
+                        </label>
+                        <select id="selectdatas" onchange="selectData()" class="form-select" 
+                            aria-label="Select Data" disabled>
+                            <option value="0" selected="">-- กรุณาเลือกกล้องก่อน --</option>
                         </select>
                     </div>
 
                 </div>
-                <br>
+            </div>
 
-                <div class="col-md-12 p-3 rounded-2 ct" style="background-color: #f7f7f7;">
-                    <div id="snappath" class="date mt-2">
-                        <span id="filedate" class="rounded-pill bg-warning px-3 py-2 text-light"
-                            style="font-family: 'Kanit', sans-serif; font-size: 14px; background-color: #004a00!important;">
-                        </span>
-                        <hr>
-                    </div>
-                    <div class="p-4 content1 ctm" style="background-color: white;">
-                        <div class="text-center" id="nodata">
-                            <h5 id="nodatah2">กรุณาเลือกข้อมูล</h5>
-                        </div>
-                        <ul class="vdonamex row" id="vdonamex" style="margin: 0; padding:0;"></ul>
-                        <ul class="vdodisplay row" id="vdodisplay" style="margin: 0; padding:0;"></ul>
-                        <div class="pagination py-2 flex-wrap" id="pagination" style="display: flex;"></div>
-                    </div>
+            <!-- Content Section -->
+            <div class="scc-content-section scc-animate scc-animate-d1">
+                <div id="snappath" class="mb-3" style="display: none;">
+                    <span id="filedate" class="scc-date-badge">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span></span>
+                    </span>
+                    <div class="scc-divider"></div>
                 </div>
 
+                <div class="scc-media-container">
+                    <div class="scc-no-data" id="nodata">
+                        <i class="fas fa-video"></i>
+                        <h5 id="nodatah2">กรุณาเลือกข้อมูล</h5>
+                    </div>
+                    <ul class="vdonamex row" id="vdonamex" style="margin: 0; padding:0;"></ul>
+                    <ul class="vdodisplay row" id="vdodisplay" style="margin: 0; padding:0;"></ul>
+                    <div class="pagination" id="pagination"></div>
+                </div>
             </div>
+
         </div>
     </section>
 
-    <footer class="py-2 digital-bg">
-        <div class="container">
-            <p class="m-0 text-center text-white" style="letter-spacing: 1px;">Copyright &copy; NetWorklink.Co.Ltd,</p>
+    <!-- Professional Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; <?= date('Y'); ?> NetWorklink Co.Ltd. &mdash; Professional Real-time Streaming Solutions</p>
+            <div class="scc-footer-version">All Rights Reserved | Intelligent Camera Management System v2.0</div>
         </div>
     </footer>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     
     <script>
         // --- Global Variables ---
