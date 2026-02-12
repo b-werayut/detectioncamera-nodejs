@@ -19,7 +19,7 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
 
 <!-- Professional Navbar -->
 <nav class="scc-navbar" id="sccNavbar">
-    <div class="container px-lg-5 py-2">
+    <div class="container px-lg-5">
         <div class="scc-navbar-inner">
             <!-- Brand -->
             <a class="scc-brand" href="#!">
@@ -27,9 +27,8 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
                     <img src="../snapshot/assets/nwl-logo.png" alt="NetWorklink" width="42">
                 </div>
                 <div class="scc-brand-text">
-                    <span class="scc-brand-name d-none d-sm-block" style="letter-spacing: 1.5px;">NETWORK LINK
-                        CO.,LTD.</span>
-                    <span class="scc-brand-name d-block d-sm-none">NWL</span>
+                    <span class="scc-brand-name d-none d-sm-block" style="letter-spacing: 1.5px;">NETWORK LINK CO.,LTD.</span>
+                    <span class="scc-brand-name d-block d-sm-none">NETWORK LINK CO.,LTD.</span>
                     <span class="scc-brand-tagline d-none d-md-block">Streaming Control Center</span>
                 </div>
             </a>
@@ -44,6 +43,14 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
 
             <!-- Navigation -->
             <div class="collapse navbar-collapse" id="sccNavCollapse">
+                <!-- Mobile Close Button -->
+                <div class="scc-mobile-close-wrap d-lg-none">
+                    <button class="scc-mobile-close" type="button" data-bs-toggle="collapse" data-bs-target="#sccNavCollapse" aria-label="Close menu">
+                        <span class="scc-toggle-bar"></span>
+                        <span class="scc-toggle-bar"></span>
+                        <span class="scc-toggle-bar"></span>
+                    </button>
+                </div>
                 <ul class="scc-nav ms-auto">
                     <li class="scc-nav-item">
                         <a class="scc-nav-link <?= $activeStreaming; ?>" href="<?= $urlstream; ?>">
@@ -82,11 +89,11 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
                                 <span class="scc-user-avatar">
                                     <?= strtoupper(substr($firstname, 0, 1)); ?>
                                 </span>
-                                <span class="scc-user-meta d-none d-md-flex">
+                                <span class="scc-user-meta">
                                     <span class="scc-user-name"
                                         style="letter-spacing: 1px;"><?= htmlspecialchars($firstname) . " " . htmlspecialchars($lastname); ?></span>
                                 </span>
-                                <i class="fas fa-chevron-down scc-user-arrow d-none d-md-inline"></i>
+                                <i class="fas fa-chevron-down scc-user-arrow"></i>
                             </button>
                             <div class="scc-user-panel">
                                 <div class="scc-user-panel-header">
@@ -97,7 +104,7 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
                                         <?= htmlspecialchars($firstname) . " " . htmlspecialchars($lastname); ?>
                                     </div>
                                     <?php if (!empty($role)): ?>
-                                        <div class="scc-user-panel-role"><?= htmlspecialchars($role); ?></div>
+                                        <div class="scc-user-panel-role"><?= htmlspecialchars($user); ?></div>
                                     <?php endif; ?>
                                 </div>
                                 <div class="scc-user-panel-body">
@@ -201,28 +208,64 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
     .scc-toggle {
         display: flex;
         flex-direction: column;
-        gap: 5px;
-        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        width: 42px;
+        height: 42px;
+        padding: 0;
         background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
         cursor: pointer;
         transition: all 0.3s ease;
+        position: relative;
     }
 
     .scc-toggle:hover,
     .scc-toggle:focus {
-        background: rgba(38, 208, 124, 0.15);
-        border-color: rgba(38, 208, 124, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(38, 208, 124, 0.2);
         outline: none;
+        box-shadow: 0 0 12px rgba(38, 208, 124, 0.2);
     }
 
     .scc-toggle-bar {
-        width: 22px;
+        display: block;
+        width: 20px;
         height: 2px;
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.9);
         border-radius: 2px;
-        transition: all 0.3s ease;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: center;
+    }
+
+    .scc-toggle-bar:nth-child(1) {
+        margin-bottom: 5px;
+    }
+
+    .scc-toggle-bar:nth-child(2) {
+        margin-bottom: 5px;
+    }
+
+    /* Animated X when open */
+    .scc-toggle[aria-expanded="true"] {
+        background: rgba(38, 208, 124, 0.15);
+        border-color: rgba(38, 208, 124, 0.3);
+    }
+
+    .scc-toggle[aria-expanded="true"] .scc-toggle-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+        background: #26d07c;
+    }
+
+    .scc-toggle[aria-expanded="true"] .scc-toggle-bar:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .scc-toggle[aria-expanded="true"] .scc-toggle-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+        background: #26d07c;
     }
 
     /* --- Mobile Collapse --- */
@@ -234,6 +277,51 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
         backdrop-filter: blur(20px);
         border-top: 1px solid rgba(38, 208, 124, 0.1);
         box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    /* --- Mobile Close Button (Hamburger style) --- */
+    .scc-mobile-close-wrap {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 0.5rem;
+    }
+
+    .scc-mobile-close {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        background: rgba(38, 208, 124, 0.15);
+        border: 1px solid rgba(38, 208, 124, 0.3);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .scc-mobile-close:hover,
+    .scc-mobile-close:focus {
+        background: rgba(38, 208, 124, 0.25);
+        border-color: rgba(38, 208, 124, 0.5);
+        outline: none;
+        box-shadow: 0 0 12px rgba(38, 208, 124, 0.2);
+    }
+
+    .scc-mobile-close .scc-toggle-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+        background: #26d07c;
+    }
+
+    .scc-mobile-close .scc-toggle-bar:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .scc-mobile-close .scc-toggle-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+        background: #26d07c;
     }
 
     /* --- Nav Items --- */
@@ -634,15 +722,40 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
     }
 
     /* ================================================================
+   MOBILE (max-width: 768px)
+   ================================================================ */
+    @media (max-width: 768px) {
+        .scc-user-meta {
+            display: flex !important;
+        }
+
+        .scc-user-name {
+            font-size: 0.8rem;
+            max-width: 140px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .scc-user-arrow {
+            font-size: 0.55rem;
+        }
+    }
+
+    /* ================================================================
    SMALL MOBILE (max-width: 576px)
    ================================================================ */
     @media (max-width: 576px) {
         .scc-brand-logo img {
-            width: 36px;
+            width: 34px;
         }
 
         .scc-brand-name {
-            font-size: 0.9rem;
+            font-size: 0.7rem;
+        }
+
+        .scc-navbar-inner {
+            min-height: 56px;
         }
 
         .scc-nav-link {
@@ -654,6 +767,28 @@ $activeManage = ($currentPage === 'manage') ? 'active' : '';
             width: 30px;
             height: 30px;
             min-width: 30px;
+        }
+
+        .scc-user-name {
+            max-width: 100px;
+        }
+    }
+
+    /* ================================================================
+   EXTRA SMALL MOBILE (max-width: 400px)
+   ================================================================ */
+    @media (max-width: 400px) {
+        .scc-brand-name {
+            font-size: 0.62rem;
+        }
+
+        .scc-brand-logo img {
+            width: 30px;
+        }
+
+        .scc-user-name {
+            max-width: 70px;
+            font-size: 0.75rem;
         }
     }
 </style>

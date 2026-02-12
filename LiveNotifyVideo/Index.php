@@ -235,7 +235,7 @@ $currentPage = 'streaming';
                     </div>
                     <div class="stat-trend up">
                         <i class="fas fa-arrow-up"></i>
-                        <span>กล้องพร้อมใช้งาน</span>
+                        <span>กล้องที่มีสิทธิ์ใช้งานทั้งหมด</span>
                     </div>
                 </div>
 

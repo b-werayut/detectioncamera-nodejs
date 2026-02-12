@@ -267,7 +267,7 @@ try {
     </section>
 
     <!-- Professional Footer -->
-    <footer style="position: absolute; bottom:0; width: 100%;">
+    <footer>
         <div class="container text-center">
             <p>&copy; <?= date('Y'); ?> NetWorklink Co.Ltd. &mdash; Professional Real-time Streaming Solutions</p>
             <div class="scc-footer-version">All Rights Reserved | Intelligent Camera Management System</div>

@@ -46,6 +46,12 @@ body {
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+body > section {
+    flex: 1;
 }
 
 ::selection {
@@ -414,7 +420,7 @@ footer {
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-green) 100%);
     /* padding: 1.25rem 0; */
     padding: 15px;
-    margin-top: 3rem;
+    margin-top: auto;
     box-shadow: 0 -2px 16px rgba(0,0,0,0.15);
     border-top: 1px solid rgba(255,255,255,0.05);
 }
